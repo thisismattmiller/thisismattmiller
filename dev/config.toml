@@ -1,0 +1,969 @@
+baseURL = "https://thisismattmiller.com/"
+title = "Matt Miller"
+theme ="hugo-theme-basic"
+languageCode = "en-us"
+googleAnalytics = "UA-10371295-5"
+enableEmoji = true 
+copyright = ""
+description = "THIS IS MATT MILLER"
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+
+[params]
+  titleEmoji = ":tada:"
+  # change this!
+  twitter = "siegerts"
+
+[Permalinks]
+  post = "post/:slug"
+
+[[params.menu]]
+  name = "blog"
+  url = "post/"
+
+[[params.menu]]
+  name = "post series"
+  url = "series/"
+  
+
+[[params.menu]]
+  name = "about"
+  url = "about/"
+  
+
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    respectDoNotTrack = true
+    useSessionStorage = true
+  [privacy.twitter]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+
+
+# HOMEPAGE ITEMS 
+
+[params.mystuff.datavisualization]
+label = "Data visualization"
+desc = "Data visualization"
+[[params.mystuff.datavisualization.things]]
+label = "1001 NYPL Finding Aids"
+desc = "Proof of concept to render 1001 NYPL finding aids as one document.\n"
+date = "2013-08-29"
+[[params.mystuff.datavisualization.things.links]]
+label = "Viz"
+url = "https://thisismattmiller.s3.amazonaws.com/archive-image/index.html"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "All of NYPL's finding aids printed out"
+desc = "Large print visualisation of all of NYPL’s finding aids (10K). Going away present.  "
+date = "2014-02-03"
+[[params.mystuff.datavisualization.things.links]]
+label = "Picture"
+url = "https://www.flickr.com/photos/mgiraldo/12293105706/in/photostream/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "NYPL Network Renderings"
+desc = "Timelapse network renderings of NYPL’s catalog."
+date = "2013-10-13"
+[[params.mystuff.datavisualization.things.links]]
+label = "Video"
+url = "https://vimeo.com/91428315"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "The Networked Catalog"
+desc = "Rendering the entire NYPL catalog as a subject network graph. "
+date = "2014-07-05"
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://www.nypl.org/blog/2014/07/31/networked-catalog"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "View Network"
+url = "http://catalog-network.s3-website-us-east-1.amazonaws.com/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "LinkedJazz Tulane"
+desc = "Prototype network viz for tulane contentDM metadata to RDF"
+date = "2015-02-15"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://linkedjazz.org/tulane/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Knight Challenge Elections"
+desc = "Analysis of the submissions to a Knight Foundation challenge"
+date = "2015-03-24"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.s3.amazonaws.com/website-election/index.html"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "Coverage"
+url = "https://knightfoundation.org/articles/exploring-entries-knight-news-challenge-elections/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Knight Challenge Libraries"
+desc = "Analysis of the submissions to a Knight Foundation challenge\n"
+date = "2014-10-16"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.s3.amazonaws.com/website-library/index.html"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "Coverage"
+url = "https://knightfoundation.org/articles/exploring-entries-knight-news-challenge-libraries/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "RFC — Visualizing Internet History"
+desc = "Visualizing the entire corpus the the RFC (Request for Comment) archive"
+date = "2017-04-20"
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/rfc-visualizing-internet-history-b672c233553"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "http://rfcarc.s3-website-us-east-1.amazonaws.com/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "List of all books @ Library of Congress"
+desc = "A large list of all the books at the Library of Congress"
+date = "2017-05-22"
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/library-of-congress-lists-57ddd177f1e2"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "View List"
+url = "https://s3.amazonaws.com/loctitles/index.html"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Vectorizing the DPLA\n"
+desc = "Using the DPLA metadata records as a source I vectorized their records to see if records aggregate based on textual features regardless of the metadata content."
+date = "2017-12-19"
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/vectorizing-the-dpla-5d8c9fc0b72a"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://s3.amazonaws.com/thisismattmiller/dpla-vector-provider2/index.html"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Linked Jazz Network"
+desc = "A network visualization of the relationships of jazz musicians based on historical oral history transcripts converted to linked data."
+date = "2012-06-01"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://linkedjazz.org/network/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Moretti-izer: Geometric Literature"
+desc = "A old experiment with Franco Moretti's idea"
+date = "2012-09-01"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/morettizer/"
+
+
+
+
+
+[params.mystuff.digitalhumanities]
+label = "Digital Humanities"
+desc = "Digital Humanities"
+[[params.mystuff.digitalhumanities.things]]
+label = "PADB Fluxus history Site"
+desc = "A site to organize co-occurrence of performance artists. Specifically for the Fluxus movement. Support site for my MA in History of Art and Design from Pratt Institute"
+date = "2013-04-20"
+[[params.mystuff.digitalhumanities.things.links]]
+label = "padb.net"
+url = "http://www.padb.net/"
+
+
+[[params.mystuff.digitalhumanities.things]]
+label = "Linked Jazz 52nd St"
+desc = "Crowdsourcing tool to map the relationships between jazz musicians "
+date = "2013-01-01"
+[[params.mystuff.digitalhumanities.things.links]]
+label = "Visit"
+url = "https://linkedjazz.org/52ndStreet/"
+
+
+[[params.mystuff.digitalhumanities.things]]
+label = "DADAlytics"
+desc = "A IMLS grant to build tools to aid in entitiy extraction"
+date = "2017-06-01"
+[[params.mystuff.digitalhumanities.things.links]]
+label = "Visit"
+url = "https://semlab.io/projects/"
+
+
+[[params.mystuff.digitalhumanities.things]]
+label = "DADAlytics: NER Service"
+desc = "A tool that combines multiple NER tools into one service"
+date = "2018-01-01"
+[[params.mystuff.digitalhumanities.things.links]]
+label = "Visit"
+url = "http://tools.semlab.io/"
+
+[[params.mystuff.digitalhumanities.things.links]]
+label = "Info"
+url = "https://semlab.io/DADAlytics_ner_demo/"
+
+
+[[params.mystuff.digitalhumanities.things]]
+label = "DADAlytics: Sélavy"
+desc = "A tool that organizes the output of the NER service and helps convert documents into RDF triples"
+date = "2019-10-01"
+[[params.mystuff.digitalhumanities.things.links]]
+label = "View"
+url = "https://semlab.io/howto/selavy_alpha"
+
+
+
+
+
+[params.mystuff.teachingresearch]
+label = "Teaching / Research"
+desc = "Teaching / Research"
+[[params.mystuff.teachingresearch.things]]
+label = "MA History of Art Deisgn Thesis"
+desc = "My master’s thesis for my MA in History of Art and Design from Pratt Institute. Using network analysis I looked at the Fluxus community and its development 1960-1969."
+date = "2013-04-20"
+[[params.mystuff.teachingresearch.things.links]]
+label = "Thesis Document"
+url = "http://www.padb.net/thesis/web_thesis.pdf"
+
+[[params.mystuff.teachingresearch.things.links]]
+label = "Network Renders"
+url = "http://www.padb.net/thesis/network_renders.pdf"
+
+
+[[params.mystuff.teachingresearch.things]]
+label = "LOD Summer School @ University of Bologna"
+desc = "For a few years I co-taught a Linked Data summer school at the University of Bologna in Ravenna Italy. "
+date = "2016-05-15"
+[[params.mystuff.teachingresearch.things.links]]
+label = "Info"
+url = "http://www.beniculturali.unibo.it/it/attivita-didattica/linked-data-per-i-beni-culturali"
+
+
+[[params.mystuff.teachingresearch.things]]
+label = "Programing for Cultural Heritage"
+desc = "I taught data + python to library students at Pratt Institute for 6 years as an adjunct. Checkout the class projects."
+date = "2020-06-01"
+[[params.mystuff.teachingresearch.things.links]]
+label = "Site"
+url = "http://pfch.nyc/"
+
+
+[[params.mystuff.teachingresearch.things]]
+label = "Harvard LIL Fellowship\u200a"
+desc = "I was a 2017 summer fellow at Harvard’s Library Innovation Lab. I worked on Case Law and linked data"
+date = "2017-06-09"
+[[params.mystuff.teachingresearch.things.links]]
+label = "Part 1"
+url = "https://medium.com/@thisismattmiller/harvard-library-innovation-lab-fellowship-week-1-8538ec1853e5"
+
+[[params.mystuff.teachingresearch.things.links]]
+label = "Part 2"
+url = "https://medium.com/@thisismattmiller/harvard-lil-fellowship-week-2-463553610a35"
+
+[[params.mystuff.teachingresearch.things.links]]
+label = "Part 3"
+url = "https://medium.com/@thisismattmiller/harvard-lil-fellowship-week-3-b37fbd79145c"
+
+[[params.mystuff.teachingresearch.things.links]]
+label = "Part 4"
+url = "https://medium.com/@thisismattmiller/harvard-lil-fellowship-part-4-fc20ae23401a"
+
+[[params.mystuff.teachingresearch.things.links]]
+label = "Part 5"
+url = "https://medium.com/@thisismattmiller/harvard-lil-fellowship-part-5-43bcfc0805b2"
+
+
+[[params.mystuff.teachingresearch.things]]
+label = "Semlab"
+desc = "I am co-director of the Semantic Lab at Pratt Institute"
+date = "2018-01-01"
+[[params.mystuff.teachingresearch.things.links]]
+label = "Site"
+url = "https://semlab.io/"
+
+
+[[params.mystuff.teachingresearch.things]]
+label = "SILS Practicum"
+desc = "My Practicum for my Masters Information Library Science (MILS) degree "
+date = "2011-06-01"
+[[params.mystuff.teachingresearch.things.links]]
+label = "Visit"
+url = "https://thisismattmiller.github.io/practicum/"
+
+
+[[params.mystuff.teachingresearch.things]]
+label = "Linked Jazz"
+desc = "A linked data digital humanities project to map the relationships of jazz musicians via oral history transcripts."
+date = "2015-01-01"
+[[params.mystuff.teachingresearch.things.links]]
+label = "Visit"
+url = "http://linkedjazz.org"
+
+
+
+
+
+[params.mystuff.metadata]
+label = "Metadata"
+desc = "Metadata"
+[[params.mystuff.metadata.things]]
+label = "MARC Schema as JSON"
+desc = "Using JSON to describe the MARC standard."
+date = "2014-03-11"
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://github.com/thisismattmiller/marc-json-schema"
+
+
+[[params.mystuff.metadata.things]]
+label = "BILLI / Nomadic Classification"
+desc = "Exploring how legacy inhouse classification systems at NYPL can be leveraged using linked data."
+date = "2016-01-26"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://www.nypl.org/blog/2016/01/27/nomadic-classification-billi"
+
+[[params.mystuff.metadata.things.links]]
+label = "App"
+url = "http://billi.nypl.org/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Available Bulk Records"
+desc = "I made a list of available cultural heritage bulk lists."
+date = "2017-03-17"
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://docs.google.com/spreadsheets/d/1V5iNtLJYxBaWopAR_61M_aX_jyH0ug0DQEnlABZMnlM/edit#gid=0"
+
+
+[[params.mystuff.metadata.things]]
+label = "Internet Archive book list"
+desc = "Worked at Internet Archive as a contractor building a big book list"
+date = "2018-03-09"
+[[params.mystuff.metadata.things.links]]
+label = "List"
+url = "https://archive.org/details/open_libraries_wish_list"
+
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "http://blog.archive.org/2018/03/14/lets-build-a-great-digital-library-together-starting-with-a-wishlist/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Wikidata on id.loc.gov"
+desc = "I connected Library of Congress authority records to Wikidata"
+date = "2019-05-22"
+[[params.mystuff.metadata.things.links]]
+label = "Library of Congress Blog"
+url = "https://blogs.loc.gov/thesignal/2019/05/integrating-wikidata-at-the-library-of-congress/?loclr=twndi"
+
+[[params.mystuff.metadata.things.links]]
+label = "Tool"
+url = "https://labs.loc.gov/experiments/pnp-wikidata-tool/"
+
+[[params.mystuff.metadata.things.links]]
+label = "Current Status"
+url = "http://id.loc.gov/loads/extrardf/wikidata/"
+
+
+[[params.mystuff.metadata.things]]
+label = "CIDOC vs Solr — Steamrolling your model"
+desc = "Looking at using a complex model like CIDOC in a search index"
+date = "2017-04-10"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/cidoc-vs-solr-steamrolling-your-model-1b5704f07e16"
+
+
+[[params.mystuff.metadata.things]]
+label = "Zines vs. Google Vision API"
+desc = "Using commercial APIs to extract metadata about zine content"
+date = "2017-04-17"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://towardsdatascience.com/zines-vs-google-vision-api-part-1-process-535ea731237b"
+
+[[params.mystuff.metadata.things.links]]
+label = "View App"
+url = "https://thisismattmiller.github.io/zine-machine/#/"
+
+[[params.mystuff.metadata.things.links]]
+label = "Blog part 2"
+url = "https://medium.com/@thisismattmiller/zines-vs-google-vision-api-part-2-embedded-images-d084f1b43258"
+
+
+[[params.mystuff.metadata.things]]
+label = "Diagramming Bibframe 2.0"
+desc = "A large diagram of Bibframe"
+date = "2017-04-21"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/diagramming-bibframe-2-0-4c1696653052"
+
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/bibframe-diagram/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Mapping LCC to Wikipedia via LCSH"
+desc = "Connecting Wikipedia to LCC via LCSH :|"
+date = "2017-10-29"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/mapping-lcc-to-wikipedia-via-lcsh-3aef1446023a"
+
+[[params.mystuff.metadata.things.links]]
+label = "View App"
+url = "https://thisismattmiller.github.io/lcc-lcsh-wiki-mapping/"
+
+
+[[params.mystuff.metadata.things]]
+label = "LCC is made of people"
+desc = "Individuals found in ranges of LCC."
+date = "2017-12-04"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/lcc-is-made-of-people-ce852ffc427"
+
+[[params.mystuff.metadata.things.links]]
+label = "View App"
+url = "https://thisismattmiller.github.io/lcc-people/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Triple Builder"
+desc = "Like Github’s gist but for random RDF graphs. A spreadsheet RDF triple editor"
+date = "2018-07-28"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/triple-builder-subsets-28152364b587"
+
+[[params.mystuff.metadata.things.links]]
+label = "App"
+url = "https://tb.semlab.io/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Analyzing 20 Million FCC Net Neutrality Comments"
+desc = "Looking at the public comments for FCC's attempt to end Title 2 protection"
+date = "2017-09-22"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/analyzing-20-million-fcc-net-neutrality-comments-3d8118b7fe34"
+
+
+[[params.mystuff.metadata.things]]
+label = "Library of Congress Holdings by LCC"
+desc = "A force diagram of resources held at the Library of Congress by LCC classification"
+date = "2017-10-11"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/library-of-congress-holdings-by-lcc-51fb5eb868f2"
+
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/lcc-hierarchy/"
+
+
+
+
+
+[params.mystuff.creativecoding]
+label = "Creative Coding"
+desc = "Creative Coding"
+[[params.mystuff.creativecoding.things]]
+label = "Emoji Field"
+desc = "When you get heatstroke walking home from trader joes and think about windows screen savers but with emojis."
+date = "2015-06-01"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/emojifield/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Code4Lib Markov Chain"
+desc = "A Markov chain toy using presentations delivered at Code4Lib 2016"
+date = "2016-04-01"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "http://thisismattmiller.github.io/overheard-at-c4l2016/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Portals to change - DPLA doors"
+desc = "Portals to change"
+date = "2018-06-02"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/dpla-doors/"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1002819486347681792"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "I trained a neural net on..."
+desc = "Dumb neural net thing, I was sick of seeing people posting the things they are training"
+date = "2018-06-02"
+[[params.mystuff.creativecoding.things.links]]
+label = "Output"
+url = "https://gist.github.com/thisismattmiller/dbba60bd2c1c30384bf01449c121c7d7"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1002982840064200706"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Byzantine"
+desc = "A little toy to make Frankenstein PDFs from government sources."
+date = "2019-03-20"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://byzantine.glitch.me/"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1104504155455008768"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Zork"
+desc = "Extracted elements from the text adventure game Zork"
+date = "2019-04-20"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://zork.glitch.me/"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1118241500524105728"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Anaphora - political speech"
+desc = "Exploring repeated phrases in government audio from Library of Congress web archives."
+date = "2019-05-20"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://anaphora.glitch.me/"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/anaphora-gov-8e8c21f539b2"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Rodin's Gates of Hell"
+desc = "There are two Gates of Hell sculptures on the east and west coast of America"
+date = "2019-09-26"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "http://gatesofhell.glitch.me/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Authority Birthdays"
+desc = "What authorities were created on your birthday"
+date = "2016-03-26"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/authority-birthdays-d37fee6d474b"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Paint by MARC (numbers)"
+desc = "Paint a picture by MARC record numbers"
+date = "2016-04-20"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/paint-by-marc-numbers-50ccde07751f"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "http://thisismattmiller.github.io/paint-by-marc/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Public Domain Cut-up Twitter Bot"
+desc = "Twitter bot mashing up public domain images"
+date = "2017-02-10"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/public-domain-cut-up-bot-9b0d77cce7a8"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Visit"
+url = "https://twitter.com/PDCutup"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Little LC List Twitterbot"
+desc = "Little lists of similar sounding books at Library of Congress"
+date = "2018-03-18"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/little-lists-twitter-bot-c4e1437ca8b0"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Visit"
+url = "https://twitter.com/LittleBookLists"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Effect Bath - BBC Sound Twitterbot"
+desc = "A mashup bot using the BBC sound effect library"
+date = "2018-05-23"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/effect-bath-collaging-16-000-bbc-sound-effects-743a3646036f"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Visit"
+url = "https://twitter.com/effectbath"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "How it was made"
+url = "https://medium.com/@thisismattmiller/effect-bath-dissection-6cfcaf344bd5"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Warhol Repetition"
+desc = "Extracting the frames in between serial photograph using computer vision stuff."
+date = "2018-10-27"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/warhol-repetion-31fed0a308c0"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Generative Tropical Cyclones Drawings"
+desc = "Randomly drawing the path of historical storms"
+date = "2017-9-9"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/generative-tropical-cyclones-drawings-371ba300c90a"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/hurricane-track-draw/"
+
+
+
+
+
+[params.mystuff.culturalheritagesystems]
+label = "Cultural Heritage Systems"
+desc = "Cultural Heritage Systems"
+[[params.mystuff.culturalheritagesystems.things]]
+label = "“Florentine Renaissance Drawings” Digital Project"
+desc = "A Linked Data system presenting three editions of Bernard Berenson’s catalog of Florentine painters. "
+date = "2015-06-11"
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Announcement"
+url = "http://itatti.harvard.edu/news/drawings-florentine-painters-online-catalogue"
+
+
+[[params.mystuff.culturalheritagesystems.things]]
+label = "Registry"
+desc = "The Registry was large metadata into linked data aggregation project at NYPL. View the presentation or read the blog to learn more. The video was a demo of the front-end of the system."
+date = "2016-06-01"
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Prenetation"
+url = "https://docs.google.com/presentation/d/1tjYSjx_v4ZD4k92h1GbDmEjOoA7-wz5wvqDkXSicztE/edit"
+
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Video"
+url = "https://vimeo.com/256307124"
+
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Blog under \"Big Labs\" section"
+url = "https://medium.com/@thisismattmiller/moving-on-from-nypl-297c51cd4cb3"
+
+
+[[params.mystuff.culturalheritagesystems.things]]
+label = "id.loc.gov update"
+desc = "I work on id.loc.gov at Library of Congress in 2018/19 I did a big update to the site design."
+date = "2018-11-09"
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Visit"
+url = "http://id.loc.gov/search/?q="
+
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1067562856189739013"
+
+
+[[params.mystuff.culturalheritagesystems.things]]
+label = "NYPL Archives"
+desc = "I spent two years building NYPL's archive portal."
+date = "2014-01-01"
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Visit"
+url = "http://archives.nypl.org"
+
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Blog, the first part"
+url = "https://medium.com/@thisismattmiller/moving-on-from-nypl-297c51cd4cb3"
+
+
+[[params.mystuff.culturalheritagesystems.things]]
+label = "id.loc.gov vocab mappings"
+desc = "I spent effort to connect id.loc.gov to other LOD vocabularies"
+date = "2019-03-01"
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Ex 1"
+url = "https://twitter.com/thisismmiller/status/1087777598321684486"
+
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Ex 2"
+url = "https://twitter.com/thisismmiller/status/1088526927470710784"
+
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Ex 3"
+url = "https://twitter.com/thisismmiller/status/1128660920782204928"
+
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Ex 4"
+url = "https://twitter.com/thisismmiller/status/1091356835939000322"
+
+
+[[params.mystuff.culturalheritagesystems.things]]
+label = "OSU VRL System "
+desc = "In 2009 I worked for Ohio State University building a system for their Visual Resource Library"
+date = "2010-06-01"
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Visit"
+url = "https://thisismattmiller.github.io/osuvrl/"
+
+
+
+
+
+[params.mystuff.detritus]
+label = "Detritus"
+desc = "Detritus"
+[[params.mystuff.detritus.things]]
+label = "Frederick Wiseman Documentaries"
+desc = "What percentage of documentaries types does Wiseman made?"
+date = "2017-09-27"
+[[params.mystuff.detritus.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/913178385907687424"
+
+
+[[params.mystuff.detritus.things]]
+label = "Cleveland socialist newspaper covers"
+desc = "Cleveland had a socialist newspaper in the 1920s. I compiled all the covers, I think I was trying to impress a polish person."
+date = "2018-10-29"
+[[params.mystuff.detritus.things.links]]
+label = "View"
+url = "https://t.co/WbiylRkNAs?amp=1"
+
+[[params.mystuff.detritus.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1057113386004168705"
+
+
+[[params.mystuff.detritus.things]]
+label = "Garfield"
+desc = "It was national lasagna day or something."
+date = "2019-07-29"
+[[params.mystuff.detritus.things.links]]
+label = "View"
+url = "http://garfield-covers.s3.amazonaws.com/index.html"
+
+
+[[params.mystuff.detritus.things]]
+label = "List of Wikipedia Emoji redirects"
+desc = "Emoji redirects"
+date = "2019-10-05"
+[[params.mystuff.detritus.things.links]]
+label = "View"
+url = "https://gist.github.com/thisismattmiller/245227af34160f427d6376c61bfcd1dc"
+
+
+[[params.mystuff.detritus.things]]
+label = "Moving on from NYPL"
+desc = "Me being polite about a bad situation"
+date = "2017-02-17"
+[[params.mystuff.detritus.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/moving-on-from-nypl-297c51cd4cb3"
+
+
+[[params.mystuff.detritus.things]]
+label = "List of Terror and Relief in Jorge Luis Borges"
+desc = "Close reading is scary yall"
+date = "2017-05-25"
+[[params.mystuff.detritus.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/list-of-terror-and-relief-in-jorge-luis-borges-e1ca0860d062"
+
+
+[[params.mystuff.detritus.things]]
+label = "Patented Screenshots"
+desc = "Some old ass websites"
+date = "2018-06-08"
+[[params.mystuff.detritus.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/patented-screenshots-bfbf8cc29b73"
+
+
+[[params.mystuff.detritus.things]]
+label = "Memory Fragments"
+desc = "I went to Venice yallll"
+date = "2017-07-11"
+[[params.mystuff.detritus.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/memory-fragments-venice-ed8db9777d76"
+
+
+[[params.mystuff.detritus.things]]
+label = "Mapping Modern Day Herms"
+desc = "Experiment using mapping tools on my phone"
+date = "2017-09-08"
+[[params.mystuff.detritus.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/modern-day-herms-mapping-2311dd827a7f"
+
+
+[[params.mystuff.detritus.things]]
+label = "Matt Miller Club"
+desc = "Hit the club and listen to bone thugs n harmony"
+date = "2017-06-01"
+[[params.mystuff.detritus.things.links]]
+label = "da club"
+url = "http://thisismattmiller.club"
+
+
+[[params.mystuff.detritus.things]]
+label = "Spreadsheet monster"
+desc = "something...about...idk, something to do with @ablwr"
+date = "2018-01-01"
+[[params.mystuff.detritus.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/spreadsheet-monster/"
+
+
+
+
+
+[params.mystuff.wikipediawikidatawikibase]
+label = "Wikipedia / Wikidata / Wikibase"
+desc = "Wikipedia / Wikidata / Wikibase"
+[[params.mystuff.wikipediawikidatawikibase.things]]
+label = "Installing Wikibase Tutorial"
+desc = "Video tutorial on installing Wikibase"
+date = "2019-09-03"
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "View"
+url = "https://semlab.io/howto/wikibase_basic"
+
+
+[[params.mystuff.wikipediawikidatawikibase.things]]
+label = "Mapping Wikidata to Bibframe"
+desc = "A look at how a Bibframe record could be represented in Wikidata"
+date = "2018-01-24"
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/mapping-wikidata-to-bibframe-f674a4eab748"
+
+
+[[params.mystuff.wikipediawikidatawikibase.things]]
+label = "Wikibase for Research Infrastructure"
+desc = "Using Wikibase as a platform for your research project"
+date = "2018-03-09"
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/wikibase-for-research-infrastructure-part-1-d3f640dfad34"
+
+
+[[params.mystuff.wikipediawikidatawikibase.things]]
+label = "Analyzing Books Cited in English Wikipedia"
+desc = "Analysis of the books cited across all of english Wikipedia"
+date = "2018-04-08"
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/analyzing-books-cited-in-english-wikipedia-d7520b7838f3"
+
+
+[[params.mystuff.wikipediawikidatawikibase.things]]
+label = "Analyzing DOI Citations in English Wikipedia"
+desc = "Analysis of the journal articles cited across all of english Wikipedia  "
+date = "2018-04-20"
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/analyzing-doi-citations-in-english-wikipedia-2db56bad030b"
+
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "Media Coverage"
+url = "https://www.nature.com/articles/d41586-018-05161-6"
+
+
+[[params.mystuff.wikipediawikidatawikibase.things]]
+label = "Variants: Comparing LCSH alt labels and Wikipedia redirects"
+desc = "Both Wikipedia and LCSH have alternative labels, comparing them."
+date = "2019-09-25"
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "Blog"
+url = "https://medium.com/@thisismattmiller/variants-comparing-lcsh-alt-labels-and-wikipedia-redirects-1a1bc926cc00"
+
+
+
+
+
+[params.mystuff.drawing]
+label = "Drawing"
+desc = "Drawing"
+[[params.mystuff.drawing.things]]
+label = "Italian Street Signs Vol. 1"
+desc = "Street signs from Italy"
+date = "2018-07-01"
+[[params.mystuff.drawing.things.links]]
+label = "View"
+url = "http://thisiswatercolor.s3-website-us-east-1.amazonaws.com/it_signs_vol_1/"
+
+
+[[params.mystuff.drawing.things]]
+label = "2018 Notebook"
+desc = "Random drawings from 2018"
+date = "2018-06-01"
+[[params.mystuff.drawing.things.links]]
+label = "View"
+url = "http://thisiswatercolor.s3-website-us-east-1.amazonaws.com/notebook_may_june/"
+
+
+
+
+

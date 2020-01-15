@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html
+  class=""
+  lang="{{ .Site.LanguageCode }}"
+  prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"
+>
+  <head>
+    <meta charset="utf-8" />
+
+    {{ partial "meta.html" . }}
+
+    <title>{{ .Site.Title }}</title>
+    <link rel="canonical" href="{{ .Permalink }}" />
+    {{ $sitetitle := .Site.Title }}
+    {{ with .OutputFormats.Get "RSS" }}
+        <link
+          href="{{ .RelPermalink }}"
+          rel="alternate"
+          type="application/rss+xml"
+          title="{{ $sitetitle }}"
+        />
+    {{ end }}
+        {{ partial "head_includes.html" . }}
+  </head>
+  <body
+    lang="{{ .Site.LanguageCode }}"
+    class=""
+  >
+
+
+
+  <div class="container">
+
+
+    <div class="columns">
+      <div class="column is-one-half">
+        <h1 id="title" class="is-size-1">
+          {{ .Site.Title }}
+        </h1>
+        <a class="is-size-5" id="menu-links" href="about/">About</a>        
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="container">
+
+
+
+
+
+    <div class="columns">
+      <div class="column is-one-third">
+
+
+
+
+        <!-- Metadata -->
+        <h2 class="is-size-4 details-header">✺{{ .Site.Params.mystuff.metadata.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.metadata.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>        
+
+        <!-- culturalheritagesystems -->
+        <h2 class="is-size-4 details-header">✲{{ .Site.Params.mystuff.culturalheritagesystems.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.culturalheritagesystems.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>    
+
+
+        <h2 class="is-size-4 details-header">✮{{ .Site.Params.mystuff.wikipediawikidatawikibase.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.wikipediawikidatawikibase.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>
+
+
+        
+
+
+      </div>
+      <div class="column">
+
+
+        <h2 class="is-size-4 details-header">✯{{ .Site.Params.mystuff.datavisualization.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.datavisualization.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>
+
+
+
+        <h2 class="is-size-4 details-header">✰{{ .Site.Params.mystuff.creativecoding.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.creativecoding.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <div class="column">
+
+
+        <h2 class="is-size-4 details-header">❂{{ .Site.Params.mystuff.digitalhumanities.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.digitalhumanities.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>        
+
+
+
+
+        <h2 class="is-size-4 details-header">※{{ .Site.Params.mystuff.teachingresearch.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.teachingresearch.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>  
+
+        <h2 class="is-size-4 details-header">〠{{ .Site.Params.mystuff.drawing.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.drawing.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>
+
+        <h2 class="is-size-4 details-header">❅{{ .Site.Params.mystuff.detritus.label }}</h2>
+        <ul class="homepage-list-ul">
+          {{ range sort .Site.Params.mystuff.detritus.things "date" "desc" }}
+          <li>
+            <details>
+                <summary>{{.label}}</summary>
+                <div class="details">
+                  <div class="details-date">{{.date}}</div>
+                  <div class="details-desc">{{.desc}}</div>
+                  <div class="details-links">
+                  {{ range .links }}
+                    <a href="{{ .url }}">{{ .label }}</a><br/>
+                  {{ end }}
+                  </div>
+                </div>
+            </details>
+          </li>
+          {{ end }}
+        </ul>  
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+    {{ partial "footer.html" . }}
+  </body>
+</html>

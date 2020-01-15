@@ -9,5 +9,11 @@ rm -fr index.xml
 rm -fr series
 rm -fr sitemap.xml
 rm -fr tags
+cd dev
+python build_index.py
+cd ..
 hugo -s dev/
 mv dev/public/* .
+git add .
+git commit -m 'release'
+git push

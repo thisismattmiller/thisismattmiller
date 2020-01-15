@@ -964,6 +964,15 @@ label = "View"
 url = "http://thisiswatercolor.s3-website-us-east-1.amazonaws.com/notebook_may_june/"
 
 
+[[params.mystuff.drawing.things]]
+label = "Aoristic"
+desc = "Screen printing projects involving repetition of art and history."
+date = "2012-01-01"
+[[params.mystuff.drawing.things.links]]
+label = "Visit"
+url = "http://aoristic.us/"
+
+
 
 
 

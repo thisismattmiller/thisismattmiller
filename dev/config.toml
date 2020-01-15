@@ -15,7 +15,7 @@ description = "THIS IS MATT MILLER"
 [params]
   titleEmoji = ":tada:"
   # change this!
-  twitter = "siegerts"
+  twitter = "thisismmiller"
 
 [Permalinks]
   post = "post/:slug"

@@ -176,7 +176,7 @@ url = "https://linkedjazz.org/network/"
 
 [[params.mystuff.datavisualization.things]]
 label = "Moretti-izer: Geometric Literature"
-desc = "A old experiment with Franco Moretti's idea"
+desc = "An old experiment with Franco Moretti's idea"
 date = "2012-09-01"
 [[params.mystuff.datavisualization.things.links]]
 label = "View"
@@ -362,6 +362,15 @@ date = "2017-03-17"
 [[params.mystuff.metadata.things.links]]
 label = "View"
 url = "https://docs.google.com/spreadsheets/d/1V5iNtLJYxBaWopAR_61M_aX_jyH0ug0DQEnlABZMnlM/edit#gid=0"
+
+
+[[params.mystuff.metadata.things]]
+label = "Embedded Metadata Explorer"
+desc = "A web tool to embed data, like a dublin core record, into digital assets. Was MILS class project and DCMI poster paper"
+date = "2011-06-01"
+[[params.mystuff.metadata.things.links]]
+label = "Visit"
+url = "http://embedmydata.com"
 
 
 [[params.mystuff.metadata.things]]
@@ -775,7 +784,7 @@ label = "Detritus"
 desc = "Detritus"
 [[params.mystuff.detritus.things]]
 label = "Frederick Wiseman Documentaries"
-desc = "What percentage of documentaries types does Wiseman made?"
+desc = "What types of documentaries did Wiseman make by percentage?"
 date = "2017-09-27"
 [[params.mystuff.detritus.things.links]]
 label = "Context"

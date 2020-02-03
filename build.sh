@@ -4,6 +4,7 @@ rm -fr categories
 rm -fr css
 rm -fr dist
 rm -fr img
+rm -fr post
 rm -fr index.html
 rm -fr index.xml
 rm -fr series

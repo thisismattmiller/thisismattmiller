@@ -155,8 +155,6 @@ twitterimage  = "https://thisismattmiller.com/img/post_repot_header.png"
 
 		<div class="column" style="">
 			
-
-
 <p>The next example is more complicated because of the decision that it cannot be made into a static site. <a href="https://linkedjazz.org/52ndStreet">Linked Jazz's 52nd Street</a> is a crowdsourcing application that lets users help classify the relationships between jazz musicians based on the content of their oral history interviews. We still wanted the site to work, we may use it in the future with new data but the current way it is being hosted is unsustainable. It is another dated LAMP site, I wrote it about eight years ago. Everything is old, Apache, MySQL and PHP. Upgrading to new versions of Apache and MySQL is not a big deal, you can load SQL data from an old MySQL instance into a new one fairly seamlessly. But trying to run a PHP app written in 5.x with say PHP version 7 is going to cause problems. You could go through and refactor the code but that is a lot of effort.</p>
 
 <p>My solution is to repot this project into <a href="https://en.wikipedia.org/wiki/Docker_(software)">a Docker container</a>. I can run the site using an old version of PHP in its own container, it can have its own Apache and MySQL in there with it and it will still be a dynamic LAMP site, just isolated in its own little sandbox. By dockerizing this app I can easily move it around to another server. If something happens and I need to wipe the current Linked Jazz server I don't have to worry about configuring everything so this old LAMP site works. As long as Docker is installed I can run it in its own container and restore it back to normal in a few minutes. </p>

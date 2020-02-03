@@ -46,7 +46,7 @@
   name="twitter:description"
   content="Sunsetting old sites, making them static, dockerizing and deleting them."
 />
-<meta name="twitter:image:src" content="/img/post_repot_header.png" />
+<meta name="twitter:image:src" content="https://thisismattmiller.com/img/post_repot_header.png" />
 <meta name="twitter:domain" content="https://thisismattmiller.com/post/repotting-old-dh-projects/" />
 
 
@@ -130,8 +130,6 @@ if (!doNotTrack) {
   		margin-bottom: 2em;
   	}
 
-
-
 	@keyframes float {
 		0% {
 			
@@ -159,6 +157,7 @@ if (!doNotTrack) {
 	      	<h1 class="is-size-1">Repotting Old Digital Humanities Projects</h1>
 	      	<h2 class="is-size-3 has-text-grey">Two Test Cases</h2>
 	      	<h2 class="is-size-5 has-text-grey">Jan 31 2020</h2>
+
 
 	    </div>
 		<div class="column is-one-half" style="text-align:left;">
@@ -274,8 +273,6 @@ if (!doNotTrack) {
 
 		<div class="column" style="">
 			
-
-
 <p>The next example is more complicated because of the decision that it cannot be made into a static site. <a href="https://linkedjazz.org/52ndStreet">Linked Jazz's 52nd Street</a> is a crowdsourcing application that lets users help classify the relationships between jazz musicians based on the content of their oral history interviews. We still wanted the site to work, we may use it in the future with new data but the current way it is being hosted is unsustainable. It is another dated LAMP site, I wrote it about eight years ago. Everything is old, Apache, MySQL and PHP. Upgrading to new versions of Apache and MySQL is not a big deal, you can load SQL data from an old MySQL instance into a new one fairly seamlessly. But trying to run a PHP app written in 5.x with say PHP version 7 is going to cause problems. You could go through and refactor the code but that is a lot of effort.</p>
 
 <p>My solution is to repot this project into <a href="https://en.wikipedia.org/wiki/Docker_(software)">a Docker container</a>. I can run the site using an old version of PHP in its own container, it can have its own Apache and MySQL in there with it and it will still be a dynamic LAMP site, just isolated in its own little sandbox. By dockerizing this app I can easily move it around to another server. If something happens and I need to wipe the current Linked Jazz server I don't have to worry about configuring everything so this old LAMP site works. As long as Docker is installed I can run it in its own container and restore it back to normal in a few minutes. </p>
@@ -289,7 +286,7 @@ if (!doNotTrack) {
 
 <p>I have one bonus example, something I really think of sunsetting, rather than repotting. Well maybe repotting into the garbage can. I made a site as a class project in graduate school to explore the possibilities of embedded metadata in digital assets. I had to evaluate the effort in repotting this tool or not. It could not be made into a static site because it is not a content site, you upload a digital asset and it will inform you of the embedded metadata present. I could possibly Dockerize it but it requires a special PHP module that was difficult to get working almost a decade ago, the thought of trying to get it functional today, even with Docker sounded extravagant. So I said farewell little website, you had a good run, someone even used it to write <a href="https://doi.org/10.1108/LHT-03-2017-0053">an academic paper</a> but you can't do everything and this is something that can be let go. I made sure to make some videos of the site, do a webcapture of it, put all the source code on Github and redirected the <a href="http://embedmydata.com/">domain to a page with all this information</a>. </p>
 
-<p>It's sad to turn off something you spent time building but you also get the satisfaction of not having to think about it ever again. And maybe that little room that is freed up in your brain is the space needed to make it to the next thing.</p>
+<p>It's sad to turn off something you spent time building but you also get the satisfaction of not having to think about it ever again. And maybe that little room that is freed up in your brain is the space needed to make it to the next thing. </p>
 
 
 

@@ -6,10 +6,19 @@
     <description>Recent content on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://thisismattmiller.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Repotting Old DH Projects</title>
+      <link>https://thisismattmiller.com/post/repotting-old-dh-projects/</link>
+      <pubDate>Fri, 31 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/repotting-old-dh-projects/</guid>
+      <description>p{ font-size: 1.5em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } }  Repotting Old Digital Humanities Projects Two Test Cases Jan 31 2020    Knowing how to stop doing things is an important skill to learn. Kind of like learning to say no to things when you don’t have the capacity to do them.</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -18,6 +27,24 @@
       
       <guid>https://thisismattmiller.com/about/</guid>
       <description>Matt Miller  About      Hi there. I’m a librarian, researcher and developer. I work with cultural heritage organizations to build and implement technology solutions with an emphasis on metadata. My research focuses on linked open data, knowledge organization and data visualization.   Quick Bio: I work for the Library of Congress helping with id.loc.gov and the Bibframe initiative. I previously worked for NYPL Labs and was a 2017 fellow at Harvard’s Library Innovation Lab.</description>
+    </item>
+    
+    <item>
+      <title>BLOG_TITLE</title>
+      <link>https://thisismattmiller.com/blog_template/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/blog_template/</guid>
+      <description>Hi there. I’m a librarian, researcher and developer. I work with cultural heritage organizations to build and implement technology solutions with an emphasis on metadata. My research focuses on linked open data, knowledge organization and data visualization.   Quick Bio: I work for the Library of Congress helping with id.loc.gov and the Bibframe initiative. I previously worked for NYPL Labs and was a 2017 fellow at Harvard’s Library Innovation Lab.</description>
+    </item>
+    
+    <item>
+      <title>BLOG_TITLE</title>
+      <link>https://thisismattmiller.com/repotting_dh/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/repotting_dh/</guid>
+      <description>Hi there. I’m a librarian, researcher and developer. I work with cultural heritage organizations to build and implement technology solutions with an emphasis on metadata. My research focuses on linked open data, knowledge organization and data visualization.   Quick Bio: I work for the Library of Congress helping with id.loc.gov and the Bibframe initiative. I previously worked for NYPL Labs and was a 2017 fellow at Harvard’s Library Innovation Lab.</description>
     </item>
     
   </channel>

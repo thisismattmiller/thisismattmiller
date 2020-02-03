@@ -101,3 +101,47 @@ html, body {
     animation: changeColor 30s infinite alternate;
 }*/
 
+
+
+  .doodle-mono-right-header {
+    width: 45%;
+  }
+  
+@media (min-width: 769px) {
+  .doodle-mono-right-header {
+    width: 45%;
+  }
+}
+@media (min-width: 785px) {
+  .doodle-mono-right-header {
+    width: 60%;
+  }
+}
+
+@media (min-width: 900px) {
+  .doodle-mono-right-header {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1023px) {
+  .doodle-mono-right-header {
+    width: 60%;
+  }
+}
+@media (min-width: 1407px) {
+  .doodle-mono-right-header {
+    width: 65%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

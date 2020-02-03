@@ -6,6 +6,7 @@ googleAnalytics = "UA-10371295-5"
 enableEmoji = true 
 copyright = ""
 description = "THIS IS MATT MILLER"
+twitimage = ""
 
 [taxonomies]
   category = "categories"
@@ -774,6 +775,15 @@ date = "2010-06-01"
 [[params.mystuff.culturalheritagesystems.things.links]]
 label = "Visit"
 url = "https://thisismattmiller.github.io/osuvrl/"
+
+
+[[params.mystuff.culturalheritagesystems.things]]
+label = "data.carnegiehall.org"
+desc = "I worked as a contractor building Carnegie Hall's linked data infrastructure and data portal"
+date = "2018-01-01"
+[[params.mystuff.culturalheritagesystems.things.links]]
+label = "Visit"
+url = "http://data.carnegiehall.org/sparql"
 
 
 

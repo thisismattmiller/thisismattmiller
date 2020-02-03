@@ -3,12 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://thisismattmiller.com/</loc>
+    <lastmod>2020-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://thisismattmiller.com/post/</loc>
+    <lastmod>2020-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://thisismattmiller.com/post/repotting-old-dh-projects/</loc>
+    <lastmod>2020-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://thisismattmiller.com/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://thisismattmiller.com/</loc>
+    <loc>https://thisismattmiller.com/blog_template/</loc>
+    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://thisismattmiller.com/repotting_dh/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   

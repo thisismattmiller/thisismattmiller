@@ -39,12 +39,12 @@
 <meta name="twitter:creator" content="@{{ .Site.Params.twitter }}" />
 <meta
   name="twitter:title"
-  content="{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}"
+  content="{{ if .Title }}{{ .Title }}{{ end }}"
 />
 <meta
   name="twitter:description"
-  content="{{ .Description | default .Summary }}|{{ .Site.Params.Description }}"
+  content="{{ if .Description }}{{ .Description }}{{ end }}"
 />
-<meta name="twitter:image:src" content="" />
+<meta name="twitter:image:src" content="{{ $.Param "twitterimage" }}" />
 <meta name="twitter:domain" content="{{ .Permalink }}" />
 {{ end }}

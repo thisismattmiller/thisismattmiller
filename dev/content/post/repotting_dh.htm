@@ -95,29 +95,37 @@ twitterimage  = "https://thisismattmiller.com/img/post_repot_header.png"
     </div>
 
 
-	<div class="columns is-flex is-vcentered ">
+	<div class="columns v-align-doodle">
 
 		<div class="column is-four-fifths" style="">
 			<p>The hierarchy of the site is pretty simple. There is a main list of all the resources in the database and then each resource has its own page, for example http://padb.net/resource/yoko_ono. With the dynamic site PHP reads the database and then populates the resource template with Yoko Ono's data. I just need to take the resulting HTML page and save it so it can be served without any database or PHP requirement to create it.</p>
 			<p>To get started I used the simple tool <a href="https://www.httrack.com/">HTTrack</a>. I pointed it at the existing database powered site and it crawled the pages and made a local file system structure. So it made a root padb.net directory, a /resource/ directory and a /yoko_ono/ directory and populated that static HTML page. This works pretty well, except I put some javascript visualizations on the site that are powered by a JSON API. The page loads then makes another request via javascript for more data to populate a d3.js network diagram. HTTrack can only follow HTML links defined in the page. If there is a button that when clicked kicks off a javacsript call then it doesn't know how to do that. So what is needed is to make the API static as well. So when the javascript requests <a href="http://padb.net/resource/yoko_ono/event/data.json">http://padb.net/resource/yoko_ono/event/data.json</a> from the site the database builds that JSON file and returns it. I need to make that data.json for each resource so when the JS calls the endpoint it is served the static file and it works exactly as when there was a database powering everything.</p>
 		</div>
 		<div class="column" style="">
-			<img class="doodle-mono" style="" src="/img/post_repot_comp1.png" alt="drawing of a computer tower"/>
+			<img class="doodle-mono doodle-mono-side" style="" src="/img/post_repot_comp1.png" alt="drawing of a computer tower"/>
 
 		</div>
 
   </div>
 
+	<div class="columns">
 
-	<div class="columns is-flex is-vcentered ">
+		<div class="column" style="">
+		
+			<p>This is when things get a little more bespoke. I need to write something something adds in these json files to the existing website hierarchy. I did this by writing a python script that requests the json files from the dynamic API and writes them out as static json files in the correct web hierarchy. To accomplish this I just figured out all of my API endpoints, made a big list of all the resources and has python loop through them, requesting each API endpoint and writing out the data file. You can see that python script <a href="https://github.com/thisismattmiller/padb.net/blob/master/make_static.py">here</a>.</p>
+		</div>
+    </div>
+
+
+	<div class="columns v-align-doodle">
 
 
 		<div class="column" style="">
-			<img class="doodle-mono" style="" src="/img/post_repot_comp2.png" alt="drawing of a computer tower"/>
+			<img class="doodle-mono doodle-mono-side" style="" src="/img/post_repot_comp2.png" alt="drawing of a computer tower"/>
 
 		</div>
 		<div class="column is-four-fifths" style="">
-			<p>This is when things get a little more bespoke. I need to write something something adds in these json files to the existing website hierarchy. I did this by writing a python script that requests the json files from the dynamic API and writes them out as static json files in the correct web hierarchy. To accomplish this I just figured out all of my API endpoints, made a big list of all the resources and has python loop through them, requesting each API endpoint and writing out the data file. You can see that python script <a href="https://github.com/thisismattmiller/padb.net/blob/master/make_static.py">here</a>.</p>
+			
 
 			<p>This is by far the most time consuming part, lots of trial and error to make sure you have everything. My process was to run a local webserver using python by running python3 -m http.server on the command line in the root of the file hierarchy. This spins up a webserver and your local files are served on http://localhost:8000. If it works here locally it will work as a static site. During this process I found out one endpoint was not really working properly for some resources, the API would 500 error out. So I decided to just remove that feature, I modified the site javascript file to hide the button that triggered that feature. It was not worth my time to hunt down a decade old bug to fix a minor feature, so I just diabled it. You might find some features that cannot be made static. For example if this site had a search feature I would have had to disable that as well. Something like full text index is not easy to recreate as static files. You have to curate what features can realistically be supported in this new form and be okay with possibly removing some features.</p>
 

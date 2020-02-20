@@ -239,6 +239,15 @@ label = "View"
 url = "https://semlab.io/howto/selavy_alpha"
 
 
+[[params.mystuff.digitalhumanities.things]]
+label = "Repotting old DH projects"
+desc = "Blog post about sunsetting old projects"
+date = "2020-01-31"
+[[params.mystuff.digitalhumanities.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/repotting-old-digital-humanities-projects/"
+
+
 
 
 
@@ -893,6 +902,19 @@ date = "2018-01-01"
 [[params.mystuff.detritus.things.links]]
 label = "View"
 url = "https://thisismattmiller.github.io/spreadsheet-monster/"
+
+
+[[params.mystuff.detritus.things]]
+label = "6 Hour PowerPoint"
+desc = "I put 1000 government PowerPoint presentations together"
+date = "2020-02-18"
+[[params.mystuff.detritus.things.links]]
+label = "View"
+url = "https://www.youtube.com/watch?v=kY9P7ruzOy4&feature=youtu.be"
+
+[[params.mystuff.detritus.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1229198993240084488"
 
 
 

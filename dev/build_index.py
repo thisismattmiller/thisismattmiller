@@ -1,6 +1,7 @@
 import toml
 import requests
 import json
+import sys
 
 ## req the google sheet as json
 resp = requests.get('https://spreadsheets.google.com/feeds/cells/1YVJq-BC2ZLx2Q74PNs2Ct3BAh7tjNY7ZgNBed2_RVDA/1/public/full?alt=json')
@@ -18,69 +19,80 @@ for e in sheet['feed']['entry']:
 
 cat_lookup = {}
 
-for x in range(1,row+1):
+try:
 
-	cat = lookup['A'+str(x)]
-	cat_clean = cat.lower().replace(' ','').replace('/','').replace('*','')
 
-	if cat_clean not in cat_lookup:
-		cat_lookup[cat_clean] = {}
-		cat_lookup[cat_clean][cat_clean] = {
-			"label": cat,
-			"desc" : cat,
-			"things":[]
-		}
+	for x in range(1,row+1):
 
-	
+		cat = lookup['A'+str(x)]
+		cat_clean = cat.lower().replace(' ','').replace('/','').replace('*','')
 
-	title = lookup['B'+str(x)]
-	date = lookup['C'+str(x)]
-	desc = 	lookup['D'+str(x)]
-	links = []
-	links.append({
-			"label" :lookup['E'+str(x)].split('|')[0],
-			"url" :lookup['E'+str(x)].split('|')[1]
-		})
+		if cat_clean not in cat_lookup:
+			cat_lookup[cat_clean] = {}
+			cat_lookup[cat_clean][cat_clean] = {
+				"label": cat,
+				"desc" : cat,
+				"things":[]
+			}
 
-	
-	if 'F'+str(x) in lookup:
+		
+
+		title = lookup['B'+str(x)]
+		date = lookup['C'+str(x)]
+		desc = 	lookup['D'+str(x)]
+		links = []
 		links.append({
-			"label" :lookup['F'+str(x)].split('|')[0],
-			"url" :lookup['F'+str(x)].split('|')[1]
-		})	
-
-
-	if 'G'+str(x) in lookup:
-		links.append({
-			"label" :lookup['G'+str(x)].split('|')[0],
-			"url" :lookup['G'+str(x)].split('|')[1]
-		})	
-
-
-	if 'H'+str(x) in lookup:
-		links.append({
-			"label" :lookup['H'+str(x)].split('|')[0],
-			"url" :lookup['H'+str(x)].split('|')[1]
-		})	
-	if 'I'+str(x) in lookup:
-		links.append({
-			"label" :lookup['I'+str(x)].split('|')[0],
-			"url" :lookup['I'+str(x)].split('|')[1]
-		})	
-	if 'J'+str(x) in lookup:
-		links.append({
-			"label" :lookup['J'+str(x)].split('|')[0],
-			"url" :lookup['J'+str(x)].split('|')[1]
-		})	
-
-
-	cat_lookup[cat_clean][cat_clean]['things'].append(
-			{	
-				"label":title,
-				"desc":desc,
-				"date":date,
-				"links":links
+				"label" :lookup['E'+str(x)].split('|')[0],
+				"url" :lookup['E'+str(x)].split('|')[1]
 			})
+
+		
+		if 'F'+str(x) in lookup:
+			links.append({
+				"label" :lookup['F'+str(x)].split('|')[0],
+				"url" :lookup['F'+str(x)].split('|')[1]
+			})	
+
+
+		if 'G'+str(x) in lookup:
+			links.append({
+				"label" :lookup['G'+str(x)].split('|')[0],
+				"url" :lookup['G'+str(x)].split('|')[1]
+			})	
+
+
+		if 'H'+str(x) in lookup:
+			links.append({
+				"label" :lookup['H'+str(x)].split('|')[0],
+				"url" :lookup['H'+str(x)].split('|')[1]
+			})	
+		if 'I'+str(x) in lookup:
+			links.append({
+				"label" :lookup['I'+str(x)].split('|')[0],
+				"url" :lookup['I'+str(x)].split('|')[1]
+			})	
+		if 'J'+str(x) in lookup:
+			links.append({
+				"label" :lookup['J'+str(x)].split('|')[0],
+				"url" :lookup['J'+str(x)].split('|')[1]
+			})	
+
+
+		cat_lookup[cat_clean][cat_clean]['things'].append(
+				{	
+					"label":title,
+					"desc":desc,
+					"date":date,
+					"links":links
+				})
+except:
+
+
+	print("-----------------")
+	print("Spreadsheet formating error!")
+	print("-----------------")
+	sys.exit()
+
 
 output  = ""
 for key in cat_lookup:

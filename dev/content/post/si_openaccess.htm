@@ -1,0 +1,716 @@
++++
+title = "Smithsonian Open Access Data Release"
+date = "2020-02-28"
+description = "A quick look at getting starting working with the Smithsonian Open Access metadata."
+twitterimage  = "https://thisismattmiller.com/img/post_si_guy.png"
++++	
+
+ <script src="/js/chart.js"></script>
+ <script src="/js/chartjsplugincolorschemes.js"></script>
+ <script src="/js/vue.js"></script>
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+  	
+  	p{
+  		font-size: 1.5em;
+  		margin-bottom: 2em;
+  	}
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+
+
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Smithsonian Open Access Data Release</h1>
+	      	<h2 class="is-size-3 has-text-grey">A First Look</h2>
+	      	<h2 class="is-size-5 has-text-grey">Feb 28 2020</h2>
+
+
+	    </div>
+		<div class="column is-one-half" style="text-align:left;">
+	      	
+	      		<img class="doodle-mono-right-header" src="/img/post_si_guy.png" title="hand drawn portrait of the Smithsonian guy" alt="hand drawn portrait of the Smithsonian guy"/>
+	    </div>
+
+	</div>
+
+
+
+    <div class="columns">
+
+
+		<div class="column">
+			<p>The Smithsonian <a href="https://www.si.edu/openaccess">Open Access</a> release has put a trove of cultural heritage digital assets and data in the public commons. I wanted to show how you could start exploring and using the data. If you are comfortable running some Python scripts this post will quickly give you a head start. If not you might still be interested in following along as we look at some discoveries and <a href="#visualizations">visualizations</a> I’ve created along the way.</p>
+			<p>The first step is to get the data. The site details there is an API and also a <a href="https://github.com/Smithsonian/OpenAccess">Github repository</a>. We want to work with all the data so we are going straight for the Github. While the nearly 3 million digital items are the stars of the show there is in total over 11 million records in this data release. The repository is structured with each division having its own directory with many metadata files in each compressed as bz2 archives. These BZIP2 files are similar to the ubiquitous ZIP file but offer better compression ratios. Let’s download the data, we are going to be using MacOS or Linux command line:</p>
+
+			{{< highlight bash >}}
+				curl -L https://github.com/Smithsonian/OpenAccess/archive/master.zip --output data.zip
+				unzip data.zip
+			{{< / highlight >}}
+
+			<p>We now want to now get at the metadata in the bz2 files. We are going to use this python script to traverse all the files, extract the data and write it to one large newline delimited JSON file. Once all the records are compiled into one file, with one record per line, it will be much quicker to iterate over all 11M records.</p>
+
+			{{< highlight python >}}
+				import glob
+				import bz2
+
+				with open('all_data.ndjson','w') as out:
+				  for div in glob.glob('./OpenAccess-master/metadata/objects/*'):
+				    print('Working on: ',div)
+				    for file in glob.glob(f'{div}/*'):
+				      with bz2.open(file, "rb") as f:
+				        out.write(f.read().decode())
+			{{< / highlight >}}
+
+			<p>The code used for this project <a href="https://github.com/thisismattmiller/smithsonian-open-access">can be found here</a></p>
+
+
+			<p>You will want to have 26GB of free space to run this script.</p>
+
+			<p>We now have all the data extracted and we can start exploring. 11 million records is a lot, for real, but we can still work with it using a single python script in this format, one line at a time. We will use one advantage however, we are going to install and use the UltraJSON python module to do our JSON interactions. This module is much faster at decoding JSON strings than the JSON module that comes with Python. So make sure to install it using the <code>pip3 install ujson</code> command.</p>
+
+			<p>The first step is to figure out what fields we have available to us. Each record a <code>content</code> field that contains three top level elements: <code>descriptiveNonRepeating</code>, <code>indexedStructured</code> and <code>freetext</code>. These are pretty self-describing but it looks like (I have no inside knowledge, this is the first time I’m seeing this data, so I’m making a lot of assumptions) that <code>descriptiveNonRepeating</code> is the basic data present on all records, things like what department it came from. <code>indexedStructured</code> is data that has been somewhat normalized already and is fairly common across all records, like date. And <code>freetext</code> which is more domain specific and or non-normalizable, things like note fields.</p>
+
+			<p>One important field in the <code>descriptiveNonRepeating</code> data is <code>online_media</code> which seems to tell us where to find the digital asset. Out of the 11M records not all of them have digital components. Here are two charts showing which divisions have what percentage of the digital assets, and what percentage of records with no digital items:</p>
+
+
+		</div>
+	</div>
+
+    <div class="columns" id="visualizations">
+		<div class="column is-one-half">
+	
+			<div class="chart-container" style="position: relative; height:auto; width:45vw; margin: auto;">
+				<canvas id="pieChartHasMedia"></canvas>
+			</div>
+
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+
+
+					let data = {
+					  "NMNH - Vertebrate Zoology - Birds Division":1,
+					  "NMNH - Botany Dept.":2316143,
+					  "NMNH - Education & Outreach":3860,
+					  "NMNH - Entomology Dept.":78891,
+					  "NMNH - Vertebrate Zoology - Fishes Division":1009,
+					  "NMNH - Vertebrate Zoology - Herpetology Division":2317,
+					  "NMNH - Invertebrate Zoology Dept.":17660,
+					  "NMNH - Vertebrate Zoology - Mammals Division":86564,
+					  "NMNH - Mineral Sciences Dept.":11272,
+					  "NMNH - Paleobiology Dept.":26019,
+
+					  "Anacostia Community Museum":237,
+					  "Cooper Hewitt, Smithsonian Design Museum":38509,
+					  "Smithsonian Field Book Project":37,
+					  "Freer Gallery of Art and Arthur M. Sackler Gallery Archives":6,
+					  "Freer Gallery of Art and Arthur M. Sackler Gallery":3133,
+					  "Smithsonian Gardens":252,
+					  "Hirshhorn Museum and Sculpture Garden":302,
+					  "National Air and Space Museum":141,
+					  "National Museum of African American History and Culture":2021,
+					  "National Museum of African Art":136,
+					  "National Museum of American History":1118,
+					  "National Portrait Gallery":7889,
+					  "National Postal Museum":2511,
+					  "Smithsonian American Art Museum":11557,
+					  "Smithsonian Institution Archives":2151,
+					  "Smithsonian Libraries":12265
+					}
+
+					let total = 0
+					Object.keys(data).forEach((d)=>{
+						total = total + data[d]
+					})
+					let labels = []
+					let percents = []
+					Object.keys(data).forEach((d)=>{
+						labels.push(d)
+						percents.push(Math.ceil(data[d]/total*100))
+					})
+
+
+					var ctx = document.getElementById('pieChartHasMedia').getContext('2d');
+					var myChart = new Chart(ctx, {
+					    type: 'doughnut',
+					    data: {
+					        labels: labels,
+					        datasets: [{
+					            label: '# of Items',
+					            data: percents
+					        }]
+					    },
+					    options: {
+							responsive: true,
+							maintainAspectRatio: true,
+					        legend: {
+					            display: false,
+					            labels: {
+					                fontColor: 'rgb(255, 99, 132)'
+					            }
+					        },
+					        title: {
+					            display: true,
+					            text: 'Record count % for items WITH media'
+					        },
+						    plugins: {
+
+						      colorschemes: {
+
+						        scheme: 'tableau.Classic20'
+
+						      }
+
+						    }
+					    }
+					});
+				})
+			</script>
+
+
+
+	    </div>
+		<div class="column is-one-half">
+			      	
+			<div class="chart-container" style="position: relative; height:auto; width:45vw; margin: auto;">
+				<canvas id="pieChartHasNoMedia"></canvas>
+			</div>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+
+
+					let data = {
+					  "Archives Center, National Museum of American History":11,
+					  "Anacostia Community Museum":12,
+					  "Cooper Hewitt, Smithsonian Design Museum":1687,
+					  "Smithsonian Field Book Project":1480,
+					  "Freer Gallery of Art and Arthur M. Sackler Gallery Archives":20,
+					  "Hirshhorn Museum and Sculpture Garden":200,
+					  "Human Studies Film Archives":77,
+					  "National Anthropological Archives":8,
+					  "National Museum of African American History and Culture":368,
+					  "National Museum of American History":1291633,
+					  "NMNH - Anthropology Dept.":479774,
+					  "NMNH - Vertebrate Zoology - Birds Division":554193,
+					  "NMNH - Botany Dept.":1298542,
+					  "NMNH - Education & Outreach":1939,
+					  "NMNH - Entomology Dept.":441921,
+					  "NMNH - Vertebrate Zoology - Fishes Division":472572,
+					  "NMNH - Vertebrate Zoology - Herpetology Division":578986,
+					  "NMNH - Invertebrate Zoology Dept.":1909059,
+					  "NMNH - Vertebrate Zoology - Mammals Division":529687,
+					  "NMNH - Mineral Sciences Dept.":432434,
+					  "NMNH - Paleobiology Dept.":600164,
+					  "National Portrait Gallery":420,
+					  "National Postal Museum":36,
+					  "Smithsonian American Art Museum":990,
+					  "Smithsonian Institution, Digitization Program Office":11,
+					  "Smithsonian Institution Archives":27265,
+					  "Smithsonian Libraries":1529
+					}
+
+					let total = 0
+					Object.keys(data).forEach((d)=>{
+						total = total + data[d]
+					})
+					let labels = []
+					let percents = []
+					Object.keys(data).forEach((d)=>{
+						labels.push(d)
+						percents.push(Math.ceil(data[d]/total*100))
+					})
+
+
+					var ctx = document.getElementById('pieChartHasNoMedia').getContext('2d');
+					var myChart = new Chart(ctx, {
+					    type: 'doughnut',
+					    data: {
+					        labels: labels,
+					        datasets: [{
+					            label: '# of Items',
+					            data: percents
+					        }]
+					    },
+					    options: {
+							responsive: true,
+							maintainAspectRatio: true,
+					        legend: {
+					            display: false,
+					            labels: {
+					                fontColor: 'rgb(255, 99, 132)'
+					            }
+					        },
+					        title: {
+					            display: true,
+					            text: 'Record count % for items with NO media yet'
+					        },
+						    plugins: {
+
+						      colorschemes: {
+
+						        scheme: 'tableau.Classic20'
+
+						      }
+						    }
+
+
+					    }
+					});
+				})
+			</script>
+
+
+
+
+	    </div>
+
+	</div>
+
+
+
+
+
+
+
+
+	<div class="columns">
+
+
+		<div class="column" style="">
+
+			<p>These charts show us a number of things including that right now the vast majority of records with media links are from the NMNH Botany Department.</p>
+
+		<p>I also made a chart of what percentage of <code>indexedStructured</code> and <code>freetext</code> fields are available across all 11M records:</p>
+
+		<div class="chart-container" style="position: relative; height:auto; width:85vw; margin: auto;">
+			<canvas id="freetextChart"></canvas>
+		</div>
+
+
+		<script>
+
+
+
+
+			document.addEventListener("DOMContentLoaded", function() {
+
+
+				var freetextData = {
+				  "date":8215753,
+				  "setName":11200303,
+				  "identifier":10893167,
+				  "notes":11160549,
+				  "name":9124490,
+				  "topic":758457,
+				  "physicalDescription":5851587,
+				  "dataSource":11245220,
+				  "objectRights":30322,
+				  "objectType":2372483,
+				  "place":9908237,
+				  "creditLine":434449,
+				  "culture":264863,
+				  "title":5880,
+				  "publisher":8353807,
+				  "taxonomicName":8694067
+				}
+				
+
+				let labels = []
+				let totals = []
+				Object.keys(freetextData).forEach((d)=>{
+					labels.push(d)
+					totals.push(freetextData[d])
+				})
+
+
+				var ctx = document.getElementById('freetextChart').getContext('2d');
+				var myChart = new Chart(ctx, {
+				    type: 'bar',
+				    data: {
+				        labels: labels,
+				        datasets: [{
+				            label: '# of Items',
+				            data: totals,
+				            backgroundColor: 'rgba(108, 92, 231,1.0)',
+				            borderWidth: 1
+				        }]
+				    },
+				    options: {
+						responsive: true,
+						maintainAspectRatio: true,
+				        legend: {
+				            display: false,
+				            labels: {
+				                fontColor: 'rgb(255, 99, 132)'
+				            }
+				        },
+				        title: {
+				            display: true,
+				            text: '"freetext" Field Count'
+				        },
+
+				        scales: {
+				            yAxes: [{
+				                ticks: {
+				                    beginAtZero: true
+				                }
+				            }]
+				        }
+				    }
+				});
+			})
+		</script>
+
+
+		</div>
+
+
+
+
+    </div>
+
+
+	<div class="columns">
+
+
+		<div class="column" style="">
+		<div class="chart-container" style="position: relative; height:auto; width:85vw; margin: auto;">
+			<canvas id="structuredChart"></canvas>
+		</div>
+
+
+		<script>
+
+
+
+
+			document.addEventListener("DOMContentLoaded", function() {
+
+
+				var structuredData = {
+				  "date":8196235,
+				  "object_type":2242269,
+				  "name":8108358,
+				  "topic":9796991,
+				  "usage_flag":41778,
+				  "geoLocation":9885026,
+				  "place":9851199,
+				  "online_media_type":4178397,
+				  "culture":273748,
+				  "tax_phylum":5531263,
+				  "tax_class":8204365,
+				  "tax_order":7316557,
+				  "tax_kingdom":8694354,
+				  "language":13571,
+				  "exhibition":17681,
+				  "onPhysicalExhibit":17681,
+				  "tax_family":8147919,
+				  "common_name":3384484,
+				  "online_media_rights":2525,
+				  "scientific_name":8731944,
+				  "strat_formation":345507,
+				  "geo_age-era":446168,
+				  "geo_age-system":455429,
+				  "geo_age-series":322669,
+				  "geo_age-stage":144773,
+				  "strat_member":81124,
+				  "strat_group":102964
+				}
+				
+
+				let labels = []
+				let totals = []
+				Object.keys(structuredData).forEach((d)=>{
+					labels.push(d)
+					totals.push(structuredData[d])
+				})
+
+
+				var ctx = document.getElementById('structuredChart').getContext('2d');
+				var myChart = new Chart(ctx, {
+				    type: 'bar',
+				    data: {
+				        labels: labels,
+				        datasets: [{
+				            label: '# of Items',
+				            data: totals,
+				            backgroundColor: 'rgba(253, 203, 110,1.0)',
+				            borderWidth: 1
+				        }]
+				    },
+				    options: {
+						responsive: true,
+						maintainAspectRatio: true,
+				        legend: {
+				            display: false,
+				            labels: {
+				                fontColor: 'rgb(255, 99, 132)'
+				            }
+				        },
+				        title: {
+				            display: true,
+				            text: '"indexedStructured" Field Count'
+				        },
+
+				        scales: {
+				            yAxes: [{
+				                ticks: {
+				                    beginAtZero: true
+				                }
+				            }]
+				        }
+				    }
+				});
+			})
+		</script>
+
+
+		</div>
+
+
+
+
+    </div>
+
+
+
+	<div class="columns">
+
+
+		<div class="column" style="">
+
+		<p>It looks like there is a lot of good data in <code>indexedStructured</code> for us to play around with. I’m assuming this data has been “cleaned up” and normalized making things a little more consistent. The first field we can look at is the <code>date</code>, looks like this field is related to the creation of the object and is rounded to the nearest decade:</p>
+
+		<div class="chart-container" style="position: relative; height:auto; width:85vw; margin: auto;">
+			<canvas id="dateChart"></canvas>
+		</div>
+
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var ctx = document.getElementById('dateChart').getContext('2d');
+				var myChart = new Chart(ctx, {
+				    type: 'bar',
+				    data: {
+				        labels: ["BCE 0s","BCE 1000s","BCE 2000s","BCE 3000s","BCE 5000s","100s","200s","300s","400s","500s","600s","700s","800s","900s","1000s","1100s","1200s","1300s","1400s","1500s","1510s","1520s","1530s","1540s","1550s","1560s","1570s","1580s","1590s","1600s","1610s","1620s","1630s","1640s","1650s","1660s","1670s","1680s","1690s","1700s","1710s","1720s","1730s","1740s","1750s","1760s","1770s","1780s","1790s","1800s","1810s","1820s","1830s","1840s","1850s","1860s","1870s","1880s","1890s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],
+				        datasets: [{
+				            label: '# of Items',
+				            data: [2939,580,184,134,4,9653,2969,2000,837,441,529,2321,368,589,1381,1475,1692,1452,2757,1436,294,424,233,312,338,307,632,335,528,2995,596,1044,725,970,1126,1046,952,910,1379,7192,3671,3490,3889,2976,4084,6975,9320,8601,10093,33342,19426,22513,37799,47518,54783,96602,144441,316079,442749,579385,484275,444557,504125,526773,584256,1117783,876678,811296,436207,294375,203664,120],
+				            backgroundColor: 'rgba(255, 99, 132, 1)',
+				            borderWidth: 1
+				        }]
+				    },
+				    options: {
+						responsive: true,
+						maintainAspectRatio: true,
+				        legend: {
+				            display: false,
+				            labels: {
+				                fontColor: 'rgb(255, 99, 132)'
+				            }
+				        },
+				        title: {
+				            display: true,
+				            text: 'Item count by Decades'
+				        },
+
+				        scales: {
+				            yAxes: [{
+				                ticks: {
+				                    beginAtZero: true
+				                }
+				            }]
+				        }
+				    }
+				});
+			})
+		</script>
+
+
+
+
+		</div>
+
+
+
+
+    </div>
+
+<div class="columns">
+	<div class="column">
+		<p>Next let's look at the <code>topic</code> field, seems like these are subject heading type tags relating to the object. I pulled out all the topics by the department of the object. Click the name of the dept on the left to view the counts. These are the topics for 9.7M records.</p>
+	</div>
+</div>
+
+
+
+
+	<div id="app">
+
+		<div class="columns">
+
+
+			<div class="column is-one-half">
+				<div>Click Department Below</div>
+				<ul id="example-1">
+				  <li v-for="item in depts">
+				    <button class="button is-small" style="width: 100%;" v-on:click="renderList(item)">{{ item }}</button>
+				  </li>
+				</ul>
+
+
+			</div>
+
+			<div class="column is-one-half">
+
+				<div style="text-align: center; margin-bottom:1em;">
+				Topics found in <strong>{{ depts_active }}</strong>
+				</div>
+				<div id="count-list" >
+				  <div v-for="item in depts_active_list" class="count-list-item">
+				    <div>{{item}} <div style="float:right">{{depts_org[depts_active][item]}}</div></div>
+				  </div>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		
+
+		<script>
+
+
+			var topic_by_dept = {"Archives Center, National Museum of American History":{"Science fiction":1,"Space flight":2,"Parade floats":3,"Peace":1,"Mythology":1,"Chariots":1,"Parades":2,"Dance":1,"Serpents":1,"Future in popular culture":1,"Flags":1,"Automobiles":1,"Geese":1},"Cooper Hewitt, Smithsonian Design Museum":{"Architecture":1993,"Theater":515,"Nature":448,"Landscapes":1515,"Graphic arts":334,"Amusements":182,"Transportation":78,"Dyes and dyeing":18,"Weaving":9,"Japanese tea ceremony":1,"Crickets":2,"Industrial design":1},"Smithsonian Field Book Project":{"Zoology":161,"Plants":296,"Animals":459,"Birds":448,"Mammalogy":156,"Entomology":123,"Marine Biology":253,"Marine invertebrates":129,"Ichthyology":135,"Sawflies":6,"Marine Invertebrates":147,"Mammologists":29,"Botany":41,"Grasses":12,"Ethology":79,"Animal behavior":80,"Geology":135,"Pacific Ocean Biological Survey Program":119,"Natural History":5,"Hymenoptera":32,"Paleontology":89,"Archaeology":18,"Anthropology":19,"Pre-Columbian art":2,"Entomologists":9,"Turtles":2,"Sea birds":30}};
+			
+			var topic_by_dept_sorted = {}
+
+			Object.keys(topic_by_dept).forEach((k)=>{
+				topic_by_dept_sorted[k] = Object.keys(topic_by_dept[k]).sort(function(a,b){return topic_by_dept[k][b]-topic_by_dept[k][a]})
+			})
+
+			document.addEventListener("DOMContentLoaded", function() {
+
+				var app = new Vue({
+				  el: '#app',
+				  created: function () {
+
+				  		this.renderList('Smithsonian American Art Museum')
+
+				  },
+				  data: {
+				  	depts: Object.keys(topic_by_dept),
+				  	depts_org: topic_by_dept,
+				  	depts_active: null,
+				  	depts_active_list: [],
+				  	depts_counts: topic_by_dept_sorted,
+				    message: 'Hello Vue!'
+				  },
+				   methods: {
+				    renderList: function (deptName) {
+						
+						this.depts_active = deptName
+						this.depts_active_list = this.depts_counts[deptName]
+				  	}
+
+				  }
+				})
+
+			})
+
+
+
+		</script>
+
+
+
+	</div>
+
+
+
+	<div class="columns">
+		<div class="column">
+			<p>I was going to map the geographic information for the 9.8M records that had the field. But it looked like there would be a lot of work geocode all the various labels to coordinates. So please just <a href="https://github.com/thisismattmiller/smithsonian-open-access/blob/master/stats/country_index.json">enjoy the JSON dump of the values instead</a> (and feel free to map them!)</p>
+		
+			<p>The data for these graphs was generated with <a href="https://github.com/thisismattmiller/smithsonian-open-access/blob/master/2_build_meta_field_count.py">this script</a>.</p>
+
+			<p>The last thing I wanted to try was something with the <code>freetext</code> fields. These fields are not structured and nicely normalized as the previous fields. I wanted to try and plot all the dimensions of the objects to see the variation in the sizes. There was a <code>physicalDescription</code> field for 5.8M records. I used a few simple regular expressions to see if I could pull out centimeter measurements of the object where there was at least a height and width provided. This resulted in about 640K measurements that I plotted onto one image:</p>
+
+		</div>
+	</div>
+
+
+
+
+
+	<div class="columns">
+
+		<div class="column" style="">
+			<div style="text-align: center">
+				<img style="margin: auto; padding-bottom: 1em;" src="/img/post_si_sizes.png" alt="a graph showing the outlines of 600K objects height and width">
+			</div>
+
+			<p>The entire image is about 24x24 feet. (<a href="https://github.com/thisismattmiller/smithsonian-open-access/blob/master/dimensions.png?raw=true">Click to see the full resolution, 25K x 25K pixel image</a>, but it might break your browser, be careful.) <a href="https://github.com/thisismattmiller/smithsonian-open-access/blob/master/3_draw_width_height_box.py">This script</a> created the image.</p>
+			<p>You can see most of the objects were less than one foot in height and width. Some of the strange outliers, like the very skinny and super tall outlines can be attributed to metadata quirks. Like this reportedly almost one mile (63,125 inches) tall <a href="https://americanhistory.si.edu/collections/search/object/nmah_586819">pitcher</a>. Metadata is hard and can go wrong in such suprising ways through migrations, transformations and maintenance, especially for 11M records.</p>
+		
+			<p>We quickly looked at what you can do with just a few of these fields. But of course this barely scratches the surface of the possibilities. It also is only using the metadata, we haven’t even talked about the 3M digital items yet. This open access release is really a tremendous feat and credit to all who made it possible. </p>
+
+			<hr>
+			<div>Addendum:</div>			
+			<div>You made it to the bottom! As a treat here are two doodles that I made for this post and then didn't use. The first is a nice <a href="/img/post_si_header.gif">squigly SI sunburst logo</a>. Which, after reading the Open Access FAQ page, was repeatedly like “do not use the SI logo or else” so I was shook. Though it is not really their logo, more like a fanfic version of their logo, oh well. The second is I started drawing the Smithsonian castle and did one half and was like, this building is too much, and stopped. So here is the <a href="/img/post_si_castle.png">right tower of the castle</a>, haha. </div>
+		</div>
+    </div>
+
+
+
+  </div>
+

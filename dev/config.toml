@@ -719,6 +719,10 @@ date = "2020-04-12"
 label = "View"
 url = "https://eclipsed-time.glitch.me/"
 
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog Post"
+url = "https://thisismattmiller.com/post/eclipsed-time/"
+
 
 
 
@@ -1021,6 +1025,15 @@ date = "2012-01-01"
 [[params.mystuff.drawing.things.links]]
 label = "Visit"
 url = "http://aoristic.us/"
+
+
+[[params.mystuff.drawing.things]]
+label = "Daily Quar drawings"
+desc = "Drawings under quarantine"
+date = "2020-03-01"
+[[params.mystuff.drawing.things.links]]
+label = "View"
+url = "http://thisiswatercolor.s3-website-us-east-1.amazonaws.com/"
 
 
 

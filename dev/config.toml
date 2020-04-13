@@ -711,6 +711,15 @@ label = "Context"
 url = "https://twitter.com/thisismmiller/status/1229198993240084488"
 
 
+[[params.mystuff.creativecoding.things]]
+label = "Maya Lin's Eclipsed Time"
+desc = "A simulation Eclipsed Time in the age of Covid-19"
+date = "2020-04-12"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://eclipsed-time.glitch.me/"
+
+
 
 
 

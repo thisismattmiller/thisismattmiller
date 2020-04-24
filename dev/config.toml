@@ -184,6 +184,19 @@ label = "View"
 url = "https://thisismattmiller.github.io/morettizer/"
 
 
+[[params.mystuff.datavisualization.things]]
+label = "Library of Congress Web Archive"
+desc = "Viewing all 21K LC archived web pages at once"
+date = "2020-03-23"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.s3.amazonaws.com/lcweb/index.html"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/library-of-congress-web-archives/"
+
+
 
 
 

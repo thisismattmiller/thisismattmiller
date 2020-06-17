@@ -11,7 +11,7 @@ rm -fr series
 rm -fr sitemap.xml
 rm -fr tags
 cd dev
-python build_index.py
+python3 build_index.py
 cd ..
 hugo -s dev/
 mv dev/public/* .

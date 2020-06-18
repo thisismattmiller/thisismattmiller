@@ -419,7 +419,7 @@ url = "https://blogs.loc.gov/thesignal/2019/05/integrating-wikidata-at-the-libra
 
 [[params.mystuff.metadata.things.links]]
 label = "Tool"
-url = "https://labs.loc.gov/experiments/pnp-wikidata-tool/"
+url = "https://labs.loc.gov/work/experiments/pnp-wikidata-tool/"
 
 [[params.mystuff.metadata.things.links]]
 label = "Current Status"
@@ -941,6 +941,15 @@ date = "2018-01-01"
 [[params.mystuff.detritus.things.links]]
 label = "View"
 url = "https://thisismattmiller.github.io/spreadsheet-monster/"
+
+
+[[params.mystuff.detritus.things]]
+label = "Consumer Divination"
+desc = "Buy a computer, change your life"
+date = "2020-05-15"
+[[params.mystuff.detritus.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/consumer-divination/"
 
 
 

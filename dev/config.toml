@@ -526,6 +526,15 @@ label = "View"
 url = "https://thisismattmiller.github.io/lcc-hierarchy/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Smithsonian Open Access"
+desc = "Analysis of the Smithsonian open data release"
+date = "2020-02-28"
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/smithsonian-open-access-data-release/"
+
+
 
 
 

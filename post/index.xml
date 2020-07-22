@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Non-Renewed</title>
+      <link>https://thisismattmiller.com/post/non-renewed/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/non-renewed/</guid>
+      <description>.count-list-item:nth-child(odd){ background-color: whitesmoke; } code{ color: #313131 !important; } #count-list{ max-height: 830px; overflow-y: scroll; overflow-x: hidden; } p{ font-size: 1.25em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } } pre{ background-color: whitesmoke !important; } canvas{ /*margin: 0 auto;*/ /*width: 75% !important;*/ /*height: 500px !important;*/ } @media only screen and (min-width: 768px) { /* tablets and desktop */ .</description>
+    </item>
     
     <item>
       <title>Eclipsed Time</title>

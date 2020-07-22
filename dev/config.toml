@@ -535,6 +535,15 @@ label = "View"
 url = "https://thisismattmiller.com/post/smithsonian-open-access-data-release/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Non-Renewed Copyright Analysis"
+desc = "Analysis of non-renewed works from 1923–1964 that are likely in the public domain"
+date = "2020-07-22"
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/non-renewed/"
+
+
 
 
 
@@ -744,6 +753,15 @@ url = "https://eclipsed-time.glitch.me/"
 [[params.mystuff.creativecoding.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/eclipsed-time/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Sun"
+desc = "What did the sun look like on your birthday?"
+date = "2020-07-04"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/sun/"
 
 
 

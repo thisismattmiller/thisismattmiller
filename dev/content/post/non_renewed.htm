@@ -1,0 +1,456 @@
++++
+title = "Non-Renewed"
+date = "2020-07-21"
+description = "yeah."
+twitterimage  = "https://thisismattmiller.com/img/post_renewed.png"
++++	
+
+ <script src="/js/chart.js"></script>
+ <script src="/js/chartjsplugincolorschemes.js"></script>
+ <script src="/js/vue.js"></script>
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+  	
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+  	}
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+
+@media only screen and (min-width: 768px) {
+    /* tablets and desktop */
+    .treemap{
+    	width: 75%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* phones */
+    .treemap{
+    	width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
+    .treemap{
+    	width: 100%;
+    }
+
+
+}
+
+
+
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Non-Renewed Copyright Analysis</h1>
+	      	<h2 class="is-size-4 has-text-grey">Digging into NYPL's digitized CCE Corpus</h2>
+	      	<h2 class="is-size-5 has-text-grey">Jul 22 2020</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:left;">
+	      	
+	      		<img class="doodle-mono-right-header" src="/img/post_non-renewed_stamp.png" title="hand drawn portrait of the Smithsonian guy" alt="hand drawn portrait of the Smithsonian guy"/>
+	    </div>
+
+	</div>
+
+
+
+
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">
+			<h3 class="is-size-5" style="font-weight: bold;">Intro</h3>
+			<p>Due to the bizarre nature of US copyright many works published in the mid-20th century are actually in the public domain. If a resource was published in a specific range of years and did not have its copyright renewed that material is likely open. The problem is determining this status because the records of this renewed status is locked up in the Library of Congress Copyright Office’s Catalog of Copyright Entries (CCE). These records are analog lists of course, but New York Public library has had <a href="https://www.nypl.org/blog/2018/03/30/unlocking-record-american-creativity">an initiative</a> to transform these records into data. This summary is an oversimplification of the situation and circumstances (<a href="https://www.hathitrust.org/blogs/perspectives-from-hathitrust/its-no-secret-millions-of-books-are-openly-public-domain">more details</a>, and watch <a href="https://www.youtube.com/watch?v=96EqY_F8lik">Creg Cram’s presentation</a> on the project) but it is enough to get us to my specific research question: If there are potentially 1000s of published works that are in the public domain what TYPE of works are they? What subjects do they cover, are they mostly already available to the public, are they widely held by libraries? This analysis uses the NYPL data to try to understand this question.</p>
+
+			
+			<h3 class="is-size-5" style="font-weight: bold;">Scope and Data</h3>
+			<p>
+
+			The NYPL is producing this data, it is ongoing and there is a lot of it. To get started I used <a href="https://www.crummy.com/2019/08/09/0">Leonard Richardson’s 2019 data export</a> of materials likely not renewed. This dataset is just a small fraction of the total CCE, and it is messy. Here is a small example:
+			</p>
+
+			<style type="text/css">
+			  .gist {width:75vw !important;}
+			  .gist-file
+			  .gist-data {max-height: 250px;}
+			</style>
+
+			<div style="margin: auto; width:75vw">
+
+				<script src="https://gist.github.com/thisismattmiller/e0187d021c1b3bd7541b248c3a769fe5.js"></script>
+				<span>Scroll right to see other columns</span>
+			</div>
+
+			<p style="margin-top:2em;">The first problem is if we want to understand more about these resources  we need to connect them to structured data. The CCE data only has a limited set of fields. We don’t have things like subject headings or other bibliographic fields. This data was used for copyright, not libraries. In this dataset there are occasional identifiers like Library of Congress LCCNs, but there are very few and mostly invalid. There is also wide variation in how the fields were populated, for example the author field has a wide range of formatting and variation. 
+			</p>
+
+			<p>With no identifiers we are left to try name and title lookups. But plopping “Great American Novel by Jane Smith” into a bibliographic database is not going to get you very far.  But we do have one advantage based on the flow of materials at the Library of Congress. Because of copyright law publishers needed to deposit two copies of their work to the Copyright Office. They would do their processing and then pass the materials over to the Library who would decide if this deposited material should be added to the library’s collection. As it is today not everything that is sent to the Copyright Office is added to the Library. A sudoku puzzle book might be copyrighted but it is not likely going to be accessioned into LC’s collection. But because of this relationship there is overlap, a name title lookup in LC’s catalog is much more likely to find the correct resource then a larger aggregator database like Worldcat.
+			</p>
+
+			<p>Fortunately as of 2019 LC’s catalog has been loaded into id.loc.gov as Bibframe providing API search access to the catalog. Using this I can try to do lookups to match each CCE record to a LC catalog record. Once I have a likely LC record I have access to all that data plus the structured fields like names and modern identifiers I can then use in other bibliographic databases to get more info. </p>
+			<p>This initial reconciliation drastically reduces the record count. The non-renewed CCE file had 520,000 records in it, I was only able to reconcile 54,000 LC records with a very high degree of confidence. My feeling is a lot of the non-reconciled records are things like grey literature and other copyrighted but not accessioned materials. So we are using 54,000 records as a sample to do this analysis, this number could be increased with human intervention into the process but is a good size to get a sense of what is in the non-renewed corpus.</p>
+
+			<h3 class="is-size-5" style="font-weight: bold;">Analysis</h3>
+			<p>To get a sense of what types of materials there are I made a treemap of their Library of Congress Classification (LCC).</p>
+			<a name="treemap"></a>
+
+
+
+			<style>
+				tspan{
+					font-size: 0.5em;
+				}
+			</style>
+
+			<h2 style="font-size: 1.5em; text-align: center;"> Treemap of 54K Non-renewed resources by Library of Congress Classification (LCC) hierarchy</h2>
+			<h5 style="margin-bottom: 1em; text-align: center;">Click to zoom, click "all" to unzoom</h5>
+
+			<div id="observablehq-27ba0a72" class="treemap" style="margin:auto"></div>
+			<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@thisismattmiller/untitled.js?v=3";
+			const inspect = Inspector.into("#observablehq-27ba0a72");
+			(new Runtime).module(define, name => name === "chart" ? inspect() : undefined);
+			</script>	
+
+
+<p style="margin-top: 2em;">
+This shows us the largest category of materials are Language and Literature which is composed mostly of American Literature and Fiction and Juvenile Belles Lettres. From this map we can see the majority of the non-renewed resources are humanities based, history, philosophy, etc. But there is also a significant amount of social sciences and natural sciences.
+</p>
+<p>
+I also wanted to allow you to explore the corpus at a record level. This tool allows you to browse by subject heading. You can facet on two subject headings and see the resulting record details including links to external sites like Library of Congress, Worldcat, HathiTrust and OpenLibrary.
+</p>
+<p>
+<a href="https://thisismattmiller.github.io/non-renewed-subject-browser/" target="_blank"> Open in new window</a>
+</p>
+
+
+<iframe src="https://thisismattmiller.github.io/non-renewed-subject-browser" style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="750px" width="100%" allowfullscreen></iframe>
+
+<p style="margin-top: 2em;">
+I also wanted to show how available these works are currently both online and physical. This first graph shows the number of institutions that hold each work. This shows us the majority of the non-renewed materials are widely held by U.S. libraries. However there is a long tail of resources held by only a small number of institutions.
+</p>
+
+			<h2 style="font-size: 1.5em; text-align: center;"> Resouces by number of holding institutions</h2>
+
+			<div id="observablehq-859a556a" style="width: 75%; margin: auto;"></div>
+			<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@thisismattmiller/bar.js?v=3";
+			const inspect = Inspector.into("#observablehq-859a556a");
+			(new Runtime).module(define, name => name === "chart" ? inspect() : undefined);
+			</script>
+
+<p style="margin-top: 2em;">HathiTrust has been doing this work of making non-renewed materials available to the public for a long time. I wanted to see based on this corpus what percentage is available on their platform and its availability.</p>
+
+			<h2 style="font-size: 1.5em; text-align: center;"> Resouces by HathiTrust status</h2>
+
+			<div id="observablehq-b70d864b" style="width: 75%; margin: auto;"></div>
+			<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@thisismattmiller/bar/2.js?v=3";
+			const inspect = Inspector.into("#observablehq-b70d864b");
+			(new Runtime).module(define, name => name === "chart" ? inspect() : undefined);
+			</script>
+
+<p style="margin-top: 2em;">This chart shows us that about %30 of the corpus is already Full View public full-text available on HathiTrust. A smaller percent is on the platform but not marked as public view. And about 42% of the 54K I was not able to find on the platform at all. </p>
+
+
+
+
+
+
+
+<p style="margin-top: 2em;">This last graph breaks this data down into top level LCC categories for the three types of access, full, limited and not found:</p>
+
+
+
+
+			<style type="text/css">
+				.streambutton{
+
+				}
+
+				.streamgraph-container{
+					display: none;
+				}
+				#observablehq-f8009a27{
+					display: block;
+				}
+
+			</style>
+
+			<div style="margin-bottom: 1em;">
+			<button class="streambutton" id="streambutton-full">Hathi - Full View</button>
+			<button class="streambutton" id="streambutton-limited">Hathi - Limited View (Search Only)</button>
+			<button class="streambutton" id="streambutton-not">Hathi - Not Found</button>
+			<span>Click to change graphs</span>
+			</div>
+
+
+
+			<style>
+				text{
+					font-size: 2em;
+				}
+				.O-1-label{
+					font-size: 1.25em;
+				}
+				#streamgraph-title{
+					font-size: 1.5em;
+					text-align: center;
+					margin-bottom: 1em;
+				}
+			</style>
+
+			<h2  id="streamgraph-title">Non-Renewed resources with "Full View" HathiTrust status by top level LCC</h2>
+			<div id="observablehq-9b9b787f" style="margin-bottom: 1em;"></div>
+			<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@thisismattmiller/streamgraph-hathi-not-found.js?v=3";
+			const inspect = Inspector.into("#observablehq-9b9b787f");
+			(new Runtime).module(define, name => name === "key" ? inspect() : undefined);
+			</script>
+
+
+
+
+			<script>
+
+				function hideem(){
+
+					var all = document.getElementsByClassName('streamgraph-container');
+					for (var i = 0; i < all.length; i++) {
+					  all[i].style.display = "none"; 
+					}					
+				}
+
+				
+				document.getElementById('streambutton-full').addEventListener('click',()=>{
+					hideem()
+					document.getElementById('observablehq-f8009a27').style.display='block'
+					document.getElementById('streamgraph-title').innerHTML = 'Non-Renewed resources with "Full View" HathiTrust status by top level LCC'
+					
+				})
+
+				document.getElementById('streambutton-limited').addEventListener('click',()=>{
+					hideem()
+					document.getElementById('observablehq-bd9d969b').style.display='block'
+					document.getElementById('streamgraph-title').innerHTML = 'Non-Renewed resources with "Limited (search-only)" HathiTrust status by top level LCC'
+				})
+
+				document.getElementById('streambutton-not').addEventListener('click',()=>{
+					hideem()
+					document.getElementById('observablehq-3acb1885').style.display='block'
+					document.getElementById('streamgraph-title').innerHTML = 'Non-Renewed resources with Not Found in HathiTrust by top level LCC'
+
+
+				})
+			</script>
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="columns">
+
+
+		<div class="column">
+
+
+
+
+
+
+			<!-- full view -->
+			<div class="streamgraph-container"  id="observablehq-f8009a27"></div>
+			<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@thisismattmiller/streamgraph.js?v=3";
+			const inspect = Inspector.into("#observablehq-f8009a27");
+			(new Runtime).module(define, name => name === "chart" ? inspect() : undefined);
+			</script>
+
+
+			<!-- limited view -->
+			<div class="streamgraph-container" id="observablehq-bd9d969b"></div>
+			<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@thisismattmiller/streamgraph-hathi-limited-view.js?v=3";
+			const inspect = Inspector.into("#observablehq-bd9d969b");
+			(new Runtime).module(define, name => name === "chart" ? inspect() : undefined);
+			</script>
+
+
+
+			<!-- not found -->
+			<div class="streamgraph-container" id="observablehq-3acb1885"></div>
+			<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@thisismattmiller/streamgraph-hathi-not-found.js?v=3";
+			const inspect = Inspector.into("#observablehq-3acb1885");
+			(new Runtime).module(define, name => name === "chart" ? inspect() : undefined);
+			</script>
+
+
+
+			<p style="margin-top: 2em;">This stream graph shows that the largest category of material that was not found on Hathi at all is for Language and Literature and Philosophy, Psychology, and Religion. There are other interesting trends, for example in the Full View category there are more materials at the beginning and end of the range, and contractions that likely relate to publishing trends for those years.</p>
+
+
+
+			<p>These are just a few of the possibilities to slice into this data. I’ve made the 54K dataset available here to download if you would like to experiment with it as well. As the datafied version of the CCE grows from NYPL’s project it would be interesting to run this analysis again and of course there is opportunity to improve the process. </p>
+			<p><a href="https://thisismattmiller.s3.amazonaws.com/non_renewed_corpus.ndjson.gz">Download</a></p>
+		</div>
+	</div>
+
+
+    <div class="columns">
+
+
+		<div class="column">
+
+
+			<hr>
+
+			<h3 class="is-size-5" style="font-weight: bold; margin-top: 3em;">Macro to Micro</h3>
+
+
+
+		</div>
+	</div>
+
+    <div class="columns">
+
+		<div class="column is-one-half">
+
+			<p>
+			That brings the large scale analysis of this dataset to close. But I wanted to try to go from this huge list of 54,000 books down to just one book and see how far I could get. 
+			</p>
+			<p>
+			While the titles were flicking across my screen in the endless reconciliation and remediation processes I pick one, based on the strange name alone:
+			</p>
+			<p><pre>
+			Title: Bizzy-Quizzy the great 
+			By: Bowker (William Rushton)
+			</pre>
+			</p>
+
+		</div>
+
+		<div class="column is-one-half" style="    background: url(/img/post_non-renewed_bizzy.png); background-size: contain; background-repeat: no-repeat;background-position: center;">
+			
+
+		</div>
+
+	</div>
+
+
+
+   <div class="columns">
+
+
+		<div class="column">
+
+
+
+<p>
+It was not on HathiTrust at all, and Worldcat says it only exists in <a href="https://www.worldcat.org/title/bizzy-quizzy-the-great-science-detective-fiction-adventures/oclc/11891800&referer=brief_results">two libraries in the world</a> (it is also in the <a href="https://lccn.loc.gov/42018284">Library of Congress</a>) meaning 3 copies of it exist in libraries. The metadata makes it look like its fiction, and about a science detective, or something. So I bought it online, a book dealer had one copy available, meaning there are at least 4 copies of it in the world.  
+
+</p>
+
+
+<p>
+When it finally arrived I dug in, and dear reader, it is an extraordinarily bad novel. Self-published by William Bowker, a retired UCLA chemistry professor in 1942. It’s dedicated to Mahatma Gandhi and World Peace and features a frontispiece image of the author and Babe Ruth for some reason. It’s a series of short stories where Bowker imagines himself as “Bizzy-Quizzy” a great detective, mostly recovering gemstones and using chemistry for MacGyver-esque escapes. And really, I’m not trying to dunk on a nearly 80 year old self-published novel but it is mostly unreadable. So I put it on Internet Archive so you could enjoy it too:
+</p>
+
+
+
+
+			<iframe src="https://archive.org/embed/bizzy-quizzy-the-great-science-detective-fiction-adventures" width="100%" height="600" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+
+
+
+
+
+<p style="margin-top: 2em;">
+My copy of the book also came with a number of documents, notes and flyers (available at the end on IA). So I researched Bowker a little and he was a very accomplished academic publishing many books on chemistry. A newspaper clipping was tapped inside the book documenting a probate court case where Bowker had left $2000 in his will to his cats when he passed away. But there was some debate about whether the current cats left in <a href="https://www.google.com/maps/place/441+alameda+blvd+coronado+ca/@32.6974606,-117.184206,3a,75y,122.5h,90t/data=!3m4!1e1!3m2!1s-mesEROrM5LOjuMVsDJKAw!2e0!4m2!3m1!1s0x80deacb06a28bb2b:0xc7408e5091dbcc17?sa=X&ved=2ahUKEwiol4H9jeHqAhVwRN8KHXBtAw4QxB0wAXoECA0QAg">his house</a> were the same 22 cats that were alive when he wrote them into his will. And that’s where I left it, drilling down into one book as much as I could. 
+</p>
+<p>
+The world is a big place and gets bigger everyday, like all books these non-renewed resources reflect some aspect of it. Even if it is the (bad) musings of a 1940’s chemistry professor who loved cats it's nice to open it up and put it out there. These non-renewed books are an important resource and I look forward to seeing the NYPL project develop.
+</p>
+
+
+<img src="/img/post_non-renewed_cats.png" style="margin: auto; display: block; width: 45%;">
+		</div>
+	</div>
+
+
+
+
+
+
+
+  </div>
+

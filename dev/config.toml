@@ -197,6 +197,15 @@ label = "Blog"
 url = "https://thisismattmiller.com/post/library-of-congress-web-archives/"
 
 
+[[params.mystuff.datavisualization.things]]
+label = "LCC Tree Map"
+desc = "A Library of Congress Classification Tree Map for LC, Harvard and Columbia."
+date = "2020-07-29"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/lcc-tree/"
+
+
 
 
 

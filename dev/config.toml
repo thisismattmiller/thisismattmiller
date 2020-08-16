@@ -682,8 +682,12 @@ label = "Blog"
 url = "https://medium.com/@thisismattmiller/public-domain-cut-up-bot-9b0d77cce7a8"
 
 [[params.mystuff.creativecoding.things.links]]
-label = "Visit"
+label = "Visit (banned) "
 url = "https://twitter.com/PDCutup"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Visit"
+url = "https://twitter.com/PDcutupSmith"
 
 
 [[params.mystuff.creativecoding.things]]

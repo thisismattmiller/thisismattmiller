@@ -206,6 +206,15 @@ label = "View"
 url = "https://thisismattmiller.github.io/lcc-tree/"
 
 
+[[params.mystuff.datavisualization.things]]
+label = "Party Platforms"
+desc = "A look at new words found in the Democratic and Republican party platforms"
+date = "2020-08-27"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/party-platform/"
+
+
 
 
 

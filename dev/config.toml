@@ -1001,6 +1001,15 @@ label = "View"
 url = "https://thisismattmiller.github.io/consumer-divination/"
 
 
+[[params.mystuff.detritus.things]]
+label = "Ostraca"
+desc = "Counting votes in Philadelphia, a video"
+date = "2020-10-29"
+[[params.mystuff.detritus.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/ostraca/"
+
+
 
 
 

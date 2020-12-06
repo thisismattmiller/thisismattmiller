@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ISBN Uh-Oh</title>
+      <link>https://thisismattmiller.com/post/isbn-uh-oh/</link>
+      <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/isbn-uh-oh/</guid>
+      <description>img{ padding:1em 1em 1em 0; border: solid 1px black; } p{ margin-bottom: 1em; } 	Maya Lin&#39;s Eclipsed Time Time telling in a pandemic Apr 12 2020 -- Example Tweet	Example Tweet  ISBN Uh-Oh Dec 2020, Twitter Bot  ISBNs are numbers given books by publishers to help uniquely identify them. Every time a new book comes out or a new edition of a book (translation, 2nd edition, paperback, etc) it gets a new ISBN.</description>
+    </item>
     
     <item>
       <title>Ostraca</title>

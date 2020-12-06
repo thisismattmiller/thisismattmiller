@@ -786,6 +786,19 @@ label = "View"
 url = "https://thisismattmiller.github.io/sun/"
 
 
+[[params.mystuff.creativecoding.things]]
+label = "ISBN Uh-Oh"
+desc = "A twitter bot posting ISBN collisions"
+date = "2020-12-06"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://twitter.com/ISBN_uhoh"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/isbn-uh-oh/"
+
+
 
 
 

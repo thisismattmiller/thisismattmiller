@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://thisismattmiller.com/post/isbn-uh-oh/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://thisismattmiller.com/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://thisismattmiller.com/post/</loc>
+    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://thisismattmiller.com/post/repeated-hunt/</loc>
+    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://thisismattmiller.com/post/isbn-uh-oh/</loc>
     <lastmod>2020-12-06T00:00:00+00:00</lastmod>
   </url>
   

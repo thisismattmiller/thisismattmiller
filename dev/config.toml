@@ -215,6 +215,15 @@ label = "View"
 url = "https://thisismattmiller.github.io/party-platform/"
 
 
+[[params.mystuff.datavisualization.things]]
+label = "1925 Public Domain"
+desc = "1925 resources in HathiTrust were automatically flipped to public domain on Jan 1st 2021 - LCC icicle graph"
+date = "2021-01-03"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/1925-hathi/"
+
+
 
 
 
@@ -562,6 +571,15 @@ label = "View"
 url = "https://thisismattmiller.com/post/non-renewed/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Pomodoro - OCR Tool"
+desc = "A tool that makes extracting text from complicated documents easier"
+date = "2020-12-17"
+[[params.mystuff.metadata.things.links]]
+label = "Use"
+url = "https://pomodoro.semlab.io/"
+
+
 
 
 
@@ -797,6 +815,19 @@ url = "https://twitter.com/ISBN_uhoh"
 [[params.mystuff.creativecoding.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/isbn-uh-oh/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Between The Places"
+desc = "Inspired by Sol LeWitt, make a map cutting out the places you used to live"
+date = "2020-12-22"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://betweentheplaces.glitch.me/"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Context"
+url = "https://twitter.com/thisismmiller/status/1341537027636998144"
 
 
 

@@ -2,10 +2,15 @@ import toml
 import requests
 import json
 import sys
-
+import re
 ## req the google sheet as json
-resp = requests.get('https://spreadsheets.google.com/feeds/cells/1YVJq-BC2ZLx2Q74PNs2Ct3BAh7tjNY7ZgNBed2_RVDA/1/public/full?alt=json')
-sheet = resp.json()
+# resp = requests.get('https://spreadsheets.google.com/feeds/cells/1YVJq-BC2ZLx2Q74PNs2Ct3BAh7tjNY7ZgNBed2_RVDA/1/public/full?alt=json')
+resp = requests.get('https://docs.google.com/spreadsheets/d/1YVJq-BC2ZLx2Q74PNs2Ct3BAh7tjNY7ZgNBed2_RVDA/gviz/tq?tqx=out:json&tq&gid=0')
+
+jsonString = re.search(r'(?<="table":).*(?=}\);)',resp.text).group(0)
+
+sheet = json.loads(jsonString)
+
 
 lookup = {}
 row = 0

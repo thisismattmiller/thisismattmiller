@@ -1,0 +1,341 @@
++++
+title = "Animated Gifs in US Elections"
+date = "2021-12-01"
+description = "The useage of animated gifs in US Election websites"
+twitterimage  = "https://thisismattmiller.com/img/leeks.png"
++++	
+
+
+
+  <style type="text/css">
+
+
+		*{
+		scroll-behavior: smooth !important;
+		}
+
+
+		body{
+			font-size: 1.2em;
+		}
+  </style>
+
+
+
+
+  <div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Animated Gifs in US Elections</h1>
+	      	<h2 class="is-size-4 has-text-grey">Mining the Library of Congress web archives for political Gifs</h2>
+	      	<h2 class="is-size-5 has-text-grey">Dec 1 2021</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:left;">
+	      	<!-- 
+	      		<img class="doodle-mono-right-header shake-slow shake-freeze" src="/img/leeks.png" title="A drawn image of a bunch of leeks"/> -->
+	    </div>
+
+	</div>
+
+
+
+
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">
+
+			<ol style="padding-left: 1em;">
+				<li><a href="#intro">Intro</a></li>
+				<li><a href="#problem">Problem Space</a></li>
+				<li><a href="#offical">Official Gifs</a></li>
+				<li><a href="#usergifs">User Content Gifs</a></li>
+				<li><a href="#weird">Getting Weird With User Content Gifs</a></li>
+				<li><a href="#tech">Technical - How to get started working with this dataset</a></li>
+
+			</ol>
+
+			<h2 id="intro" class="is-size-4" style="margin-top: 3em;">Intro</h2>
+
+
+			<p style="margin-top:2em;">
+
+			A new dataset was <a href="https://twitter.com/LC_Labs/status/1438179553411665921">announced</a> by the prolific data releasing web archiving team and LC Labs at the Library of Congress. I really enjoy working with the datasets they put out because: 1. I think it is important for institutions to release data as much as possible and 2. It’s not my domain of expertise so I don’t know much about it and that enables me to do <a href="https://twitter.com/thisismmiller/status/1229198993240084488">mostly</a> <a href="https://twitter.com/thisismmiller/status/1104504155455008768">unserious</a> but <a href="https://medium.com/@thisismattmiller/anaphora-gov-8e8c21f539b2">maybe</a> <a href="https://thisismattmiller.com/post/library-of-congress-web-archives/">interesting</a> things with them.
+
+			</p>
+
+
+			<p style="margin-top:2em;">
+				This new dataset is based around US Elections, it is <a href="https://labs.loc.gov/work/experiments/webarchive-datasets/">described</a> as:
+				<div style="    border: 1px lightgray solid;padding: 0.75em;font-family: monospace;background-color: whitesmoke;">
+					This collection includes campaign sites archived weekly during United States election seasons since 2000, documenting sites associated with presidential, congressional, and gubernatorial elections.
+				</div>
+
+			</p>
+
+			<p style="margin-top:2em;">
+				This dataset was the result of a patron research request. Which made me think about doing something a little more targeted. Normally a dataset that is released has some characteristics that might be interesting if explored. But for this release I thought I should ask it a question. So I wondered, if I wanted to write a historical use of animated gifs in US political websites since 2000, could I do that? 				
+			</p>
+
+			<p style="margin-top:2em;">
+				My theory going into that question was that animated gifs are traditionally structural in the makeup of a webpage. They are good for ad banners, good for giving design elements some polish. The pop culture reflection of the file format is normally centered around things like memes and other internet culture communication. I wondered how they are used in this political context. If they are used for communicating information, what does that look like? Are they used in a meme type context?
+
+			</p>
+
+
+			<h2 id="problem" class="is-size-4" style="margin-top: 3em;">Problem Space</h2>
+
+			<p style="margin-top:2em;">
+				The amazing feature of the LC web archive is that it is curated, the website captures are organized. You are able to see what type of sites would be included in this <a href="https://www.loc.gov/collections/united-states-elections-web-archive">data dump</a>. You can access that same metadata via LC’s P1 API, for example <a href="https://www.loc.gov/web-archives/?fa=partof:united+states+elections+2000&fo=json">here is the metadata</a> for election websites captures in the year 2000.
+			</p>
+
+
+			<p style="margin-top:2em;">
+				This dataset contains a lot of political campaign sites but also related sites such as issue based websites and other related sites. I mostly just used all of the sites scrapped but I excluded things like social media sites to cut back on the potential noise. But the web is a distributed network and if you are looking for a needle in that haystack you need to make sure you are looking at the right context. The problem here is that I am interested in animated gifs used on these sites but not gifs used on sites that are linked to from the originally intended captured election site. I don't know how many hops the web crawler goes out. For example, say there is a post on actblue.com by a user (a lot of these big sites had user forums surprisingly) that links to a reddit post that has an animated gif in a comment on reddit. I don’t care about that animated gif, it is not on the official captured site. I would be potentially interested in animated gifs posted by users on the official site though. I’ve broken these into three possible categories: <ol style="padding-left: 1em; margin-top:1em; margin-bottom:1em;"><li>Official gifs used on the web page, either hosted on the same domain or using a <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>.</li> <li>User content gifs used on the official webpage.</li><li>Linked gifs that occur outside the context of the official webpage.</li></ol> 
+
+				This diagram depicts these areas:
+				<div style="text-align:center;">
+					<img src="/img/post_election_gifs_diagram.png" style="width:75%; margin-top:1em;">
+				</div>
+
+			</p>
+
+			<p style="margin-top:2em;">
+				The problem becomes more complicated however. This data release only contains the manifest of the files captured by the archiving process. It is simply a huge list of file names and their associated metadata. This is great because I can just look for gifs and do something with those. But we lose any context of where these files came from. If one of the manifests contains metadata for 10,000 files, those files could have come from any number of websites, I don’t know that a specific gif came from a specific website. If I had local access to the <a href="https://en.wikipedia.org/wiki/Web_ARChive">WARC files</a>. I could look through each HTML file and find where that gif was referenced, but for this dataset only the manifests were released not the WARC files. I could request each HTML page from the archive’s webserver and look for the occurrence of the gif but I would need to request every HTML file in the archive. We are talking about a huge number of files that would need to be requested and individually downloaded. That approach is not practical unless you have the WARC files locally, which I do not. 
+
+			</p>
+
+			<p style="margin-top:2em;">
+				My solution to this problem is to use the metadata provided about which sites were scrapped, create an allow list for those domains and only look at gifs that were hosted on the official domain. For example, if there was a gif listed in the manifest and its URL included the domain of one of the official sites scrapped then I would download that gif for further work. If the gif appeared on a domain not in the official list of sites scrapped I would ignore it. As mentioned before I did remove some of the larger officially scrapped sites like myspace or twitter (captures were often done of the politician's social media presence) simply because it would introduce too much noise and be difficult to isolate “official gifs.” This means I only looked at gifs that were hosted on the official campaign site for example. If there was a CDN hosting the gif it would also not be included because I do not have the HTML context and its domain would not have been in the allow list.
+
+			</p>
+
+
+			<p style="margin-top:2em;">
+				From the 134 million gif files found in this dataset I filtered out only the gifs that appeared on these <a href="https://gist.github.com/thisismattmiller/bbd002901c8474db3be80cb22207fbd8">official domains</a> which resulted in 3200 gifs of which only around 200 of them were animated. 
+			</p>
+
+			<p style="margin-top:2em; font-weight: bold;">You can see all 200 of those gifs here: <a href="https://thisismattmiller.github.io/lc-election-web-archives/offical/">https://thisismattmiller.github.io/lc-election-web-archives/offical/</a></p>
+
+
+
+			<h2 id="offical" class="is-size-4" style="margin-top: 3em;">Offical Gifs</h2>
+
+
+			<p style="margin-top:2em;">
+				It is interesting to see trends of how animated gifs were used through the years. The meme quality we often associate with animated gifs is not really present in their use on these political websites. The further away from “official” we got the more meme type gifs we would see. For example in the 2000 election, a site called <a href="https://webarchive.loc.gov/all/20001127063716/http://www.hereliesalgore.com/">“Here Lies Al Gore” a pro-Bush site</a> features a couple gifs of George W. Bush dancing. 
+			</p>
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/offical/img/HGJKOPUCYWMDMCTYBINPGVJBE2WWE6K6.gif"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/offical/img/D6P3WW7ZGR7PWJGW3G6RQNSQSG3H7C4M.gif"></div>
+			</div>
+
+			<p style="margin-top:2em;">
+				Of course hereliesalgore.com is not an official campaign site, but it was included in this election related dataset. Al Gore, not to be out done, did have an example of an animated gif on his official website, a beige american flag superimposed over the United States, for some reason.
+			</p>
+				<div style="display:flex; margin-top:1em">
+					<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/offical/img/WYMUCEXGGA5XHY6L6PF3VP6FC432BPZ5.gif"></div>
+				</div>
+
+			<p style="margin-top:2em;">
+				Most of the animated gifs were as I guessed earlier used for design elements, banner ads mostly, like this early example of an ad to download your own personal Ronald Reagan screensaver:
+
+			</p>
+				<div style="display:flex; margin-top:1em">
+					<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/offical/img/JHNXRV2TIN3QMXDDSKJQ7FUDIZMDFLJA.gif"></div>
+				</div>
+
+			<p style="margin-top:2em;">
+				As we move forward in time the gifs mostly become banner ads for various things, culminating in mostly actblue.com banner ads for democratic politicians. Some sites had wordpress blogs attached to them so you would get more pop culture meme type gifs but mostly they were used for ad space. 
+
+			</p>
+
+
+			<p style="margin-top:2em;">
+				Interestingly it seems libertarians made heavy use animated gifs in the early 2010s with multiple candidates using the medium to try to present their idea of what libertarianism is and where they think it fits into the political spectrum:
+			</p>
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/offical/img/ELOC644ZRLOUB4HICVTFTHWNHZNJQL24.gif"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/offical/img/HW3I3NP7SENVRB6YPYPKHEDFTQI7SLUL.gif"></div>
+			</div>
+
+
+			<p style="margin-top:2em;">
+				It is not a huge dataset once you filter down to these few (200) animated gifs, but it does encapsulate the progression of use for the medium over twenty years on political sites. The early days had very small crude gifs progressing to the high resolution photo gifs of 2018.
+
+			</p>
+
+
+			<h2 id="usergifs" class="is-size-4" style="margin-top: 3em;">User Content Gifs</h2>
+
+
+
+			<p style="margin-top:2em;">
+				What really drove me to start looking at animated gifs in this domain was the idea that people used animated gifs in a political way. I wanted to find examples of this use to show how the medium could communicate a political message. As described above these “official” animated gifs are sterile and vanilla, they are mostly not being used to communicate political messaging. That makes sense in the context they are presented as most official campaign sites are very sterile and non-confrontational themselves. I knew if I dove into the non-official gifs I would find what I was looking for. This led me to user generated or user contributed animated gifs. These are assets that were contributed to this dataset via sites adjacent to the official site. They might be social media, or user forums, or comment sections. For example the top ten non-official domains that were hosting animated gifs in this dataset are:
+			</p>
+
+<pre style="margin-top:2em;">
+photobucket.com 820,485
+myspacecdn.com 98,965
+heritage.org 84,391
+imageshack.us 57,994
+asu.edu 53,191
+gwu.edu 51,863
+nj.us 46,537
+wa.gov 44,413
+mn.us 40,670
+tumblr.com 40,198
+</pre>
+			<p style="margin-top:2em;">
+				These are mostly content hosting domains, meaning in this dataset there are hundreds of thousands of animated gifs created by people that somehow made their way into the dataset. Mostly likely through linking or social media sites. I called these “user content gifs.” At this point I really have zero context of where these animated gifs appeared in the dataset. Without the WARC files I don’t know that an image hosted at tumblr was posted in the comment section of actblue.com or maybe an imageshack gif was posted as a reply to twitter post by a politician captured in the dataset. I do know that there is a higher likelihood that the gif could be politically related since it was captured occurring in the orbit of these political sites, but it could also just be someone's avatar image they like to use. There is really no way to extract politically active animated gifs except to look at them, so I looked at a lot of them. I would select a domain, download all gifs from the LC web archive server and have a script build a giant web page displaying the gifs. I would manually look at the gifs and see if I could find some political ones. I did this only for one domain, the very famous <a href="https://en.wikipedia.org/wiki/Blingee">Blingee</a>. I knew immediately when I saw that there were thousands of blingee gifs I would see some wild gifs, hopefully political in some sense. Here is a selection of political blingees:
+			</p>
+			<div style="display:flex; margin-top:2em;">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/SATQCOD73WGE7UBZWSUJO44EGE2OEVIE.gif
+"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/I2E4C3XZHOM5EARBRUY6PZEKXDRHIHSE.gif
+"></div>
+			</div>
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/VLP7FXHGPW4X3H5HFRUS4KHU4SOPPPHB.gif"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/TPUM5KWDUC4LCOSY4ANL332MXB3XD24X.gif
+"></div>
+			</div>
+
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/L3BUUYW5RH7W7BB3Z6KGMJASAIGINV6P.gif
+"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/3XX6ZFKHNNQHHM6FLPJSWQMDETNNXPYJ.gif
+"></div>
+			</div>
+
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/6STEQ6GDLK27A74UE44SUROVK57ZHQQX.gif
+"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/4DR4CAGVUEQ3V6TKYHSCCK44FVKLM3A4.gif
+"></div>
+			</div>
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/C6WKUIDBQRBF3NIFVD4WKPIXCVLMXE3M.gif
+"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/IVSKJMPRJQUG3NSPWM5AC5OTZVXIFZ7X.gif
+"></div>
+			</div>
+
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/75S3DHU5FN6RW37VOGVWDUTDNVPNGCMR.gif
+"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/ZSPM7OFLYZJ4JZIUOFWAKWSYI3MNEHPO.gif
+
+"></div>
+			</div>
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/IVR4FBS75FC6DB75M3WYBO26734KH2JL.gif
+"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/TIERUPTE7Y44ML7SNTOGMFGH75GZRO26.gif
+"></div>
+			</div>
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/QBN4PHOUMDVS2AMTGTJPSIMW3JNWITTV.gif
+"></div>
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/FWOULZ22FORPYZ4WYVDNES7ERHPKXCJY.gif
+"></div>
+			</div>
+
+
+			<div style="display:flex">
+				<div style="flex:1"><img src="https://thisismattmiller.github.io/lc-election-web-archives/user_content/5HPU74FVPWJTNTOCBRJPF2BFTR34JQZT.gif
+"></div>
+			</div>
+
+
+
+
+		
+
+
+
+			<p style="margin-top:2em;">
+				These range from gifs critical of specific, mostly GOP politicians to celebratory gifs, mostly of Obama. I think these are really the core of what I was interested in exploring with this dataset. It is fairly impractical to try to find more of these for the large domains simply because of logistics. I would need to request each of the images from the LC web archive server and even then I wouldn’t know their context or what website they were embedded on, like these Blingee gifs they would be disembodied. With local access or having the WARC files you could discover more of these political gifs in a more automated method.
+			</p>
+
+
+			<h2 id="weird" class="is-size-4" style="margin-top: 3em;">Getting Weird With User Content Gifs</h2>
+
+
+
+
+
+			<p style="margin-top:2em;">
+				If you were a very online teen or young adult in the mid 2000s you probably find the earlish web very noslastigc. It feels like there was a shift in technology in the mid 2000s that enabled more high definition web to come into existence. That earlier web had a lot of character mostly derived from its eccentricities. Working on these files I ended up with a lot of animated gifs from that time period. Most of these came from user forums or user discussion groups. Before reddit and facebook collapsed the entire idea of forum communication on the web into a couple monopolistic sites there were countless individually hosted discussion forum sites and little communities. Each had its own users posting media for their avatars and signatures. I thought it would be fun to do something with these weird gifs so I made a little 3D simulation where you are trapped in an endless hallway of these images. As you walk forward more and more animated gifs from 2007 fall trapping you on a single path forward. I’m not an advocate of VR to explore or “experience” but I found looking at these images in this context triggered a sort of indexical memory response. You could never recall a lot of these images on purpose but if you were on the internet in 2007 as soon as you see them you can place them into an internet cultural context. I used images from glitter-graphics.com (surprisingly still online) mostly because it has very simple gifs invoking the earlyish web, that were mostly not explicit, and while a lot of them are what I would call boomer-esque they are still kind of strange and weird. 
+
+			</p>
+
+			<p style="margin-top:2em; font-weight: bold; margin-bottom: 2em;">
+
+				<a style="font-size:1.5em;" target="_blank" href="https://thisismattmiller.github.io/lc-election-web-archives/simulation/">Explore the gifs</a>
+				<br>
+				(video below shows the general idea) 
+				<br>
+				Each refresh of the page is a random experience.
+				<br>
+				Use the keyboard and mouse to explore, you can use the enter key when standing infront of a Gif to download it.
+
+			</p>
+
+			<video src="https://thisismattmiller.s3.amazonaws.com/lc-election-web-archive/pov_image_demo.mp4" controls>
+
+			</video>
+
+			<p style="margin-top:2em; margin-bottom: 2em;">
+					While most of the images are not overtly political, when I was exploring the gifs I came across this pairing of Barack Obama as Neo from the Matrix and George Bush morphing into the devil. The random number generator happened to place them next to each other. These images are peak 2007 politics and reminded me that everything is political, even animated gifs.
+			</p>
+
+
+			<video src="https://thisismattmiller.s3.amazonaws.com/lc-election-web-archive/demo_obama_bush.mp4" autoplay controls loop>
+
+			</video>
+
+
+
+			<h2 id="tech" class="is-size-4" style="margin-top: 3em;">Technical - How to get started working with this dataset</h2>
+
+
+			
+			<p style="margin-top:2em; margin-bottom: 2em;">
+				This section simply describes and links to scripts to work with this dataset. You’ll need several hundred gigabytes of free disk space to download and extract the manifests. You’ll need even more to download assets from the LC web archive. 
+			</p>
+
+			<ol style="padding-left: 1em;">
+				<li>The first step is to download the manifests of all the the index files, you can use this shell script to do that <a href="https://github.com/thisismattmiller/lc-election-web-archives/blob/main/scripts/download_manifest.sh">Script</a></li>
+				<li>Next you download the many CDX files: <a href="https://github.com/thisismattmiller/lc-election-web-archives/blob/main/scripts/download_cdx_files.py">Script</a></li>
+				<li>Then you extract them: <a href="https://github.com/thisismattmiller/lc-election-web-archives/blob/main/scripts/extract_cdx.py">Script</a></li>
+				<li>Once they are extracted you can parse them and do whatever you want with the data, for example this script pulls out all of the animated GIF assets based on mime type<a href="https://github.com/thisismattmiller/lc-election-web-archives/blob/main/scripts/build_mime_extract.py">Script</a></li>
+				<li>Once you have those extracted you probably want to slice and dice them down to what you want for example this script pulls out all the blingee gifs: <a href="https://github.com/thisismattmiller/lc-election-web-archives/blob/main/scripts/parse_extract_blingee.py">Script</a></li>
+				<li>And then this script downloads the assets from the LC web archive server: <a href="https://github.com/thisismattmiller/lc-election-web-archives/blob/main/scripts/download_assets_blingee.py">Script</a></li>
+			</ol>
+
+			<p style="margin-top:2em;">
+				There are other scripts in that directory that I used for my process but these are the main ones to get started with the dataset.			</p>
+
+
+	  	</div>
+
+
+	</div>
+
+</div>

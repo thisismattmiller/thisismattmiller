@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Animated Gifs in US Elections</title>
+      <link>https://thisismattmiller.com/post/animated-gifs-in-us-elections/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/animated-gifs-in-us-elections/</guid>
+      <description>*{ scroll-behavior: smooth !important; } body{ font-size: 1.2em; }  Animated Gifs in US Elections Mining the Library of Congress web archives for political Gifs Dec 1 2021  --   Intro Problem Space Official Gifs User Content Gifs Getting Weird With User Content Gifs Technical - How to get started working with this dataset  Intro A new dataset was announced by the prolific data releasing web archiving team and LC Labs at the Library of Congress.</description>
+    </item>
     
     <item>
       <title>Leeks: ParkMobile</title>

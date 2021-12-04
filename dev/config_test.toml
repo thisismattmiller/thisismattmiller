@@ -224,15 +224,6 @@ label = "View"
 url = "https://thisismattmiller.github.io/1925-hathi/"
 
 
-[[params.mystuff.datavisualization.things]]
-label = "Leeks: ParkMobile"
-desc = "Using the ParkMobile data leak to explore what nick names people give their cars"
-date = "2021-06-09"
-[[params.mystuff.datavisualization.things.links]]
-label = "View"
-url = "https://thisismattmiller.com/post/leeks-parkmobile/"
-
-
 
 
 
@@ -589,24 +580,6 @@ label = "Use"
 url = "https://pomodoro.semlab.io/"
 
 
-[[params.mystuff.metadata.things]]
-label = "Wiki2MARC"
-desc = "Working on a tool to build name authority MARC records from wikidata entities"
-date = "2021-06-25"
-[[params.mystuff.metadata.things.links]]
-label = "View"
-url = "https://thisismattmiller.github.io/wiki2marc/"
-
-
-[[params.mystuff.metadata.things]]
-label = "Animated Gifs in US Elections"
-desc = "Mining the Library of Congress web archives for political Gifs"
-date = "2021-12-01"
-[[params.mystuff.metadata.things.links]]
-label = "Read"
-url = "https://thisismattmiller.com/post/animated-gifs-in-us-elections/"
-
-
 
 
 
@@ -857,24 +830,6 @@ label = "Context"
 url = "https://twitter.com/thisismmiller/status/1341537027636998144"
 
 
-[[params.mystuff.creativecoding.things]]
-label = "Every Arbys Twitter Bot"
-desc = "Order some curly fries for me"
-date = "2021-06-15"
-[[params.mystuff.creativecoding.things.links]]
-label = "View"
-url = "https://twitter.com/EveryArbys"
-
-
-[[params.mystuff.creativecoding.things]]
-label = "Endless hallway of 2007 GIFs"
-desc = "Wonder down a hallway of 12,000 animated gifs from 2007"
-date = "2021-12-01"
-[[params.mystuff.creativecoding.things.links]]
-label = "View"
-url = "https://thisismattmiller.github.io/lc-election-web-archives/simulation/"
-
-
 
 
 
@@ -1088,15 +1043,6 @@ date = "2020-05-15"
 [[params.mystuff.detritus.things.links]]
 label = "View"
 url = "https://thisismattmiller.github.io/consumer-divination/"
-
-
-[[params.mystuff.detritus.things]]
-label = "Clickbait machine self-descurction"
-desc = "Can a news page make so many click bait ads even it cannot lift it?"
-date = "2021-02-21"
-[[params.mystuff.detritus.things.links]]
-label = "View"
-url = "https://twitter.com/thisismmiller/status/1363711952430780419"
 
 
 

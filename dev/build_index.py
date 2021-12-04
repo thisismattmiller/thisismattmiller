@@ -12,22 +12,45 @@ jsonString = re.search(r'(?<="table":).*(?=}\);)',resp.text).group(0)
 sheet = json.loads(jsonString)
 
 
+
 lookup = {}
 row = 0
 
 # build a lookup buy cell Id
-for e in sheet['feed']['entry']:
-	lookup[e['title']['$t']] = e['content']['$t']
-	if int(e['gs$cell']["row"])>row:
-		row=int(e['gs$cell']["row"])
+for rows in sheet['rows']:
+
+	# dunno what this c key is but its there
+	rows = rows['c']
+
+	# lookup[e['title']['$t']] = e['content']['$t']
+	for idx, col in enumerate(sheet['cols']):
+		
+
+		
+		if rows[idx] == None:
+			# lookup[col['id']+str(row)] = None
+			# if its empty dont add to the lookup
+			pass
+		elif 'f' in rows[idx]:
+			if rows[idx]['f'] != None:
+				lookup[col['id']+str(row)] = rows[idx]['f']
+		elif 'v' in rows[idx]:
+			if rows[idx]['v'] != None:
+				lookup[col['id']+str(row)] = rows[idx]['v']
+
+		else:
+			print("unkown data type here", rows[idx], 'in row', row)
+
+	row=row+1
 
 
 cat_lookup = {}
 
+
 try:
 
+	for x in range(0,row):
 
-	for x in range(1,row+1):
 
 		cat = lookup['A'+str(x)]
 		cat_clean = cat.lower().replace(' ','').replace('/','').replace('*','')
@@ -53,6 +76,7 @@ try:
 
 		
 		if 'F'+str(x) in lookup:
+
 			links.append({
 				"label" :lookup['F'+str(x)].split('|')[0],
 				"url" :lookup['F'+str(x)].split('|')[1]
@@ -71,6 +95,7 @@ try:
 				"label" :lookup['H'+str(x)].split('|')[0],
 				"url" :lookup['H'+str(x)].split('|')[1]
 			})	
+		print('row',str(x))
 		if 'I'+str(x) in lookup:
 			links.append({
 				"label" :lookup['I'+str(x)].split('|')[0],
@@ -97,6 +122,9 @@ except:
 	print("Spreadsheet formating error!")
 	print("-----------------")
 	sys.exit()
+
+
+
 
 
 output  = ""

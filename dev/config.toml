@@ -867,8 +867,8 @@ url = "https://twitter.com/EveryArbys"
 
 
 [[params.mystuff.creativecoding.things]]
-label = "Endless hallway of 2007 GIFs"
-desc = "Wonder down a hallway of 12,000 animated gifs from 2007"
+label = "Endless Hallway of 2007 GIFs"
+desc = "Wander down a hallway of 12,000 animated gifs from 2007"
 date = "2021-12-01"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"

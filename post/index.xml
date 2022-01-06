@@ -17,7 +17,7 @@
       <pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/jan-6th-overflow/</guid>
-      <description>.ytcontainer { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; } .video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; } img{ padding:1em 1em 1em 0; } 	    Jan 6th Overflow 2022  Watching the live stream of Trump&#39;s speech on Jan 6th 2021 on YouTube I was struck by the comment section on the video. Rendered pretty much useless by the sheer volume of comments flying up the window.</description>
+      <description>.ytcontainer { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; } .video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; } .ytcontainer{ min-height: 600px; } /* @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) { .ytcontainer{ margin-bottom: 5em; } }*/ img{ padding:1em 1em 1em 0; } 	    Jan 6th Overflow 2022  Watching the live stream of Trump&#39;s speech on Jan 6th 2021 on YouTube I was struck by the comment section on the video.</description>
     </item>
     
     <item>

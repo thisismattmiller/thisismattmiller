@@ -233,6 +233,15 @@ label = "View"
 url = "https://thisismattmiller.com/post/leeks-parkmobile/"
 
 
+[[params.mystuff.datavisualization.things]]
+label = "1926 Public Domain"
+desc = "Browse 54K public domain resources in Hathi Trust as of Jan 1 2022"
+date = "2022-01-01"
+[[params.mystuff.datavisualization.things.links]]
+label = "View"
+url = "https://thisismattmiller.github.io/hathi-pd-2022/"
+
+
 
 
 
@@ -873,6 +882,37 @@ date = "2021-12-01"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
 url = "https://thisismattmiller.github.io/lc-election-web-archives/simulation/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Jan 6th Overflow"
+desc = "Livestream comment simulation"
+date = "2022-01-06"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/jan-6th-overflow/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Wordle Shares"
+desc = "Collecting Wordle Shares on Twitter"
+date = "2022-01-09"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://wordleshares.glitch.me/"
+
+[[params.mystuff.creativecoding.things.links]]
+label = "Context"
+url = "https://twitter.com/anildash/status/1480419489791496195"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Ley Lines"
+desc = "Drawing lines between things, mondern ley lines."
+date = "2022-01-17"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/leylines"
 
 
 

@@ -242,6 +242,23 @@ label = "View"
 url = "https://thisismattmiller.github.io/hathi-pd-2022/"
 
 
+[[params.mystuff.datavisualization.things]]
+label = "Hathi Trust Public Domain Viz"
+desc = "Browse new resources entering the public domain in Hathi Trust"
+date = "2023-01-01"
+[[params.mystuff.datavisualization.things.links]]
+label = "1925 (2021)"
+url = "https://thisismattmiller.github.io/1925-hathi/"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "1926 (2022)"
+url = "https://thisismattmiller.github.io/hathi-pd-2022/"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "1927 (2023)"
+url = "https://thisismattmiller.github.io/hathi-pd-2023/"
+
+
 
 
 

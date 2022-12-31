@@ -216,15 +216,6 @@ url = "https://thisismattmiller.github.io/party-platform/"
 
 
 [[params.mystuff.datavisualization.things]]
-label = "1925 Public Domain"
-desc = "1925 resources in HathiTrust were automatically flipped to public domain on Jan 1st 2021 - LCC icicle graph"
-date = "2021-01-03"
-[[params.mystuff.datavisualization.things.links]]
-label = "View"
-url = "https://thisismattmiller.github.io/1925-hathi/"
-
-
-[[params.mystuff.datavisualization.things]]
 label = "Leeks: ParkMobile"
 desc = "Using the ParkMobile data leak to explore what nick names people give their cars"
 date = "2021-06-09"
@@ -234,18 +225,13 @@ url = "https://thisismattmiller.com/post/leeks-parkmobile/"
 
 
 [[params.mystuff.datavisualization.things]]
-label = "1926 Public Domain"
-desc = "Browse 54K public domain resources in Hathi Trust as of Jan 1 2022"
-date = "2022-01-01"
-[[params.mystuff.datavisualization.things.links]]
-label = "View"
-url = "https://thisismattmiller.github.io/hathi-pd-2022/"
-
-
-[[params.mystuff.datavisualization.things]]
 label = "Hathi Trust Public Domain Viz"
 desc = "Browse new resources entering the public domain in Hathi Trust"
 date = "2023-01-01"
+[[params.mystuff.datavisualization.things.links]]
+label = "1927 (2023)"
+url = "https://thisismattmiller.github.io/hathi-pd-2023/"
+
 [[params.mystuff.datavisualization.things.links]]
 label = "1925 (2021)"
 url = "https://thisismattmiller.github.io/1925-hathi/"
@@ -253,10 +239,6 @@ url = "https://thisismattmiller.github.io/1925-hathi/"
 [[params.mystuff.datavisualization.things.links]]
 label = "1926 (2022)"
 url = "https://thisismattmiller.github.io/hathi-pd-2022/"
-
-[[params.mystuff.datavisualization.things.links]]
-label = "1927 (2023)"
-url = "https://thisismattmiller.github.io/hathi-pd-2023/"
 
 
 

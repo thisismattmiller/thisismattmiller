@@ -6,10 +6,15 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 Jan 2022 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 30 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using GPT on Library Collections</title>
+      <link>https://thisismattmiller.com/post/using-gpt-on-library-collections/</link>
+      <pubDate>Thu, 30 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/using-gpt-on-library-collections/</guid>
+      <description>Using GPT on Library Collections Use cases for applying GPT3/3.5/4 on a full text collection March 30 2023 Intro Ground Rules Domain - Susan B Anthony Daybooks Correspondences Writings Comparing GPT3 / 3.5 / 4 Provenance Don’t call it Boutique Scale vs Voltage Should you use GPT? Conclusion Intro Here in early 2023 the breathless hype surrounding ChatGPT/GPT4 is honestly reaching annoying levels. On twitter every would be tech influencer Nostradamus is posting a screenshot of some tiny conversation they had with a computer and predicting the death of an entire industry.</description>
+    </item>
     
     <item>
       <title>Jan 6th Overflow</title>
@@ -17,7 +22,7 @@
       <pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/jan-6th-overflow/</guid>
-      <description>.ytcontainer { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; } .video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; } .ytcontainer{ min-height: 600px; } /* @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) { .ytcontainer{ margin-bottom: 5em; } }*/ img{ padding:1em 1em 1em 0; } 	    Jan 6th Overflow 2022  Watching the live stream of Trump&#39;s speech on Jan 6th 2021 on YouTube I was struck by the comment section on the video.</description>
+      <description>Jan 6th Overflow 2022 Watching the live stream of Trump&#39;s speech on Jan 6th 2021 on YouTube I was struck by the comment section on the video. Rendered pretty much useless by the sheer volume of comments flying up the window. It consisted of mostly Trump supporters shouting into the internet. Watching it trying to gauge some kind of zeitgeist of what was about to happen. At the time I lived only a few blocks from the National Mall and the situation was giving me serious anxiety.</description>
     </item>
     
     <item>
@@ -26,7 +31,7 @@
       <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/animated-gifs-in-us-elections/</guid>
-      <description>*{ scroll-behavior: smooth !important; } body{ font-size: 1.2em; }  Animated Gifs in US Elections Mining the Library of Congress web archives for political Gifs Dec 1 2021  --   Intro Problem Space Official Gifs User Content Gifs Getting Weird With User Content Gifs Technical - How to get started working with this dataset  Intro A new dataset was announced by the prolific data releasing web archiving team and LC Labs at the Library of Congress.</description>
+      <description>Animated Gifs in US Elections Mining the Library of Congress web archives for political Gifs Dec 1 2021 Intro Problem Space Official Gifs User Content Gifs Getting Weird With User Content Gifs Technical - How to get started working with this dataset Intro A new dataset was announced by the prolific data releasing web archiving team and LC Labs at the Library of Congress. I really enjoy working with the datasets they put out because: 1.</description>
     </item>
     
     <item>
@@ -35,7 +40,7 @@
       <pubDate>Wed, 09 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/leeks-parkmobile/</guid>
-      <description>.count-list-item:nth-child(odd){ background-color: whitesmoke; } code{ color: #313131 !important; } #count-list{ max-height: 830px; overflow-y: scroll; overflow-x: hidden; } p{ font-size: 1.25em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } } pre{ background-color: whitesmoke !important; } canvas{ /*margin: 0 auto;*/ /*width: 75% !important;*/ /*height: 500px !important;*/ } .name-li{ cursor: pointer; font-size: 1.25em; } .name-li:hover{ background-color: #f4a9a8; font-size: 2em; } @media only screen and (min-width: 768px) { /* tablets and desktop */ .</description>
+      <description>Leeks: ParkMobile What&#39;s in a (car) name? June 9 2021 About the Leeks Series: This blog series uses publicly found dataset leaks, breaches and scrapes to do something interesting or fun. Personal identifying information will never be posted. Nor will any data be redistributed and you will never find any information on how to obtain the dataset. I will however use the data in aggregate for visualizations or reporting on trends found in the dataset.</description>
     </item>
     
     <item>
@@ -44,7 +49,7 @@
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/repeated-hunt/</guid>
-      <description>.ytcontainer { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; } .video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; } img{ padding:1em 1em 1em 0; } 	    Maya Lin&#39;s Eclipsed Time Time telling in a pandemic Apr 12 2020 --  Repeated Hunt 2020, 7 minutes  These layered 18th century hand colored engravings come from the collection of Caroline King Duer who gave them to the Cooper Hewitt.</description>
+      <description>Repeated Hunt 2020, 7 minutes These layered 18th century hand colored engravings come from the collection of Caroline King Duer who gave them to the Cooper Hewitt. Duer was an author as well as an editor in the 1930s at Vogue, heading up the house furnishing section of the magazine. Hunting scenes are a common theme in 18th century and earlier engravings. A desirable aristocratic activity whose depiction begins appearing in paintings, etchings and eventually housewares and even stylized in wall paper designs.</description>
     </item>
     
     <item>
@@ -53,7 +58,7 @@
       <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/isbn-uh-oh/</guid>
-      <description>img{ padding:1em 1em 1em 0; border: solid 1px black; } p{ margin-bottom: 1em; } 	Maya Lin&#39;s Eclipsed Time Time telling in a pandemic Apr 12 2020 -- Example Tweet	Example Tweet  ISBN Uh-Oh Dec 2020, Twitter Bot  ISBNs are numbers given books by publishers to help uniquely identify them. Every time a new book comes out or a new edition of a book (translation, 2nd edition, paperback, etc) it gets a new ISBN.</description>
+      <description>Example Tweet	Example Tweet ISBN Uh-Oh Dec 2020, Twitter Bot ISBNs are numbers given books by publishers to help uniquely identify them. Every time a new book comes out or a new edition of a book (translation, 2nd edition, paperback, etc) it gets a new ISBN. These numbers are very useful for libraries, book sellers, book readers to help locate books and organize them. Sometimes it turns out that two books get the same number, this problem can turn up in large collaborative cataloging systems like Worldcat.</description>
     </item>
     
     <item>
@@ -62,7 +67,7 @@
       <pubDate>Sun, 29 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/ostraca/</guid>
-      <description>.ytcontainer { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; } .video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; } img{ padding:1em 1em 1em 0; } 	    Maya Lin&#39;s Eclipsed Time Time telling in a pandemic Apr 12 2020 --  Ostraca 2020, 2 hours 34 minutes  In the weeks after the 2020 presidential election you could stream live video of the Philadelphia vote counting process.</description>
+      <description>Ostraca 2020, 2 hours 34 minutes In the weeks after the 2020 presidential election you could stream live video of the Philadelphia vote counting process. You could watch as dozens of workers claid in safety vests sorted and counted ballots. This low paid or volunteer work is the invisible labor that makes the machinery of US elections work. Ostraca reuses that footage but erases everything except the fluorescent safety vests worn by the workers.</description>
     </item>
     
     <item>
@@ -71,7 +76,7 @@
       <pubDate>Wed, 22 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/non-renewed/</guid>
-      <description>.count-list-item:nth-child(odd){ background-color: whitesmoke; } code{ color: #313131 !important; } #count-list{ max-height: 830px; overflow-y: scroll; overflow-x: hidden; } p{ font-size: 1.25em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } } pre{ background-color: whitesmoke !important; } canvas{ /*margin: 0 auto;*/ /*width: 75% !important;*/ /*height: 500px !important;*/ } @media only screen and (min-width: 768px) { /* tablets and desktop */ .</description>
+      <description>Non-Renewed Copyright Analysis Digging into NYPL&#39;s digitized CCE Corpus Jul 22 2020 Intro Due to the bizarre nature of US copyright many works published in the mid-20th century are actually in the public domain. If a resource was published in a specific range of years and did not have its copyright renewed that material is likely open. The problem is determining this status because the records of this renewed status is locked up in the Library of Congress Copyright Office’s Catalog of Copyright Entries (CCE).</description>
     </item>
     
     <item>
@@ -80,7 +85,7 @@
       <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/eclipsed-time/</guid>
-      <description>.count-list-item:nth-child(odd){ background-color: whitesmoke; } code{ color: #313131 !important; } #count-list{ max-height: 830px; overflow-y: scroll; overflow-x: hidden; } p{ font-size: 1.5em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } } pre{ background-color: whitesmoke !important; } canvas{ /*margin: 0 auto;*/ /*width: 75% !important;*/ /*height: 500px !important;*/ }  Maya Lin&#39;s Eclipsed Time Time telling in a pandemic Apr 12 2020    “Time is broken” seems to be the thing everyone can agree with lately.</description>
+      <description>Maya Lin&#39;s Eclipsed Time Time telling in a pandemic Apr 12 2020 “Time is broken” seems to be the thing everyone can agree with lately. The last few weeks folks I’ve talked to always seem to casually mention how they don’t know what day of the week it is. Co-workers, family, friends, students, it’s different for everyone, days feel too long, or seem too short, or a mixture of both.</description>
     </item>
     
     <item>
@@ -89,7 +94,7 @@
       <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/library-of-congress-web-archives/</guid>
-      <description>.count-list-item:nth-child(odd){ background-color: whitesmoke; } code{ color: #313131 !important; } #count-list{ max-height: 830px; overflow-y: scroll; overflow-x: hidden; } p{ font-size: 1.5em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } } pre{ background-color: whitesmoke !important; } canvas{ /*margin: 0 auto;*/ /*width: 75% !important;*/ /*height: 500px !important;*/ }  Library of Congress Web Archives Big Picture Apr 23 2020    It was great to see the web archiving team at the Library of Congress recently celebrate twenty years of archiving.</description>
+      <description>Library of Congress Web Archives Big Picture Apr 23 2020 It was great to see the web archiving team at the Library of Congress recently celebrate twenty years of archiving. And they had a great article in the New York Times last month. I really like the LC web archive for a number of reasons. One is that it is heavily curated, meaning a lot of metadata is created for each site that is archived.</description>
     </item>
     
     <item>
@@ -98,7 +103,7 @@
       <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/smithsonian-open-access-data-release/</guid>
-      <description>.count-list-item:nth-child(odd){ background-color: whitesmoke; } code{ color: #313131 !important; } #count-list{ max-height: 830px; overflow-y: scroll; overflow-x: hidden; } p{ font-size: 1.5em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } } pre{ background-color: whitesmoke !important; } canvas{ /*margin: 0 auto;*/ /*width: 75% !important;*/ /*height: 500px !important;*/ }  Smithsonian Open Access Data Release A First Look Feb 28 2020    The Smithsonian Open Access release has put a trove of cultural heritage digital assets and data in the public commons.</description>
+      <description>Smithsonian Open Access Data Release A First Look Feb 28 2020 The Smithsonian Open Access release has put a trove of cultural heritage digital assets and data in the public commons. I wanted to show how you could start exploring and using the data. If you are comfortable running some Python scripts this post will quickly give you a head start. If not you might still be interested in following along as we look at some discoveries and visualizations I’ve created along the way.</description>
     </item>
     
     <item>
@@ -107,7 +112,7 @@
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://thisismattmiller.com/post/repotting-old-digital-humanities-projects/</guid>
-      <description>p{ font-size: 1.5em; margin-bottom: 2em; } @keyframes float { 0% { transform: translatey(0px); } 50% { transform: translatey(-20px); } 100% { transform: translatey(0px); } }  Repotting Old Digital Humanities Projects Two Test Cases Jan 31 2020    Knowing how to stop doing things is an important skill to learn. Kind of like learning to say no to things when you don’t have the capacity to do them.</description>
+      <description>Repotting Old Digital Humanities Projects Two Test Cases Jan 31 2020 Knowing how to stop doing things is an important skill to learn. Kind of like learning to say no to things when you don’t have the capacity to do them. I&#39;ve seen requirements around sustainability and sunsetting, that is how to wind down or retire a project become more prevalent on grant applications and funding processes. I&#39;ve also seen sunsetting become more of a topic around digital humanities and cultural heritage projects.</description>
     </item>
     
   </channel>

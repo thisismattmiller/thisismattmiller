@@ -1,102 +1,65 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://thisismattmiller.com/post/jan-6th-overflow/</loc>
-    <lastmod>2022-01-06T00:00:00+00:00</lastmod>
-  </url>
-  
   <url>
     <loc>https://thisismattmiller.com/</loc>
-    <lastmod>2022-01-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2023-03-30T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://thisismattmiller.com/post/</loc>
+    <lastmod>2023-03-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thisismattmiller.com/post/using-gpt-on-library-collections/</loc>
+    <lastmod>2023-03-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thisismattmiller.com/post/jan-6th-overflow/</loc>
     <lastmod>2022-01-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/leylines/</loc>
     <lastmod>2022-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/animated-gifs-in-us-elections/</loc>
     <lastmod>2021-12-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/leeks-parkmobile/</loc>
     <lastmod>2021-06-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/repeated-hunt/</loc>
     <lastmod>2020-12-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/isbn-uh-oh/</loc>
     <lastmod>2020-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/ostraca/</loc>
     <lastmod>2020-11-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/non-renewed/</loc>
     <lastmod>2020-07-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/eclipsed-time/</loc>
     <lastmod>2020-04-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/library-of-congress-web-archives/</loc>
     <lastmod>2020-04-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/smithsonian-open-access-data-release/</loc>
     <lastmod>2020-02-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/post/repotting-old-digital-humanities-projects/</loc>
     <lastmod>2020-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/blog_template/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/repotting_dh/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/series/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://thisismattmiller.com/tags/</loc>
   </url>
-  
 </urlset>

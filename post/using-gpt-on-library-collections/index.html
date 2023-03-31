@@ -523,8 +523,11 @@ The last interface I have is just comparing the output from three generations of
 
 			</p>
 			<div style="text-align:center;">
-				<img style="max-height: 600px;" src="/img/post_sba_bad_error.png"/><br>
+				<a href="https://thisismattmiller.github.io/susan-b-anthony/compare/?year=1872&page=17"><img style="max-height: 600px;" src="/img/post_sba_bad_error.png"/></a><br>
+				<a href="https://thisismattmiller.github.io/susan-b-anthony/compare/?year=1872&page=17">https://thisismattmiller.github.io/susan-b-anthony/compare/?year=1872&page=17</a>
+				
 			</div>			
+
 			<p style="margin-top:2em;">
 
 In this instance the entry was blank, meaning there was just a date, GPT3 and GPT4 correctly parsed this as an empty entry and did not extract anything. GPT3.5 aka chatGPT decided to invent a journal entry as if it was written by Anthony, a sort of deal breaker error in my opinion. This is the worst possible thing that could happen by generating false noise into the dataset. But I think you could easily mitigate these sorts of issues with a data quality check that compares extracted data to the original using simple methods like levenshtein distance and other approaches to make sure the data extracted is similar enough to the original and flag any issues. 

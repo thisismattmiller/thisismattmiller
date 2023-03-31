@@ -615,6 +615,15 @@ label = "Read"
 url = "https://thisismattmiller.com/post/animated-gifs-in-us-elections/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Using GPT on Library Collections"
+desc = "Use cases for applying GPT3/3.5/4 on a full text collection"
+date = "2023-03-30"
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/using-gpt-on-library-collections/"
+
+
 
 
 

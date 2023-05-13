@@ -15,6 +15,7 @@ python3 build_index.py
 cd ..
 hugo -s dev/
 mv dev/public/* .
+python3 build_zip.py
 git add .
 git commit -m 'release'
 git push

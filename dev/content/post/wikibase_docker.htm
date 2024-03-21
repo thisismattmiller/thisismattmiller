@@ -114,7 +114,7 @@ mv template.env .env</code></pre>
 			</p>
 			<p>It takes a while on the first launch to initialize things and come up, you might need to wait a few minutes for the website to become responsive.
 			</p>
-			<p>This is also assuming you have something line NGINX or Apache running so you can go to that domain and it is routing you to the right place. I can share my NGINX config at the end.
+			<p>This is also assuming you have something like NGINX or Apache running so you can go to that domain and it is routing you to the right place. I can share my NGINX config at the end.
 			</p>
 			<p>Just a note here, now that the new version is running, before you turn it off again you need to create a new item, or edit an item (which can only be done after you have loaded all the old data) before you turn it off again. Otherwise the start date is not set on the WDQS updater and it will insta quit on the next launch breaking your install. You can recover from this by setting a manual start date, but it is easier to just create an item before turning it off again. For example our Q1 item is “person” so I just created a new item at `/wiki/Special:NewItem` with the label “person.” By using the same label for Q1 as in the old data it just merges that statement in the triple store when the new data comes in, otherwise that label will hang around until you edit it again after the data is loaded. tldr; just make an item on the first run!
 			</p>
@@ -209,9 +209,8 @@ $wgLogos = [
 			</p>
 			<p>I finally just said fine, I’ll force it to serve the client javascript configured to use the HTTPS endpoints by editing the source code. I made changes to the `ClientHtml.php`,  `mediawiki.loader.js` and `WikibaseClient.default.php` files and overlaid them on the docker image like so:
 				<pre><code>-./custom_assests/WikibaseClient.default.php:/var/www/html/w/extensions/Wikibase/client/config/WikibaseClient.default.php
-					- ./custom_assests/ClientHtml.php:/var/www/html/includes/ResourceLoader/ClientHtml.php
-					- ./custom_assests/mediawiki.loader.js:/var/www/html/resources/src/startup/mediawiki.loader.js</code></pre>
-
+- ./custom_assests/ClientHtml.php:/var/www/html/includes/ResourceLoader/ClientHtml.php
+- ./custom_assests/mediawiki.loader.js:/var/www/html/resources/src/startup/mediawiki.loader.js</code></pre>
 			</p>
 			<p>Basically changing those files to hard code it to use “https://base.semlab.io” in all its settings being sent to the client. A bit hackish but it works.</p>
 			<h3 class="is-size-3">Appendix</h3>

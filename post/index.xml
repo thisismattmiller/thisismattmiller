@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migrating Your Docker Wikibase</title>
+      <link>https://thisismattmiller.com/post/migrating-your-docker-wikibase/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/migrating-your-docker-wikibase/</guid>
+      <description>Migrating Your Docker Wikibase Mar 20 2024 At Semantic Lab @ Pratt we were early-ish adopters of the Wikibase Docker distrubtuion (now deprecated and archived, replaced with the wikibase-release-pipeline). It was nice to have a system that was ready to deploy with minimal configuration, we used version 1.31 for many years and it worked fairly well. Like all system maintenance eventually you need to upgrade servers and I needed to now move our Wikibase to a new server and upgrade to use version 1.</description>
+    </item>
+    
     <item>
       <title>Using GPT on Library Collections</title>
       <link>https://thisismattmiller.com/post/using-gpt-on-library-collections/</link>

@@ -1,0 +1,255 @@
++++
+title = "Migrating Your Docker Wikibase"
+date = "2024-03-20"
+description = "How-to migrate a Docker Wikibase to a new server, step-by-step tutorial."
+twitterimage  = "https://thisismattmiller.com/img/ship_bottle.png"
++++
+
+  <style type="text/css">
+  	
+  	p{
+  		font-size: 1.5em;
+  		margin-bottom: 1.1em;
+  	}
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+
+  </style>
+  <div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Migrating Your Docker Wikibase</h1>
+	      	<h2 class="is-size-5 has-text-grey">Mar 20 2024</h2>
+
+
+	    </div>
+		<div class="column is-one-half" style="text-align:left;">
+	      	
+	      		<img class="doodle-mono-right-header" src="/img/ship_bottle.png" alt="A boat in a bottle"/>
+	    </div>
+
+	</div>
+	<div class="columns">
+
+		<div class="column" style="">
+			<p>
+				At <a href="https://semlab.io/">Semantic Lab @ Pratt</a> we were early-ish adopters of the <a href="https://github.com/wmde/wikibase-docker">Wikibase Docker distrubtuion</a> (now deprecated and archived, replaced with the <a href="https://github.com/wmde/wikibase-release-pipeline">wikibase-release-pipeline</a>). It was nice to have a system that was ready to deploy with minimal configuration, we used version 1.31 for many years and it worked fairly well. Like all system maintenance eventually you need to upgrade servers and I needed to now move our Wikibase to a new server and upgrade to use version 1.39 in the process. I found it was sort of a challenging experience, so this post outlines the process. If you use the Docker version of Wikibase and need to migrate to a new server, this guide will show you step-by-step how to do that.
+			</p>
+			<h3 class="is-size-3">1. Get your data ready</h3>
+			<br/>
+			
+			<p>We need to get the data out of our old Wikibase to import to the new server. In Wikibase that means basically two types of data, the SQL database data and the RDF triple store data. The triple store (Blazegraph) data was the more challenging of the two. At first I did not even think that I needed to export this data because I thought that Wikibase could be told to build it again, since all the data and its history of changes is stored in the database. But while it can regenerate the RDF data for a limited number of previous days you cannot tell it to “start from the beginning.” I also found old documentation that you should be able to copy the “JNL” journal file from one installation to another. This turned out incorrect too, or at least I could not get it working, so it took the third attempt, exporting the data as RDF and importing to the new installation to get it working. This might be common knowledge, or obvious to someone steeped in how the software works, but for me it was not obvious and was a pretty frustrating experience. 
+			</p>
+			<p>Let’s prepare the database data. <br>On our old machine we are going to run the command:
+				<pre><code>docker ps</code></pre>
+			</p>
+			<p>This gets the name of our container running the database, we are then going to run the command:
+				<pre><code>docker exec wikibase-docker-new_mysql_1 mysqldump -u USERNAME -pPASSWORD > backup.sql</code></pre>
+
+			</p>
+			<p>Here `wikibase-docker-new_mysql_1` is the name of the container on my old server. Of course you supply the correct username and password, which if you don’t know it will be in the docker-compose.yml file if it's the older version or the .env file for the new one.</p>
+			<p>This will result in a backup.sql file in that directory, it can be fairly large, mine was 4GB, so I gzipped it and got it over to the new server.
+			</p>
+			<p>Next is the RDF data, get the container name running your wikibase and run:
+				<pre><code>docker exec wikibase-wikibase-1 php /var/www/html/extensions/Wikibase/repo/maintenance/dumpRdf.php > backup.ttl</code></pre>
+
+			</p>
+			<p>This will dump the RDF out of the triplestore and into the file backup.ttl in the Turtle serialization format. And of course move it over to the new server.
+			</p>
+			<p>Okay we got our data ready, we need to set up Wikibase on the new server.
+			</p>
+			<h3 class="is-size-3">2. Load the data</h3>
+			<br/>
+
+			<p>The tutorial here has good steps to get started with the docker images:
+				<a href="https://www.mediawiki.org/wiki/Wikibase/Docker">https://www.mediawiki.org/wiki/Wikibase/Docker</a>
+				</p>
+			<p>We are going to clone the wikibase-release-pipeline repo and pull out the example docker compose files which are configured to run things.
+<pre><code>git clone https://github.com/wmde/wikibase-release-pipeline
+cd wikibase-release-pipeline/
+git checkout tags/wmde.15</code></pre>
+
+			</p>
+			<p>Replace wmde.15 with whatever newest version the tutorial tells you.<br>
+
+				This is the release pipeline repo, but we want the example compose files so we make a new directory and copy the things we need over to it:
+				<pre><code>mkdir ~/wikibase
+cp -r example/* ~/wikibase/
+cd ~/wikibase
+mv template.env .env</code></pre>
+
+				</p>
+			<p>This is putting it in the logged in users home directory, but you may want it to live somewhere else.
+			</p>
+			<p>We’re going to go to that new directory with the files (cd ~/wikibase/) and edit the environment file:
+				<pre><code>nano .env</code></pre>
+
+			</p>
+			<p>Follow the tutorial to populate the credentials 
+			</p>
+			<p>In this case I changed the hostnames to the public domain name of the server (base.semlab.io), WIKIBASE_HOST, changed QS_PUBLIC_SCHEME_HOST_AND_PORT, QUICKSTATEMENTS_HOST, to subdomains that run these different services, I don’t want to use port numbers in the URL so I have query.semlab.io and qs.semlab.io for the query service and quickstatments.
+			</p>
+			<p>The tutorial suggests you also change MW_ELASTIC_HOST to a hostname, but I left it as the default internal hostname because I’m not going to expose my elastic search service publicly, and not sure why you would want to.
+			</p>
+			<p>I started the system up with:
+				<pre><code>docker compose -f docker-compose.yml -f docker-compose.extra.yml up -d</code></pre>
+
+			</p>
+			<p>It takes a while on the first launch to initialize things and come up, you might need to wait a few minutes for the website to become responsive.
+			</p>
+			<p>This is also assuming you have something line NGINX or Apache running so you can go to that domain and it is routing you to the right place. I can share my NGINX config at the end.
+			</p>
+			<p>Just a note here, now that the new version is running, before you turn it off again you need to create a new item, or edit an item (which can only be done after you have loaded all the old data) before you turn it off again. Otherwise the start date is not set on the WDQS updater and it will insta quit on the next launch breaking your install. You can recover from this by setting a manual start date, but it is easier to just create an item before turning it off again. For example our Q1 item is “person” so I just created a new item at `/wiki/Special:NewItem` with the label “person.” By using the same label for Q1 as in the old data it just merges that statement in the triple store when the new data comes in, otherwise that label will hang around until you edit it again after the data is loaded. tldr; just make an item on the first run!
+			</p>
+			<p>I also want to be able to add my own configurations to the LocalSettings.php so I uncomment these lines in the docker-compose.yml in the two places it is commented out:
+				<pre><code>`- ./LocalSettings.php:/var/www/html/LocalSettings.d/LocalSettings.override.php`</code></pre>
+
+
+			</p>
+			<p>Then I edit the LocalSettings.php in that directory with my custom configurations
+			</p>
+			<p>For example I set:
+<pre><code>$wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['*']['createaccount'] = false;
+$wgSMTP = [ … STMP config here, I used postmarkapp.com free tier service … ]
+$wgEnableEmail = true;
+$wgEnableUserEmail = true;
+$wgEmergencyContact = 'email@address.com’;
+$wgPasswordSender = 'email@address.com';
+$wgLogos = [
+'1x' => "/w/resources/assets/wiki.png"
+];</code></pre>
+
+			</p>
+			<p>For the logo I needed to get that wiki.png on to the docker volume so I added 
+				<pre><code>- ./custom_assests/logo.png:/var/www/html/resources/assets/wiki.png</code></pre>
+
+			</p>
+			<p>To the volumes: section of docker-compose.yml I also overlay some other files I talk about later on.
+			</p>
+			<p>You would need to stop the docker containers if you wanted to change these. To stop it you would run:
+				<pre><code>docker compose -f docker-compose.yml -f docker-compose.extra.yml down</code></pre>
+			</p>
+			<p>I often run it without the -d flag when I’m doing this process so I can watch the output of the server in real time, so when you bring it back up if you leave off that -d it will just stream the output to the terminal and you can Ctrl+C when you want to shut down the containers:
+				<pre><code>docker compose -f docker-compose.yml -f docker-compose.extra.yml up</code></pre>
+
+
+			</p>
+			<p>Now we are going to load the database data. With this command:
+				<pre><code>cat your_file_name.sql | docker exec -i wikibase-mysql-1 mysql -u your_mysql_username -pyour_mysqlpassword my_wiki</code></pre>
+
+
+			</p>
+			<p>Of course change the container name and user/pass/db name to the right values.
+			</p>
+			<p>We now need to run the update script to modify our DB to match what the updated newer version of the  application expects:
+				<pre><code>docker exec -i wikibase-wikibase-1 php maintenance/update.php</code></pre>
+
+			</p>
+			<p>We are going to also reindex the search service now as well:
+				<pre><code>docker exec -i wikibase-wikibase-1 php extensions/CirrusSearch/maintenance/ForceSearchIndex.php</code></pre>
+			</p>
+			<p>And with that you should have a Wikibase with all your old data loaded, the problem is now the query service does not have any data. We need to import the RDF dump next.
+			</p>
+			<p>We apparently can’t just load the dump file we created, we have to “munge” it first, basically to massage the data into a format that is expected by the system. I THINK! I just gleaned this info from various threads and issues and from this helpful <a href="https://addshore.com/2019/11/changing-the-concept-uri-of-an-existing-wikibase-with-data/">2019 personal blog post</a> from a Wikibase developer.
+			</p>
+			<p>They explain we need to do this to modify the dump to conform to how the data should be represented, you could also change the concept URIs being used if desired (the reason behind that blog post) but for us the URIs are going to be the same: base.semlab.io so we don’t need to change them, just get it ready to load to the new graph.
+			</p>
+			<p>Copy it into the WDQS service container:
+				<pre><code>docker cp ./backup.ttl wikibase-wdqs-1:/tmp/backup.ttl</code></pre>
+			</p>
+			<p>I’m going to go into the container and run it:
+				<pre><code>docker exec -it wikibase-wdqs-1 /bin/bash
+./munge.sh -f /tmp/backup.ttl -- --conceptUri http://base.semlab.io</code></pre>
+			</p>
+			<p>At first this wasn’t working for me, the munge.sh script has changed a bit since that blog post but iI did get the command above to create a `wikidump-000000001.ttl.gz` file in the same directory, but you must provide a conceptUri though that is not listed in the command line usage (learned that here <a href="https://phabricator.wikimedia.org/T245352">https://phabricator.wikimedia.org/T245352</a>)
+			</p>
+			<p>I also experimented with changing the conceptUri, say you were moving domains (I didn’t want to use base.semlab.io but somethingelse.semlab.io), and it did not work, the munge.sh script would error out. But if I ran it with the old concept uri value and then unzipped the results wikidump-xxxxxx.ttl.gz file and modified the name spaces at the start of the dump file it reflected that change once loaded. I didn’t need to change my conceptUri for this migration, but it seems possible via this editing of the ttl file directly to do it.
+			</p>
+			<p>And finally, still inside the container we load the data with the script:
+				<pre><code>./loadData.sh -n wdq -d /wdqs/</code></pre>
+			</p>
+			<p>To be clear, the files it is loading are sitting in the same directory (called wikidump-xxxxxx.ttl.gz, it is looking for these files)
+			</p>
+			<p>You should now be able to write SPARQL queries in your query service front end and when you change things in the Wikibase it is updated there as well.
+			</p>
+			<p>There are various other little things to configure of course, one thing I would point out specifically though is if you had quick statements before running you would need to add the Oauth token and secret to the docker-compose.extra.yml file at the bottom.
+			</p>
+			<p>And that’s it. You should have a fully functional Wikibase running with all your old data. The section below details some issues I ran into which depending on your circumstance may not be a problem for you, but I wanted to document when things went wrong for us and how it was fixed.
+			</p>
+			<h3 class="is-size-3">Building a ship in a bottle
+			</h3>
+			<br/>
+
+			<p>Easy, right? The nice thing about Docker is that it is super simple to get running, but if you have any sort of problem then it gets a bit messy. Imagine building a model ship in a bottle, <a href="https://www.youtube.com/watch?v=7zAtvrfiw8Y">I’ve seen in videos</a> the way they get the ship into the bottle is by having the sails collapsed so it fits, and then once in they raise them up. I kind of think of it the same way, you can get the software running in the Docker bottle no problem, but it's in the bottle, and now if something needs to be fixed you have the extra layer between you and the problem. Unfortunately I did still have some problems after all this. I originally set in my LocalSettings.php file this setting:
+				<pre><code>$wgServer  = "https://base.semlab.io";</code></pre>
+			</p>
+			<p>This just tells the software what its domain is. The problems I ran into with setting this flag manifested in a number of places. Some special pages would get caught in an infinite redirect such as the `/wiki/Special:OAuthConsumerRegistration` page. Also my main issue is that it builds the URI for everything based off of this setting, so It was creating HTTPS URIs (https://base.semlab.io/entity/) when all the old data was using HTTP URIs, and I kind of still wanted to use HTTP URIs since that’s what we have been publishing for the last five years. The problem is it seems the software builds the URIs off of the $wgServer value, so it was building HTTPS URIs, and the query service updater did not like that, it would reject any changes saying it had an invalid URI. And on top of everything I could not get the QuickStatments service Oauth flow to work, this has been extremely fickle on the old server and was a headache to finally get working, so I knew all the pitfalls, but even then I could not get it running without errors. 
+			</p>
+			<p>In previous versions there was a setting called $wgWBRepoSettings['conceptBaseUri'] which let you manually set the URI to use, but it has been deprecated, so regardless of the other two problems the wdqs-updater is still broken.
+			</p>
+			<p>All of these problems went away, if I simply removed the $wgServer setting. Great, no problem then! I already have my NGINX setup to redirect anyone landing on a HTTP page to the HTTPS version. But we found out quickly that not setting $wgServer breaks the front-end client. When you load the page it's being loaded over HTTPS but all the javascript is being configured to reach out to the /w/api.php endpoints over HTTP. So modern browsers will not allow HTTPS loaded javascript to talk to HTTP API endpoints. Again, for someone who knows this software inside and out there is probably an obvious fix for this, some simple setting or something, but digging around I could not find anything much. I tried a lot of things including setting the $wgServer to “//base.semlab.io” but the front end still insisted on using the HTTP endpoints in the javascript. 
+			</p>
+			<p>I finally just said fine, I’ll force it to serve the client javascript configured to use the HTTPS endpoints by editing the source code. I made changes to the `ClientHtml.php`,  `mediawiki.loader.js` and `WikibaseClient.default.php` files and overlaid them on the docker image like so:
+				<pre><code>-./custom_assests/WikibaseClient.default.php:/var/www/html/w/extensions/Wikibase/client/config/WikibaseClient.default.php
+					- ./custom_assests/ClientHtml.php:/var/www/html/includes/ResourceLoader/ClientHtml.php
+					- ./custom_assests/mediawiki.loader.js:/var/www/html/resources/src/startup/mediawiki.loader.js</code></pre>
+
+			</p>
+			<p>Basically changing those files to hard code it to use “https://base.semlab.io” in all its settings being sent to the client. A bit hackish but it works.</p>
+			<h3 class="is-size-3">Appendix</h3>
+			<br/>
+			
+			<p>NGINX configuration files:<br>This is what my NGINX config file looks like, I decided to use subdomains, but you could use paths if you wanted, for example our query service interface lives at query.semlab.io but you could have it at base.semlab.io/query/ or something, since I used subdomains I have a NGINX file for each subdomain that are pretty much the same with changes for the subdomain name and what exposed port it is running locally.
+				<pre><code>server {
+        
+
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html index.php;
+
+	server_name base.semlab.io;
+
+	location / {
+			proxy_pass  http://localhost:8181/;                
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+
+
+
+	listen 80;
+	listen [::]:80;
+			
+			
+}
+			</code></pre>
+
+			</p>
+			<p>This is the basic config file I started out with then use let’s encrypt’s certbot to enable SSL and HTTPS. The important part is the prox_pass sending the request to the localhost with 8181 being the port configured to be exposed in docker-compose.yml file.
+			</p>
+
+
+		</div>
+
+
+
+    </div>
+	

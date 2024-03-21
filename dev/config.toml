@@ -1215,6 +1215,15 @@ label = "Blog"
 url = "https://medium.com/@thisismattmiller/variants-comparing-lcsh-alt-labels-and-wikipedia-redirects-1a1bc926cc00"
 
 
+[[params.mystuff.wikipediawikidatawikibase.things]]
+label = "Migrating Your Docker Wikibase"
+desc = "How-to migrate a Docker Wikibase to a new server, step-by-step tutorial"
+date = "2024-03-20"
+[[params.mystuff.wikipediawikidatawikibase.things.links]]
+label = "Read"
+url = "https://thisismattmiller.com/post/migrating-your-docker-wikibase/"
+
+
 
 
 

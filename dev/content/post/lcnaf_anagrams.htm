@@ -1,0 +1,838 @@
++++
+title = "LCNAF Anagrams"
+date = "2024-04-01"
+description = "Names Names Names Names."
+
++++
+
+  <style type="text/css">
+  	
+  	p{
+  		font-size: 1.5em;
+  		margin-bottom: 1.1em;
+  	}
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+
+  </style>
+  <div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">LCNAF Anagrams</h1>
+	      	<h2 class="is-size-5 has-text-grey">Apr 1 2024</h2>
+
+
+	    </div>
+		<div class="column is-one-half" style="text-align:left;">
+	      	
+
+		</div>
+
+	</div>
+	<div class="columns">
+
+		<div class="column">
+			<p>
+			<a href="https://id.loc.gov/authorities/names.html">LCNAF (Library of Congress Authority File)</a> has over eleven million names of things ranging from people to geographic locations. I look at this data all the time, and it must have rotted my brain because I started thinking how there were probably a lot of names that if rearranged would spell other names in the file. Truns out there are—in just the personal and corporate categories alone there are over 4000 sets of 5 or more names that all use the same letters to spell themselves. So I pulled those out and made this. Click the button to see another, click the name to view its NAF record. <a href="https://github.com/thisismattmiller/lcnaf-anagrams">Source code/data</a>. <a href="https://thisismattmiller.github.io/lcnaf-anagrams/">View in its own window.</a>
+			</p>
+			<p>I really like these sets of anagrammed names because as you read them your brain works really hard to make them relate to each other. You think they are going to rhyme, or find some other rhythm between them but usually there isn’t. But they still feel related subconsciously through their shared N-grams. Combined with the standardization of using inverted order (last name, first) makes reading the list out loud slightly discombobulating. </p>
+			<hr/>
+			<button id="more">Show Another</button>
+			<svg
+			  id="words"
+			  height="100%"
+			  viewbox="0 0 100 100"
+			  xmlns="http://www.w3.org/2000/svg"
+			></svg>
+		
+			<style>
+			  @import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+			  #words {
+				width: 100%;
+				fill: hsla(200, 0%, 0%, 0.7);
+				height: 600px;
+			  }
+			  button{
+				background-color:transparent;
+				font-family: "Space Mono", monospace;
+				border:solid 1px hsla(200, 0%, 0%, 0.7);
+				border-color: hsla(200, 0%, 0%, 0.7);
+				color: hsla(200, 0%, 0%, 0.7);
+				cursor:pointer;
+				float:right;
+				  
+			  }
+			  button:hover{
+				font-weight:bold;
+			  }
+			  button:disabled,
+			  button[disabled]{
+				opacity: 0.2;
+				font-weight:normal !important;
+				background-color:whitesmoke;
+				cursor: not-allowed;
+			  }
+			  
+			  
+			  #words text {
+				font-family: "Space Mono", monospace;
+				fill: hsla(200, 0%, 0%, 0.7);
+				display: block;
+				white-space: nowrap;
+				transform-origin: 0px 0px;
+				transition-property: opacity;
+				opacity: 0;
+				cursor: pointer;
+			  }
+			  #words line {
+				transition-property: opacity;
+				opacity: 0;
+			  }
+			</style>
+		
+			<script>
+			  let buttonAnagrams = [
+				"Hearth Swoon",
+				"Another Hows",
+				"Another Show",
+				"Anther Whoso",
+				"Hearts Nohow",
+				"Haters Nohow",
+				"Earths Nohow",
+				"Wreath Shoon",
+				"Wheats Honor",
+				"Swathe Honor",
+				"Wheat Honors",
+				"Antre Whoosh",
+				"Whoa Shorten",
+				"Whoa Thrones",
+				"Whoa Hornets",
+				"Thaw Onshore",
+				"What Onshore",
+				"A Hone Throws",
+				"A Hone Worths",
+				"A Shorten Who",
+				"A Shorten How",
+				"A Thrones Who",
+				"A Thrones How",
+				"A Hornets Who",
+				"A Hornets How",
+				"A Hornet Hows",
+				"A Hornet Show",
+				"A Throne Hows",
+				"A Throne Show",
+				"A Shone Throw",
+				"A Shone Worth",
+				"A Shone Wroth",
+				"A Hones Throw",
+				"A Hones Worth",
+				"A Hones Wroth",
+				"A Throe Shown",
+				"A Other Shown",
+				"A Hose Thrown",
+				"A Hoes Thrown",
+				"A Shoe Thrown",
+				"A Whose North",
+				"A Whose Thorn",
+				"A Threw Shoon",
+				"A Thews Honor",
+				"A Whets Honor",
+				"A Whet Honors",
+				"A Thew Honors",
+				"A Rent Whoosh",
+				"A Tern Whoosh",
+				"Rehash No Two",
+				"Rehash No Wot",
+				"Rehash No Tow",
+				"Rehash On Two",
+				"Rehash On Wot",
+				"Rehash On Tow",
+				"Rehash Not Ow",
+				"Rehash Ton Ow",
+				"Rehash Won To",
+				"Rehash Now To",
+				"Rehash Own To",
+				"Hearths No Ow",
+				"Hearths On Ow",
+				"Hearth No Sow",
+				"Hearth On Sow",
+				"Hearth Nos Ow",
+				"Hearth Son Ow",
+				"Hearth Won So",
+				"Hearth Now So",
+				"Hearth Own So",
+				"Sheath No Row",
+				"Sheath On Row",
+				"Sheath Nor Ow",
+				"Sheath Won Or",
+				"Sheath Now Or",
+				"Sheath Own Or",
+				"Heaths No Row",
+				"Heaths On Row",
+				"Heaths Nor Ow",
+				"Heaths Won Or",
+				"Heaths Now Or",
+				"Heaths Own Or",
+				"Heath No Rows",
+				"Heath On Rows",
+				"Heath Nor Sow",
+				"Heath Worn So",
+				"Heath Nos Row",
+				"Heath Son Row",
+				"Heath Snow Or",
+				"Heath Owns Or",
+				"Heath Sown Or",
+				"Heath Nows Or",
+				"Anthers Ho Ow",
+				"Anthers Oh Ow",
+				"Anther Ho Sow",
+				"Anther Oh Sow",
+				"Anther Ohs Ow",
+				"Anther Hos Ow",
+				"Anther Who So",
+				"Anther How So",
+				"Ashen Ho Trow",
+				"Ashen Ho Wort",
+				"Ashen Oh Trow",
+				"Ashen Oh Wort",
+				"Ashen Rho Two",
+				"Ashen Rho Wot",
+				"Ashen Rho Tow",
+				"Ashen Hot Row",
+				"Ashen Tho Row",
+				"Ashen Who Rot",
+				"Ashen Who Tor",
+				"Ashen Who Ort",
+				"Ashen How Rot",
+				"Ashen How Tor",
+				"Ashen How Ort",
+				"Thanes Ho Row",
+				"Thanes Oh Row",
+				"Thanes Rho Ow",
+				"Thanes Who Or",
+				"Thanes How Or",
+				"Hasten Ho Row",
+				"Hasten Oh Row",
+				"Hasten Rho Ow",
+				"Hasten Who Or",
+				"Hasten How Or",
+				"Neath Ho Rows",
+				"Neath Oh Rows",
+				"Neath Rho Sow",
+				"Neath Rhos Ow",
+				"Neath Ohs Row",
+				"Neath Hos Row",
+				"Neath Hows Or",
+				"Neath Show Or",
+				"Thane Ho Rows",
+				"Thane Oh Rows",
+				"Thane Rho Sow",
+				"Thane Rhos Ow",
+				"Thane Ohs Row",
+				"Thane Hos Row",
+				"Thane Hows Or",
+				"Thane Show Or",
+				"Ashore Nth Ow",
+				"Hoarse Nth Ow",
+				"Hare Hon Wost",
+				"Hare Hon Tows",
+				"Hare Hon Twos",
+				"Hare Hon Stow",
+				"Hare Nosh Two",
+				"Hare Nosh Wot",
+				"Hare Nosh Tow",
+				"Hare Hons Two",
+				"Hare Hons Wot",
+				"Hare Hons Tow",
+				"Hare Shown To",
+				"Hare Nth Woos",
+				"Hare Ho Towns",
+				"Hare Ho Wonts",
+				"Hare Oh Towns",
+				"Hare Oh Wonts",
+				"Hare Ohs Town",
+				"Hare Ohs Wont",
+				"Hare Hos Town",
+				"Hare Hos Wont",
+				"Hare Hots Won",
+				"Hare Hots Now",
+				"Hare Hots Own",
+				"Hare Host Won",
+				"Hare Host Now",
+				"Hare Host Own",
+				"Hare Shot Won",
+				"Hare Shot Now",
+				"Hare Shot Own",
+				"Hare Hows Not",
+				"Hare Hows Ton",
+				"Hare Show Not",
+				"Hare Show Ton",
+				"Hare Hot Snow",
+				"Hare Hot Owns",
+				"Hare Hot Sown",
+				"Hare Hot Nows",
+				"Hare Tho Snow",
+				"Hare Tho Owns",
+				"Hare Tho Sown",
+				"Hare Tho Nows",
+				"Hare Who Tons",
+				"Hare Who Snot",
+				"Hare How Tons",
+				"Hare How Snot",
+				"Hear Hon Wost",
+				"Hear Hon Tows",
+				"Hear Hon Twos",
+				"Hear Hon Stow",
+				"Hear Nosh Two",
+				"Hear Nosh Wot",
+				"Hear Nosh Tow",
+				"Hear Hons Two",
+				"Hear Hons Wot",
+				"Hear Hons Tow",
+				"Hear Shown To",
+				"Hear Nth Woos",
+				"Hear Ho Towns",
+				"Hear Ho Wonts",
+				"Hear Oh Towns",
+				"Hear Oh Wonts",
+				"Hear Ohs Town",
+				"Hear Ohs Wont",
+				"Hear Hos Town",
+				"Hear Hos Wont",
+				"Hear Hots Won",
+				"Hear Hots Now",
+				"Hear Hots Own",
+				"Hear Host Won",
+				"Hear Host Now",
+				"Hear Host Own",
+				"Hear Shot Won",
+				"Hear Shot Now",
+				"Hear Shot Own",
+				"Hear Hows Not",
+				"Hear Hows Ton",
+				"Hear Show Not",
+				"Hear Show Ton",
+				"Hear Hot Snow",
+				"Hear Hot Owns",
+				"Hear Hot Sown",
+				"Hear Hot Nows",
+				"Hear Tho Snow",
+				"Hear Tho Owns",
+				"Hear Tho Sown",
+				"Hear Tho Nows",
+				"Hear Who Tons",
+				"Hear Who Snot",
+				"Hear How Tons",
+				"Hear How Snot",
+				"Rhea Hon Wost",
+				"Rhea Hon Tows",
+				"Rhea Hon Twos",
+				"Rhea Hon Stow",
+				"Rhea Nosh Two",
+				"Rhea Nosh Wot",
+				"Rhea Nosh Tow",
+				"Rhea Hons Two",
+				"Rhea Hons Wot",
+				"Rhea Hons Tow",
+				"Rhea Shown To",
+				"Rhea Nth Woos",
+				"Rhea Ho Towns",
+				"Rhea Ho Wonts",
+				"Rhea Oh Towns",
+				"Rhea Oh Wonts",
+				"Rhea Ohs Town",
+				"Rhea Ohs Wont",
+				"Rhea Hos Town",
+				"Rhea Hos Wont",
+				"Rhea Hots Won",
+				"Rhea Hots Now",
+				"Rhea Hots Own",
+				"Rhea Host Won",
+				"Rhea Host Now",
+				"Rhea Host Own",
+				"Rhea Shot Won",
+				"Rhea Shot Now",
+				"Rhea Shot Own",
+				"Rhea Hows Not",
+				"Rhea Hows Ton",
+				"Rhea Show Not",
+				"Rhea Show Ton",
+				"Rhea Hot Snow",
+				"Rhea Hot Owns",
+				"Rhea Hot Sown",
+				"Rhea Hot Nows",
+				"Rhea Tho Snow",
+				"Rhea Tho Owns",
+				"Rhea Tho Sown",
+				"Rhea Tho Nows",
+				"Rhea Who Tons",
+				"Rhea Who Snot",
+				"Rhea How Tons",
+				"Rhea How Snot",
+				"Hears Hon Two",
+				"Hears Hon Wot",
+				"Hears Hon Tow",
+				"Hears Nth Woo",
+				"Hears Ho Town",
+				"Hears Ho Wont",
+				"Hears Oh Town",
+				"Hears Oh Wont",
+				"Hears Hot Won",
+				"Hears Hot Now",
+				"Hears Hot Own",
+				"Hears Tho Won",
+				"Hears Tho Now",
+				"Hears Tho Own",
+				"Hears Who Not",
+				"Hears Who Ton",
+				"Hears How Not",
+				"Hears How Ton",
+				"Rheas Hon Two",
+				"Rheas Hon Wot",
+				"Rheas Hon Tow",
+				"Rheas Nth Woo",
+				"Rheas Ho Town",
+				"Rheas Ho Wont",
+				"Rheas Oh Town",
+				"Rheas Oh Wont",
+				"Rheas Hot Won",
+				"Rheas Hot Now",
+				"Rheas Hot Own",
+				"Rheas Tho Won",
+				"Rheas Tho Now",
+				"Rheas Tho Own",
+				"Rheas Who Not",
+				"Rheas Who Ton",
+				"Rheas How Not",
+				"Rheas How Ton",
+				"Share Hon Two",
+				"Share Hon Wot",
+				"Share Hon Tow",
+				"Share Nth Woo",
+				"Share Ho Town",
+				"Share Ho Wont",
+				"Share Oh Town",
+				"Share Oh Wont",
+				"Share Hot Won",
+				"Share Hot Now",
+				"Share Hot Own",
+				"Share Tho Won",
+				"Share Tho Now",
+				"Share Tho Own",
+				"Share Who Not",
+				"Share Who Ton",
+				"Share How Not",
+				"Share How Ton",
+				"Hares Hon Two",
+				"Hares Hon Wot",
+				"Hares Hon Tow",
+				"Hares Nth Woo",
+				"Hares Ho Town",
+				"Hares Ho Wont",
+				"Hares Oh Town",
+				"Hares Oh Wont",
+				"Hares Hot Won",
+				"Hares Hot Now",
+				"Hares Hot Own",
+				"Hares Tho Won",
+				"Hares Tho Now",
+				"Hares Tho Own",
+				"Hares Who Not",
+				"Hares Who Ton",
+				"Hares How Not",
+				"Hares How Ton",
+				"Shear Hon Two",
+				"Shear Hon Wot",
+				"Shear Hon Tow",
+				"Shear Nth Woo",
+				"Shear Ho Town",
+				"Shear Ho Wont",
+				"Shear Oh Town",
+				"Shear Oh Wont",
+				"Shear Hot Won",
+				"Shear Hot Now",
+				"Shear Hot Own",
+				"Shear Tho Won",
+				"Shear Tho Now",
+				"Shear Tho Own",
+				"Shear Who Not",
+				"Shear Who Ton",
+				"Shear How Not",
+				"Shear How Ton",
+				"Hearts Hon Ow",
+				"Hearts Ho Won",
+				"Hearts Ho Now",
+				"Hearts Ho Own",
+				"Hearts Oh Won",
+				"Hearts Oh Now",
+				"Hearts Oh Own",
+				"Hearts Who No",
+				"Hearts Who On",
+				"Hearts How No",
+				"Hearts How On",
+				"Haters Hon Ow",
+				"Haters Ho Won",
+				"Haters Ho Now",
+				"Haters Ho Own",
+				"Haters Oh Won",
+				"Haters Oh Now",
+				"Haters Oh Own",
+				"Haters Who No",
+				"Haters Who On",
+				"Haters How No",
+				"Haters How On",
+				"Earths Hon Ow",
+				"Earths Ho Won",
+				"Earths Ho Now",
+				"Earths Ho Own",
+				"Earths Oh Won",
+				"Earths Oh Now",
+				"Earths Oh Own",
+				"Earths Who No",
+				"Earths Who On",
+				"Earths How No",
+				"Earths How On",
+				"Wreaths Ho No",
+				"Wreaths Ho On",
+				"Wreaths Oh No",
+				"Wreaths Oh On",
+				"Rewash Hon To",
+				"Rewash Ho Not",
+				"Rewash Ho Ton",
+				"Rewash Oh Not",
+				"Rewash Oh Ton",
+				"Rewash Hot No",
+				"Rewash Hot On",
+				"Rewash Tho No",
+				"Rewash Tho On",
+				"Washer Hon To",
+				"Washer Ho Not",
+				"Washer Ho Ton",
+				"Washer Oh Not",
+				"Washer Oh Ton",
+				"Washer Hot No",
+				"Washer Hot On",
+				"Washer Tho No",
+				"Washer Tho On",
+				"Hawser Hon To",
+				"Hawser Ho Not",
+				"Hawser Ho Ton",
+				"Hawser Oh Not",
+				"Hawser Oh Ton",
+				"Hawser Hot No",
+				"Hawser Hot On",
+				"Hawser Tho No",
+				"Hawser Tho On",
+				"Heart Hon Sow",
+				"Heart Nosh Ow",
+				"Heart Hons Ow",
+				"Heart Ho Snow",
+				"Heart Ho Owns",
+				"Heart Ho Sown",
+				"Heart Ho Nows",
+				"Heart Oh Snow",
+				"Heart Oh Owns",
+				"Heart Oh Sown",
+				"Heart Oh Nows",
+				"Heart Ohs Won",
+				"Heart Ohs Now",
+				"Heart Ohs Own",
+				"Heart Hos Won",
+				"Heart Hos Now",
+				"Heart Hos Own",
+				"Heart Hows No",
+				"Heart Hows On",
+				"Heart Show No",
+				"Heart Show On",
+				"Heart Who Nos",
+				"Heart Who Son",
+				"Heart How Nos",
+				"Heart How Son",
+				"Earth Hon Sow",
+				"Earth Nosh Ow",
+				"Earth Hons Ow",
+				"Earth Ho Snow",
+				"Earth Ho Owns",
+				"Earth Ho Sown",
+				"Earth Ho Nows",
+				"Earth Oh Snow",
+				"Earth Oh Owns",
+				"Earth Oh Sown",
+				"Earth Oh Nows",
+				"Earth Ohs Won",
+				"Earth Ohs Now",
+				"Earth Ohs Own",
+				"Earth Hos Won",
+				"Earth Hos Now",
+				"Earth Hos Own",
+				"Earth Hows No",
+				"Earth Hows On",
+				"Earth Show No",
+				"Earth Show On",
+				"Earth Who Nos",
+				"Earth Who Son",
+				"Earth How Nos",
+				"Earth How Son",
+				"Hater Hon Sow",
+				"Hater Nosh Ow",
+				"Hater Hons Ow",
+				"Hater Ho Snow",
+				"Hater Ho Owns",
+				"Hater Ho Sown",
+				"Hater Ho Nows",
+				"Hater Oh Snow",
+				"Hater Oh Owns",
+				"Hater Oh Sown",
+				"Hater Oh Nows",
+				"Hater Ohs Won",
+				"Hater Ohs Now",
+				"Hater Ohs Own",
+				"Hater Hos Won",
+				"Hater Hos Now",
+				"Hater Hos Own",
+				"Hater Hows No",
+				"Hater Hows On",
+			  ];
+		
+			  async function build(names) {
+				let svgNS = "http://www.w3.org/2000/svg";
+				let namesSvg = document.querySelector("#words");
+		
+				namesSvg.innerHTML = "";
+		
+				let startOffset = 0;
+				let lineOpacity = 0.3;
+		
+				let letterWidth = parseInt(namesSvg.clientWidth / 100);
+		
+				if (namesSvg.clientWidth > 1000) {
+				  letterWidth = parseInt(namesSvg.clientWidth / 150);
+				}
+				if (namesSvg.clientWidth > 2000) {
+				  letterWidth = parseInt(namesSvg.clientWidth / 200);
+				}
+
+				if (namesSvg.clientWidth < 500) {
+				  letterWidth = parseInt(namesSvg.clientWidth / 55);
+				  startOffset = 5;
+				  lineOpacity = 0.5;
+				}
+		
+				let top = letterWidth + startOffset;
+		
+				let left = 0;
+				let previousName = null;
+		
+				for (let [namesIdx, name] of Object.entries(names)) {
+				  if (parseFloat(namesSvg.style.height) < parseFloat(top) - 20) {
+					namesSvg.style.height = parseFloat(top) + 100 + "px";
+				  }
+		
+				  //           if (namesIdx>0){
+				  //             await new Promise(r => setTimeout(r, 2000));
+				  //           }
+		
+				  for (let el of namesSvg.querySelectorAll(".word")) {
+					el.remove();
+				  }
+		
+				  let positions = [];
+		
+				  let letterHeight = 0;
+		
+				  let baseLetterDelay = 500;
+		
+				  for (const [idx, l] of Object.entries(name.full)) {
+					left = left + letterWidth / 1.75;
+		
+					let svgLetter = document.createElementNS(svgNS, "text");
+					let textNode = document.createTextNode(l);
+					svgLetter.appendChild(textNode);
+		
+					svgLetter.innerHTML = l;
+					svgLetter.style.fontSize = letterWidth + "px";
+					svgLetter.style.transitionDelay = baseLetterDelay + idx * 50 + "ms";
+					svgLetter.setAttribute("data-lccn", name.lccn);
+					svgLetter.setAttribute("x", left);
+					svgLetter.setAttribute("y", top);
+					svgLetter.addEventListener("click", (e) => {
+					  window.open(
+						"https://id.loc.gov/authorities/names/" + e.target.dataset.lccn,
+						"_blank"
+					  );
+					});
+		
+					namesSvg.appendChild(svgLetter);
+					window.setTimeout(() => {
+					  svgLetter.style.opacity = 1;
+					});
+					letterHeight = svgLetter.clientHeight;
+		
+					console.log(letterWidth);
+		
+					positions.push({
+					  idx: parseInt(idx),
+					  l: name.flat[parseInt(idx)],
+					  x: left + letterWidth / 4,
+					  y: top + 0.5,
+					});
+				  }
+				  top = top + letterWidth + 6;
+				  left = 0;
+		
+				  previousName = name;
+		
+				  if (names[parseInt(namesIdx) + 1]) {
+					let nextFlat = names[parseInt(namesIdx) + 1].flat;
+		
+					let nextPositions = [];
+		
+					let nextLeft = 0;
+		
+					for (const [idx, l] of Object.entries(nextFlat)) {
+					  nextLeft = nextLeft + letterWidth / 1.75;
+					  if (l.match(/[a-z]/)) {
+						nextPositions.push({
+						  l: l,
+						  x: nextLeft,
+						});
+					  }
+					}
+					console.log(nextPositions);
+		
+					for (let nP of nextPositions) {
+					  console.log("looking to match to next lettter:", nP.l, "@", nP.x);
+					  for (let p of positions) {
+						if (p.x2) {
+						  console.log("found already");
+						  continue;
+						}
+		
+						if (nP.l == p.l) {
+						  console.log("Matched to current letter @", p.x);
+						  p.x2 = nP.x + letterWidth / 4;
+						  break;
+						}
+					  }
+					}
+		
+					//             for (nl of names[parseInt(namesIdx)+1]){
+					//               console.log(nl)
+					//             }
+		
+					console.log("NEXT NAME IS", names[parseInt(namesIdx) + 1]);
+					console.log(positions);
+		
+					await new Promise((r) =>
+					  setTimeout(r, previousName.full.length * 50)
+					);
+		
+					let baseLineDelay = 500;
+					for (let [idx, p] of Object.entries(positions)) {
+					  if (p.x2) {
+						let line = document.createElementNS(svgNS, "line");
+						line.setAttribute("x1", p.x);
+						line.setAttribute("y1", p.y);
+						line.setAttribute("x2", p.x2);
+						line.setAttribute("y2", top - letterWidth / 1.5);
+						line.setAttribute("stroke", "black");
+						line.setAttribute("stroke-width", "0.1");
+						line.setAttribute("stroke-dasharray", "0.2");
+						// line.style.opacity = 0;
+						line.style.transitionDelay = baseLineDelay + idx * 50 + "ms";
+		
+						namesSvg.appendChild(line);
+						window.setTimeout(() => {
+						  line.style.opacity = lineOpacity;
+						});
+					  }
+					}
+				  }
+				}
+			  }
+		
+			  async function download() {
+				try {
+				  let req = await fetch(
+					"https://thisismattmiller.github.io/lcnaf-anagrams/lcnaf_anagrams.json"
+				  );
+				  let data = await req.json();
+				  return data;
+				} catch {
+				  alert(
+					"Error downloading anagram data from: https://github.com/thisismattmiller/lcnaf-anagrams"
+				  );
+				  return false;
+				}
+			  }
+		
+			  async function init() {
+				let data = await download();
+				let showAnother = 0;
+				// let longest = []
+				// for (let x of data){
+				//   if (x.length >= longest.length){
+				//     longest = x
+				//   }
+				// }
+		
+				let random = data[~~(Math.random() * data.length)];
+		
+				document.querySelector("#more").disabled = true;
+		
+				window.setTimeout(() => {
+				  document.querySelector("#more").disabled = false;
+				}, random.length * 800);
+		
+				build(random);
+		
+				document.querySelector("#more").addEventListener("click", (e) => {
+				  let random = data[~~(Math.random() * data.length)];
+		
+				  e.target.disabled = true;
+		
+				  window.setTimeout(() => {
+					e.target.disabled = false;
+				  }, random.length * 800);
+		
+				  build(random);
+				  showAnother++;
+				  if (showAnother > 2) {
+					document.querySelector("#more").innerText =
+					  buttonAnagrams[~~(Math.random() * buttonAnagrams.length)];
+				  }
+				});
+			  }
+		
+			  // build(names)
+		
+			  init();
+			</script>
+
+
+
+
+		</div>
+
+
+
+    </div>
+	

@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://thisismattmiller.com/</loc>
-    <lastmod>2024-03-20T00:00:00+00:00</lastmod>
+    <loc>https://thisismattmiller.com/post/lcnaf-anagrams/</loc>
+    <lastmod>2024-04-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://thisismattmiller.com/post/migrating-your-docker-wikibase/</loc>
-    <lastmod>2024-03-20T00:00:00+00:00</lastmod>
+    <loc>https://thisismattmiller.com/</loc>
+    <lastmod>2024-04-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/post/</loc>
+    <lastmod>2024-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thisismattmiller.com/post/migrating-your-docker-wikibase/</loc>
     <lastmod>2024-03-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/post/using-gpt-on-library-collections/</loc>

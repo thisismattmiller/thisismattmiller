@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LCNAF Anagrams</title>
+      <link>https://thisismattmiller.com/post/lcnaf-anagrams/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/lcnaf-anagrams/</guid>
+      <description>LCNAF Anagrams Apr 1 2024 LCNAF (Library of Congress Authority File) has over eleven million names of things ranging from people to geographic locations. I look at this data all the time, and it must have rotted my brain because I started thinking how there were probably a lot of names that if rearranged would spell other names in the file. Truns out there are—in just the personal and corporate categories alone there are over 4000 sets of 5 or more names that all use the same letters to spell themselves.</description>
+    </item>
+    
     <item>
       <title>Migrating Your Docker Wikibase</title>
       <link>https://thisismattmiller.com/post/migrating-your-docker-wikibase/</link>

@@ -13,13 +13,13 @@
 <meta name="MobileOptimized" content="320" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="description" content="Names Names Names Names." />
+<meta name="description" content="Automatic transcription of Alan Lomax’s Midwest 1938 Folk Song Collection using Whisper.cpp" />
 
 <meta name="keywords" content="">
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content="Names Names Names Names." />
+<meta property="og:description" content="Automatic transcription of Alan Lomax’s Midwest 1938 Folk Song Collection using Whisper.cpp" />
 <meta property="og:title" content="Lomax Whisper" />
 <meta property="og:site_name" content="Matt Miller" />
 <meta property="og:image" content="" />
@@ -44,9 +44,9 @@
 />
 <meta
   name="twitter:description"
-  content="Names Names Names Names."
+  content="Automatic transcription of Alan Lomax’s Midwest 1938 Folk Song Collection using Whisper.cpp"
 />
-<meta name="twitter:image:src" content="" />
+<meta name="twitter:image:src" content="https://thisismattmiller.com/img/post_lomax_presto.png" />
 <meta name="twitter:domain" content="https://thisismattmiller.com/post/lomax-whisper/" />
 
 
@@ -120,7 +120,7 @@
 
 		<div class="column is-one-half" style="text-align:left;">
 	      	<h1 class="is-size-1">Lomax &amp; Whisper.cpp</h1>
-	      	<h2 class="is-size-4 has-text-grey">Automatic transcription of Alan Lomax’s Midwest Folk Song Collection using Whisper.cpp</h2>
+	      	<h2 class="is-size-4 has-text-grey">Automatic transcription of Alan Lomax’s 1938 Midwest Folk Song Collection using Whisper.cpp</h2>
 	      		
 	      	<h2 class="is-size-5 has-text-grey">Sep 12 2024</h2>
 
@@ -167,7 +167,7 @@
 
 
 			<h2 id="lomax" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Alan Lomax Collection of Michigan and Wisconsin Recordings</h2>
-			<p>Enough about computers, let’s talk about something actually interesting, library and archive collections. This <a href="https://www.loc.gov/collections/alan-lomax-in-michigan/">Alan Lomax collection</a> from the Library of Congress is really facilitating and a good candidate for testing. It was actually commissioned by the library, they paid for Alan Lomax [https://en.wikipedia.org/wiki/Alan_Lomax] to travel around the midwest in 1938 to make recordings of regional folk songs. There are over 400 recordings in the collection, with ten different languages represented. The recordings were made using a portable Presto instantaneous disc recorder with a 12-inch turntable so the quality is not great, meaning they are realistic samples not pristine modern audio. </p>
+			<p>Enough about computers, let’s talk about something actually interesting, library and archive collections. This <a href="https://www.loc.gov/collections/alan-lomax-in-michigan/">Alan Lomax collection</a> from the Library of Congress is really facilitating and a good candidate for testing. It was actually commissioned by the library, they paid for <a href="https://en.wikipedia.org/wiki/Alan_Lomax">Alan Lomax</a> to travel around the midwest in 1938 to make recordings of regional folk songs. There are over 400 recordings in the collection, with ten different languages represented. The recordings were made using a portable Presto instantaneous disc recorder with a 12-inch turntable so the quality is not great, meaning they are realistic samples not pristine modern audio. </p>
 			<p>The beauty of the collection can really be appreciated if you read this e-book by <a href="https://blogs.loc.gov/folklife/author/tharvey/">Todd Harvey</a> called <a href="https://dust-digital.com/products/michigan-i-o-alan-lomax-and-the-1938-library-of-congress-folk-song-expedition-2">Michigan-I-O: Alan Lomax and the 1938 Library of Congress Folk-Song Expedition</a>. Harvey organizes the collection materials into a Kerouac-esque narrative of Lomax racing around the midwest meeting interesting characters and recording folk songs. And the book details the trials and tribulations of doing that in 1930’s America entails.  I really recommend it.</p>
 			<p>Other than the above I really have no experience with the collection, while I do work for the Library I don’t work with these materials or even with these materials’s metadata. I have no special access to the collection, I just used what is publicly available on loc.gov. This is really just a personal project but like most of my projects I think the library has amazing collections so I like to make use of them.</p>						
 
@@ -228,7 +228,7 @@
 	<li>So why not ask it to create tags in the mode of LCSH and then verify that they are real?</li>
 	<li>While there are LCSH headings from the original metadata on each song they are collection wide headings, general stuff like “Folk music -- Michigan” or “Field recordings” not contextual headings about the individual song. Even for an extra special collection like this that is just too much work and has not really been done in the past and will certainly not be done in the future by people, there is just too much work to do at the item level.</li>
 </ol>
-<p>So I asked it to generate the LCSH headings for each song based on the lyrics and then used the API services at id.loc.gov to validate each heading created. There was some manipulation I did for many headings like lopping “in literature” off the end of a heading to get it to match. So in the end I had only real LCSH headings. They are not necessarily valid headings though, I did not take the extra steps to validate pattern headings were used correctly or a subdivision heading wasn’t used as a topical headings. There are a lot of LCSH rules that could be applied to improve the results but I simply wanted to add more access points to each song and it was fairly successful.</p>
+<p>So I asked it to generate the LCSH headings for each song based on the lyrics and then used the API services at <a href="https://id.loc.gov">id.loc.gov</a> to validate each heading created. There was some manipulation I did for many headings like lopping “in literature” off the end of a heading to get it to match. So in the end I had only real LCSH headings. They are not necessarily valid headings though, I did not take the extra steps to validate pattern headings were used correctly or a subdivision heading wasn’t used as a topical headings. There are a lot of LCSH rules that could be applied to improve the results but I simply wanted to add more access points to each song and it was fairly successful.</p>
 			<h2 id="search" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Search Interface</h2>
 
 			<p>The web component player created the individual interface but I wanted to aggregate them all together into a collection interface. With the enrichments of English translation and added access points in addition to full text search you could really explore the collection in new ways. I built a static but searchable and facetable interface:</p>

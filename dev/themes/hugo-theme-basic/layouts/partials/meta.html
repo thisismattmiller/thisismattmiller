@@ -46,5 +46,9 @@
   content="{{ if .Description }}{{ .Description }}{{ end }}"
 />
 <meta name="twitter:image:src" content="{{ $.Param "twitterimage" }}" />
+<meta property="og:image"  content="{{ $.Param "twitterimage" }}" />
+<meta name="twitter:image"  content="{{ $.Param "twitterimage" }}" />
+
+
 <meta name="twitter:domain" content="{{ .Permalink }}" />
 {{ end }}

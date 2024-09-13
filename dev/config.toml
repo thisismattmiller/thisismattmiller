@@ -628,6 +628,15 @@ label = "View"
 url = "https://thisismattmiller.com/post/using-gpt-on-library-collections/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Lomax Folk Song Collection & Whisper Transcription"
+desc = "Automatic transcription of Alan Lomax’s Midwest Folk Song Collection using Whisper.cpp"
+date = "2024-09-12"
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/lomax-whisper/"
+
+
 
 
 
@@ -925,6 +934,15 @@ date = "2022-01-17"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
 url = "https://thisismattmiller.com/leylines"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "LCNAF Anagrams"
+desc = "If you have +11 million names, like in the LC Name Authority File, how many of them anagram to each other?"
+date = "2024-04-01"
+[[params.mystuff.creativecoding.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/lcnaf-anagrams/"
 
 
 

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lomax Whisper</title>
+      <link>https://thisismattmiller.com/post/lomax-whisper/</link>
+      <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/lomax-whisper/</guid>
+      <description>Lomax &amp;amp; Whisper.cpp Automatic transcription of Alan Lomax’s Midwest Folk Song Collection using Whisper.cpp Sep 12 2024 Sound to Data Whisper(.cpp) Alan Lomax Collection of Michigan and Wisconsin Recordings The Shape of Sound Many Models - Least Bad? Web Component Player LLM Enrichment Search Interface Mutable Metadata Now I&#39;m going to sing a song like you&#39;re dying Code Links Sound to Data This post reviews a small project applying the Whisper speech-to-text model on an early 20th century folk song collection.</description>
+    </item>
+    
     <item>
       <title>LCNAF Anagrams</title>
       <link>https://thisismattmiller.com/post/lcnaf-anagrams/</link>

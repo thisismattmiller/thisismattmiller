@@ -1,0 +1,167 @@
++++
+title = "Lomax Whisper"
+date = "2024-09-12"
+description = "Names Names Names Names."
+
++++
+
+  <style type="text/css">
+			p {
+			    font-size: 1.25em;
+			    margin-bottom: 2em;
+			}  
+	}
+ 	
+
+  </style>
+  <div class="container">
+
+
+  <div class="columns">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Lomax &amp; Whisper.cpp</h1>
+	      	<h2 class="is-size-4 has-text-grey">Automatic transcription of Alan Lomax’s Midwest Folk Song Collection using Whisper.cpp</h2>
+	      		
+	      	<h2 class="is-size-5 has-text-grey">Sep 12 2024</h2>
+
+
+	    </div>
+		<div class="column is-one-half" style="text-align:center;">
+	      		<img class="doodle-mono-right-header" src="/img/post_lomax_presto.png" title="A drawing of a portable 12 inch Presto record cutter" alt="A drawing of a portable 12 inch Presto record cutter"/>
+
+		</div>
+
+	</div>
+	<div class="columns">
+
+
+
+		<div class="column" style="">
+
+			<ol style="padding-left: 1em; font-size: 1.25em;">
+				<li><a href="#sound-to-data">Sound to Data</a></li>
+				<li><a href="#whisper">Whisper(.cpp)</a></li>
+				<li><a href="#lomax">Alan Lomax Collection of Michigan and Wisconsin Recordings</a></li>
+				<li><a href="#shape">The Shape of Sound</a></li>
+				<li><a href="#many-models">Many Models - Least Bad?</a></li>
+				<li><a href="#web-component">Web Component Player</a></li>
+				<li><a href="#llm">LLM Enrichment</a></li>
+				<li><a href="#search">Search Interface</a></li>
+				<li><a href="#mutable">Mutable Metadata</a></li>
+				<li><a href="#dying">Now I'm going to sing a song like you're dying</a></li>
+				<li><a href="#code">Code Links</a></li>
+
+			</ol>
+			
+
+
+
+
+			<h2 id="sound-to-data" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Sound to Data</h2>
+			<p>This post reviews a small project applying the Whisper speech-to-text model on an early 20th century folk song collection. But before we talk about people singing please indulge me and let’s talk about birds singing. I often use the Cornell Lab of Ornithology’s <a href="https://merlin.allaboutbirds.org/">Merlin app</a> to help identify while birding. It has a pretty good model to detect bird calls and identify what you are likely hearing. I use it all the time, and often at the <a href="https://www.nps.gov/grfa/index.htm">Great Falls park</a> (Maryland side) which is a great spot during migration and <a href="https://rosemarymosco.com/comics/bird-and-moon/four-seasons-of-bird-watching">winter</a>. Once while using the app there it kept alerting that it was hearing a Solitary sandpiper, not a rare bird or anything, but I had never ever seen one in the many years of birding there. Using this app you kind of build up a dialog of believing or not believing it, you maybe have it on in your pocket and it will think it heard something extraordinary but you are just like “sure ebird” and it was something completely ordinary.  In this case though it was correct, and around the corner was Solitary sandpiper just plopped on a log. With these tools you oscillate between being extremely impressed and completely dismissive. Had I not eventually seen the sandpiper myself I would have thought it was a potentially expected hallucination by the app. Moving into the more complex domain of speech to text we have to think about things similarly. When does the tool move from being an aid in navigating reality into a malfunction which actually makes navigating reality more challenging? For me this is the key tipping point to keep in mind as we go through the application of this tool.</p>
+			
+			<h2 id="whisper" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Whisper(.cpp)</h2>
+			<p>Whisper model is an encoder-decoder transformer model released by OpenAI in the last couple of years. The thing that draws people to it is that it has been shown to have up to 50% fewer errors and is able to deal with things like background noises and other audio issues. The main thing though is that it is available for free, as the generated model can be downloaded and run locally. Another big reason for more adoption is that is has been ported (the <a href="https://github.com/ggerganov/whisper.cpp">.cpp part</a>) to be able to run on different architectures and can even just run using CPU only (most machine learning tools needs powerful GPU capabilities) So basically is is very successful because it is a pretty good model and it can can be ran very easily.</p>
+			<p>When Whisper.cpp port came out last year I thought about running it on cultural heritage resources so I began doing initial testing in April of 2023, I got recordings running through the model and got positive results and like 90% of my other personal projects I promptly abandoned it. Since then I’ve seen places like Internet Archive start populating transcription assets in their collections (I’m assuming they are using Whisper) and I see a lot more interest in using it so I’ve updated the results (there have been more models released since 04/203) and packaged up everything to communicate it.</p>
+
+
+
+			<h2 id="lomax" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Alan Lomax Collection of Michigan and Wisconsin Recordings</h2>
+			<p>Enough about computers, let’s talk about something actually interesting, library and archive collections. This <a href="https://www.loc.gov/collections/alan-lomax-in-michigan/">Alan Lomax collection</a> from the Library of Congress is really facilitating and a good candidate for testing. It was actually commissioned by the library, they paid for Alan Lomax [https://en.wikipedia.org/wiki/Alan_Lomax] to travel around the midwest in 1938 to make recordings of regional folk songs. There are over 400 recordings in the collection, with ten different languages represented. The recordings were made using a portable Presto instantaneous disc recorder with a 12-inch turntable so the quality is not great, meaning they are realistic samples not pristine modern audio. </p>
+			<p>The beauty of the collection can really be appreciated if you read this e-book by <a href="https://blogs.loc.gov/folklife/author/tharvey/">Todd Harvey</a> called <a href="https://dust-digital.com/products/michigan-i-o-alan-lomax-and-the-1938-library-of-congress-folk-song-expedition-2">Michigan-I-O: Alan Lomax and the 1938 Library of Congress Folk-Song Expedition</a>. Harvey organizes the collection materials into a Kerouac-esque narrative of Lomax racing around the midwest meeting interesting characters and recording folk songs. And the book details the trials and tribulations of doing that in 1930’s America entails.  I really recommend it.</p>
+			<p>Other than the above I really have no experience with the collection, while I do work for the Library I don’t work with these materials or even with these materials’s metadata. I have no special access to the collection, I just used what is publicly available on loc.gov. This is really just a personal project but like most of my projects I think the library has amazing collections so I like to make use of them.</p>						
+
+			<h2 id="shape" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">The Shape of Sound</h2>
+			<p>Something I found interesting about the Whisper model is that the output by default is formatted to the structural nature of the speech being transformed. For example if you send in a mp3 of a monolog speech you will get the text broken up into sentences or paragraphs. In our case we are feeding in someone singing a song, so you get back text usually formatted into many lines like stanzas. This is equivalent to doing an OCR process and getting back nicely formatted text blocks by paragraphs as opposed to one long string of text. This can be challenging if you are looking for word level timestamps but depending on your application of the data it might be a huge advantage. For example in my use case I want to be able to break up the songs into line-by-line lyrics. I wanted to build a tool that could present the songs in a way that lets you see its entirety at once but also lets you sonically navigate between different lines. So having the model output that structure by default is an added bonus.</p>
+
+			<h2 id="many-models" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Many Models - Least Bad?</h2>
+			<p>There are a few different Whisper models that were released. The main difference being size, so the automatic assumption is to go for the largest model as the best. But as of mid 2024 they had released three large models (v1-v3) in addition to the already well performing medium model. So which should be used? Like all things with machine learning, it depends. I found differences in language, speaker type, ratio of music to lyrics all contributed to the variability of the results for each model. So I compiled the outputs from all four models (large v1-3 and medium) and made a small QA interface for all 400+ songs: </p>
+			<p><a href="https://lomax-whisper.glitch.me/">https://lomax-whisper.glitch.me/</a> (embedded below)</p>
+
+			<!-- Copy and Paste Me -->
+			<div class="glitch-embed-wrap" style="height: 620px; width: 100%; margin-bottom: 1.5em;">
+			  <iframe
+			    src="https://glitch.com/embed/#!/embed/lomax-whisper?path=README.md&previewSize=100"
+			    title="lomax-whisper on Glitch"
+			    allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen"
+			    allowFullScreen
+			    style="height: 100%; width: 100%; border: 0;">
+			  </iframe>
+			</div>
+
+			<p>This interface displays the VTT transcript (<a href="https://en.wikipedia.org/wiki/WebVTT">a format</a> that Whisper supports outputting) for the song for each model. I found a major indicator for quality was repeated lines, oftentimes especially during silence or transition to music there will be repetition of the previous transcribed line. For this collection I found the following rule was a good metric for selecting the best quality version:
+				<br>
+				<ol style="margin-left:3em; font-size: 1.25em;">
+					<li>If english and low levels of duplication use the medium model otherwise use the v1 model.</li>
+					<li>If not english and the v2 model has less duplication than the medium model use it otherwise use the medium.</li>
+
+
+				</ol>
+			 </p>
+			<p>Of course these are not exact approaches and the best idea would probably be to modify the QA interface to allow you to select which one is best. Oftentimes it is easy to pick out the best quality version without even listening to the audio to compare it, just the structure and amount of repetition makes it obvious, so if I were doing this in a production workflow it might make sense to just manually QA the batch.  See the end of the blog for links to the code to show how I ran the collection through Whisper and ran these QA processes on them.</p>
+			<p>I also found all the models had a specific problem with empty space, when no words were being spoken especially at the end of the song. This could manifest itself in false transcriptions, very sort of strange hallucinations with things like “subtitles by amara.org” or something like that. Completely terrible LLM type generations. The whisper implementation I was using did not really have a good way of reducing temperature to cut back on these types of problems. So if doing this for production I would focus more on getting those settings controllable via other implementations of the model. Likewise I’ve read of people preprocessing the audio to detect these empty spaces that the model seems to populate with bad data and use that preprocessing to help discard bad transcriptions sections. While semi-alarming (it would be very alarming if it didn’t produce seemingly excellent results otherwise) I think these sorts of quirks can be ironed out via workflows.</p>
+			<p>Outside of looking and listening to a lot of them I haven’t done any quantitative analysis of the quality of the output. There are some <a href="https://www.loc.gov/item/afc2004004.ms070331/">written song lyrics in the collection</a> (there might be more resources I don’t know about as well) that I thought I could use to compare but I found that even if the song is in both the printed song lyric collection and the audio collection they are different. The audio recording will have variations of the printed lyrics that would make it hard to compare, there is also often dialog between Lomax and the performer and other chatting. There are definitely issues in many of the transcriptions, homonyms, proper nouns and other common issues with automatic transcription are still problems here. The other issue is without a ground truth you have that sandpiper problem where you listen and read along with the text that the model thinks it hears and you just kind of agree by default because you can’t tell if it is wrong or not. It seems right but is it generating convincing transcriptions based on its own hallucinations or is it reality? In general though it seems more successful than not.</p>
+			<h2 id="web-component" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Web Component Player</h2>
+
+			<p>Now that we have the transcriptions with timecodes for each song by line I wanted to be able to present them first as individuals. The classic media web player is the expected scrubbable time bar with a play/stop and time indicator. I wanted to integrate the lyric lines of the song into the player. I wanted the user to be able to click any line and listen to just that line. I developed a <a href="https://en.wikipedia.org/wiki/Web_Components">web component</a> that accepts two attributes, the mp3 to the song and a VTT file with the timecode lyrics. The component will build a lyric display and handle playback based on clicking a specific line. It will stop playing after the line but you can pick up and play from there onward using the play button at the top. Here is an example of the player, try clicking different lines to hear playback or click the play button it let it run synchronously:</p>
+			<p style="margin-bottom:0.5em"><a href="https://www.loc.gov/item/afc1939007_afs02266b">Once More a-Lumbering Go</a></p>
+			<div style="width:50%">
+				<vtt-lyrics vtt="https://thisismattmiller.s3.amazonaws.com/lc-lomax-michigan/vtt/afc1939007_afs02266b.vtt" audio="https://thisismattmiller.s3.amazonaws.com/lc-lomax-michigan/audio/afc1939007_afs02266b.mp3"></vtt-lyrics>
+			</div>
+<div style="margin-top:1em;">
+	This code creates the player above:
+<code style="padding:0;"><pre>&lt;vtt-lyrics 
+	vtt="https://thisismattmiller.s3.amazonaws.com/lc-lomax-michigan/vtt/afc1939007_afs02266b.vtt" 
+	audio="https://thisismattmiller.s3.amazonaws.com/lc-lomax-michigan/audio/afc1939007_afs02266b.mp3">
+&lt;/vtt-lyrics>
+&lt;script  src="/js/vtt-lyrics.umd.js">&lt;/script>
+
+</pre></code>
+</div>
+<p>I wrote this web component using the Vue3 framework, which was fine, but for technical reasons I would not use it again. I've been using the Lit framework recently for web components with more success. I have the link to the web component source code at the end of the page if interested.</p>
+			<h2 id="llm" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">LLM Enrichment</h2>
+<p>Once you have the text of the song you can start to do other types of enrichment. While this is not the primary goal of this project I thought it would be cool to try two enrichments. The first was translation, many of these songs were not in english, that info was in the metadata for the record and when you run the file through Whisper you can pass a language code and it will output the transcription in that language. Whisper does advertise the ability to tell it the audio is in one language and you want the output in another. I did not have very much success with this feature, I found it often produced extremely poor data versus having it simply output it in the original language. So instead I used an LLM to translate it to english, I used GPT since it was easy but you could use a local model for sure. If taken further I would probably have it translate it line by line in order to be able to match up the translation to the original timecode. But just having a rough english translation of the song I’m able to work with and search is a huge enrichment.</p>
+<p>The other enrichment I wanted to try was having the LLM generate Library of Congress subject headings for each song. Now if you know about LCSH or cataloging in general you probably blew a little “pfft” puff of air through your teeth while reading that last sentence. Because it is something an AI salesperson would suggest and not a domain expert. There is no way something like ChatGPT would be able to correctly build a subject heading for a song based on its lyrics. But this was my thought process: </p>
+<ol style="margin-left:3em; font-size: 1.25em; margin-bottom: 1.5em;">
+	<li>I want to use the LLM to apply some type of categorical tag to each song.</li>
+	<li>There is no existing dataset that could be used to train something to correctly apply LCSH to folk song lyrics.</li>
+	<li>So why not ask it to create tags in the mode of LCSH and then verify that they are real?</li>
+	<li>While there are LCSH headings from the original metadata on each song they are collection wide headings, general stuff like “Folk music -- Michigan” or “Field recordings” not contextual headings about the individual song. Even for an extra special collection like this that is just too much work and has not really been done in the past and will certainly not be done in the future by people, there is just too much work to do at the item level.</li>
+</ol>
+<p>So I asked it to generate the LCSH headings for each song based on the lyrics and then used the API services at id.loc.gov to validate each heading created. There was some manipulation I did for many headings like lopping “in literature” off the end of a heading to get it to match. So in the end I had only real LCSH headings. They are not necessarily valid headings though, I did not take the extra steps to validate pattern headings were used correctly or a subdivision heading wasn’t used as a topical headings. There are a lot of LCSH rules that could be applied to improve the results but I simply wanted to add more access points to each song and it was fairly successful.</p>
+			<h2 id="search" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Search Interface</h2>
+
+			<p>The web component player created the individual interface but I wanted to aggregate them all together into a collection interface. With the enrichments of English translation and added access points in addition to full text search you could really explore the collection in new ways. I built a static but searchable and facetable interface:</p>
+
+
+
+			<p><a href="https://thisismattmiller.github.io/lomax-michigan-whisper/" target="_blank">https://thisismattmiller.github.io/lomax-michigan-whisper/</a> (the video below shows interaction with the site)</p>
+
+			<video style="border:solid 1px black" src="/img/lomax-whisper-search.mp4"/ controls loop autoplay></video>
+			<p style="margin-top:1em">
+				Canned search examples: <a  target="_blank" href="https://thisismattmiller.github.io/lomax-michigan-whisper/?q=shipwrecks&facets=&page=0">Songs about shipwrecks </a> or <a target="_blank" href="https://thisismattmiller.github.io/lomax-michigan-whisper/?q=love&facets=&language=polish&page=0">Polish love songs</a>
+			</p>
+			<p>As I mentioned in another <a href="https://thisismattmiller.com/post/using-gpt-on-library-collections/">machine learning blog post</a> I really like the idea of collection level discovery interfaces. Being able to quickly look at how phrases were used across a number of songs is really powerful and being able to slice the collection into digestible pieces makes it seem more accessible. </p>
+			<h2 id="mutable" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Mutable Metadata</h2>
+			<p>I thought up this alliterative phrase mutable metadata meaning simply metadata is liable to change. While anyone who works with metadata will tell you it does change and things are always being updated it does seem like normally once a record is created it remains fairly static. This really is just trying to approach the idea of how to put machine generated metadata into a record to live next to authoritative information added by people.  If you saw a record with two subject fields one that says “machine generated” or whatever would that communicate the necessary suspicion needed to interact with that data? I’ll repeat what I said in previous posts, there does seem to be a context line where the automatic transcription would be welcome, errors and all, just like OCR. But maybe subject headings are too far, what if there is an inappropriate heading? I continue to think having clear labels and being transparent in the source of the meatadata is enough to allay any confusion from people interacting with the record. I also think of mutable metadata meaning that some aspect of a metadata record is not necessarily static but a function. I could imagine that these machine learning processes will continue to improve, and so continuing to add to and improve the record’s metadata should be a continuous process. </p>
+			<h2 id="dying" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Now I'm going to sing a song like you're dying</h2>
+			<p>Rarely are you impressed with a piece of technology you are working with. You know the details and imperfections, you see everything that needs to be fixed or improved. But I was clicking around the search interface and filtered on Finnish love songs. I came across this one: <a href="https://thisismattmiller.github.io/lomax-michigan-whisper/?q=null&facets=&language=finnish&subject=Birds|Love--Songs%20And%20Music&page=0">Nyt arjon laulon laulella; Army song</a>. The process had generated the transcription into Finnish text and had generated the English translation from that. The opening line is “Now I'm going to sing a song like you're dying.” Now I don’t really know anything about folk songs, but I’ve seen other examples of the singer setting the stage in the opening lines, setting the tone for the audience. But this one kind of struck me for whatever reason. Death is kind of an easy trope but something about the implied question of how would you sing a song to someone who is dying, or how would you listen to a song knowing you are dying created affective imagery. And something about the efficiency of language used to convey the thought I really admired.  I thought about that lyric for the rest of the day. I wanted to better understand the song, wanted a better translation and wanted to place it into a larger context. I was also impressed by these tools' ability to transmit that idea between someone singing Finnish in a Michigan living room in 1938 and me reading the English translation 86 years later. It made me excited about building not only effective cultural memory systems but affective systems as well, as in systems that are able to affect. I think it’s that potential of some of these emerging tools that makes me interested in doing more in this space. </p>
+		
+
+			<h2 id="code" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Code</h2>
+			<p>
+				<a href="https://github.com/thisismattmiller/lomax-michigan-whisper">Whisper, data and search site code</a><br>
+				<a href="https://github.com/thisismattmiller/vtt-lyrics-web-component">VTT player web component code</a>
+			</p>
+		</div>
+
+
+
+    <script  src="/js/vtt-lyrics.umd.js"></script>
+
+
+
+  </div>
+	

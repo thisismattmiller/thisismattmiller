@@ -637,6 +637,15 @@ label = "View"
 url = "https://thisismattmiller.com/post/lomax-whisper/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Banned Metadata"
+desc = "Analysis of PEN America 2022-2023 Banned and Challenged Book Metadata"
+date = "2024-09-27"
+[[params.mystuff.metadata.things.links]]
+label = "View"
+url = "https://thisismattmiller.com/post/banned-metadata/"
+
+
 
 
 
@@ -1001,27 +1010,6 @@ url = "http://archives.nypl.org"
 [[params.mystuff.culturalheritagesystems.things.links]]
 label = "Blog, the first part"
 url = "https://medium.com/@thisismattmiller/moving-on-from-nypl-297c51cd4cb3"
-
-
-[[params.mystuff.culturalheritagesystems.things]]
-label = "id.loc.gov vocab mappings"
-desc = "I spent effort to connect id.loc.gov to other LOD vocabularies"
-date = "2019-03-01"
-[[params.mystuff.culturalheritagesystems.things.links]]
-label = "Ex 1"
-url = "https://twitter.com/thisismmiller/status/1087777598321684486"
-
-[[params.mystuff.culturalheritagesystems.things.links]]
-label = "Ex 2"
-url = "https://twitter.com/thisismmiller/status/1088526927470710784"
-
-[[params.mystuff.culturalheritagesystems.things.links]]
-label = "Ex 3"
-url = "https://twitter.com/thisismmiller/status/1128660920782204928"
-
-[[params.mystuff.culturalheritagesystems.things.links]]
-label = "Ex 4"
-url = "https://twitter.com/thisismmiller/status/1091356835939000322"
 
 
 [[params.mystuff.culturalheritagesystems.things]]

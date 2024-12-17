@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html
+  class=""
+  lang="en-us"
+  prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"
+>
+  <head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="description" content="Using Segment Anything, LLaVA and other methods on a 14K image corpus" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Using Segment Anything, LLaVA and other methods on a 14K image corpus" />
+<meta property="og:title" content="WoodBlockShop" />
+<meta property="og:site_name" content="Matt Miller" />
+<meta property="og:image" content="" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="" />
+<meta property="og:image:height" content="" />
+<meta property="og:url" content="https://thisismattmiller.com/post/woodblockshop/" />
+<meta property="og:locale" content="en-us" />
+<meta property="article:published_time" content="2024-12-16
+" /> <meta property="article:modified_time" content="2024-12-16
+" />
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@thisismmiller" />
+<meta name="twitter:creator" content="@thisismmiller" />
+<meta
+  name="twitter:title"
+  content="WoodBlockShop"
+/>
+<meta
+  name="twitter:description"
+  content="Using Segment Anything, LLaVA and other methods on a 14K image corpus"
+/>
+<meta name="twitter:image:src" content="https://thisismattmiller.com/img/woodblockshop.jpg" />
+<meta property="og:image"  content="https://thisismattmiller.com/img/woodblockshop.jpg" />
+<meta name="twitter:image"  content="https://thisismattmiller.com/img/woodblockshop.jpg" />
+
+
+<meta name="twitter:domain" content="https://thisismattmiller.com/post/woodblockshop/" />
+
+
+
+    <title>WoodBlockShop</title>
+    <link rel="canonical" href="https://thisismattmiller.com/post/woodblockshop/" />
+
+
+    <link
+  rel="stylesheet"
+  href="https://thisismattmiller.com/css/bulma.min.css"
+/>
+
+<link rel="stylesheet" href="https://thisismattmiller.com/css/style.css" />
+
+<link
+  rel="stylesheet"
+  href="https://thisismattmiller.com/css/github-gist.css"
+/>
+
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto&display=swap" rel="stylesheet">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f09496fc47cb4d31ae2591c0f4945c3e"}'></script>
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  </head>
+
+
+<body
+  lang="en-us"
+  class=""
+  itemscope
+  itemtype="http://schema.org/Article"
+>
+
+    <div class="container" style="margin-bottom: 5em; ">
+
+
+    <div class="columns">
+      <div class="column is-one-half">
+        <h1 id="title" class="is-size-1">
+          <a href="/" style="color:#313131; text-decoration:none;">Matt Miller</a>
+        </h1>
+        <a href="/about" class="is-size-5" id="menu-links">About</a>        
+      </div>
+    </div>
+
+
+
+  </div>
+ 
+
+  	
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+  	summary{
+	    display: list-item !important;
+	    counter-increment: list-item 0;
+	    list-style: inside disclosure-closed;  		
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+  	
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+  	}
+
+
+	#app-subject-components ul {
+	  columns: 3;
+	  -webkit-columns: 3;
+	  -moz-columns: 3;
+	}		
+	#app-subject-complex ul {
+	  columns: 2;
+	  -webkit-columns: 2;
+	  -moz-columns: 2;
+	}
+
+
+
+
+
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+    .state-subjects{
+    	margin-bottom: 3em;
+    }
+
+
+	tr{
+		
+		transition-duration: 0.5s;
+	}
+	tr:hover{
+		background-color: aliceblue;
+
+	}
+	li{
+		
+		transition-duration: 0.5s;
+	}
+	li:hover{
+		background-color: aliceblue;
+
+	}
+
+
+
+@media only screen and (min-width: 768px) {
+    /* tablets and desktop */
+    .treemap{
+    	width: 75%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* phones */
+    .treemap{
+    	width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
+    .treemap{
+    	width: 100%;
+    }
+
+
+}
+
+
+
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">WoodBlockShop</h1>
+	      	<h2 class="is-size-4 has-text-grey">Using Segment Anything, LLaVA and other methods on a 14K image corpus</h2>
+	      	<h2 class="is-size-5 has-text-grey">Dec 16 2024</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:right;">
+	      		      		<img class="doodle-mono-right-header" src="/img/woodblockshop.jpg" title="A mashup woodcut from woodblockshop.glitch.me tool of a human face floating over a grid of lines."/>
+
+
+	    </div>
+
+	</div>
+
+
+
+
+
+
+    <div class="columns">
+
+
+			<div class="column" style="">
+				
+				<p>I came across people sharing the <a href="https://museumplantinmoretus.be/en/impressedbyplantin">Plantin-Moretus Museum collection site</a> and I really liked it. The 14,000 woodcuts are obviously all very different but the monochromatic cohesion of the collection ties it together. I thought it would be a great collection to try some of the various image based machine learning techniques I’ve seen recently. Specifically I wanted to try the Meta Segment Anything 2 model on it thinking it would be very cool to break down some of the very dense but simple prints into component pieces to do something fun with. </p>
+				<p>Having been a laptop loser for the last 15-ish years (still am tbh) I built a new computer this summer. I haven’t put together a computer since my early 20s but <a href="/img/build_da_computer.jpg">it went pretty well</a>. I specifically put a nice Nvidia card in it to try some local machine learning stuff. The card is more of a gamer card but with 24GB of VRAM it can still run a lot of models in memory. To get the models working I ran Windows to get the Nvidia drivers and cuda toolkit installed and working easily, then used Windows Subsystem for Linux which lets you have a linux environment on the machine. </p>
+				<p>Getting the corpus was pretty straight forward, the site has a nice JSON search index. I downloaded all the images, I used the “thumbnail” version of the images for my project, while they have very large hi-res tiffs available I didn’t use them. Most of the almost 14K images are a few hundred kilobytes, none larger than a megabyte. </p>
+				<p>You probably saw the Meta <a href="https://segment-anything.com/demo">Segment Anything demo site</a> it is super impressive. Specifically the ability to do automatic masking (as opposed to defining a specific target region)  and basically have it pick out prominent features and build masks which lets you extract the sub-images. If you use the demo site it does a great job so I started running my woodcut images through the SAM 2.1 Hiera Large model. I asked it to use its automatic mask generator to pull out features. And it worked terribly compared to the demo site. So I spent a couple hours tweaking the parameters and it got better but nowhere near as good as the demo on the Meta site. Here are some comparison images:</p>
+				
+	 		</div>
+	 	</div>
+	</div>
+
+<div class="columns">
+  <div class="column">
+  	<div style="text-align:center">Good automatic masking results from the Demo website:</div>
+  	<img src="/img/sam_website_demo.png">
+  </div>
+  <div class="column">
+  	<div style="text-align:center">Default parameter local model auto masking results:</div>
+  	<img src="/img/blog_img1.png">
+  </div>
+  <div class="column">
+  	<div style="text-align:center">After significant tweaking of the local model parameters:</div>
+  	<img src="/img/blog_img2.png">
+
+  </div>
+</div>
+
+
+  <div class="container" >
+
+
+    <div class="columns" style="margin-top: 5em; margin-bottom: 5em;">
+
+
+			<div class="column" style="">
+					<p>So what gives? I started searching and found a lot of other people having the same question. Why does the demo site do automatic masking so much better than the local model? Their github issue had tons of <a href="https://github.com/facebookresearch/sam2/issues/252">tickets like this</a> and the general consensus is that the model released is not the same model as used on the site, at least for the automatic masking functionality. I would love to hear otherwise but it appears the quality of the auto masking in the demo is not attainable using the released model at this point.</p>				
+	 				<p>This kinda derailed my goal but I still wanted to try some other approaches so I used <a href="https://github.com/danielgatis/rembg">rembg</a> which can use a number of <a href="https://github.com/danielgatis/rembg?tab=readme-ov-file#models">models</a> to do background removing. I wasn’t interested in strictly removing the background though, I wanted to pull out elements of the woodcuts and this tool performed okay, a lot of messy transparencies, but also a lot of clean crops. If I were to do this again I would spend more time here, maybe try creating my own model based on the corpus. 
+</p>
+	 				<p>
+
+Next I wanted to try the <a href="https://llava-vl.github.io/">LLaVA multimodal model</a>. You can pass it an image and prompt to do something with it. I got it running with <a href="https://ollama.com/library/llava">Ollama</a> pretty easily and started sending the cropped images with a prompt asking for search terms describing the image. I basically wanted to use the model to build a browsable index of the image. The challenge of course is that getting the model to describe the content and not the medium, and also it produces a very long tail of single terms that apply to only one image, not useful for building buckets. From the list of a few thousand terms it produced for all of the images I truncated it at four uses per term. Meaning the term had to be used on at least four images to make it into the list. 
+
+	 				</p>
+	 				<p>If you go to the original site you will find nice big term buckets created for the images on the site. For example “BOTANICAL” or “ANIMAL” which are great and I’m sure were machine generated. The terms coming out of the LLaVA model are more descriptive and narrow but lack controlled vocabulary and are all over the place. I think you could spend a lot of time here to get better quality terms and groupings out of the model, but this was a good start. And of course regardless of how it is produced, machine generated terms are going to be lower quality and probably not suitable for official metadata records. But for something like this where there is no existing descriptive metadata and they are going to be used only at the application layer it seems like a good way to at least attempt to generate some more description for 14,000 item level resources. 
+</p>
+	 				<p>
+We got the cropped resource and some descriptions, now let’s spend way too much of our free time building an interface! I wanted to make something that sort of lets you creatively explore the images and do something fun with them. The result is this interface that lets you overlay the elements from the woodcuts to composite an image from the parts. I also added a social aspect where you can share the final creation and it will post it on a new <a href="https://bsky.app/profile/woodblockshop.bsky.social">Bluesky account called WoodBlockShop</a> along with links to the original sources of the images used in the composition. 
+
+	 				</p>
+	 				<p>The app lives here: <a href="https://woodblockshop.glitch.me/">https://woodblockshop.glitch.me/</a>
+</p>
+					
+					<p>But you can watch a video of how it works here:</p>
+			<video style="border:solid 1px black; margin-bottom:3em;" src="/img/woodblockshop_demo.webm"/ controls loop autoplay muted></video>
+
+
+					<p>What I like about it is the sort of exploration of the collection via creation, I also like the visual prompting of ideas through the random assortment of image elements it gives you. I found myself randomly combining elements that then prompted a visual narrative or memory from me. It’s giving a “it’s 2015 and we’re at a cultural heritage hackathon” vibe and I kind of miss that energy to be honest.</p>
+			<h2 style="margin:1.5em 0 0 0; padding:0; font-size: 1.5em;">Code Links:</h2>
+
+					<p style="margin-bottom: 1em;">I don’t have a repo for this project, here are some of the scripts used however:</p>
+					<ul style="font-size: 1.1em;">
+					<li>Using SAM2 and automatic masks: <a href="https://gist.github.com/thisismattmiller/50e77d2af8cd2480732067b75ac65ca3">https://gist.github.com/thisismattmiller/50e77d2af8cd2480732067b75ac65ca3</a></li>
+					<li>Using LLaVA: <a href="https://gist.github.com/thisismattmiller/39e6ca24c18cf8c5bcc90033afbb35b1">https://gist.github.com/thisismattmiller/39e6ca24c18cf8c5bcc90033afbb35b1</a></li>
+					<li>Source to the interface: <a href="https://glitch.com/edit/#!/woodblockshop">https://glitch.com/edit/#!/woodblockshop</a></li>
+					</ul>
+
+
+					<hr>
+			<h2 style="margin:1.5em 0 0 0; padding:0; font-size: 1em;">Related Posts:</h2>
+			<p style="font-size: 1em;">
+				<div><a href="/post/using-gpt-on-library-collections/">Using GPT on Library Collections</a></div>
+				<div><a href="/post/lomax-whisper/">Automatic transcription of Alan Lomax’s 1938 Midwest Folk Song Collection using Whisper.cpp</a></div>
+				<div><a href=""></a></div>
+				
+
+
+
+
+
+			</p>
+	 		</div>
+	 	</div>
+
+	</div>
+
+  <footer>
+    <div>
+
+  <style>
+    #masta:hover{
+      stroke: black !important;
+      fill:  black !important;
+    }
+  </style>
+<a rel="me" class="is-size-5" href="https://ebooks.social/@matt" title="mastodon verification" style="text-decoration: none;">
+<svg id="masta" style="stroke:white; fill: white;" width="20px" height="20px" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <path  d="m5 58.801v5.8008l2.8984-2.9023h19.703v-9.5l4-5.6992v33h9.6992l5-13.602h18.5l5.3008 14.203h8.6992l4.3008-13.902 3.5-18.898h3.7969l0.60156 16h4v-16.801l-7.5-7.6016-0.30078-5.7969-22-12.203-33.098-1-6.1016 2.7031-6.8008 9.7969v25.801z"/>
+  <path d="m14.301 51.102l14.301-1.6016-3.3008 4.8984z"/>
+ </g>
+</svg>
+</a>   
+
+
+    </div>
+  </footer>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+
+  </body>
+</html>

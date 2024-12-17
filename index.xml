@@ -6,7 +6,16 @@
     <description>Recent content on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WoodBlockShop</title>
+      <link>https://thisismattmiller.com/post/woodblockshop/</link>
+      <pubDate>Mon, 16 Dec 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/woodblockshop/</guid>
+      <description>WoodBlockShop Using Segment Anything, LLaVA and other methods on a 14K image corpus Dec 16 2024 I came across people sharing the Plantin-Moretus Museum collection site and I really liked it. The 14,000 woodcuts are obviously all very different but the monochromatic cohesion of the collection ties it together. I thought it would be a great collection to try some of the various image based machine learning techniques I’ve seen recently.</description>
+    </item>
+    
     <item>
       <title>Banned Metadata</title>
       <link>https://thisismattmiller.com/post/banned-metadata/</link>

@@ -646,6 +646,19 @@ label = "View"
 url = "https://thisismattmiller.com/post/banned-metadata/"
 
 
+[[params.mystuff.metadata.things]]
+label = "WoodBlockShop"
+desc = "Using Segment Anything, LLaVA and other methods on a 14K image corpus"
+date = "2024-12-16"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/woodblockshop/"
+
+[[params.mystuff.metadata.things.links]]
+label = "App"
+url = "https://woodblockshop.glitch.me/"
+
+
 
 
 

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html
+  class=""
+  lang="en-us"
+  prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"
+>
+  <head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="description" content="Data and tools to explore 50,000 1929 public domain titles in HathiTrust" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Data and tools to explore 50,000 1929 public domain titles in HathiTrust" />
+<meta property="og:title" content="Hathi PD 2025" />
+<meta property="og:site_name" content="Matt Miller" />
+<meta property="og:image" content="" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="" />
+<meta property="og:image:height" content="" />
+<meta property="og:url" content="https://thisismattmiller.com/post/hathi-pd-2025/" />
+<meta property="og:locale" content="en-us" />
+<meta property="article:published_time" content="2025-02-05
+" /> <meta property="article:modified_time" content="2025-02-05
+" />
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@thisismmiller" />
+<meta name="twitter:creator" content="@thisismmiller" />
+<meta
+  name="twitter:title"
+  content="Hathi PD 2025"
+/>
+<meta
+  name="twitter:description"
+  content="Data and tools to explore 50,000 1929 public domain titles in HathiTrust"
+/>
+<meta name="twitter:image:src" content="https://thisismattmiller.com/img/1929.png" />
+<meta property="og:image"  content="https://thisismattmiller.com/img/1929.png" />
+<meta name="twitter:image"  content="https://thisismattmiller.com/img/1929.png" />
+
+
+<meta name="twitter:domain" content="https://thisismattmiller.com/post/hathi-pd-2025/" />
+
+
+
+    <title>Hathi PD 2025</title>
+    <link rel="canonical" href="https://thisismattmiller.com/post/hathi-pd-2025/" />
+
+
+    <link
+  rel="stylesheet"
+  href="https://thisismattmiller.com/css/bulma.min.css"
+/>
+
+<link rel="stylesheet" href="https://thisismattmiller.com/css/style.css" />
+
+<link
+  rel="stylesheet"
+  href="https://thisismattmiller.com/css/github-gist.css"
+/>
+
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto&display=swap" rel="stylesheet">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f09496fc47cb4d31ae2591c0f4945c3e"}'></script>
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  </head>
+
+
+<body
+  lang="en-us"
+  class=""
+  itemscope
+  itemtype="http://schema.org/Article"
+>
+
+    <div class="container" style="margin-bottom: 5em; ">
+
+
+    <div class="columns">
+      <div class="column is-one-half">
+        <h1 id="title" class="is-size-1">
+          <a href="/" style="color:#313131; text-decoration:none;">Matt Miller</a>
+        </h1>
+        <a href="/about" class="is-size-5" id="menu-links">About</a>        
+      </div>
+    </div>
+
+
+
+  </div>
+ 
+
+  	
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+  	summary{
+	    display: list-item !important;
+	    counter-increment: list-item 0;
+	    list-style: inside disclosure-closed;  		
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+  	
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+  	}
+
+
+	#app-subject-components ul {
+	  columns: 3;
+	  -webkit-columns: 3;
+	  -moz-columns: 3;
+	}		
+	#app-subject-complex ul {
+	  columns: 2;
+	  -webkit-columns: 2;
+	  -moz-columns: 2;
+	}
+
+
+
+
+
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+    .state-subjects{
+    	margin-bottom: 3em;
+    }
+
+
+	tr{
+		
+		transition-duration: 0.5s;
+	}
+	tr:hover{
+		background-color: aliceblue;
+
+	}
+	li{
+		
+		transition-duration: 0.5s;
+	}
+	li:hover{
+		background-color: aliceblue;
+
+	}
+
+
+
+@media only screen and (min-width: 768px) {
+    /* tablets and desktop */
+    .treemap{
+    	width: 75%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* phones */
+    .treemap{
+    	width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
+    .treemap{
+    	width: 100%;
+    }
+
+
+}
+
+
+
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">HathiTrust 1929 Pubic Domain</h1>
+	      	<h2 class="is-size-4 has-text-grey">Data and tools to explore 50,000 1929/2025 public domain titles in HathiTrust</h2>
+	      	<h2 class="is-size-5 has-text-grey">Feb 5 2025</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:right;">
+	      		      		<img class="doodle-mono-right-header" src="/img/1929.png" title="A drawing of 1929 new years glasses where the 2 and 9 are the lens."/>
+
+
+	    </div>
+
+	</div>
+
+
+
+
+
+
+    <div class="columns">
+
+
+			<div class="column" style="">
+				
+
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Intro</h2>
+				<p>Towards the end of the year HathiTrust quietly <a href="https://babel.hathitrust.org/cgi/mb?colltype=featured">posts a collection</a> of their resources that are set to enter the public domain in the new year. This is such a great resource and for the past few years I’ve done some visualistions or lists for <a href="https://thisismattmiller.github.io/1925-hathi/">1925</a>, <a href="https://thisismattmiller.github.io/hathi-pd-2022/">1926</a>, <a href="https://thisismattmiller.github.io/hathi-pd-2023/">1927</a> and <a href="https://thisismattmiller.github.io/hathi-pd-2024/">1928</a>. This year, for 1929 I spent some more time enriching the dataset and building three interfaces to explore the data than in the past. This post will walk through the three tools I developed and talk a little about the enrichment going on.</p>
+				<p>TLDR; If you don’t want to go on my metadata journey and just want to use the tools: <a href="https://thisismattmiller.github.io/hathi-pd-2025/">Check them out here</a>.</p>
+
+				<h2 id="Stats" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Stats</h2>
+
+				<p>First let’s look at the scope of what we are working with. The HathiTrust collection has over 70,000 volumes. This means physical objects that were published in 1929 and entered the public domain this year 2025. But it is of course not one-to-one in terms of objects and intellectual work. In this case the 70K objects reduce down to about 50,000 individual works. The 20,000 reduction is in the form of multiple volumes belonging to a single work. A Book may have 10 volumes which are counted in the 70K but only once in the 50K.</p>
+				<p>So out of the 50K we can break it down into format. About 34K (68%) of them are books while 16K (31%) are journals. I spent a lot of time enriching the data because a common issue is that these metadata records are barebones, there is not a lot of description available in the MARC record provided by HathiTrust. So we need to look around and ask for more data. We can do this by reconciling the works to data repositories like the Library of Congress and OCLC. A big thing I want to have in the record is the Library of Congress Classification number (LCC) and then subject headings. Only about 38% of the records had a LCC originally so using a lot of scripts I went through and got that number up to 40K or 81%. </p>
+				
+				<h2 id="Litterature-Browser" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Litterature Browser</h2>
+
+
+				<p>I think a big obstacle for exploring these titles is that you are faced with a wall of books with no real good way to dig into them, it's very opaque. I wanted to make an interface that focused only on literature or fiction, this ended up being a tiny fraction of the collection, only 3200 titles, but still a lot of books. My goal was to be able to say something like, “I want to see horror books from 1929” for example. To do something like that you need to have metadata that is not going to be in the original minimal record. Even after enriching the titles from sources for a lot of them it is really hard to say what exactly the title is about. LCC can place them roughly in a category like “Fiction and juvenile belles lettres” but that is as deep as it goes. LCSH Subject headings are almost non-existent for this corpus as well. </p>
+				<p>The nice thing though is that these titles are now in the public domain. Meaning you can access the full text of them. So let's use that to build application level description and genre terms. I passed the first 50 pages of each book through the Llama-3.3-70B-Instruct LLM model to add some new metadata. This model is nice because you can actually download it if you want, while it is not open source it is open weight, meaning you can run it locally if you want/can. I asked the LLM to build genre tags, a description blurb and check for overtly racist words/sentiments. Old books are gonna old book, and of course you can place things into context but sometimes you just don’t want to read pages of racial slurs, right? So I thought it would be nice to flag those off the top. It works okay, it took a bit of testing to get the model to actually do this but I got it eventually. The genre and description are fine, I am not advocating LLM use on metadata of record of course, but for these 1000s of books with no context of what they are or hooks to browse them I think this works well enough for an interface. I also included the LCSH when available. </p>
+				<p>Take a look at the interface: <a href="https://thisismattmiller.github.io/hathi-pd-2025/lit-browse/">https://thisismattmiller.github.io/hathi-pd-2025/lit-browse/</a></p>
+				<p>Canned search, for example <a href="https://thisismattmiller.github.io/hathi-pd-2025/lit-browse/#/?activeSearch=&activeSort=holdings_count&activeSortDir=desc&activeFilters={%22genres%22:[%22Horror%22]}">public domain horror books</a> from 1929: </p>
+
+				<p>Here is a video:</p>
+			<video style="border:solid 1px black; margin-bottom:3em;" src="/img/pd_2025_lit_browse.mp4"/ controls loop autoplay muted></video>
+				
+
+				<h2 id="LCC-Browse" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">LCC Browse</h2>
+
+
+				<p>While the last system was only for literature this tool lets you browse anything that had an LLC, around 40,000 titles. This includes the journals and other non-fiction. This interface takes full advantage of the LCC hierarchy. You can dig down through the various levels of the system and sort by things like holdings count, which would tell you the most popular title from that range. </p>
+				<p>Take a look at the interface: <a href="https://thisismattmiller.github.io/hathi-pd-2025/lcc-browse/">https://thisismattmiller.github.io/hathi-pd-2025/lcc-browse/</a></p>
+				<p>Here is a video of the interface:</p>
+			<video style="border:solid 1px black; margin-bottom:3em;" src="/img/pd_2025_lcc_browse.mp4"/ controls loop autoplay muted></video>
+
+
+				<h2 id="LCC-Visualization" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">LCC Visualization</h2>
+
+
+				<p>The final tool is similar to the last, just visual. It lets you see the 40,000 titles by LCC in an icicle graph. You can click and visually drill down and explore titles.
+</p>
+				<p>Take a look at the interface: <a href="https://thisismattmiller.github.io/hathi-pd-2025/lcc-viz/">https://thisismattmiller.github.io/hathi-pd-2025/lcc-viz/</a></p>
+				<p>Here is a video:</p>
+			<video style="border:solid 1px black; margin-bottom:3em;" src="/img/pd_2025_lcc_viz.mp4"/ controls loop autoplay muted></video>
+
+				<h2 id="Code-Data" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Code/Data</h2>
+				<p>You can find the scripts and data here: <a href="https://github.com/thisismattmiller/hathi-pd-2025/">https://github.com/thisismattmiller/hathi-pd-2025/</a></p>
+
+
+	 		</div>
+	 	</div>
+	</div>
+
+
+
+
+  <footer>
+    <div>
+
+  <style>
+    #masta:hover{
+      stroke: black !important;
+      fill:  black !important;
+    }
+  </style>
+<a rel="me" class="is-size-5" href="https://ebooks.social/@matt" title="mastodon verification" style="text-decoration: none;">
+<svg id="masta" style="stroke:white; fill: white;" width="20px" height="20px" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <path  d="m5 58.801v5.8008l2.8984-2.9023h19.703v-9.5l4-5.6992v33h9.6992l5-13.602h18.5l5.3008 14.203h8.6992l4.3008-13.902 3.5-18.898h3.7969l0.60156 16h4v-16.801l-7.5-7.6016-0.30078-5.7969-22-12.203-33.098-1-6.1016 2.7031-6.8008 9.7969v25.801z"/>
+  <path d="m14.301 51.102l14.301-1.6016-3.3008 4.8984z"/>
+ </g>
+</svg>
+</a>   
+
+
+    </div>
+  </footer>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+
+  </body>
+</html>

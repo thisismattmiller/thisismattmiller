@@ -659,6 +659,19 @@ label = "App"
 url = "https://woodblockshop.glitch.me/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Public Domain 1929"
+desc = "Data and tools to explore 50,000 1929/2025 public domain titles in HathiTrus\n"
+date = "2025-02-05"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/hathi-pd-2025/"
+
+[[params.mystuff.metadata.things.links]]
+label = "Apps"
+url = "https://thisismattmiller.github.io/hathi-pd-2025/"
+
+
 
 
 

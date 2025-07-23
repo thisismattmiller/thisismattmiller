@@ -1,0 +1,334 @@
++++
+title = "Glitch"
+date = "2025-02-05"
+description = "Migration and Maintenance"
+twitterimage  = "https://thisismattmiller.com/img/glitch.png"
++++	
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+  	summary{
+	    display: list-item !important;
+	    counter-increment: list-item 0;
+	    list-style: inside disclosure-closed;  		
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+  	
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+  	}
+
+
+	#app-subject-components ul {
+	  columns: 3;
+	  -webkit-columns: 3;
+	  -moz-columns: 3;
+	}		
+	#app-subject-complex ul {
+	  columns: 2;
+	  -webkit-columns: 2;
+	  -moz-columns: 2;
+	}
+
+
+
+
+
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+    .state-subjects{
+    	margin-bottom: 3em;
+    }
+
+
+	tr{
+		
+		transition-duration: 0.5s;
+	}
+	tr:hover{
+		background-color: aliceblue;
+
+	}
+	li{
+		
+		transition-duration: 0.5s;
+	}
+	li:hover{
+		background-color: aliceblue;
+
+	}
+
+
+
+@media only screen and (min-width: 768px) {
+    /* tablets and desktop */
+    .treemap{
+    	width: 75%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* phones */
+    .treemap{
+    	width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
+    .treemap{
+    	width: 100%;
+    }
+
+
+}
+
+ul li{
+	margin-bottom: 1em;
+	font-size: 1.2em;
+
+}
+ol{
+	padding-left: 2em;
+	font-size: 1.2em;
+}
+
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Glitch</h1>
+	      	<h2 class="is-size-4 has-text-grey">Migration and Maintenance</h2>
+	      	<h2 class="is-size-5 has-text-grey">Jul 23 2025</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:right;">
+	      		      		<img class="doodle-mono-right-header" src="/img/glitch.png" title="CARP ON A FLAG POLE."/>
+
+
+	    </div>
+
+	</div>
+
+
+
+
+
+
+    <div class="columns">
+
+
+			<div class="column" style="">
+				
+
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Intro</h2>
+
+				<p>
+					This month Glitch.com shut down, ending hosting for the projects there. They gave folks about a month to migrate their projects off the site. This also included paying customers, like me, who had the pro plan which cost $99 a year. A month is not a very long time at all, especially for paying customers, but that’s just like my opinion. The bottom line is they cut the power, so all of my projects there are gone, so after being salty about it I spent time this weekend doing the worst, most boring thing, maintenance on my personal hobby projects…
+				</p>
+
+
+
+
+
+
+				
+				<h2 id="Stats" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Flowers for Glitch</h2>
+
+
+				
+				
+
+				<p>
+					The way it ended is very lame, but I forgive them since it was really cool while it lasted. It basically solved the problem you encounter when you want to quickly make a website that requires a backend or a server. They leveraged container technology to have teeny tiny servers spin up whenever the url is requested allowing you to do complex backend sites stuff without having to have a dedicated server. You could also do static webpage hosting but the container stuff was the big deal. They also made a decent web based editor GUI for working with the code in real time and allowed you to fork and collaborate on projects. I think if you were to imagine <a href="https://en.wikipedia.org/wiki/GeoCities">Geocities</a> for today it would look like Glitch.
+				</p>
+				<p>For me it was useful for me in two ways. First was for my little personal projects that I spend too much time on. I don’t really want to worry about maintaining a lot of servers or paying for expensive services like Heroku. Glitch was perfect for that, I always tried to make my little bauble projects static webpages but if I couldn't, due to needed backend functionality then I would use Glitch, and I happily paid (if you paid for pro you were allowed to have X number of projects always running, giving a faster load time) to not have to worry about their infrastructure. </p>
+			
+				<p>The second more important reason though was Glitch’s pedagogical uses. For a number of years I taught an intro to interface development class. It was mostly library science students at first but then became more UX/UI students. The problem with designing interfaces is that you have to make them eventually. I guess if you are lucky you can have someone else make them. But I wanted these students who were good at thinking about design concepts to get experience around the work behind actually making a web interface. </p>
+				<p>Glitch solved this problem because “real” interfaces have data, data means backend and I don’t want to have to maintain that infrastructure or add another layer of difficulty for these new to tech students trying to get things working on their own laptop. The other aspect glitch was great for teaching is because I created a number of starter projects on glitch that have everything needed for a real world project except the interface. So all the database backend and data was populated, the routes and logic to the different pages were ready to go, there was an API built into the backend for them to use when ready. They could just focus on building the interface. Glitch accelerated this to the point where I had them choosing a starter project and we began working on a real life interface within the first 3 hour class, it was great. </p>
+				<p>Glitch doesn’t work anymore, so I can’t link to the starter projects I made but I uploaded their code and data (sqlite dbs) to Github, you can get a sense of the type of projects the students had to choose from:</p>
+				<p>
+					<ul>
+						<li><a href="https://github.com/thisismattmiller/pui-starter-project-nyt" target="_blank">NYT Best Seller Database</a>: Had a couple thousand books in the database, hosted book cover images. A perfect project for library students to make their own book based user interface</li>
+
+						<li><a href="https://github.com/thisismattmiller/pui-starter-project-museums" target="_blank">Museum Interface:</a> Had 100s of cultural heritage sites across the world with dozen of facets, a good project for students interested in GIS (Geographic information system)</li>
+						<li><a href="https://github.com/thisismattmiller/pui-starter-project-movies" target="_blank">Movies (IMDB-esqu) Interface:</a>Had 1000s of movie metadata records and hosted movie posters, similar to the NYT book project but for film.</li>
+						<li><a href="https://github.com/thisismattmiller/pui-starter-project-recipes" target="_blank">Recipes Interface:</a>A recipe database interface, facets, search, etc.</li>
+
+
+					</ul>
+
+
+				</p>
+				<p>Allowing the student to pick which domain seemed most interesting to them and I would challenge them to think broadly on what a Book/Movie/whatever interface could be like. A lot of the students would make wireframes and then each week for about 4 weeks we would go through building the HTML, applying CSS, enriching with javascript functionality. At the end they would have a fully working site of their own design. At that point we would go on to more complex topics like single page applications or more elaborate API usage, etc.. Some students would move on to localhost development, running things on their own laptops but some students really liked Glitch, and would do the rest of the class using it which is great because it makes sharing and getting help from me very easy. If I were teaching still I would be in panic mode trying to figure out what to do in the Fall.</p>
+				<h2 id="Stats" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Existential Dread of Maintenance</h2>
+				
+				<p>I had about a dozen projects running on Glitch and so I have to decide what I should do with them. I both hate and appreciate these types of inflection points because it's a nice opportunity to think about things you have done and if they are important to you. But then you actually have to make a decision, keep them going or not. Any sort of tech work is mostly maintenance, although you could probably argue most of all work is maintenance. You ask yourself if you even care if this thing exists anymore? Certainly nobody else does, so it really is dependent on how I feel about them. I think most of these projects are on a spectrum between tool and creative. A lot of the more creative ones are of course an attempt to express a thought or idea. I think I enjoy that process, of creating a thing that tries to convey something and sharing it. Each subsequent attempt trying to get better at the process and execution. Unfortunately the forms they usually take is a fragile and ephemeral website. If the thing I most value is the creation and execution do I need to make sure it keeps running for the next decade or longer? Ultimately a few of these projects are embedded in blogs I wrote, so if I’m going to preserve them for the sake of the blog I might as well do all of them. And honestly the thought of deleting/archiving my “creative” projects from my homepage because they don’t work anymore is pretty depressing.</p>
+				
+				<h2 id="Stats" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Time to Migrate</h2>
+				
+				<p>
+					I think of the Glitch projects in three categories:
+					<ol>
+					<li>A static webpage, just client side javascript and assets, doesn't need a backend server</li>
+					<li>Had a backend server on glitch, but doesn’t really need it. Could and should exist as a static page.</li>
+					<li>Needs a backend server, it does some database or other functionality that requires it.</li>
+					</ol>
+
+
+
+				</p>
+				<p>The first category is the easiest to do, we basically download the file and get it created on Github Pages for static hosting. Here are the steps to that process:</p>
+
+
+
+				<p>
+
+<ol>
+<li>Download the .tar file of the project from the Glitch Dashboard</li>
+<li>Extract, it should create a new folder called “app” or similar inside will be all the files, note that there will be files that start with a period (like .data) that will be invisible on most operating systems unless you are using the command line or have them turned on.</li>
+<li>Create a new Github repo.</li>
+<li>You can use the Web upload feature to places the files into the repo, you likely don’t want to include everything, just the parts that are needed.</li>
+<li>Make sure there is a index.html file (if you have .hbs or .ejs files that is category two from the list above)</li>
+<li>Go to the page settings (under settings) and turn on static hosting from the main branch.</li>
+<li>If you have a domain you can set up a subdomain from your DNS settings (usually on your hosting provider) and enter that in the custom domain field. Otherwise you can use the github pages url.</li>
+<li>Test it out, the most common problem would probably be that the paths are wrong for a file or asset that are not loading. So fix the HTML or adjust the file structure in the repo.</li>
+<li>Go back to the glitch dashboard and use the Create Redirect to point to the new URL.</li>
+</ol>
+	
+				</p>
+
+				<p>I made a silent video showing these steps if you want a visual guide. Step 7 and 8 will likely look different to you but same idea:</p>
+			<video style="border:solid 1px black; margin-bottom:3em;" src="https://thisismattmiller.s3.us-east-1.amazonaws.com/glitch_to_github_pages.mp4"/ controls loop autoplay muted></video>
+
+
+				<p>For the second category you may have a Glitch project that started using a backend server but it really doesn't need one. If it is just server static template pages. But it is not so easy to convert server template pages into vanilla static html. You would need to manually do it or run it locally and save off the HTML file. I had a couple like this where the backend was really only doing templates but I didn’t feel like doing the work to convert them, since I have a number of category three sites I just did the same thing with them.
+</p>
+
+				<p>Category three, these need a server. So you have to buy a server… The Glitch migration guide directs you to Digital Ocean as an example where you are buying a little 4$ server for each project. This does not scale if you have a bunch of projects like me. No way I’m paying $20-40 a month for these little tiny sites. There are other serverless options but you are building in their custom setup and honestly I don’t want to do this again if the next cool serverless hosting provider decides to shut down. I want to go old school and have my own server. So we are going to clown car these guys and try to stuff them all onto a $6 a month server. 
+</p>
+
+				<p>One thing about owning a server is now you have to maintain it, which is very annoying. So if you want to make the maintenance as easy as possible, being able to restore it to a new server quickly and painlessly is really key to making it tolerable. One way of doing this is using Docker, you can configure everything into a setup file and then quickly deploy it if you need to move providers or it gets really out of date and needs to be rebuilt or whatever. My final goal is to have each site running on a subdomain of my thisismattmiler.com website. Here are the steps I went through to get it working.</p>
+
+				<p>
+<ol>
+<li>Download the project from glitch and upload it to Github in its own repo. You can see <a href="https://github.com/thisismattmiller/woodblock-shop" target="_blank">an example here</a>. One thing I did for all of them as I added them to Github was set up <a href="https://github.com/thisismattmiller/woodblock-shop/blob/main/package.json#L8" target="_blank">this npm script startup shortcut</a>. It simply uses forever to run the server, sometimes its a express server sometimes its a fastify server, doesn’t matter as long as the file name is server.js</li>
+<li>Now that we have the source code for all the projects hosted in Github we are going to build a single Docker image capable of running all of them, it is super simple and based on Alpine linux to be as small as possible. <a href="https://github.com/thisismattmiller/glitch-migration/blob/main/Dockerfile" target="_blank">Here is the Dockerfile</a></li>
+<li>Now that we have the Docker image to run each of the Apps we are going to make <a href="https://github.com/thisismattmiller/glitch-migration/blob/main/compose.yaml" target="_blank">a compose file that has them all listed out and configured</a>.
+</li>
+<li>You’ll notice they map the github repo dir name to the /app directory in the image which is where it will run inside Docker, we also have an api.env that is shared by all the apps, if you have API keys or other secrets that need to be in the environmental variables you can put them into the api.env file. We also give each app its own port number. 
+</li>
+<li>If you do have an app that uses a SQLite database and you want the database to persist with new data added you want to setup the volumes and app structure <a href="https://github.com/thisismattmiller/glitch-migration/blob/main/compose.yaml#L82">like this one  where you have a separate data directory</a> where the .db file is saved outside the app directory.
+</li>
+<li>I’m using the 1GB RAM $6 droplet server from Digital Ocean running Ubuntu, you can use any provider.
+</li>
+<li><a hrerf="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04" target="_blank">Install Docker</a>. </li>
+<li>I choose to run Nginx outside of a container just to make it easier to configure. <a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04">Installing Nginx</a></li>
+<li>I git cloned the docker compose file to the server. Then I git cloned each of the projects to the same directory. And ran “docker compose up” this really tested the limits of only having 1 GB of memory, building the image went fine but doing 7 concurrent “npm install” really bogged things down and one timed out. But after 15min the containers came online and were running. I would <a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04">recommend you add swap space</a> to a server with such a small amount of RAM, it degrades performance but that’s not really the goal here. </li>
+<li>Now that they are running on the server I <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04" target="_blank">installed Let’s Encrypt</a> and created a Nginx site config for each app in “/etc/nginx/sites-available/” and symbolic linking them to “/etc/nginx/sites-enabled/” The configs need to have the server name and the proxy_pass to the localhost with the correct port, here is what that simple config looks like:
+<code>
+	<pre>
+server {
+  listen 80;
+  listen [::]:80;
+  server_name woodblock-shop.thisismattmiller.com;
+  location / {
+    proxy_pass http://0.0.0.0:8501;
+  }       
+}</pre></code>
+</li>
+<li>This is only set up for port 80 but we are going to use certbot to create a SSL certificate for each sub-domain. So you can follow the steps in the guide above to set up the certbot for each. You then need to add your subdomain to your DNS server mapped with an “A” record to the server’s public IP.</li>
+
+</ol>
+
+				</p>
+
+				<p>
+Of course the final step is going to replace all the URLs everywhere, even though the redirects work (until the end of 2026) I rather have the new ones in blogs and links. I did find that Github pages allow embedding, so if you embedded a Glitch project somewhere like a blog it will work with Github pages but you have to update the URL, the redirect does not work for embedded projects. 
+</p>
+
+				<p>I’ll end with a checklist of projects I migrated over and a little about them. 
+</p>
+
+				<p><a href="https://eclipsed-time.thisismattmiller.com/" target="_blank">Eclipsed Time</a> A digital recreation of the deinstalled Penn Station sculpture/clock by Maya Lin (static site)</p>
+
+				<p><a href="https://woodblock-shop.thisismattmiller.com/" target="_blank">Woodblock Shop</a> Lets you mashup 14K woodblock prints from Plantin-Moretus Museum and post them to a Bluesky account. (server site)
+</p>
+				<p><a href="https://betweentheplaces.thisismattmiller.com" target="_blank">Between The Places</a> Based off a Sol LeWitt idea, lets you build maps with an area cut out where you used to live. (server)</p>
+				<p><a href="https://anaphora.thisismattmiller.com/" target="_blank">Anaphora</a> Exploring speech found in the Library of Congress web archives. (static)</p>
+				<p><a href="https://lcsh-wiki-variants.thisismattmiller.com" target="_blank">LCSH/Wiki Variant</a> Browse LCSH headings to where they redirect in Wikipedia (server)
+</p>
+				<p><a href="http://gatesofhell.thisismattmiller.com/" target="_blank">Gates of Hell</a>  I’m obsessed with Rodin the sculptor and found out there are two bicoastal Gates of Hell sculptures (posthumous casting, don’t get it twisted…aaaacutally all Gates of Hell are posthumous…) (static)
+</p>
+				<p><a href="https://edge-notch-cards.thisismattmiller.com" target="_blank">Edge Notch Card Crowdsource Tool</a> A little tool made to transcribe some signatures for a project. (server db)</p>
+				<p><a href="https://zork.thisismattmiller.com" target="_blank">Zork Text</a>  I extracted the Text from the adventure game Zork and made a little mashup (server)</p>
+				<p><a href="https://lomax-qa.thisismattmiller.com/" target="_blank">Lomax QA Tool</a> A tool I made to compare Whisper.cpp output for a Alan Lomax project (server)
+</p>
+				<p><a href="https://byzantine.thisismattmiller.com" target="_blank">Byzantine</a> A toy that makes a new PDF from the Web Archive of LC (server)
+</p>
+				<p><a href="https://lc-midi.thisismattmiller.com/" target="_blank">LC MIDI</a> Some MIDI files I found in the LC Web Archives (static)
+</p>
+
+				<p></p>
+
+				<p></p>
+
+
+
+
+
+
+
+
+
+				
+			
+
+	 		</div>
+	 	</div>
+	</div>
+
+

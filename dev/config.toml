@@ -656,7 +656,7 @@ url = "https://thisismattmiller.com/post/woodblockshop/"
 
 [[params.mystuff.metadata.things.links]]
 label = "App"
-url = "https://woodblockshop.glitch.me/"
+url = "https://woodblock-shop.thisismattmiller.com"
 
 
 [[params.mystuff.metadata.things]]
@@ -728,7 +728,7 @@ desc = "A little toy to make Frankenstein PDFs from government sources."
 date = "2019-03-20"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
-url = "https://byzantine.glitch.me/"
+url = "https://byzantine.thisismattmiller.com/"
 
 [[params.mystuff.creativecoding.things.links]]
 label = "Context"
@@ -741,7 +741,7 @@ desc = "Extracted elements from the text adventure game Zork"
 date = "2019-04-20"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
-url = "https://zork.glitch.me/"
+url = "https://zork.thisismattmiller.com/"
 
 [[params.mystuff.creativecoding.things.links]]
 label = "Context"
@@ -754,7 +754,7 @@ desc = "Exploring repeated phrases in government audio from Library of Congress 
 date = "2019-05-20"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
-url = "https://anaphora.glitch.me/"
+url = "https://anaphora.thisismattmiller.com/"
 
 [[params.mystuff.creativecoding.things.links]]
 label = "Blog"
@@ -767,7 +767,7 @@ desc = "There are two Gates of Hell sculptures on the east and west coast of Ame
 date = "2019-09-26"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
-url = "http://gatesofhell.glitch.me/"
+url = "http://gatesofhell.thisismattmiller.com/"
 
 
 [[params.mystuff.creativecoding.things]]
@@ -880,7 +880,7 @@ desc = "A simulation Eclipsed Time in the age of Covid-19"
 date = "2020-04-12"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
-url = "https://eclipsed-time.glitch.me/"
+url = "https://eclipsed-time.thisismattmiller.com/"
 
 [[params.mystuff.creativecoding.things.links]]
 label = "Blog"
@@ -915,7 +915,7 @@ desc = "Inspired by Sol LeWitt, make a map cutting out the places you used to li
 date = "2020-12-22"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"
-url = "https://betweentheplaces.glitch.me/"
+url = "https://betweentheplaces.thisismattmiller.com"
 
 [[params.mystuff.creativecoding.things.links]]
 label = "Context"
@@ -951,7 +951,7 @@ url = "https://thisismattmiller.com/post/jan-6th-overflow/"
 
 [[params.mystuff.creativecoding.things]]
 label = "Wordle Shares"
-desc = "Collecting Wordle Shares on Twitter"
+desc = "Collecting Wordle Shares on Twitter - Dead Project, Twitter Takeover + Glitch Ending"
 date = "2022-01-09"
 [[params.mystuff.creativecoding.things.links]]
 label = "View"

@@ -980,6 +980,15 @@ label = "View"
 url = "https://thisismattmiller.com/post/lcnaf-anagrams/"
 
 
+[[params.mystuff.creativecoding.things]]
+label = "Migrating Glitch"
+desc = "Glitch.com closed down, so we must migrate, my experince and How-to"
+date = "2025-07-23"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/glitch/"
+
+
 
 
 

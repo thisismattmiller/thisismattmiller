@@ -6,7 +6,16 @@
     <description>Recent content on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building datasets from video collections using local &amp; cloud LLMs</title>
+      <link>https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/</guid>
+      <description>Building datasets from video collections using local &amp; cloud LLMs Using Qwen2.5-VL, Gemini 2.5 and Whisper to build a Siskel and Ebert dataset Jul 30 2025 Intro I continue to experiment with LLM models finding very narrow tasks in my domain of cultural heritage where they could be useful and appropriate. I’m not going to go into it in this post but I find most pro-“AI” claims, discourse, and use cases to be completely overhyped and seem to originate from dishonest intentions.</description>
+    </item>
+    
     <item>
       <title>Glitch</title>
       <link>https://thisismattmiller.com/post/glitch/</link>

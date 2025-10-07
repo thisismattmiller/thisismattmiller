@@ -1,0 +1,712 @@
++++
+title = "LC & Flickr Commons"
+date = "2025-10-03"
+description = "Library of Congress & Flickr Commons: Analysis of user interactions on 40,000 images."
+twitterimage  = "https://thisismattmiller.com/img/lc-flicker-comment-blog.jpg"
++++	
+
+
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+  	summary{
+	    display: list-item !important;
+	    counter-increment: list-item 0;
+	    list-style: inside disclosure-closed;  		
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+  	
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+				line-height: 1.75em;
+
+  	}
+
+
+	#app-subject-components ul {
+	  columns: 3;
+	  -webkit-columns: 3;
+	  -moz-columns: 3;
+	}		
+	#app-subject-complex ul {
+	  columns: 2;
+	  -webkit-columns: 2;
+	  -moz-columns: 2;
+	}
+
+
+
+
+
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+    .state-subjects{
+    	margin-bottom: 3em;
+    }
+
+
+	tr{
+		
+		transition-duration: 0.5s;
+	}
+	tr:hover{
+		background-color: aliceblue;
+
+	}
+	li{
+		
+		transition-duration: 0.5s;
+	}
+	li:hover{
+		background-color: aliceblue;
+
+	}
+
+
+
+@media only screen and (min-width: 768px) {
+    /* tablets and desktop */
+    .treemap{
+    	width: 75%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* phones */
+    .treemap{
+    	width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
+    .treemap{
+    	width: 100%;
+    }
+
+
+}
+
+.lcsh-list{
+	column-count: 4; font-size: 0.9em;
+	margin-bottom: 3em;
+}
+.lcsh-list li{
+	margin-bottom: 0.1em;
+}
+li{
+	margin-bottom: 1em;
+	font-size: 1em;
+
+}
+ol, ul{
+	padding-left: 2em;
+	font-size: 1.1em;
+}
+
+.iframe-container {
+	position: relative;
+	width: 100%;
+	height: 800px;
+	overflow: hidden;
+	border-top: dashed 2px black;
+	border-bottom: dashed 2px black;
+	margin-bottom: 3em;
+
+}
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Library of Congress & Flickr Commons</h1>
+	      	<h2 class="is-size-4 has-text-grey">Analysis of user interactions on 40,000 images</h2>
+	      	<h2 class="is-size-5 has-text-grey">Oct 6 2025</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:right;">
+	    	<img style="width: 85%;" class="doodle-mono-right-header" src="/img/lc-flicker-comment-blog.png" title="A drawing of the top of the Jefferson Building of the Library of Congress with the FLICKr logo mirrored below it."/>
+	    </div>
+	</div>
+
+
+
+
+
+
+    <div class="columns">
+
+
+			<div class="column" style="">				
+
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Intro</h2>
+
+				<p>
+					
+					Flickr Commons is a program to bring the visual collections of cultural heritage organizations to new audiences. Getting these resources in front of people where they are online as opposed to being siloed in their own website or not online at all. It was a pretty ground breaking project, the Library of Congress was the first participant with <a href="https://flickr.com/photos/library_of_congress" target="_blank">over 40,000 photos</a> now on Flickr. The program continues today under the <a href="https://www.flickr.org/" target="_blank">Flickr Foundation</a>. Starting in 2008 there is a lot of information about the project, <a href="https://www.loc.gov/item/2021687931/" target="_blank">this webcast</a>, <a href="https://tile.loc.gov/storage-services/master/pnp/ppbd/11500/11581.pdf" target="_blank">a project report</a>, and <a href="https://guides.loc.gov/ld.php?content_id=78324103" target="_blank">a 2024 impact report</a>. While the project predates my time at the library by a decade and I have nothing to do with these collections with my job at LC I was really compelled by having potentially 17 years of data about interactions between the public and these materials. This post is going to analyze and visualize that data.
+					
+				</p>
+
+				<h2 id="Data" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Data + Code</h2>
+				<p>
+				I’ll be using data from the public Flickr API that I harvested back in 2024 (I unreliably work on too many personal projects for years and then eventually something will cause me to finish one, like being furloughed in a US government shutdown). So this is all public data, and the code I use to do everything on this page can be found in <a href="https://github.com/thisismattmiller/LC-Flickr/" target="_blank">this Github repo</a>.
+				</p>
+				<h2 id="Interactions" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Interactions</h2>
+
+				<p>The comments are the big thing with this project. They are the largest interaction surface between the public and the photos. With over 95,000 comments made on the photos over the 17 years there are a lot of questions in my mind as to what people are saying. To organize them I built embeddings for all 95K comments using the Google Gemini gemini-embedding-001 model. This produces a 3072-dimensional vector for each comment which I then reduced to two-dimensional space and ran some clustering over them to build communities of comments. I then sent a random sample of each off to a LLM to classify them into a group based on the actual text of the comments. Here are the communities:</p>
+
+<pre>
+Category ID  Count      Category Label
+================================================================================
+0            4464       Historical Context and Identification with Links
+1            2782       Aesthetic Praise and Admiration
+2            1973       Biographical & Historical Wikimedia Contributions
+3            3765       Factual Historical Annotation
+4            5553       Historical Detail Identification and Contextualization
+5            678        Explore Congratulations
+6            595        See Also
+7            1402       Historical Subject Identification and Details
+8            2529       Location and Status Verification
+9            202        Aesthetic Feedback
+10           4754       LC Staff Thanks for Metadata Improvement
+11           1204       Non-English Compliments
+12           629        Flickr Group Invitations
+13           1770       Crowdsourced Historical Data Refinement
+14           4230       Historical Performing Artist Biographical Documentation
+15           3469       Sourced Historical Details and Context
+16           335        Flickr Group Invitations
+17           1687       Flickr Group Invitations
+18           3315       Location Verification and Contemporary Comparison
+19           1054       Cross-referencing and Linked Information
+20           466        External Content Feature Notification
+21           6199       Observations on Period Appearance
+22           2806       LC Staff Thanks for Contributions
+23           954        Wikidata Zone 💪
+24           2571       Factual Correction and Archival Enhancement
+25           1620       Historical Factual Identification and Context
+26           2130       Historical Baseball Identification and Contextualization
+27           296        Flickr Group Invitations
+28           3402       Factual contributions and corrections
+29           4184       Factual Identification and Historical Context
+30           661        Group Invitations
+31           270        Identification and Biographical Information of Historical Figures
+32           7373       Historical Photo Annotation
+33           5265       Biographical and Genealogical Identification
+34           372        Flickr Group Invitations
+35           5487       Praise
+36           4659       Historical Annotation
+37           223        Compliments
+================================================================================
+Total:       95328    
+</pre>
+	<p>I then created a visualization to display all of these comments. Once loaded you can hover over the comment to see the text, if you click it will take you to that comment on Flickr. Probably does not work well on mobile. Explore the communites below or <a class="button" href="https://thisismattmiller.github.io/LC-Flickr/apps/atlas/dist/index.html" target="_blank">Open in new tab</a></p>
+	
+			</div>
+
+			
+	</div>
+
+</div>
+
+
+
+
+<div class="iframe-container">
+<iframe style="width: 100%; height: 800px; border: none;" src="https://thisismattmiller.github.io/LC-Flickr/apps/atlas/dist/index.html"></iframe>
+</div>
+
+
+
+
+<div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">	
+
+
+			<p>The comments aggregate into interesting communities, the majority of them being related to contributing some information about the photo. That can be in the form of context, facts, “See also” links, external links to Wikimedia ecosystem and others. There are also large communities of comments praising the photo, or making related aesthetic comments in addition to more meta Flickr comments. </p>
+			<p>I really love that there are some hyper specialized communities within the broader group like the red cluster in the lower left of the graph of 2000 comments about “Historical Baseball Identification and Contextualization.” So just a community of comments adding info about baseball related images.
+</p>
+			<p>Another one that caught my attention is the “Location and Status Verification” cluster that are comments on typically a <a href="https://guides.loc.gov/roadside-america-photographs" target="_blank">John Margolies</a> photograph commenting that what is depicted is still there. Or better yet a set or GPS coordinates or a link to a Google Maps page geolocating the image in the current world.</p>
+			<p>I took all of these comments, extracted the geo information from them and made a little site to browse all of the photos that had location comments added with the ability to view in google maps street view:
+</p>
+			<p><a class="button" href="https://thisismattmiller.github.io/LC-Flickr/apps/street_view/index.html" target="_blank">Open in new tab</a></p>
+			<p>Here is a demo video of the site:</p>
+
+			<video controls style="width: 100%;  margin-bottom: 3em;">
+			  <source src="/img/lc-flickr-geo.webm" type="video/webm">
+			  Your browser does not support the video tag.
+			</video>
+
+			
+			<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Comments</h2>
+
+			<p>Overall there were a lot of comments made on these photos on the Flickr site. Here is a histogram for the whole 17 years:</p>
+
+
+		</div>
+	</div>
+
+				
+</div>
+
+
+
+<div class="iframe-container" style="height: 600px;">
+<iframe style="width: 100%; height: 600px; border: none;" src="https://thisismattmiller.github.io/LC-Flickr/apps/viz_histogram/dist/index.html"></iframe>
+</div>
+
+
+
+
+
+<div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">	
+
+
+			<p>Here is a list of the top 50 photos with the most comments:
+
+
+    <table style="    width: 100%;">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/2179930812/" target="_blank">Woman aircraft worker, Vega Aircraft Corporation, Burbank, Calif. (LOC)</a></td>
+                <td>415</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/4427422524/" target="_blank">[Irish spinner and spinning wheel. County Galway, Ireland] (LOC)</a></td>
+                <td>412</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/2179172498/" target="_blank">Negro boy near Cincinnati, Ohio (LOC)</a></td>
+                <td>410</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/3551599565/" target="_blank">Destitute pea pickers in California. Mother of seven children (LOC)</a></td>
+                <td>341</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/2179038448/" target="_blank">Operating a hand drill at Vultee-Nashville, woman is working on a "Vengeance" dive bomber (LOC)</a></td>
+                <td>257</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/2179913094/" target="_blank">Worker at carbon black plant, Sunray, Texas (LOC)</a></td>
+                <td>208</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/2179137591/" target="_blank">This girl in a glass house is putting finishing touches on the bombardier nose section (LOC)</a></td>
+                <td>177</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/3174194065/" target="_blank">[Svartisen, Nordland, Norway] (LOC)</a></td>
+                <td>168</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/3175016732/" target="_blank">[Bondhus glacier and lake, Hardanger Fjord, Handanger, Norway] (LOC)</a></td>
+                <td>162</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.flickr.com/photos/library_of_congress/2179047512/" target="_blank">Poster for a side show at the Vermont state fair, Rutland (LOC)</a></td>
+                <td>154</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <details>
+        <summary>Show remaining 40 photos (11-50)</summary>
+        <table style="    width: 100%;">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2162646403/" target="_blank">[Germany Schaefer, Washington AL (baseball)] (LOC)</a></td>
+                    <td>148</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3548859587/" target="_blank">Chicago, Illinois. In the waiting room of the Union Station (LOC)</a></td>
+                    <td>143</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179060449/" target="_blank">Carpenter at work on Douglas Dam, Tennessee (TVA) (LOC)</a></td>
+                    <td>143</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179849362/" target="_blank">A carpenter at the TVA's new Douglas dam on the French Broad River (LOC)</a></td>
+                    <td>128</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2163474742/" target="_blank">Col. Villa (LOC)</a></td>
+                    <td>125</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3174174579/" target="_blank">[Kongen og Dronningen, Bispen, Norway] (LOC)</a></td>
+                    <td>117</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3174172461/" target="_blank">[The Tivoli park, Copenhagen, Denmark] (LOC)</a></td>
+                    <td>117</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179139715/" target="_blank">Crane operator at TVA's Douglas Dam, Tennessee (LOC)</a></td>
+                    <td>117</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179923220/" target="_blank">Women at work on bomber, Douglas Aircraft Company, Long Beach, Calif. (LOC)</a></td>
+                    <td>115</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179925802/" target="_blank">Women are trained to do precise and vital engine installation work (LOC)</a></td>
+                    <td>114</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/4120064280/" target="_blank">[Arcade, Rotterdam, Holland] (LOC)</a></td>
+                    <td>110</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179931106/" target="_blank">[Grand Grocery Co.], Lincoln, Neb. (LOC)</a></td>
+                    <td>110</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3174172875/" target="_blank">[Copenhagen, Helsingborg, Sweden] (LOC)</a></td>
+                    <td>108</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2162723195/" target="_blank">G. Washington's teeth (LOC)</a></td>
+                    <td>106</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3253744672/" target="_blank">[Abraham Lincoln, Congressman-elect from Illinois. Three-quarter length portrait] (LOC)</a></td>
+                    <td>102</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179057897/" target="_blank">Tank driver, Ft. Knox, Ky. (LOC)</a></td>
+                    <td>93</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179931690/" target="_blank">General view of one of the classification yards of the Chicago and Northwestern Railroad (LOC)</a></td>
+                    <td>90</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3174173093/" target="_blank">[General view, Ålesund, Norway] (LOC)</a></td>
+                    <td>86</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2178246751/" target="_blank">House, Houston, Texas (LOC)</a></td>
+                    <td>86</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179131683/" target="_blank">[Display of home-canned food] (LOC)</a></td>
+                    <td>84</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179055031/" target="_blank">Tank commander, Ft. Knox, Ky. (LOC)</a></td>
+                    <td>83</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/4712018396/" target="_blank">[Blue grotto, Capri Island, Italy] (LOC)</a></td>
+                    <td>81</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179058148/" target="_blank">Bayou Bourbeau plantation, a Farm Security Administration co-operative (LOC)</a></td>
+                    <td>79</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3175010584/" target="_blank">[Fantoft Church, Bergen, Norway] (LOC)</a></td>
+                    <td>76</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179139371/" target="_blank">Children in the tenement district, Brockton, Mass. (LOC)</a></td>
+                    <td>75</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179918784/" target="_blank">Woman putting on her lipstick in a park with Union Station behind (LOC)</a></td>
+                    <td>74</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179048484/" target="_blank">"Backstage" at the "girlie" show at the Vermont state fair, Rutland (LOC)</a></td>
+                    <td>74</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179909780/" target="_blank">Dr. Schreiber of San Augustine giving a typhoid innoculation (LOC)</a></td>
+                    <td>72</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/4426684715/" target="_blank">[Rope Bridge, Carrick-a-Rede. County Antrim, Ireland] (LOC)</a></td>
+                    <td>68</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179117431/" target="_blank">Japanese-American camp, war emergency evacuation, [Tule Lake Relocation Center] (LOC)</a></td>
+                    <td>67</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3175012360/" target="_blank">[Gols Church, with Hovenstuen and Staburet, Christiania, Norway] (LOC)</a></td>
+                    <td>63</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2163735434/" target="_blank">Burgess (LOC)</a></td>
+                    <td>62</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179929808/" target="_blank">Smoke stacks (LOC)</a></td>
+                    <td>61</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179038972/" target="_blank">Shepherd with his horse and dog on Gravelly Range, Madison County, Mont. (LOC)</a></td>
+                    <td>61</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179931434/" target="_blank">Children gathering potatoes on a large farm, vicinity of Caribou, Aroostook County, Me. (LOC)</a></td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/4427447306/" target="_blank">[Glenariff. County Antrim, Ireland] (LOC)</a></td>
+                    <td>56</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/4843765564/" target="_blank">[Portrait of Billie Holiday, Downbeat, New York, N.Y., ca. Feb. 1947] (LOC)</a></td>
+                    <td>55</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/3752441496/" target="_blank">[Swallow Falls II, Fairy Glen, Bettws-y-Coed (i.e. Betws), Wales] (LOC)</a></td>
+                    <td>54</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2163950720/" target="_blank">Summer scene, N.Y. (LOC)</a></td>
+                    <td>54</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.flickr.com/photos/library_of_congress/2179139231/" target="_blank">[Electric phosphate smelting furnace used in the making of elemental phosphorous] (LOC)</a></td>
+                    <td>51</td>
+                </tr>
+            </tbody>
+        </table>
+    </details>
+
+
+			<h2 id="Pareto" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Pareto Principle </h2>
+
+			
+			<p>There are other types of interactions like Tagging, users adding a folksonomy and Notes which are commenting on a region in the image. I was curious if the “80/20” rule applied to all types of user interaction. The idea is basically that 80 percent of the work/effort/whatever of something comes from 20 percent of the people involved. I always associated this metric towards crowdsourcing projects since I learned about it during my NYPL Labs days with all of our crowdsourcing projects. It is formally called the <a href="https://en.wikipedia.org/wiki/Pareto_principle" target="_blank">Pareto principle</a> and before I ran the numbers I knew for certain it would be true for this data, because it always is for crowdsourcing but would it be 20% or smaller? Here is an interface to explore the data:</p>
+
+
+		</div>
+	</div>
+
+				
+</div>
+
+
+
+<div class="iframe-container" style="height: 700px;">
+<iframe style="width: 100%; height: 700px; border: none;" src="https://thisismattmiller.github.io/LC-Flickr/apps/viz_user_activity/dist/index.html"></iframe>
+</div>
+
+
+
+
+
+<div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">	
+
+
+			<p>The data shows for comments it is only 11% of users that made 80% of all comments. For Notes it is a little larger with 14% making most of them but for Tags it is extreme with 1% of users responsible for 80% of all tags. The Tags figure is skewed by one single user doing over 70,000 tags and I’m not sure if this was an automated process. Like all crowdsourcing projects these interactions follow the trend of a small core group of individuals really passionate about the material.
+</p>
+
+			</p>
+
+			<h2 id="Tags" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Tags vs Subjects</h2>
+
+
+			<p>Each LC photo on Flickr actually has a MARC record created for it in the LC catalog, which is pretty amazing. Of course there are a lot of useful things that can be in a MARC record including things like Subjects Headings. I wanted to explore two areas using subjects (LCSH) one being the popularity of subjects and the other the relationship between Flickr Tags and the subject headings. 
+</p>
+			<p>The first is popularity of particular subjects, popularity meaning what LCSH headings had the most interaction on? To do this I just pulled the topical subfields ($a) for each photo and added up the interactions. This interfaces lets you explore that data, it also includes popularity based on subcollection:
+</p>
+			<p>
+				
+				<a class="button" href="https://thisismattmiller.github.io/LC-Flickr/apps/viz_subject_collection_popularity/" target="_blank">Open in new tab</a>
+			</p>
+			<p>I did not see any obvious patterns, I think it mostly falls around collection strength, there are a lot of World War photographs, so that is going to be a popular topic. Likewise for the collection popularity, the majority of the photos comes from <a href="https://www.loc.gov/pictures/collection/ggbain/" target="_blank">the Bain Collection</a> so that will have the most interactions but it is still interesting to see them listed out sorted by interactions.</p>
+			<p>The other area with subject headings I thought would be interesting is Folksonomy vs Vocabulary. The LCSH headings come from the photo record and the Tags come from Flickr users. I was curious if there are any patterns between what LCSH headings would be assigned vs what the Flickr users are adding to the images.</p>
+						<p><a class="button" href="https://thisismattmiller.github.io/LC-Flickr/apps/lcsh_vs_tags/" target="_blank">Open in new tab</a></p>
+
+
+			<p>Let’s look at one example photos with the LCSH headings “Miniature golf” 
+</p>
+			<p><img src="/img/post_lc_flickr_mini_golf.png" alt="Miniature golf" /></p>
+			
+			<p>You can see the authorized headings “Miniature golf” and it has one variant “Golf, Miniature” compared to the Tags Flickr users have added. There are a couple useful variants added such as “mini golf” and “put-put” that would probably make good additions to the LCSH variant labels. But most of the Tags are image specific taggings identifying mini golf locations or features. Some of the tags like Dinosaurs do have LCSH equivalents and were added to the MARC record. Here is a list of all LCSH headings added to the miniature golf images:
+</p>
+			<div>
+				<ul class="lcsh-list" >
+<li>$a Log cabins $y 1980-1990.</li>
+<li>$a Dinosaurs $y 1990-2000.</li>
+<li>$a Lighthouses $y 2000-2010.</li>
+<li>$a Miniature golf $y 1980-1990.</li>
+<li>$a Sharks $y 1980-1990.</li>
+<li>$a Lighthouses $y 1970-1980.</li>
+<li>$a Sculpture $y 1980-1990.</li>
+<li>$a Horses.</li>
+<li>$a Tipis $y 1980-1990.</li>
+<li>$a Octopuses $y 1980-1990.</li>
+<li>$a Pagodas $y 1980-1990.</li>
+<li>$a Pirates $y 1980-1990.</li>
+<li>$a Lighthouses $y 1990-2000.</li>
+<li>$a Lighthouses $y 1980-1990.</li>
+<li>$a Miniature golf $y 2000-2010.</li>
+<li>$a Merry-go-rounds $y 1980-1990.</li>
+<li>$a Totem poles $y 1980-1990.</li>
+<li>$a Sculpture $y 1970-1980.</li>
+<li>$a Miniature golf $y 1970-1980.</li>
+<li>$a Skulls $y 1980-1990.</li>
+<li>$a Trading posts $y 1980-1990.</li>
+<li>$a Signs (Notices) $y 1980-1990.</li>
+<li>$a Rabbits $y 1980-1990.</li>
+<li>$a Signs (Notices) $y 1990.</li>
+<li>$a Obelisks $y 1980-1990.</li>
+<li>$a Windmills $y 1970-1980.</li>
+<li>$a Dinosaurs $y 1980-1990.</li>
+<li>$a Roller coasters $y 1980-1990.</li>
+<li>$a Signs (Notices) $y 2000-2010.</li>
+<li>$a Tipis $y 1970-1980.</li>
+<li>$a Miniature golf $y 1990.</li>
+<li>$a Drive-in theaters $y 1980-1990.</li>
+<li>$a Sculpture $y 1990-2000.</li>
+<li>$a Castles & palaces $y 1980-1990.</li>
+<li>$a Dinosaurs $y 1970-1980.</li>
+<li>$a Houses $y 1980-1990.</li>
+<li>$a Lighthouses $y 1990.</li>
+<li>$a Swine $y 1980-1990.</li>
+<li>$a Waiters $y 1990.</li>
+<li>$a Shoes $y 1980-1990.</li>
+<li>$a Frogs $y 1980-1990.</li>
+<li>$a Barns $y 1980-1990.</li>
+<li>$a Windmills $y 2000-2010.</li>
+<li>$a Signs (Notices) $y 1970-1980.</li>
+<li>$a Miniature golf $y 1990-2000.</li>
+<li>$a Whales $y 1980-1990.</li>
+<li>$a Windmills $y 1980-1990.</li>
+					
+				</ul>
+
+			</div>
+			<p>These are all the unique headings, each photo would have at least an $a Miniature golf and a $y and then some of them would also have the descriptive feature $a like Frogs or Windmills. LCSH does provide the ability to do this more fine grain topical assignment and the cataloger has utilized it. So in that case I don’t see an advantage of the Folksonomy usage there. But for some of the Name based Tags identifying specific golf courses it is nice because a Name Authority would not be created for those within the library ecosystem so being able to tag entities ad-hoc without the overhead of authority control. Again nothing super surprising here, Folksonomies work well for some things but it really comes down to the application of the correct system and how consistent it is applied.
+</p>
+<h2 id="Wiki" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Wiki* Integration</h2>
+
+			<p>The last important point I wanted to look into and explore is how these images fit into the internet’s knowledge system, specifically Wikimedia projects. If you explore the comment graph above you will notice a lot of links to Wikipedia and Wikidata. Those projects allow users to immediately act upon information they are creating interacting with the photos. A lot of comments are things like “I just created a Wikipedia article for them” resulting in the collection seeding information into the internet’s knowledge graph. It also helps that these images are public domain and are being ingested into Wikicommons allowing them to be included in any Wikipedia or Wikidata resources created. But in my mind it provides a huge benefit and boost to the user’s ability to contribute back if the resources are tied to Wiki* projects as much as possible. 
+</p>
+			<p>I wanted to try to explore how these images fit into the Wiki ecosystem so I took all the comments that had a Wikipedia or Wikidata link in them and built a large navigable graph interface to display the photos and the Wiki* resources they are attached to.
+</p>
+			<p>You can watch this video of me interacting with the graph or explore it yourself:
+</p>
+
+			<details style="margin-bottom: 3em;">
+								  <summary>Demo Video</summary>
+			  <video controls style="width: 100%;  margin-bottom: 3em;">
+				  <source src="https://thisismattmiller.s3.us-east-1.amazonaws.com/lc-flickr-wiki.webm" type="video/webm">
+				  Your browser does not support the video tag.
+				</video>	
+
+			</details>
+
+		</div>
+	</div>
+
+				
+</div>
+
+
+<div class="iframe-container" style="height: 700px;">
+<iframe style="width: 100%; height: 700px; border: none;" src="https://thisismattmiller.github.io/LC-Flickr/apps/graph/dist/index.html"></iframe>
+</div>
+
+
+
+<div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">	
+			<p>
+				<a class="button" href="https://thisismattmiller.github.io/LC-Flickr/apps/graph/dist/index.html" target="_blank">Open in new tab</a>
+			</p>
+
+			<p>The images are populated and then the Wiki* links are resolved and those entities are also added to the graph. So it is building a large interconnected network based on what the Flickr user thought was important to tag in the image. I don’t really think of this as a good interface but I wanted to show the magnitude of information and how empowered users are able to place resources into that context. This graph was built only based on Flickr users adding Wiki* links to their comments and just represent around a quarter of the total images.
+</p>
+
+			<p style="margin-bottom: 5em;">That brings us to the end of what I looked at with this data. I think this is a really interesting project dataset because of its longevity and the range of user activities it encompasses. </p>
+		</div>
+	</div>
+
+				
+</div>
+
+
+

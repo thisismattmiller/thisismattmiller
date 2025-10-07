@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/</loc>
-    <lastmod>2025-07-29T00:00:00+00:00</lastmod>
+    <loc>https://thisismattmiller.com/post/lc-flickr-commons/</loc>
+    <lastmod>2025-10-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/</loc>
-    <lastmod>2025-07-29T00:00:00+00:00</lastmod>
+    <lastmod>2025-10-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/post/</loc>
+    <lastmod>2025-10-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/</loc>
     <lastmod>2025-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/post/glitch/</loc>

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LC &amp; Flickr Commons</title>
+      <link>https://thisismattmiller.com/post/lc-flickr-commons/</link>
+      <pubDate>Fri, 03 Oct 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/lc-flickr-commons/</guid>
+      <description>Library of Congress &amp; Flickr Commons Analysis of user interactions on 40,000 images Oct 6 2025 Intro Flickr Commons is a program to bring the visual collections of cultural heritage organizations to new audiences. Getting these resources in front of people where they are online as opposed to being siloed in their own website or not online at all. It was a pretty ground breaking project, the Library of Congress was the first participant with over 40,000 photos now on Flickr.</description>
+    </item>
+    
     <item>
       <title>Building datasets from video collections using local &amp; cloud LLMs</title>
       <link>https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/</link>

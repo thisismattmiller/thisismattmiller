@@ -1,0 +1,301 @@
++++
+title = "Book Bans 2025"
+date = "2025-10-17"
+description = "Analysis of PEN America Book Ban Data"
+twitterimage  = "https://thisismattmiller.com/img/book_bans_2025.jpg"
++++
+
+
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+  	summary{
+	    display: list-item !important;
+	    counter-increment: list-item 0;
+	    list-style: inside disclosure-closed;  		
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+  	
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+				line-height: 1.75em;
+
+  	}
+
+
+	#app-subject-components ul {
+	  columns: 3;
+	  -webkit-columns: 3;
+	  -moz-columns: 3;
+	}		
+	#app-subject-complex ul {
+	  columns: 2;
+	  -webkit-columns: 2;
+	  -moz-columns: 2;
+	}
+
+
+
+
+
+	@keyframes float {
+		0% {
+			
+			transform: translatey(0px);
+		}
+		50% {
+			
+			transform: translatey(-20px);
+		}
+		100% {
+			
+			transform: translatey(0px);
+		}
+	}
+ 	
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+    .state-subjects{
+    	margin-bottom: 3em;
+    }
+
+
+	tr{
+		
+		transition-duration: 0.5s;
+	}
+	tr:hover{
+		background-color: aliceblue;
+
+	}
+	li{
+		
+		transition-duration: 0.5s;
+	}
+	li:hover{
+		background-color: aliceblue;
+
+	}
+
+
+
+@media only screen and (min-width: 768px) {
+    /* tablets and desktop */
+    .treemap{
+    	width: 75%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* phones */
+    .treemap{
+    	width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
+    .treemap{
+    	width: 100%;
+    }
+
+
+}
+
+.lcsh-list{
+	column-count: 4; font-size: 0.9em;
+	margin-bottom: 3em;
+}
+.lcsh-list li{
+	margin-bottom: 0.1em;
+}
+li{
+	margin-bottom: 1em;
+	font-size: 1em;
+
+}
+ol, ul{
+	padding-left: 2em;
+	font-size: 1.1em;
+}
+
+.iframe-container {
+	position: relative;
+	width: 100%;
+	height: 800px;
+	overflow: hidden;
+	border-top: dashed 2px black;
+	border-bottom: dashed 2px black;
+	margin-bottom: 3em;
+
+}
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Book Bans 2025</h1>
+	      	<h2 class="is-size-4 has-text-grey">Analysis of PEN America Book Ban Data</h2>
+	      	<h2 class="is-size-5 has-text-grey">Oct 17 2025</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:center;">
+	    	<img style="width: 55%;" class="doodle-mono-right-header" src="/img/book_bans_2025.png" title="A drawing of a library checkout slip that says 'Book Bans 2025'."/>
+	    </div>
+	</div>
+
+
+
+
+
+
+    <div class="columns">
+
+
+			<div class="column" style="">				
+
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Intro</h2>
+
+				<p>
+					
+                    PEN America released their <a href="https://pen.org/report/the-normalization-of-book-banning" target="_blank">Book Bans 2025 list</a> which aggregates books that have been banned in US school districts for 2024-2025. They also kindly released the <a href="https://pen.org/book-bans/pen-america-index-of-school-book-bans-2024-2025/" target="_blank">spreadsheet of data</a> which lets me take the titles and author list and do some enrichment and analysis. I did something similar a couple years ago that can be <a href="https://thisismattmiller.com/post/banned-metadata/" target="_blank">found here</a>, unfortunately there is a lot more data for this year and I had some new thoughts on how to explore it. In this post we are going to look at the data through two lenses: Geographic and Subject Headings.
+				</p>
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Data + Code</h2>
+                <p>Using the data CSV from PEN I reconciled most of it using <a href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service" target="_blank">this Openrefine service</a> against Library of Congress, Google Books and Worldcat, and then ran some more scripts to further enrich the data. All the code I used to do everything on this page, code and data can be found in <a href="https://github.com/thisismattmiller/book-bans-2025" target="_blank">this Github repo</a>.</p>
+
+			
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Geographic</h2>
+<p>I wanted to plot the book bans as much as possible to see them on a map. I always feel a little disconnected when referencing distant school districts that I have no idea where they are. So I took the school district and reconciled them to get their home County, this is not as granular as I wanted as there can be multiple school districts in a single county but at least it gets it down to a more local level. I plotted all those and put them on an interactive map. You can explore the map through clicking, panning and zooming below or</p>
+			<p><a class="button" href="https://thisismattmiller.github.io/book-bans-2025/apps/map/dist/" target="_blank">Open in new tab</a></p>
+
+			</div>
+
+	</div>
+
+</div>
+
+
+
+
+<div class="iframe-container">
+<iframe style="width: 100%; height: 800px; border: none;" src="https://thisismattmiller.github.io/book-bans-2025/apps/map/dist/index.html"></iframe>
+</div>
+
+
+
+
+
+
+
+
+<div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">	
+
+            <p>The map represents the counties where a school district exists and has banned books. You can click on a county and see what books they specifically banned and filter on the subject. If there are multiple school districts in the same county you can select which one you want to view. I have to say when I saw the data like this it made me think of some sort of infection map. I noticed that counties that ban books are often adjacent to each other. I could imagine that there is some sort of spread from one school district that begins to ban books to others nearby either by similar groups or sympathetic local government or some other interconnected relationship.
+</p>
+<p>You’ll also notice military bases plotted. There is a large grouping (500+) of books banned by <a href="https://en.wikipedia.org/wiki/Department_of_Defense_Education_Activity" target="_blank">Department of Defense Education Activity</a> so I simply used the data from the wikipedia page to add bases that have schools on-site. I think this is accurate but I’m not familiar with how book bans work within DoDEA and if every school would ban everything on the list.</p>
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Explorer</h2>
+<p>After building the map I wanted to make a interface to better explore the 3700+ books so I made a traditional faceted browse interface that lets you search and browse:
+</p>
+			<p><a class="button" href="https://thisismattmiller.github.io/book-bans-2025/apps/explore/dist/" target="_blank">Open in new tab</a></p>
+
+		</div>
+	</div>
+
+				
+</div>
+
+
+
+<div class="iframe-container" style="height: 700px;">
+<iframe style="width: 100%; height: 700px; border: none;" src="https://thisismattmiller.github.io/book-bans-2025/apps/explore/dist/index.html"></iframe>
+</div>
+
+
+
+
+
+<div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">	
+
+				<h2 id="Intro" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Subjects</h2>
+
+
+<p>There are subjects in both of the interfaces above but I wanted to get a sense of what each region was focusing on in the books they are banning. These subjects are aggregated from three services so they are not all LCSH or some specific vocabulary. I also further reduced them by removing any audience or format subfields (like “Fiction”) to make them more collapsable. They are still useful without the authority control in conveying the meaning of the books. Here is the most common subjects by region, state then district:
+</p>
+			<p><a class="button" href="https://thisismattmiller.github.io/book-bans-2025/apps/by_state/dist/" target="_blank">Open in new tab</a></p>
+
+
+		</div>
+	</div>
+
+				
+</div>
+
+
+
+<div class="iframe-container" style="height: 700px;">
+<iframe style="width: 100%; height: 700px; border: none;" src="https://thisismattmiller.github.io/book-bans-2025/apps/by_state/dist/index.html"></iframe>
+</div>
+
+
+
+
+<div class="container">
+
+
+    <div class="columns">
+
+
+		<div class="column" style="">	
+
+            <p>The obvious distinction I see is that the states are kind of generalized with the most common headings being around Friendship and Romance which are the general story narrative and probably not why the book was banned by that district (think Friendship + Witches or Romance + Queer) while the DoDEA seems specifically focused on LGBTQ+ related topics.
+</p>
+<p>The PEN America project to track these bans and them sharing the data is really amazing and a great resource for exploring this issue further. 
+</p>
+
+
+		</div>
+	</div>
+
+				
+</div>
+
+

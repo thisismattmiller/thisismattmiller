@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Book Bans 2025</title>
+      <link>https://thisismattmiller.com/post/book-bans-2025/</link>
+      <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/book-bans-2025/</guid>
+      <description>Book Bans 2025 Analysis of PEN America Book Ban Data Oct 17 2025 Intro PEN America released their Book Bans 2025 list which aggregates books that have been banned in US school districts for 2024-2025. They also kindly released the spreadsheet of data which lets me take the titles and author list and do some enrichment and analysis. I did something similar a couple years ago that can be found here, unfortunately there is a lot more data for this year and I had some new thoughts on how to explore it.</description>
+    </item>
+    
     <item>
       <title>LC &amp; Flickr Commons</title>
       <link>https://thisismattmiller.com/post/lc-flickr-commons/</link>

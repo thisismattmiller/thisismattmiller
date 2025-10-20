@@ -45,6 +45,7 @@ for rows in sheet['rows']:
 
 
 cat_lookup = {}
+all_things = []  # Track all items with their dates for "newest" section
 
 
 try:
@@ -108,13 +109,16 @@ try:
 			})	
 
 
-		cat_lookup[cat_clean][cat_clean]['things'].append(
-				{	
-					"label":title,
-					"desc":desc,
-					"date":date,
-					"links":links
-				})
+		thing_data = {
+			"label":title,
+			"desc":desc,
+			"date":date,
+			"links":links
+		}
+
+		cat_lookup[cat_clean][cat_clean]['things'].append(thing_data)
+		all_things.append(thing_data)  # Add to global list for newest section
+
 except:
 
 
@@ -127,7 +131,26 @@ except:
 
 
 
+# Sort all_things by date descending and get the newest 5
+all_things_sorted = sorted(all_things, key=lambda x: x['date'], reverse=True)
+newest_5 = all_things_sorted[:5]
+
+# Create newest section
+newest_section = {
+	"newest": {
+		"newest": {
+			"label": "Newest",
+			"desc": "Most recent projects",
+			"things": newest_5
+		}
+	}
+}
+
 output  = ""
+# Add newest section first
+output = output + toml.dumps({"params": {"mystuff": newest_section}}) + "\n\n\n"
+
+# Add other categories
 for key in cat_lookup:
 	output = output + toml.dumps({"params": {"mystuff": cat_lookup[key]}}) + "\n\n\n"
 

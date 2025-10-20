@@ -49,6 +49,61 @@ twitimage = ""
 
 # HOMEPAGE ITEMS 
 
+[params.mystuff.newest.newest]
+label = "Newest"
+desc = "Most recent projects"
+[[params.mystuff.newest.newest.things]]
+label = "Book Bans 2025"
+desc = "Analysis of PEN America Book Ban Data 2025\n"
+date = "2025-10-17"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/book-bans-2025/"
+
+
+[[params.mystuff.newest.newest.things]]
+label = "Library of Congress & Flickr Commons\n"
+desc = "Analysis of user interactions on 40,000 images"
+date = "2025-10-06"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
+
+
+[[params.mystuff.newest.newest.things]]
+label = "Building datasets from video collections using local & cloud LLMs"
+desc = "Using Qwen2.5-VL, Gemini 2.5 and Whisper to build a Siskel and Ebert dataset"
+date = "2025-07-30"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
+
+
+[[params.mystuff.newest.newest.things]]
+label = "Migrating Glitch"
+desc = "Glitch.com closed down, so we must migrate, my experince and How-to"
+date = "2025-07-23"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/glitch/"
+
+
+[[params.mystuff.newest.newest.things]]
+label = "Public Domain 1929"
+desc = "Data and tools to explore 50,000 1929/2025 public domain titles in HathiTrus\n"
+date = "2025-02-05"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/hathi-pd-2025/"
+
+[[params.mystuff.newest.newest.things.links]]
+label = "Apps"
+url = "https://thisismattmiller.github.io/hathi-pd-2025/"
+
+
+
+
+
 [params.mystuff.datavisualization]
 label = "Data visualization"
 desc = "Data visualization"
@@ -672,6 +727,24 @@ label = "Apps"
 url = "https://thisismattmiller.github.io/hathi-pd-2025/"
 
 
+[[params.mystuff.metadata.things]]
+label = "Library of Congress & Flickr Commons\n"
+desc = "Analysis of user interactions on 40,000 images"
+date = "2025-10-06"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Book Bans 2025"
+desc = "Analysis of PEN America Book Ban Data 2025\n"
+date = "2025-10-17"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/book-bans-2025/"
+
+
 
 
 
@@ -987,6 +1060,15 @@ date = "2025-07-23"
 [[params.mystuff.creativecoding.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/glitch/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Building datasets from video collections using local & cloud LLMs"
+desc = "Using Qwen2.5-VL, Gemini 2.5 and Whisper to build a Siskel and Ebert dataset"
+date = "2025-07-30"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
 
 
 

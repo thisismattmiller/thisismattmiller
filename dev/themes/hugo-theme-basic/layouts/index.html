@@ -49,11 +49,44 @@
           {{ .Site.Title }}
         </h1>
         <a class="is-size-5" id="menu-links" href="about/">About</a>
-             
+
       </div>
     </div>
 
 
+
+  </div>
+  <div class="container">
+
+    <!-- Newest 5 Things Section -->
+    {{ if .Site.Params.mystuff.newest }}
+    <div class="columns">
+      <div class="column">
+        <h2 class="is-size-3 details-header">✦ {{ .Site.Params.mystuff.newest.newest.label }}</h2>
+        <style>
+          .newest-item {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.2s;
+          }
+          .newest-item:hover {
+            background-color: #f0f0f0;
+          }
+        </style>
+        <ul class="homepage-list-ul">
+          {{ range .Site.Params.mystuff.newest.newest.things }}
+          <li>
+            <a href="{{ (index .links 0).url }}" class="newest-item">
+              <span class="details-date">{{.date}}</span> - <strong>{{.label}}</strong> - {{.desc}}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+    {{ end }}
 
   </div>
   <div class="container">

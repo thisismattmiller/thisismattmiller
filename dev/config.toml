@@ -53,6 +53,15 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
+label = "Giallo"
+desc = "Using a vision language model to analyze Italian Giallo films"
+date = "2025-10-31"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/giallo/"
+
+
+[[params.mystuff.newest.newest.things]]
 label = "Book Bans 2025"
 desc = "Analysis of PEN America Book Ban Data 2025\n"
 date = "2025-10-17"
@@ -86,19 +95,6 @@ date = "2025-07-23"
 [[params.mystuff.newest.newest.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/glitch/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "Public Domain 1929"
-desc = "Data and tools to explore 50,000 1929/2025 public domain titles in HathiTrus\n"
-date = "2025-02-05"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/hathi-pd-2025/"
-
-[[params.mystuff.newest.newest.things.links]]
-label = "Apps"
-url = "https://thisismattmiller.github.io/hathi-pd-2025/"
 
 
 
@@ -1069,6 +1065,15 @@ date = "2025-07-30"
 [[params.mystuff.creativecoding.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
+
+
+[[params.mystuff.creativecoding.things]]
+label = "Giallo"
+desc = "Using a vision language model to analyze Italian Giallo films"
+date = "2025-10-31"
+[[params.mystuff.creativecoding.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/giallo/"
 
 
 

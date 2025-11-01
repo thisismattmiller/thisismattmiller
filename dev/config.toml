@@ -76,7 +76,7 @@ desc = "Analysis of user interactions on 40,000 images"
 date = "2025-10-06"
 [[params.mystuff.newest.newest.things.links]]
 label = "Blog"
-url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
+url = "https://thisismattmiller.com/post/lc-flickr-commons/"
 
 
 [[params.mystuff.newest.newest.things]]
@@ -729,7 +729,7 @@ desc = "Analysis of user interactions on 40,000 images"
 date = "2025-10-06"
 [[params.mystuff.metadata.things.links]]
 label = "Blog"
-url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
+url = "https://thisismattmiller.com/post/lc-flickr-commons/"
 
 
 [[params.mystuff.metadata.things]]

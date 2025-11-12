@@ -6,7 +6,16 @@
     <description>Recent content on Matt Miller</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://thisismattmiller.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LCNAF &amp; Trie</title>
+      <link>https://thisismattmiller.com/post/lcnaf-trie/</link>
+      <pubDate>Wed, 12 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://thisismattmiller.com/post/lcnaf-trie/</guid>
+      <description>LCNAF &amp; Trie Storing +11M unique LCNAF names in 50MB Trie data structure Nov 12 2025 Intro Trie Data Structure &amp; LCNAF Application - Client Lookup and MARC Reconciliation Application - Interface for Humans Application - OpenRefine, Simple API and Command Line Limitations Takeaways Intro The core of this post is looking at a pretty niche problem but it spans across a number of interconnected interests including controlled vocabularies, data structures and web development within library data.</description>
+    </item>
+    
     <item>
       <title>Giallo</title>
       <link>https://thisismattmiller.com/post/giallo/</link>

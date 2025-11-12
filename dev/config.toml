@@ -53,6 +53,15 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
+label = "LCNAF + Trie"
+desc = "Storing +11M unique LCNAF names in a 50MB trie data structure"
+date = "2025-11-12"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/lcnaf-trie/"
+
+
+[[params.mystuff.newest.newest.things]]
 label = "Giallo"
 desc = "Using a vision language model to analyze Italian Giallo films"
 date = "2025-10-31"
@@ -86,15 +95,6 @@ date = "2025-07-30"
 [[params.mystuff.newest.newest.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "Migrating Glitch"
-desc = "Glitch.com closed down, so we must migrate, my experince and How-to"
-date = "2025-07-23"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/glitch/"
 
 
 
@@ -739,6 +739,15 @@ date = "2025-10-17"
 [[params.mystuff.metadata.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/book-bans-2025/"
+
+
+[[params.mystuff.metadata.things]]
+label = "LCNAF + Trie"
+desc = "Storing +11M unique LCNAF names in a 50MB trie data structure"
+date = "2025-11-12"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/lcnaf-trie/"
 
 
 

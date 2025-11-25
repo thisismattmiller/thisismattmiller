@@ -53,6 +53,19 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
+label = "Email Visualization"
+desc = "Visualizing 14,000 Released Epstein Emails"
+date = "2025-11-25"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/email-visualization/"
+
+[[params.mystuff.newest.newest.things.links]]
+label = "Viz"
+url = "https://thisismattmiller.github.io/email-viz/viz/dist/"
+
+
+[[params.mystuff.newest.newest.things]]
 label = "LCNAF + Trie"
 desc = "Storing +11M unique LCNAF names in a 50MB trie data structure"
 date = "2025-11-12"
@@ -86,15 +99,6 @@ date = "2025-10-06"
 [[params.mystuff.newest.newest.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/lc-flickr-commons/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "Building datasets from video collections using local & cloud LLMs"
-desc = "Using Qwen2.5-VL, Gemini 2.5 and Whisper to build a Siskel and Ebert dataset"
-date = "2025-07-30"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/building-datasets-from-video-collections-using-local-cloud-llms/"
 
 
 
@@ -294,6 +298,19 @@ url = "https://thisismattmiller.github.io/hathi-pd-2022/"
 [[params.mystuff.datavisualization.things.links]]
 label = "1925 (2021)"
 url = "https://thisismattmiller.github.io/1925-hathi/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Email Visualization"
+desc = "Visualizing 14,000 Released Epstein Emails"
+date = "2025-11-25"
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/email-visualization/"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "Viz"
+url = "https://thisismattmiller.github.io/email-viz/viz/dist/"
 
 
 

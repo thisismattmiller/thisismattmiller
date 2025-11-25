@@ -1,0 +1,295 @@
++++
+title = "Email Visualization"
+date = "2025-11-24"
+description = "Visualizing 14,000 Released Epstein Emails"
+twitterimage  = "https://thisismattmiller.com/img/email-viz-logo.jpg"
++++
+
+
+
+
+  <style type="text/css">
+
+  	.count-list-item:nth-child(odd){
+  		background-color: whitesmoke;
+  	}
+  	summary{
+	    display: list-item !important;
+	    counter-increment: list-item 0;
+	    list-style: inside disclosure-closed;
+  	}
+
+  	code{
+  		color: #313131 !important;
+  	}
+  	#count-list{
+  		max-height: 830px;
+  		overflow-y: scroll;
+  		overflow-x: hidden;
+  	}
+
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+			line-height: 1.75em;
+
+  	}
+
+
+	#app-subject-components ul {
+	  columns: 3;
+	  -webkit-columns: 3;
+	  -moz-columns: 3;
+	}
+	#app-subject-complex ul {
+	  columns: 2;
+	  -webkit-columns: 2;
+	  -moz-columns: 2;
+	}
+
+
+
+
+	@keyframes float {
+		0% {
+
+			transform: translatey(0px);
+		}
+		50% {
+
+			transform: translatey(-20px);
+		}
+		100% {
+
+			transform: translatey(0px);
+		}
+	}
+
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+	canvas{
+    /*margin: 0 auto;*/
+    	/*width: 75% !important;*/
+    	/*height: 500px !important;*/
+    }
+
+    .doodle-mono-right-header {
+    	-webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	                     linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	-webkit-mask-composite: source-in;
+    	mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	            linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	mask-composite: intersect;
+    }
+
+    .state-subjects{
+    	margin-bottom: 3em;
+    }
+
+
+	tr{
+
+		transition-duration: 0.5s;
+	}
+	tr:hover{
+		background-color: aliceblue;
+
+	}
+	li{
+
+		transition-duration: 0.5s;
+	}
+	li:hover{
+		background-color: aliceblue;
+
+	}
+
+
+
+@media only screen and (min-width: 768px) {
+    /* tablets and desktop */
+    .treemap{
+    	width: 75%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* phones */
+    .treemap{
+    	width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    /* portrait phones */
+    .treemap{
+    	width: 100%;
+    }
+
+
+}
+
+.lcsh-list{
+	column-count: 4; font-size: 0.9em;
+	margin-bottom: 3em;
+}
+.lcsh-list li{
+	margin-bottom: 0.1em;
+}
+li{
+	margin-bottom: 1em;
+	font-size: 1em;
+
+}
+ol, ul{
+	padding-left: 2em;
+	font-size: 1.1em;
+}
+
+.iframe-container {
+	position: relative;
+	width: 100%;
+	height: 950px;
+	overflow: hidden;
+	border-top: dashed 2px black;
+	border-bottom: dashed 2px black;
+	margin-bottom: 3em;
+
+}
+
+@media only screen and (max-width: 1120px) {
+	iframe[width="1120"] {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+	}
+}
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Email Visualization</h1>
+	      	<h2 class="is-size-4 has-text-grey">Visualizing 14,000 Released Epstein Emails</h2>
+	      	<h2 class="is-size-5 has-text-grey">Nov 24 2025</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:center;">
+	    	<img style="width: 45%;" class="doodle-mono-right-header" src="/img/email-viz-logo.jpg" title="Email visualization"/>
+	    </div>
+	</div>
+
+
+
+  </div>
+
+
+
+
+<div class="container">
+    <div class="columns">
+
+
+		<div class="column" style="">
+
+        <p>Browsing the 20,000 Epstein documents <a href="https://oversight.house.gov/release/oversight-committee-releases-additional-epstein-estate-documents/" target="_blank">released</a> by the House Oversight Committee using tools people built such as this <a href="https://journaliststudio.google.com/pinpoint/search?collection=092314e384a58618&utm_source=collection_share_link" target="_blank">searchable interface</a> or even <a href="https://epsteinvisualizer.com/" target="_blank">network graph</a> is interesting but still kind of opaque. I was thinking about what a browseable interface for thousands of emails would look like. If you have time as the x-axis and people as the y-axis you could "plot" all of them at once. I'm kind of obsessed with the idea of seeing everything at once but still being able to access the individual part. I took the emails released and built an interface based on this idea. I like it as an experiment to give a visible chronological aspect to a digital collection and a way to wrap your mind around the scope and extent of the documents. You can see the shape of communication between Epstein and people who wanted to talk to him and it gives you a way to slice into that query.
+        </p>
+
+        <h2 id="Data" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Data</h2>
+
+        <p>Quick note on the data, yes there are 20K documents, but only around 5700 of them are emails. These emails are not digital data files, they are PICTURES of an email. So imagine doing a "print to pdf" of each gmail email and then taking a screen shot of that. Meaning these pictures are of email threads, if you do the work to take all those apart you end up with around 12,600 emails sent to Epstein or received by him. Let's jump into the visualization and then the second part of the blog documents the process if you are interested.
+        </p>
+
+        <p>Open in a new window (recommended, not meant for mobile either) or use the embedded version below or click the video link to see a video demo of the viz.</p>
+
+<details style="margin: 2em 0;" id="videoDetails">
+  <summary style="cursor: pointer; font-size: 1.25em; margin-bottom: 1em;">View video demo</summary>
+  <div style="text-align: center; margin-top: 1em;">
+    <video id="demoVideo" controls style="width: 100%; max-width: 800px; margin: 0 auto; display: block;">
+      <source src="https://thisismattmiller.s3.us-east-1.amazonaws.com/email-viz.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</details>
+
+<script>
+  (function() {
+    const details = document.getElementById('videoDetails');
+    const video = document.getElementById('demoVideo');
+
+    details.addEventListener('toggle', function() {
+      if (details.open) {
+        video.play();
+      } else {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+  })();
+</script>
+
+<div style="text-align: center; margin: 2em 0;">
+    <a href="https://thisismattmiller.github.io/email-viz/viz/dist/" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3273dc; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; transition: background-color 0.3s;">
+      Open in New Window
+    </a>
+  </div>
+
+  </div>
+  </div>
+</div>
+
+
+<div class="iframe-container">
+<iframe style="width: 100%; height: 950px; border: none;" src="https://thisismattmiller.github.io/email-viz/viz/dist/?embedded"></iframe>
+</div>
+
+
+
+<div class="container">
+
+   <div class="columns">
+
+
+		<div class="column" style="">
+
+        <h2 id="Process" class="is-size-4" style="margin-top: 3em; margin-bottom: 0.5em;">Process</h2>
+
+        <p>As I mentioned above there are 20K files but not all of them are emails. To sort the thousands of documents I use the vision model Qwen3-VL quantized 8B runs locally on my 4090 nicely. I sent each image off and returned if it was an email or not and if not what kind of document. Those results can be seen <a href="https://github.com/thisismattmiller/email-viz/tree/main/data" target="_blank">here</a> (###_results.json) which might be useful to someone else. Once I narrowed the document set down to about 5700 images I sent each one to Gemini 2.5 pro to extract data in this format:
+        </p>
+
+<pre>
+{
+  "sender": "Jeevacation",
+  "senderEmail": "jeevacation@gmail.com",
+  "senderGuess": "Jeffrey Epstein",
+  "receiver": "Gmax",
+  "receiverEmail": "gmax1@ellmax.com",
+  "date": "2010-11-10-20-53",
+  "subject": "Re:",
+  "summary": "The sender sarcastically lists a wide variety of luxurious foods and...",
+  "messageType": "Reply"
+}
+</pre>
+
+        <p style="margin-top: 2em;">There were datasets already available of people using OCR on the released files to dump all the images to text. But I think using the original image retains the structure and provides an easier method of extracting the many nested emails rather than a jumble of OCR text.
+        </p>
+
+        <p>If the name was totally redacted for a lot of the emails I asked the model to guess to the sender based on other context clues in the email, for example there are emails where the name is redacted but then in the signature it says "Sent from XYZ's iPhone!" so it can fill in the blank. Or sometimes on long email chains the initial email's name would be redacted but then nested messages from earlier in the conversation were unredacted so you can connect those emails together. Once in this form there was some cleanup of the names to map name variations and then connecting it back to the original documents published by the Oversight Committee on Dropbox.
+        </p>
+
+        <p>Overall I think it is a nice experiment. I don't think it will be revealing anything new as the documents are pretty well combed though. But I do like the idea of being able to see the "shape" of the emails for each contact. When did contact start, how long, when were busy periods, etc. I was thinking of adding some timeline overlays, say major political events or other timelines to give a chronological context to what was happening in the world when the emails were being sent. Otherwise I think it is a decent approach to presenting a really opaque and hard to dissect dataset, something I think we'll be seeing more examples of in the future.
+        </p>
+        <p>Code and data on <a href="https://github.com/thisismattmiller/email-viz" target="_blank">GitHub</a>.</p>
+        
+
+		</div>
+
+	</div>
+</div>

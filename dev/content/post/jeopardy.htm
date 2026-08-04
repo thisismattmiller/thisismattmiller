@@ -124,55 +124,32 @@ twitterimage  = "https://thisismattmiller.com/img/tribect.gif"
 
 		<div class="column" style="">
 
-        <p>I have been looking at trivia game stuff recently and also been thinking about ROM emulation files, for old console gaming systems like Nintendo, as a data corpus. And it made me remember seeing these Jeopardy games around growing up and thinking how awful they must be. But now that I&rsquo;m old I kind of think they are neat, or at least conceptually. There ended up being quite a lot of games released over the ~10 years that cartridge systems were hugely popular. And I wondered what kind of questions were on these things? The market is of course mostly for children but the Jeopardy brand is pretty serious trivia. So I gathered them up and extracted the questions and did some analysis. The list of games used:
+        <p>I have been looking at trivia game stuff recently and also been thinking about ROM emulation files, for old console gaming systems like Nintendo, as a data corpus. And it made me remember seeing these Jeopardy games around growing up and thinking how awful they must be. But now that I&rsquo;m old I kind of think they are neat, or at least conceptually. There ended up being quite a lot of games released over the ~10 years that cartridge systems were hugely popular. And I wondered what kind of questions were on these things? The market is of course mostly for children but the Jeopardy brand is pretty serious trivia. So I gathered them up and extracted the questions and did some analysis.
         </p>
 
-        <table class="jeopardy-table">
-          <thead>
-            <tr><th>Game title</th><th>Platform</th><th>Year</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Jeopardy! (Rev 1)</td><td>NES</td><td>1988</td></tr>
-            <tr><td>Jeopardy! Junior Edition</td><td>NES</td><td>1989</td></tr>
-            <tr><td>Jeopardy! 25th Anniversary Edition</td><td>NES</td><td>1990</td></tr>
-            <tr><td>Super Jeopardy!</td><td>NES</td><td>1991</td></tr>
-            <tr><td>Jeopardy!</td><td>Game Boy</td><td>1991</td></tr>
-            <tr><td>Jeopardy!</td><td>SNES</td><td>1992</td></tr>
-            <tr><td>Jeopardy!</td><td>Game Gear</td><td>~1992&ndash;93</td></tr>
-            <tr><td>Jeopardy!</td><td>Sega Genesis</td><td>1993 (Feb)</td></tr>
-            <tr><td>Jeopardy! Deluxe Edition</td><td>Sega Genesis</td><td>1993 (Oct)</td></tr>
-            <tr><td>Jeopardy! Deluxe Edition</td><td>SNES</td><td>~1993&ndash;94</td></tr>
-            <tr><td>Jeopardy! Sports Edition</td><td>Game Gear</td><td>~1994</td></tr>
-            <tr><td>Jeopardy! Sports Edition</td><td>Sega Genesis</td><td>1994 (May)</td></tr>
-            <tr><td>Jeopardy! Sports Edition</td><td>SNES</td><td>1994</td></tr>
-            <tr><td>Jeopardy!</td><td>Nintendo 64</td><td>1998</td></tr>
-          </tbody>
-        </table>
-
-        <p>Getting the questions out I made use of a coding agent to search the binary ROM file. This is a good example of using them where it can just churn away brute forcing binary offsets of the 14 files for as long as needed. I did find a hint before I started that the early games used the classic <a href="https://en.wikipedia.org/wiki/Huffman_coding" target="_blank">Huffman coding</a> algorithm so that was a good start:
+     <p>Getting the questions out I made use of a coding agent to search the binary ROM file. This is a good example of using them where it can just churn away brute forcing binary offsets of the 14 files for as long as needed. I did find a hint before I started that the early games used the classic <a href="https://en.wikipedia.org/wiki/Huffman_coding" target="_blank">Huffman coding</a> algorithm so that was a good start:
         </p>
-
         <div class="table-scroll">
         <table class="jeopardy-table">
           <thead>
-            <tr><th>Game</th><th>Platform</th><th>Questions</th><th>Question storage</th></tr>
+            <tr><th>Game title</th><th>Platform</th><th>Year</th><th>Questions</th><th>Question storage</th></tr>
           </thead>
           <tbody>
-            <tr><td>Jeopardy! (Rev 1)</td><td>NES</td><td>1,891</td><td>Huffman-coded bit stream, fixed in-ROM binary trees, per-bank pointer tables</td></tr>
-            <tr><td>Jeopardy! Junior Edition</td><td>NES</td><td>1,830</td><td>Same Rare Huffman format as Rev 1</td></tr>
-            <tr><td>Jeopardy! 25th Anniversary Edition</td><td>NES</td><td>1,769</td><td>Same Rare Huffman format as Rev 1</td></tr>
-            <tr><td>Super Jeopardy!</td><td>NES</td><td>2,100</td><td>Canonical Huffman code, binary-search decoder + word-token dictionary</td></tr>
-            <tr><td>Jeopardy!</td><td>Game Boy</td><td>1,675</td><td>Bit-packed prefix code (Huffman-equivalent tables) + token/case post-passes; same engine as Game Gear</td></tr>
-            <tr><td>Jeopardy!</td><td>SNES</td><td>3,904</td><td>Canonical Huffman code + word-token dictionary, byte-aligned self-delimiting records</td></tr>
-            <tr><td>Jeopardy!</td><td>Game Gear</td><td>1,705</td><td>Bit-packed prefix code (Huffman-equivalent tables) + token/case post-passes</td></tr>
-            <tr><td>Jeopardy!</td><td>Sega Genesis</td><td>2,290</td><td>Length-prefixed ASCII words + LZ77-style back-references, walked record-by-record</td></tr>
-            <tr><td>Jeopardy! Deluxe Edition</td><td>Sega Genesis</td><td>3,180</td><td>Same LZ back-reference format as Genesis v1</td></tr>
-            <tr><td>Jeopardy! Deluxe Edition</td><td>SNES</td><td>2,260</td><td>Uncompressed ASCII, null-terminated segments</td></tr>
-            <tr><td>Jeopardy! Sports Edition</td><td>Game Gear</td><td>1,705</td><td>Same bit-packed prefix code as Game Gear v1</td></tr>
-            <tr><td>Jeopardy! Sports Edition</td><td>Sega Genesis</td><td>3,425</td><td>Same LZ back-reference format as Genesis v1</td></tr>
-            <tr><td>Jeopardy! Sports Edition</td><td>SNES</td><td>2,590</td><td>Uncompressed ASCII, null-terminated segments</td></tr>
-            <tr><td>Jeopardy!</td><td>Nintendo 64</td><td>4,038</td><td>Plain ASCII text lines, no compression (richest metadata: wrong answers, difficulty)</td></tr>
-            <tr><td><strong>Total</strong></td><td></td><td><strong>34,362</strong></td><td></td></tr>
+            <tr><td>Jeopardy! (Rev 1)</td><td>NES</td><td>1988</td><td>1,891</td><td>Huffman-coded bit stream, fixed in-ROM binary trees, per-bank pointer tables</td></tr>
+            <tr><td>Jeopardy! Junior Edition</td><td>NES</td><td>1989</td><td>1,830</td><td>Same Rare Huffman format as Rev 1</td></tr>
+            <tr><td>Jeopardy! 25th Anniversary Edition</td><td>NES</td><td>1990</td><td>1,769</td><td>Same Rare Huffman format as Rev 1</td></tr>
+            <tr><td>Super Jeopardy!</td><td>NES</td><td>1991</td><td>2,100</td><td>Canonical Huffman code, binary-search decoder + word-token dictionary</td></tr>
+            <tr><td>Jeopardy!</td><td>Game Boy</td><td>1991</td><td>1,675</td><td>Bit-packed prefix code (Huffman-equivalent tables) + token/case post-passes; same engine as Game Gear</td></tr>
+            <tr><td>Jeopardy!</td><td>SNES</td><td>1992</td><td>3,904</td><td>Canonical Huffman code + word-token dictionary, byte-aligned self-delimiting records</td></tr>
+            <tr><td>Jeopardy!</td><td>Game Gear</td><td>~1992&ndash;93</td><td>1,705</td><td>Bit-packed prefix code (Huffman-equivalent tables) + token/case post-passes</td></tr>
+            <tr><td>Jeopardy!</td><td>Sega Genesis</td><td>1993 (Feb)</td><td>2,290</td><td>Length-prefixed ASCII words + LZ77-style back-references, walked record-by-record</td></tr>
+            <tr><td>Jeopardy! Deluxe Edition</td><td>Sega Genesis</td><td>1993 (Oct)</td><td>3,180</td><td>Same LZ back-reference format as Genesis v1</td></tr>
+            <tr><td>Jeopardy! Deluxe Edition</td><td>SNES</td><td>~1993&ndash;94</td><td>2,260</td><td>Uncompressed ASCII, null-terminated segments</td></tr>
+            <tr><td>Jeopardy! Sports Edition</td><td>Game Gear</td><td>~1994</td><td>1,705</td><td>Same bit-packed prefix code as Game Gear v1</td></tr>
+            <tr><td>Jeopardy! Sports Edition</td><td>Sega Genesis</td><td>1994 (May)</td><td>3,425</td><td>Same LZ back-reference format as Genesis v1</td></tr>
+            <tr><td>Jeopardy! Sports Edition</td><td>SNES</td><td>1994</td><td>2,590</td><td>Uncompressed ASCII, null-terminated segments</td></tr>
+            <tr><td>Jeopardy!</td><td>Nintendo 64</td><td>1998</td><td>4,038</td><td>Plain ASCII text lines, no compression (richest metadata: wrong answers, difficulty)</td></tr>
+            <tr><td><strong>Total</strong></td><td></td><td></td><td><strong>34,362</strong></td><td></td></tr>
           </tbody>
         </table>
         </div>
@@ -249,12 +226,12 @@ twitterimage  = "https://thisismattmiller.com/img/tribect.gif"
           </tbody>
         </table>
 
-        <p>There is of course the "Junior" version of the game that has more kid friendly questions, but the majority questions I would say are geared towards adults. There are a few areas of overrepresentation by game/platform. For example the Sega Genesis version has over two times the amount of biblical questions compared to other versions. And the NES 25th Anniversary version has four times as many questions about The Beatles than any other version. Other areas of over-representation:
+        <p>There is of course the "Junior" version of the game that has more kid friendly questions, but the majority questions I would say are geared towards adults. There are a few areas of overrepresentation by game/platform. For example the Sega Genesis version has over two times the amount of biblical questions compared to other versions. And the NES 25th Anniversary version has four times as many questions about The Beatles than any other version. Other areas of over-representation using the HDBSCAN clusters:
         </p>
 
         <table class="jeopardy-table">
           <thead>
-            <tr><th>Game</th><th>Over-represented category</th><th>Lift</th><th>n</th></tr>
+            <tr><th>Game</th><th>Over-represented category</th><th>Lift</th><th>Count</th></tr>
           </thead>
           <tbody>
             <tr><td>Sega Genesis (v1)</td><td>Biblical Figures &amp; Texts</td><td>2.3x</td><td>68</td></tr>
@@ -271,6 +248,30 @@ twitterimage  = "https://thisismattmiller.com/img/tribect.gif"
             <tr><td>Game Gear / Game Boy</td><td>Magazines and Newspapers</td><td>2.8x</td><td>16</td></tr>
           </tbody>
         </table>
+
+
+        <p>And there are a few questions that repeated across many of the game's iterations:
+        </p>
+
+        <table class="jeopardy-table">
+          <thead>
+            <tr><th>Games</th><th>Clue</th><th>Answer</th><th>Jeopardy Category</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>5</td><td>THE FASTEST GAIT OF A HORSE</td><td>GALLOP</td><td>ANIMALS / HORSE RACING</td></tr>
+            <tr><td>4</td><td>HE WAS PROCLAIMED "ADMIRAL OF THE OCEAN SEA" BY FERDINAND &amp; ISABELLA</td><td>CHRISTOPHER COLUMBUS</td><td>ADMIRALS</td></tr>
+            <tr><td>4</td><td>FRENCH EMPEROR WHO REDESIGNED THE ITALIAN FLAG TO RESEMBLE HIS OWN</td><td>NAPOLEON</td><td>ITALY</td></tr>
+            <tr><td>4</td><td>WEST INDIAN ISLAND THAT'S THE HOME OF THE LIMBO DANCE &amp; CALYPSO MUSIC</td><td>TRINIDAD</td><td>ISLANDS</td></tr>
+            <tr><td>4</td><td>WHETHER ST. PATRICK WAS RESPONSIBLE OR NOT, NONE ARE NATURALLY FOUND IN IRELAND</td><td>SNAKES</td><td>ANIMALS</td></tr>
+            <tr><td>4</td><td>SAUTEED EGG-DIPPED BREAD</td><td>FRENCH TOAST</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>A CAMPFIRE CONFECTION</td><td>TOASTED MARSHMALLOW</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>"RANK" OF GEORGE JESSEL</td><td>TOASTMASTER GENERAL</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>NAMED FOR AN AUSTRALIAN SOPRANO, IT'S THIN, CRISP BREAD</td><td>MELBA TOAST</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>THIS NEIGHBORING COUNTRY'S FRANC IS WORTH MORE THAN FRANCE'S</td><td>SWITZERLAND</td><td>FOREIGN EXCHANGE</td></tr>
+            <tr><td>4</td><td>ANTI-MALARIAL DRUG PRESENT IN TONIC WATER</td><td>QUININE</td><td>MEDICINE</td></tr>
+          </tbody>
+        </table>
+
 
         <p>Finally I was thinking, out of 24K questions there HAD to be some wrong ones in there. I don&rsquo;t mean question answer pairs that were correct in 1989 but wrong today I mean straight up incorrect. To find these I used a local LLM Qwen 3.6 35B A3B to scan 20 questions at a time to flag possible issues. The second pass then did a more thorough skeptical check that thinned down that previous pass and then finally sent those that kicked up as wrong in both passes to gemini-3.6-flash with google search grounding enabled. Then I reviewed the output of that last pass and found over 50 questions that were incorrect. Oftentimes the wrong questions are just an issue of the writer inverting the clue or other minor problem but sometimes boldly incorrect. Here is a list:
         </p>

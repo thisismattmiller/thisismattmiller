@@ -8,6 +8,9 @@ copyright = ""
 description = "THIS IS MATT MILLER"
 twitimage = ""
 
+[security]
+  allowContent = ['.*']
+
 [taxonomies]
   category = "categories"
   series = "series"
@@ -40,7 +43,7 @@ twitimage = ""
     anonymizeIP = true
     respectDoNotTrack = true
     useSessionStorage = true
-  [privacy.twitter]
+  [privacy.x]
     enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
@@ -52,6 +55,19 @@ twitimage = ""
 [params.mystuff.newest.newest]
 label = "Newest"
 desc = "Most recent projects"
+[[params.mystuff.newest.newest.things]]
+label = "Jeopardy! Video Games of the 80s and 90s"
+desc = "Analysis of 24K questions extracted"
+date = "2026-08-03"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/jeopardy/"
+
+[[params.mystuff.newest.newest.things.links]]
+label = "Viz"
+url = "https://thisismattmiller.github.io/jeopardy-viz/"
+
+
 [[params.mystuff.newest.newest.things]]
 label = "Email Visualization"
 desc = "Visualizing 14,000 Released Epstein Emails"

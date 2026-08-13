@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://thisismattmiller.com/post/jeopardy/</loc>
-    <lastmod>2026-08-03T00:00:00+00:00</lastmod>
+    <loc>https://thisismattmiller.com/post/superwork/</loc>
+    <lastmod>2026-08-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/</loc>
-    <lastmod>2026-08-03T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/post/</loc>
+    <lastmod>2026-08-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thisismattmiller.com/post/jeopardy/</loc>
     <lastmod>2026-08-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thisismattmiller.com/post/email-visualization/</loc>

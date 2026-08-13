@@ -56,6 +56,19 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
+label = "Building Bibliographic Superwork Clusters for Discovery with Local LLMs"
+desc = "Judging work relationships in 88K clusters"
+date = "2026-08-13"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/superwork/"
+
+[[params.mystuff.newest.newest.things.links]]
+label = "Viz"
+url = "https://thisismattmiller.github.io/superwork/"
+
+
+[[params.mystuff.newest.newest.things]]
 label = "Jeopardy! Video Games of the 80s and 90s"
 desc = "Analysis of 24K questions extracted"
 date = "2026-08-03"

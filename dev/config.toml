@@ -56,7 +56,7 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
-label = "Exploring Latent Space"
+label = "Paper Marble GAN"
 desc = "Building a Generative adversarial network to organize and explore paper marble "
 date = "2026-08-28"
 [[params.mystuff.newest.newest.things.links]]
@@ -342,7 +342,7 @@ url = "https://thisismattmiller.github.io/jeopardy-viz/"
 
 
 [[params.mystuff.datavisualization.things]]
-label = "Exploring Latent Space"
+label = "Paper Marble GAN"
 desc = "Building a Generative adversarial network to organize and explore paper marble "
 date = "2026-08-28"
 [[params.mystuff.datavisualization.things.links]]

@@ -56,6 +56,19 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
+label = "Paper Marble GAN"
+desc = "Exploring latent space as a tool of organization"
+date = "2026-08-28"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/paper-marble/"
+
+[[params.mystuff.newest.newest.things.links]]
+label = "Viz"
+url = "https://paper-marble.thisismattmiller.cloud/"
+
+
+[[params.mystuff.newest.newest.things]]
 label = "Building Bibliographic Superwork Clusters for Discovery with Local LLMs"
 desc = "Judging work relationships in 88K clusters"
 date = "2026-08-13"

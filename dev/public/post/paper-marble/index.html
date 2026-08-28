@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html
+  class=""
+  lang="en-us"
+  prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="description" content="Exploring Latent Space" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Exploring Latent Space" />
+<meta property="og:title" content="Paper Marble GAN" />
+<meta property="og:site_name" content="Matt Miller" />
+<meta property="og:image" content="https://thisismattmiller.com/img/paper-marble.png" />
+<meta property="og:image:type" content="" />
+<meta property="og:image:width" content="" />
+<meta property="og:image:height" content="" />
+<meta property="og:url" content="http://localhost:1313/post/paper-marble/" />
+<meta property="og:locale" content="en-us" />
+<meta property="article:published_time" content="2026-08-28
+" /> <meta property="article:modified_time" content="2026-08-28
+" />
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@thisismmiller" />
+<meta name="twitter:creator" content="@thisismmiller" />
+<meta
+  name="twitter:title"
+  content="Paper Marble GAN"
+/>
+<meta
+  name="twitter:description"
+  content="Exploring Latent Space"
+/>
+<meta name="twitter:image:src" content="https://thisismattmiller.com/img/paper-marble.png" />
+<meta property="og:image"  content="https://thisismattmiller.com/img/paper-marble.png" />
+<meta name="twitter:image"  content="https://thisismattmiller.com/img/paper-marble.png" />
+
+
+<meta name="twitter:domain" content="http://localhost:1313/post/paper-marble/" />
+
+
+
+    <title>Paper Marble GAN</title>
+    <link rel="canonical" href="http://localhost:1313/post/paper-marble/" />
+
+
+    <link
+  rel="stylesheet"
+  href="http://localhost:1313/css/bulma.min.css"
+/>
+
+<link rel="stylesheet" href="http://localhost:1313/css/style.css" />
+
+<link
+  rel="stylesheet"
+  href="http://localhost:1313/css/github-gist.css"
+/>
+
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto&display=swap" rel="stylesheet">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f09496fc47cb4d31ae2591c0f4945c3e"}'></script>
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  </head>
+
+
+<body
+  lang="en-us"
+  class=""
+  itemscope
+  itemtype="http://schema.org/Article"
+>
+
+    <div class="container" style="margin-bottom: 5em; ">
+
+
+    <div class="columns">
+      <div class="column is-one-half">
+        <h1 id="title" class="is-size-1">
+          <a href="/" style="color:#313131; text-decoration:none;">Matt Miller</a>
+        </h1>
+        <a href="/about" class="is-size-5" id="menu-links">About</a>        
+      </div>
+    </div>
+
+
+
+  </div>
+ 
+
+  
+
+  <style type="text/css">
+
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+			line-height: 1.75em;
+  	}
+
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+
+    .doodle-mono-right-header {
+    	-webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	                     linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	-webkit-mask-composite: source-in;
+    	mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	            linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	mask-composite: intersect;
+    }
+
+	ul.steps{
+		padding-left: 2em;
+		margin-bottom: 2em;
+	}
+	ul.steps li{
+		font-size: 1.15em;
+		line-height: 1.6em;
+		margin-bottom: 1em;
+		list-style: disc;
+	}
+
+	figure.marble-figure{
+		margin: 1em 0 2.5em 0;
+		text-align: center;
+	}
+	figure.marble-figure img{
+		max-width: 100%;
+		border: 1px solid #dbdbdb;
+	}
+	figure.marble-figure figcaption{
+		font-size: 0.95em;
+		color: #7a7a7a;
+		margin-top: 0.5em;
+		font-style: italic;
+	}
+
+	p.aside{
+		font-style: italic;
+		border-left: 4px solid #dbdbdb;
+		padding-left: 1em;
+		color: #4a4a4a;
+	}
+
+	.video-container{
+		position: relative;
+		width: 100%;
+		padding-bottom: 56.25%;
+		height: 0;
+		overflow: hidden;
+		margin-bottom: 3em;
+	}
+	.video-container iframe{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Paper Marble GAN</h1>
+	      	<h2 class="is-size-4 has-text-grey">Exploring Latent Space</h2>
+	      	<h2 class="is-size-5 has-text-grey">Aug 28 2026</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:center;">
+	    	<img style="width: 55%;" class="doodle-mono-right-header" src="/img/paper-marble.png" title="A generated paper marble pattern"/>
+	    </div>
+	</div>
+
+
+
+  </div>
+
+
+
+
+<div class="container">
+    <div class="columns">
+
+
+		<div class="column" style="">
+
+        <p>Besides old card catalogs probably nothing activates bibliophiles' neurons more than <a href="https://en.wikipedia.org/wiki/Paper_marbling" target="_blank">paper marble</a>. Who can resist a 1000 year old technique that became popular in Europe and the US during the mid-19th century turning books into unique psychedelic marblelike monotypes. I was browsing the great collection of them at the <a href="https://content.lib.washington.edu/dpweb/index.html" target="_blank">University of Washington Libraries Decorated and Decorative Paper Collection</a> and I started thinking of how they would be arranged if you organized them somehow. Not by a vocabulary of characteristics and curation but visually in a continuum. And that made me think of this idea of multi-dimensional <a href="https://en.wikipedia.org/wiki/Latent_space" target="_blank">latent space</a> used in machine learning and what if you had a space full of paper marble patterns? If you could traverse through that space there would be real patterns but what would the space between those look like? That’s what this post is about, training a model on paper marble and exploring that latent space as a tool of organization.
+        </p>
+
+        <p class="aside">Before you throw your vintage <a href="https://en.wikipedia.org/wiki/Library_of_Congress_Subject_Headings#/media/File:Printed_Library_of_Congress_Subject_Headings,_29th_edition_(cropped).jpg" target="_blank">LCSH red book</a> at me since this relates to machine learning and an artistic practice: The goal here is not to build a paper marble machine, I’m using a relatively out of date technique not employed by modern generative AI that I run on my own computer. It produces low resolution cropped images that are not really useful outside of this little exploration.
+        </p>
+
+        <p>After some research I ended up using this well known older (6 years is a long time anymore) <a href="https://en.wikipedia.org/wiki/Generative_adversarial_network" target="_blank">Generative Adversarial Network</a> approach developed by NVIDIA called <a href="https://en.wikipedia.org/wiki/StyleGAN" target="_blank">StyleGAN2-ADA</a> from 2020. Unlike modern diffusion models that today’s generative AI uses it allows you to “walk” the latent space of the model which is exactly what I wanted to explore. I picked this version of it because I read that it does well with a smaller amount of training images due to the Adaptive Discriminator Augmentation (ADA) part which maximizes the small dataset I’m using. Here are the technical steps I took:
+        </p>
+
+        <ul class="steps">
+          <li>Generated about 1,100 1024x1024 pixel crops of paper marble from the 500 University of Washington Libraries collection images.</li>
+          <li>On my 4090 24GB card I used stylegan2-ada-pytorch library and started with the FFHQ 70,000 human faces base model and fine tuned that. 1,100 images is way too small of a corpus to train a GAN from scratch so this starts off with a large defined model and then “untrains” the parts we don't want (human faces) out of it.
+            <figure class="marble-figure">
+              <img src="/img/paper-marble-training-progress.webp" title="Animated grid of training tiles transitioning from human faces to paper marble patterns"/>
+              <figcaption>PAPER MARBLE IS……PEOPLE!!</figcaption>
+            </figure>
+          </li>
+          <li>Training took about nine hours to get the base after about 300,000 images reviewed by the discriminator. I found that the results really oversampled a few common marble patterns in the corpus so I did another fine tune of the first model to over sample the more rare marble patterns in the corpus. These are the cool unique one off sheets that were basically ignored in the original training. Otherwise a few of the dominant patterns took over the whole output.</li>
+          <li>This GAN generates a 512 number vector. There is one vector value called the W space that behaves in a predictable way, nearby W space values are similar images. So by manipulating the W space on generation you can walk the latent space of the model.</li>
+          <li>But real images, like the ones we started with don’t have a W space value to begin with, so if we do want to ultimately map these into a space we need to find that number via a process called projection or GAN inversion, it takes a long time but eventually you can generate where the real image would likely sit in this new model.</li>
+          <li>With all that information we can MAP! I wanted a grid layout, no overlap, but still community so still do the expected UMAP reduction but then take the scipy.optimize.linear_sum_assignment solver to place them into a grid arrangement.</li>
+          <li>The 128x128 grid has 16,384 marble sheets, 9,600 of those were just randomly selected, 381 are real sheets, I’m calling them anchors, and 6096 were generated by mixing the w latent space of the its neighbors around the anchors, and 307 are generated where there was no sheet, gaps in the mapping.</li>
+        </ul>
+
+        <p style="text-align:center;"><a class="button is-large is-dark" href="https://paper-marble.thisismattmiller.cloud/" target="_blank">Explore the Marble Latent Map</a></p>
+
+        <figure class="marble-figure">
+          <a href="https://paper-marble.thisismattmiller.cloud/" target="_blank"><img src="/img/paper-marble-explore-latent-map.webp" title="Animated screen recording of browsing the marble latent map"/></a>
+          <figcaption>exploring the latent marble map</figcaption>
+        </figure>
+
+        <p>Using this interface you can browse the 128x128 grid and explore the patterns generated between the real anchored paper marble samples which are outlined in blue. I wasn’t sure what to expect from the results, as I mentioned earlier it is more of an organizational tool than a generation tool. I was interested in what kind of marble patterns would emerge between the anchors but there is not a real surprise, they mostly look like the original samples with slight iterations. I think this could be viewed as a spectrum of the Libraries Decorated and Decorative Paper Collection as opposed to a overall paper marble explorer. But I do like this idea of a using latent space as a tool for organization and wayfinding.
+        </p>
+
+        <p>I’ll end with an hour long tour of the latent space I made a video of the transitions between all the different anchors and the marbles you find inbetween:
+        </p>
+
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/zmSy0Fpwk8A?si=B48IFeOOyaC_qRJv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+
+		</div>
+	</div>
+</div>
+
+
+  <footer>
+    <div>
+
+  <style>
+    #masta:hover{
+      stroke: black !important;
+      fill:  black !important;
+    }
+  </style>
+<a rel="me" class="is-size-5" href="https://ebooks.social/@matt" title="mastodon verification" style="text-decoration: none;">
+<svg id="masta" style="stroke:white; fill: white;" width="20px" height="20px" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <path  d="m5 58.801v5.8008l2.8984-2.9023h19.703v-9.5l4-5.6992v33h9.6992l5-13.602h18.5l5.3008 14.203h8.6992l4.3008-13.902 3.5-18.898h3.7969l0.60156 16h4v-16.801l-7.5-7.6016-0.30078-5.7969-22-12.203-33.098-1-6.1016 2.7031-6.8008 9.7969v25.801z"/>
+  <path d="m14.301 51.102l14.301-1.6016-3.3008 4.8984z"/>
+ </g>
+</svg>
+</a>   
+
+
+    </div>
+  </footer>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+
+  </body>
+</html>

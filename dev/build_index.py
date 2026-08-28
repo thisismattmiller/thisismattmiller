@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["toml", "requests"]
+# ///
 import toml
 import requests
 import json
@@ -119,13 +123,13 @@ try:
 		cat_lookup[cat_clean][cat_clean]['things'].append(thing_data)
 		all_things.append(thing_data)  # Add to global list for newest section
 
-except:
-
-
+except Exception:
+	import traceback
+	traceback.print_exc()
 	print("-----------------")
-	print("Spreadsheet formating error!")
+	print("Spreadsheet formating error! (see traceback above, row", x, ")")
 	print("-----------------")
-	sys.exit()
+	sys.exit(1)
 
 
 

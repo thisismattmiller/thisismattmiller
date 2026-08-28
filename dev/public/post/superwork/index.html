@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html
+  class=""
+  lang="en-us"
+  prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="description" content="Judging work relationships in 88K clusters" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Judging work relationships in 88K clusters" />
+<meta property="og:title" content="Building Bibliographic Superwork Clusters for Discovery with Local LLMs" />
+<meta property="og:site_name" content="Matt Miller" />
+<meta property="og:image" content="https://thisismattmiller.com/img/superwork-cover.png" />
+<meta property="og:image:type" content="" />
+<meta property="og:image:width" content="" />
+<meta property="og:image:height" content="" />
+<meta property="og:url" content="http://localhost:1313/post/superwork/" />
+<meta property="og:locale" content="en-us" />
+<meta property="article:published_time" content="2026-08-13
+" /> <meta property="article:modified_time" content="2026-08-13
+" />
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@thisismmiller" />
+<meta name="twitter:creator" content="@thisismmiller" />
+<meta
+  name="twitter:title"
+  content="Building Bibliographic Superwork Clusters for Discovery with Local LLMs"
+/>
+<meta
+  name="twitter:description"
+  content="Judging work relationships in 88K clusters"
+/>
+<meta name="twitter:image:src" content="https://thisismattmiller.com/img/superwork-cover.png" />
+<meta property="og:image"  content="https://thisismattmiller.com/img/superwork-cover.png" />
+<meta name="twitter:image"  content="https://thisismattmiller.com/img/superwork-cover.png" />
+
+
+<meta name="twitter:domain" content="http://localhost:1313/post/superwork/" />
+
+
+
+    <title>Building Bibliographic Superwork Clusters for Discovery with Local LLMs</title>
+    <link rel="canonical" href="http://localhost:1313/post/superwork/" />
+
+
+    <link
+  rel="stylesheet"
+  href="http://localhost:1313/css/bulma.min.css"
+/>
+
+<link rel="stylesheet" href="http://localhost:1313/css/style.css" />
+
+<link
+  rel="stylesheet"
+  href="http://localhost:1313/css/github-gist.css"
+/>
+
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto&display=swap" rel="stylesheet">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f09496fc47cb4d31ae2591c0f4945c3e"}'></script>
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  </head>
+
+
+<body
+  lang="en-us"
+  class=""
+  itemscope
+  itemtype="http://schema.org/Article"
+>
+
+    <div class="container" style="margin-bottom: 5em; ">
+
+
+    <div class="columns">
+      <div class="column is-one-half">
+        <h1 id="title" class="is-size-1">
+          <a href="/" style="color:#313131; text-decoration:none;">Matt Miller</a>
+        </h1>
+        <a href="/about" class="is-size-5" id="menu-links">About</a>        
+      </div>
+    </div>
+
+
+
+  </div>
+ 
+
+  
+
+  <style type="text/css">
+
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+			line-height: 1.75em;
+  	}
+
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+
+    .doodle-mono-right-header {
+    	-webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	                     linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	-webkit-mask-composite: source-in;
+    	mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	            linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	mask-composite: intersect;
+    }
+
+	table.sw-table{
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 3em;
+		font-size: 1em;
+	}
+	table.sw-table th{
+		text-align: left;
+		border-bottom: 2px solid black;
+		padding: 0.5em;
+		vertical-align: bottom;
+	}
+	table.sw-table td{
+		padding: 0.5em;
+		border-bottom: 1px solid #dbdbdb;
+		vertical-align: top;
+	}
+	table.sw-table tr:nth-child(even){
+		background-color: whitesmoke;
+	}
+	table.sw-table tr{
+		transition-duration: 0.5s;
+	}
+	table.sw-table tr:hover{
+		background-color: aliceblue;
+	}
+	table.sw-table th.num, table.sw-table td.num{
+		text-align: right;
+	}
+	table.sw-table code{
+		background-color: transparent;
+		font-size: 0.9em;
+		padding: 0;
+		color: inherit;
+	}
+	.table-scroll{
+		overflow-x: auto;
+		margin-bottom: 3em;
+	}
+	.table-scroll table.sw-table{
+		margin-bottom: 0;
+	}
+	.table-caption{
+		margin-bottom: 0.75em;
+	}
+
+	/* collapsed/expandable big tables */
+	.expand-wrap{
+		position: relative;
+		margin-bottom: 3em;
+	}
+	.expand-wrap .table-scroll{
+		margin-bottom: 0;
+	}
+	.expand-wrap.collapsed .table-scroll{
+		max-height: 340px;
+		overflow-y: hidden;
+	}
+	.expand-wrap .expand-fade{
+		display: none;
+	}
+	.expand-wrap.collapsed .expand-fade{
+		display: flex;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 150px;
+		align-items: flex-end;
+		justify-content: center;
+		cursor: pointer;
+		background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 70%, #ffffff 100%);
+	}
+	.expand-wrap .expand-fade span{
+		background-color: rgba(0,0,0,0.75);
+		color: white;
+		padding: 8px 16px;
+		border-radius: 4px;
+		margin-bottom: 1em;
+		font-size: 0.9em;
+	}
+
+	/* chart browser */
+	.viz-browser{
+		display: flex;
+		gap: 1.5em;
+		align-items: flex-start;
+		border-top: dashed 2px black;
+		border-bottom: dashed 2px black;
+		padding: 1.5em 0;
+		margin-bottom: 3em;
+	}
+	ul.viz-menu{
+		flex: 0 0 230px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: sticky;
+		top: 1em;
+	}
+	ul.viz-menu li{
+		padding: 0.6em 0.75em;
+		cursor: pointer;
+		font-size: 0.95em;
+		line-height: 1.3em;
+		border-left: 3px solid transparent;
+		transition-duration: 0.3s;
+	}
+	ul.viz-menu li:hover{
+		background-color: whitesmoke;
+	}
+	ul.viz-menu li.active{
+		border-left-color: black;
+		background-color: whitesmoke;
+		font-weight: bold;
+	}
+	.viz-stage{
+		flex: 1;
+		min-width: 0;
+	}
+	.viz-panel{
+		display: none;
+	}
+	.viz-panel.active{
+		display: block;
+	}
+	@media(max-width: 768px){
+		.viz-browser{
+			flex-direction: column;
+		}
+		ul.viz-menu{
+			flex: none;
+			width: 100%;
+			position: static;
+		}
+	}
+
+	ul.toc{
+		list-style: none;
+		padding-left: 0;
+		font-size: 1.15em;
+		line-height: 2.2em;
+		margin-bottom: 4em;
+	}
+	ul.toc a{
+		text-decoration: none;
+		border-bottom: 1px dashed #7a7a7a;
+	}
+
+	.section-head{
+		margin: 1.5em 0 1em 0;
+		scroll-margin-top: 1em;
+	}
+
+	ul.post-ul, ol.post-ol{
+		font-size: 1.25em;
+		line-height: 1.75em;
+		margin-bottom: 2em;
+		margin-left: 1.5em;
+	}
+	ul.post-ul li, ol.post-ol li{
+		margin-bottom: 0.75em;
+	}
+
+	.footnote{
+		font-size: 0.95em;
+		color: #7a7a7a;
+		margin-top: -2em;
+	}
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Building Bibliographic Superwork Clusters for Discovery with Local LLMs</h1>
+	      	<h2 class="is-size-4 has-text-grey">Judging work relationships in 88K clusters</h2>
+	      	<h2 class="is-size-5 has-text-grey">Aug 13 2026</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:center;">
+	    	<img style="width: 55%;" class="doodle-mono-right-header" src="/img/superwork-cover.png" title="Superwork clusters"/>
+	    </div>
+	</div>
+
+
+
+  </div>
+
+
+
+
+<div class="container">
+    <div class="columns">
+
+
+		<div class="column" style="">
+
+        <ul class="toc">
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#links-and-clusters">Links and Clusters</a></li>
+          <li><a href="#local-llm-data">Local LLM + Data</a></li>
+          <li><a href="#relationship-vocabulary">Relationship Vocabulary</a></li>
+          <li><a href="#quality-evaluation">Quality Evaluation</a></li>
+          <li><a href="#opac-browse-interface">OPAC Browse Interface</a></li>
+          <li><a href="#summary">Summary</a></li>
+        </ul>
+
+
+        <h2 class="is-size-3 section-head" id="intro">Intro</h2>
+
+        <p>In bibliographic description you are able to build relationships to external authorities and records in various ways. In MARC you can use controlled vocabularies which eventually evolved the ability to use identifiers and URIs to establish connections. You can link to other titles specifically via a Name Title authority or some description in the higher <a href="https://www.loc.gov/marc/bibliographic/bd760787.html" target="_blank">7XX fields</a> mostly used for Serial cataloging. As we move into more <a href="https://en.wikipedia.org/wiki/IFLA_Library_Reference_Model" target="_blank">FRBR-LRM/WEMI/Linked Data</a> aligned standards like <a href="https://bibframe.org" target="_blank">Bibframe</a> relationships become more central to how the record is constructed. The Work and the Instance are separate resources, the <a href="https://loc.gov/bibframe/news/bibframe-update-jun2025.html" target="_blank">Bibframe Hub</a> takes the place of and expands the functionality of Name Title Authorities for cataloging purposes. There are more details I’m glossing over here because I’m thinking about the type of relationships that can be built for discovery rather than cataloging. The following little experiment is looking at automated ways to build relationships that aggregate works under the idea of a Superwork: The novel, the translation, the movie adaptation, the 13 different editions, all linked with their relationships defined.
+        </p>
+
+
+        <h2 class="is-size-3 section-head" id="links-and-clusters">Links and Clusters</h2>
+
+        <p>While Hubs do collocation they are similar to Named Title authorities in that they are scoped to specific levels of expression and like all authority work it takes additional effort while cataloging meaning there are very specific rules to when one is created. This idea of Superwork is much more expansive and is of course not a new idea, lots of debate about the role of Works vs something higher. The Share-VDE project implemented a Superwork level they called an Opus that is discussed in <a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C9&amp;q=The+Share-VDE+ontology%3A+a+BIBFRAME+extension+for+linked+data+discovery&amp;btnG=" target="_blank">this paper</a>. So it&rsquo;s not a novel idea, it might be a good idea, but the problem is that it&rsquo;s hard to implement for a number of reasons.
+        </p>
+
+        <p>Clustering bibliographic data is also a well trodden path. Twenty-five years ago orgs like OCLC were <a href="https://www.oclc.org/research/activities/frbralgorithm.html" target="_blank">clustering works</a> for FRBR-ization efforts. The process involves matching parts of MARC records on various fields to create groupings of resources. So clustering is &ldquo;easy&rdquo; but once they are clustered how do you relate them to one another? You have to come up with elaborate rule based processes that quickly fall apart against records described at different levels of completeness, conflicting historical practices and an infinite long tail of problems.
+        </p>
+
+
+        <h2 class="is-size-3 section-head" id="local-llm-data">Local LLM + Data</h2>
+
+        <p>Enter the idea of using a LLM to help you judge how all these works are related to one another. I&rsquo;m an AI pragmatic, I&rsquo;ve been subjected to a couple demos and pitches this year of AI &ldquo;cataloging&rdquo; books and I find that sort of approach to AI in libraries really harmful and gross. I think LLMs can potentially be useful for specific tasks or workflow automations. And I think it has a place in this idea of enriching legacy data. I&rsquo;ve also been really interested in using local models that can run on your own (beefy) computer as alternatives to expensive black box frontier models.
+        </p>
+
+        <p>So this test is going to be:</p>
+        <ol class="post-ol">
+          <li>Cluster a catalog&rsquo;s worth of records into works</li>
+          <li>Use a local LLM to judge what is the Superwork of the cluster and how all the works relate to it</li>
+          <li>Test how well it did and how useful are the results.</li>
+        </ol>
+
+        <p>For the source data I&rsquo;m going to use the Library of Congress catalog. I do work there but this is a side project (🫠) and I&rsquo;m using their public downloadable bulk data. To cluster this catalog I wanted to cast a ridiculously wide net, so it looks for things that have the same title and a matching 1XX or 7XX contributor. This will miss things like translated titles (Der Idiot vs The Idiot) or transliterated titles but I use Name Title authorities to try to fill in those gaps. Applying this insane clustering methodology we get the following breakdown out of the ~20M records:
+        </p>
+
+        <h3 class="is-size-5 table-caption"><strong>Full candidate universe</strong> (1,969,233 title+name matches → union-find merged)</h3>
+        <div class="table-scroll">
+<table class="sw-table">
+  <thead>
+    <tr><th>Cluster size</th><th class="num">Clusters</th><th class="num">% of clusters</th><th class="num">Resources</th><th class="num">% of resources</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>2</td><td class="num">1,068,038</td><td class="num">75.9%</td><td class="num">2,136,076</td><td class="num">51.8%</td></tr>
+    <tr><td>3–4</td><td class="num">245,632</td><td class="num">17.5%</td><td class="num">802,334</td><td class="num">19.5%</td></tr>
+    <tr><td><strong>5–9</strong></td><td class="num"><strong>69,157</strong></td><td class="num"><strong>4.9%</strong></td><td class="num"><strong>424,928</strong></td><td class="num"><strong>10.3%</strong></td></tr>
+    <tr><td><strong>10–19</strong></td><td class="num"><strong>15,853</strong></td><td class="num"><strong>1.1%</strong></td><td class="num"><strong>204,028</strong></td><td class="num"><strong>4.9%</strong></td></tr>
+    <tr><td><strong>20–40</strong></td><td class="num"><strong>4,846</strong></td><td class="num"><strong>0.3%</strong></td><td class="num"><strong>130,465</strong></td><td class="num"><strong>3.2%</strong></td></tr>
+    <tr><td>41–100</td><td class="num">2,007</td><td class="num">0.14%</td><td class="num">123,284</td><td class="num">3.0%</td></tr>
+    <tr><td>101–500</td><td class="num">905</td><td class="num">0.06%</td><td class="num">157,027</td><td class="num">3.8%</td></tr>
+    <tr><td>501–1,000</td><td class="num">57</td><td class="num">0.004%</td><td class="num">38,636</td><td class="num">0.9%</td></tr>
+    <tr><td>1,001+ (max 21,188 — generic-title noise)</td><td class="num">30</td><td class="num">0.002%</td><td class="num">107,475</td><td class="num">2.6%</td></tr>
+    <tr><td><strong>Total</strong></td><td class="num"><strong>1,406,525</strong></td><td class="num">100%</td><td class="num"><strong>4,124,253</strong></td><td class="num">100%</td></tr>
+  </tbody>
+</table>
+</div>
+
+        <p>So only 20% of records possibly belong to a cluster. The biggest cluster is 2 things, these clusters are often artifacts of MARC cataloging where two formats of the same work are recorded separately (print + ebook for example). For my test I wanted to do a significantly challenging cluster size, but don&rsquo;t want to do everything. I picked the 5-40 slice as a good test group. This is how that grouping breaks down:
+        </p>
+
+        <div class="table-scroll">
+<table class="sw-table">
+  <thead>
+    <tr><th>Cluster size</th><th class="num">Clusters</th><th class="num">% of clusters</th><th class="num">Resources</th><th class="num">% of resources</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>5–9</td><td class="num">67,821</td><td class="num">76.6%</td><td class="num">416,411</td><td class="num">54.8%</td></tr>
+    <tr><td>10–19</td><td class="num">15,657</td><td class="num">17.7%</td><td class="num">201,737</td><td class="num">26.6%</td></tr>
+    <tr><td>20–40</td><td class="num">4,910</td><td class="num">5.5%</td><td class="num">132,456</td><td class="num">17.4%</td></tr>
+    <tr><td>41–100</td><td class="num">138</td><td class="num">0.16%</td><td class="num">7,569</td><td class="num">1.0%</td></tr>
+    <tr><td>101–340</td><td class="num">8</td><td class="num">0.01%</td><td class="num">1,248</td><td class="num">0.16%</td></tr>
+    <tr><td><strong>Total</strong></td><td class="num"><strong>88,534</strong></td><td class="num">100%</td><td class="num"><strong>759,421</strong></td><td class="num">100%</td></tr>
+  </tbody>
+</table>
+</div>
+
+        <p>While the cutoff was 40 records Name Title authority merging collapsed 89,856 → 88,534 clusters (−1,322) with no change in resources. 146 merged clusters now exceed the original 40-record judging cap.
+        </p>
+
+
+        <h2 class="is-size-3 section-head" id="relationship-vocabulary">Relationship Vocabulary</h2>
+
+        <p>So we have 88K clusters of varying sizes to judge. We now need a vocabulary to organize how these things relate to each other. I chose to use the local LLM to help build the relationship properties based on data present in the cluster to make a limited vocabulary. There are vocabularies out there for work relationships, which might have been sufficient but I wanted to try a bottom up approach. Though after it was created I did want to compare to what already exists, specifically the Bibframe <a href="https://id.loc.gov/vocabulary/relationship.html" target="_blank">work to expression relationship vocabulary</a> and the <a href="https://www.rdaregistry.info/Elements/w/" target="_blank">RDA Registry Work relationships</a>. Here is the list of the organic relationship vocabulary and how it maps to the two established ones:
+        </p>
+
+        <h3 class="is-size-5 table-caption"><strong>Mapping to BIBFRAME relationships</strong></h3>
+        <div class="expand-wrap collapsed">
+          <div class="table-scroll">
+<table class="sw-table">
+  <thead>
+    <tr><th>Our label</th><th>Scope</th><th>Equivalence</th><th>Best BIBFRAME match(es)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>original_first</code></td><td>core</td><td>⚪ none</td><td><code>representativeexpressionof</code>, <code>expressionof</code></td></tr>
+    <tr><td><code>later_printing_reprint</code></td><td>core</td><td>🟡 related</td><td><code>reproductionof</code>, <code>equivalent</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>revised_edition</code></td><td>core</td><td>🟢 exact</td><td><code>revisionof</code>, <code>otheredition</code>, <code>relatedexpressionof</code></td></tr>
+    <tr><td><code>abridged_edition</code></td><td>core</td><td>🟢 exact</td><td><code>abridgementof</code>, <code>digestof</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>translation</code></td><td>core</td><td>🟢 exact</td><td><code>translationof</code>, <code>languageversionof</code>, <code>freetranslationof</code></td></tr>
+    <tr><td><code>format_variant</code></td><td>core</td><td>🟢 exact</td><td><code>otherphysicalformat</code>, <code>versionindifferentformatof</code>, <code>equivalent</code></td></tr>
+    <tr><td><code>reproduction_surrogate</code></td><td>core</td><td>🟢 exact</td><td><code>reproductionof</code>, <code>otherphysicalformat</code>, <code>versionindifferentformatof</code></td></tr>
+    <tr><td><code>component_part</code></td><td>core</td><td>🔵 broader</td><td><code>partof</code>, <code>issueof</code>, <code>specialissueof</code></td></tr>
+    <tr><td><code>apparent_duplicate</code></td><td>core</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>source_work</code></td><td>core</td><td>🟡 related</td><td><code>adaptedas</code>, <code>dramatizedas</code>, <code>remadeas</code></td></tr>
+    <tr><td><code>derivative_work</code></td><td>core</td><td>🔵 broader</td><td><code>adaptationof</code>, <code>dramatizationof</code>, <code>basedon</code></td></tr>
+    <tr><td><code>related_work</code></td><td>core</td><td>🟢 exact</td><td><code>relatedwork</code>, <code>relatedworkof</code>, <code>relatedexpression</code></td></tr>
+    <tr><td><code>different_work</code></td><td>core</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>indeterminate</code></td><td>core</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>other</code></td><td>core</td><td>🟡 related</td><td><code>associatedwith</code>, <code>relatedexpressionof</code>, <code>relatedworkof</code></td></tr>
+    <tr><td><code>critical_or_annotated_edition</code></td><td>book</td><td>🟡 related</td><td><code>augmentationof</code>, <code>augmentedby</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>illustrated_edition</code></td><td>book</td><td>🟡 related</td><td><code>otheredition</code>, <code>augmentationof</code>, <code>expandedversionof</code></td></tr>
+    <tr><td><code>preceding_title</code></td><td>serial</td><td>🟢 exact</td><td><code>continuationof</code>, <code>precededby</code>, <code>absorptioninpartof</code></td></tr>
+    <tr><td><code>succeeding_title</code></td><td>serial</td><td>🟢 exact</td><td><code>continuedby</code>, <code>succeededby</code>, <code>continuedinpartby</code></td></tr>
+    <tr><td><code>online_version</code></td><td>serial</td><td>🔵 broader</td><td><code>otherphysicalformat</code>, <code>versionindifferentformatof</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>print_version</code></td><td>serial</td><td>🟡 related</td><td><code>otherphysicalformat</code>, <code>versionindifferentformatof</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>microform_version</code></td><td>serial</td><td>🟢 exact</td><td><code>reproductionof</code>, <code>versionindifferentformatof</code>, <code>otherphysicalformat</code></td></tr>
+    <tr><td><code>dubbed_version</code></td><td>video/projected</td><td>🟢 exact</td><td><code>dubbedversion</code>, <code>dubbedversionof</code>, <code>languageversionof</code></td></tr>
+    <tr><td><code>subtitled_version</code></td><td>video/projected</td><td>🔵 broader</td><td><code>expressionof</code>, <code>languageversionof</code>, <code>relatedexpressionof</code></td></tr>
+    <tr><td><code>alternate_cut</code></td><td>video/projected</td><td>🟡 related</td><td><code>relatedexpressionof</code>, <code>abridgementof</code>, <code>expandedversionof</code></td></tr>
+    <tr><td><code>special_edition_release</code></td><td>video/projected</td><td>🟡 related</td><td><code>expandedversionof</code>, <code>otheredition</code>, <code>augmentationof</code></td></tr>
+    <tr><td><code>episode_or_installment</code></td><td>video/projected</td><td>🔵 broader</td><td><code>partof</code>, <code>issueof</code></td></tr>
+    <tr><td><code>excerpt_or_trailer</code></td><td>video/projected</td><td>🟡 related</td><td><code>partof</code>, <code>relatedworkof</code>, <code>derivativework</code></td></tr>
+    <tr><td><code>different_performance</code></td><td>audio (music)</td><td>🟡 related</td><td><code>relatedexpression</code>, <code>relatedexpressionof</code>, <code>expressionof</code></td></tr>
+    <tr><td><code>different_release_issue</code></td><td>audio (music)</td><td>🟡 related</td><td><code>equivalent</code>, <code>otheredition</code>, <code>relatedexpressionof</code></td></tr>
+    <tr><td><code>remastered</code></td><td>audio (music)</td><td>🟡 related</td><td><code>equivalent</code>, <code>expressionof</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>compilation_appearance</code></td><td>audio (music)</td><td>🟢 exact</td><td><code>aggregatedby</code>, <code>partof</code></td></tr>
+    <tr><td><code>arrangement</code></td><td>audio (music); notated music</td><td>🟢 exact</td><td><code>arrangedas</code>, <code>arrangementof</code></td></tr>
+    <tr><td><code>unabridged_recording</code></td><td>audio (spoken)</td><td>🔵 narrower</td><td><code>spokenwordfor</code>, <code>expressionof</code>, <code>relatedexpressionof</code></td></tr>
+    <tr><td><code>abridged_recording</code></td><td>audio (spoken)</td><td>🟡 related</td><td><code>abridgementof</code>, <code>expressionof</code>, <code>spokenwordfor</code></td></tr>
+    <tr><td><code>different_narrator</code></td><td>audio (spoken)</td><td>⚪ none</td><td><code>relatedexpressionof</code>, <code>spokenwordfor</code></td></tr>
+    <tr><td><code>vocal_score</code></td><td>notated music</td><td>🔵 narrower</td><td><code>arrangementof</code>, <code>relatedexpressionof</code>, <code>expressionof</code></td></tr>
+    <tr><td><code>full_score</code></td><td>notated music</td><td>⚪ none</td><td><code>expressionof</code>, <code>otherphysicalformat</code>, <code>versionindifferentformatof</code></td></tr>
+    <tr><td><code>instrumental_parts</code></td><td>notated music</td><td>⚪ none</td><td><code>otherphysicalformat</code>, <code>versionindifferentformatof</code></td></tr>
+    <tr><td><code>different_music_edition</code></td><td>notated music</td><td>🟢 exact</td><td><code>otheredition</code>, <code>equivalent</code>, <code>relatedexpressionof</code></td></tr>
+    <tr><td><code>revised_map_edition</code></td><td>map</td><td>🟢 exact</td><td><code>revisedas</code>, <code>revisionof</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>different_scale</code></td><td>map</td><td>🟡 related</td><td><code>relatedexpressionof</code>, <code>relatedworkof</code></td></tr>
+    <tr><td><code>different_sheet_area</code></td><td>map</td><td>🔵 broader</td><td><code>part</code>, <code>partof</code></td></tr>
+    <tr><td><code>different_state_or_impression</code></td><td>image</td><td>🟡 related</td><td><code>equivalent</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>reproduction_print</code></td><td>image</td><td>🟢 exact</td><td><code>reproductionof</code>, <code>otherphysicalformat</code>, <code>versionindifferentformatof</code></td></tr>
+    <tr><td><code>detail_or_crop</code></td><td>image</td><td>🟡 related</td><td><code>derivativework</code>, <code>partof</code>, <code>reproductionof</code></td></tr>
+    <tr><td><code>new_version_release</code></td><td>computer/software</td><td>🟡 related</td><td><code>sequentialversionof</code>, <code>otheredition</code>, <code>expandedversionof</code></td></tr>
+    <tr><td><code>different_platform</code></td><td>computer/software</td><td>🟡 related</td><td><code>versionindifferentformatof</code>, <code>equivalent</code>, <code>otheredition</code></td></tr>
+    <tr><td><code>accrual_or_addition</code></td><td>mixed materials</td><td>🟡 related</td><td><code>partof</code>, <code>separatedfrom</code></td></tr>
+    <tr><td><code>finding_aid</code></td><td>mixed materials</td><td>🟢 exact</td><td><code>findingaidfor</code>, <code>guideto</code>, <code>descriptionof</code></td></tr>
+  </tbody>
+</table>
+</div>
+          <div class="expand-fade"><span>Click to expand the full table ▾</span></div>
+        </div>
+
+        <h3 class="is-size-5 table-caption"><strong>Mapping to RDA Registry Work relationships</strong></h3>
+        <div class="expand-wrap collapsed">
+          <div class="table-scroll">
+<table class="sw-table">
+  <thead>
+    <tr><th>Our label</th><th>Scope</th><th>Equivalence</th><th>Best RDA Registry match(es)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>original_first</code></td><td>core</td><td>⚪ none</td><td><em>(none)</em> — nearest: <code>has derivative work</code>, <code>is inspiration for</code>, <code>has transformation</code></td></tr>
+    <tr><td><code>later_printing_reprint</code></td><td>core</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>revised_edition</code></td><td>core</td><td>⚪ none</td><td><em>(none)</em> — nearest: <code>is expanded version of work</code>, <code>is replacement of work</code></td></tr>
+    <tr><td><code>abridged_edition</code></td><td>core</td><td>🟢 exact</td><td><code>is abridgement of work</code>, <code>is digest of work</code>, <code>is part of work</code></td></tr>
+    <tr><td><code>translation</code></td><td>core</td><td>🔵 broader</td><td><code>is language version of</code>, <code>has language version</code>, <code>is free translation of work</code></td></tr>
+    <tr><td><code>format_variant</code></td><td>core</td><td>🟢 exact</td><td><code>is carrier version of</code>, <code>has carrier version</code></td></tr>
+    <tr><td><code>reproduction_surrogate</code></td><td>core</td><td>⚪ none</td><td><em>(none)</em> — nearest: <code>is carrier version of</code></td></tr>
+    <tr><td><code>component_part</code></td><td>core</td><td>🔵 narrower</td><td><code>is part of work</code>, <code>is issue of</code>, <code>is special issue of</code></td></tr>
+    <tr><td><code>apparent_duplicate</code></td><td>core</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>source_work</code></td><td>core</td><td>🟢 exact</td><td><code>has derivative work</code>, <code>has source work</code>, <code>is adapted as work</code></td></tr>
+    <tr><td><code>derivative_work</code></td><td>core</td><td>🟢 exact</td><td><code>has source work</code>, <code>is adaptation of work</code>, <code>is dramatization of work</code></td></tr>
+    <tr><td><code>related_work</code></td><td>core</td><td>🔵 broader</td><td><code>has related work of work</code>, <code>has sequel work</code>, <code>has prequel work</code></td></tr>
+    <tr><td><code>different_work</code></td><td>core</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>indeterminate</code></td><td>core</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>other</code></td><td>core</td><td>🔵 broader</td><td><code>has related work of work</code></td></tr>
+    <tr><td><code>critical_or_annotated_edition</code></td><td>book</td><td>🟡 related</td><td><code>is commentary on work</code>, <code>is work commentary in</code></td></tr>
+    <tr><td><code>illustrated_edition</code></td><td>book</td><td>⚪ none</td><td><em>(none)</em> — nearest: <code>has illustrations work</code>, <code>is illustrations for work</code></td></tr>
+    <tr><td><code>preceding_title</code></td><td>serial</td><td>🟢 exact</td><td><code>is continued by work</code>, <code>is succeeded by work</code>, <code>is merged to form work</code></td></tr>
+    <tr><td><code>succeeding_title</code></td><td>serial</td><td>🟢 exact</td><td><code>is continuation of work</code>, <code>is preceded by work</code>, <code>is merger of work</code></td></tr>
+    <tr><td><code>online_version</code></td><td>serial</td><td>🟢 exact</td><td><code>is carrier version of</code>, <code>has carrier version</code></td></tr>
+    <tr><td><code>print_version</code></td><td>serial</td><td>🟢 exact</td><td><code>has carrier version</code>, <code>is carrier version of</code></td></tr>
+    <tr><td><code>microform_version</code></td><td>serial</td><td>🟡 related</td><td><code>is carrier version of</code></td></tr>
+    <tr><td><code>dubbed_version</code></td><td>video/projected</td><td>🟡 related</td><td><code>is language version of</code></td></tr>
+    <tr><td><code>subtitled_version</code></td><td>video/projected</td><td>🟡 related</td><td><code>is language version of</code>, <code>is regional version of</code></td></tr>
+    <tr><td><code>alternate_cut</code></td><td>video/projected</td><td>🟡 related</td><td><code>is expanded version of work</code>, <code>is abridgement of work</code>, <code>has source work</code></td></tr>
+    <tr><td><code>special_edition_release</code></td><td>video/projected</td><td>🟡 related</td><td><code>is expanded version of work</code></td></tr>
+    <tr><td><code>episode_or_installment</code></td><td>video/projected</td><td>🔵 broader</td><td><code>is issue of</code>, <code>is part of work</code></td></tr>
+    <tr><td><code>excerpt_or_trailer</code></td><td>video/projected</td><td>🟡 related</td><td><code>is part of work</code>, <code>is adaptation of work</code>, <code>has source work</code></td></tr>
+    <tr><td><code>different_performance</code></td><td>audio (music)</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>different_release_issue</code></td><td>audio (music)</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>remastered</code></td><td>audio (music)</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>compilation_appearance</code></td><td>audio (music)</td><td>🔵 broader</td><td><code>has part work</code></td></tr>
+    <tr><td><code>arrangement</code></td><td>audio (music); notated music</td><td>🟡 related</td><td><code>is adaptation of work</code></td></tr>
+    <tr><td><code>unabridged_recording</code></td><td>audio (spoken)</td><td>🟡 related</td><td><code>is carrier version of</code></td></tr>
+    <tr><td><code>abridged_recording</code></td><td>audio (spoken)</td><td>🟡 related</td><td><code>is abridgement of work</code>, <code>is carrier version of</code></td></tr>
+    <tr><td><code>different_narrator</code></td><td>audio (spoken)</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>vocal_score</code></td><td>notated music</td><td>🟡 related</td><td><code>is adaptation of work</code></td></tr>
+    <tr><td><code>full_score</code></td><td>notated music</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>instrumental_parts</code></td><td>notated music</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>different_music_edition</code></td><td>notated music</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>revised_map_edition</code></td><td>map</td><td>⚪ none</td><td><em>(none)</em> — nearest: <code>is replacement of work</code></td></tr>
+    <tr><td><code>different_scale</code></td><td>map</td><td>⚪ none</td><td><em>(none)</em> — nearest: <code>is adaptation of work</code></td></tr>
+    <tr><td><code>different_sheet_area</code></td><td>map</td><td>🔵 broader</td><td><code>is part of work</code></td></tr>
+    <tr><td><code>different_state_or_impression</code></td><td>image</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>reproduction_print</code></td><td>image</td><td>⚪ none</td><td><em>(no match)</em></td></tr>
+    <tr><td><code>detail_or_crop</code></td><td>image</td><td>🟡 related</td><td><code>is part of work</code>, <code>has source work</code></td></tr>
+    <tr><td><code>new_version_release</code></td><td>computer/software</td><td>⚪ none</td><td><em>(none)</em> — nearest: <code>is expanded version of work</code>, <code>is replacement of work</code></td></tr>
+    <tr><td><code>different_platform</code></td><td>computer/software</td><td>🟡 related</td><td><code>is carrier version of</code>, <code>is adaptation of work</code></td></tr>
+    <tr><td><code>accrual_or_addition</code></td><td>mixed materials</td><td>🟡 related</td><td><code>is part of work</code>, <code>is separated from work</code></td></tr>
+    <tr><td><code>finding_aid</code></td><td>mixed materials</td><td>🔵 broader</td><td><code>is metadata description of work</code>, <code>is description of work</code></td></tr>
+  </tbody>
+</table>
+</div>
+          <div class="expand-fade"><span>Click to expand the full table ▾</span></div>
+        </div>
+
+
+        <h2 class="is-size-3 section-head" id="quality-evaluation">Quality Evaluation</h2>
+
+        <p>As I mentioned earlier we are going to use a local LLM to judge these clusters of works, basically prompting with the titles of each cluster and metadata data along with the possible relationship list. I&rsquo;m using Qwen3.6-35B-A3B-bf16 model which is a 35 billion parameter model but only ever has 3 billion parameters active. This is a Mixture-of-Experts (MoE) model that allows it to draw on a lot of parameters but is able to execute quickly. Running 4-6 prompts in parallel results in ~17 tokens a second each on my M5 128GB machine. Even though that is a decent clip it still ran in the background for a couple weeks to get through all 88K clusters. If you ran a job like this using the same model on a provider like Open Router it would cost around $150-200 in tokens but probably take a day rather than weeks. If you ran it on something like Gemini it would cost MUCH more but probably better quality. So it&rsquo;s all a trade off, money vs time vs quality vs local, etc.
+        </p>
+
+        <p>Now that everything is judged I wanted to first evaluate how well the LLM worked and then break down how the clusters panned out. To judge them I did two approaches, I manually reviewed 200 clusters and judged their accuracy and I also had a frontier model (Opus 4.8) review 2500 and judge. There are two factors when thinking about correctness here, there are 4 broad buckets:
+        </p>
+
+        <ul class="post-ul">
+          <li><strong>Belongs:</strong> belongs, a realization of the core expression</li>
+          <li><strong>Related:</strong> belongs, a distinct related expression like source/derivative/sequel</li>
+          <li><strong>Excluded:</strong> does not belong</li>
+          <li><strong>Fallback:</strong> Stumps the judge, not sure what to do with them</li>
+        </ul>
+
+        <p>Each of the relationships roll up into one of these buckets. So a title in the cluster could be generally correct but specifically incorrect. The results:
+        </p>
+
+        <div class="table-scroll">
+<table class="sw-table">
+  <thead>
+    <tr><th></th><th>How strictly we grade</th><th class="num">Overall: judge matched the grader<br/><span style='font-weight:normal;'>accuracy (micro)</span></th><th class="num">When it picks a label, the label is right¹<br/><span style='font-weight:normal;'>macro-P</span></th><th class="num">It finds all the records a label applies to¹<br/><span style='font-weight:normal;'>macro-R</span></th><th class="num">Balanced score: every label counts equally<br/><span style='font-weight:normal;'>macro-F1</span></th><th class="num">Balanced score: common labels count more<br/><span style='font-weight:normal;'>weighted-F1</span></th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="2"><strong>Frontier model (Opus)</strong><br/>2,500 records</td><td>Exact property required (45 choices)</td><td class="num">76.3%</td><td class="num">80.4%</td><td class="num">75.2%</td><td class="num">72.8%</td><td class="num">74.8%</td></tr>
+    <tr><td>Right broad category (4 buckets)</td><td class="num">91.0%</td><td class="num">81.6%</td><td class="num">60.2%</td><td class="num">65.7%</td><td class="num">90.0%</td></tr>
+    <tr><td rowspan="2"><strong>Human (Matt)</strong><br/>200 records</td><td>Exact property required (19 labels seen)</td><td class="num">88.6%</td><td class="num">91.1%</td><td class="num">90.8%</td><td class="num">87.7%</td><td class="num">88.8%</td></tr>
+    <tr><td>Right broad category (4 buckets)</td><td class="num">96.6%</td><td class="num">97.3%</td><td class="num">89.9%</td><td class="num">93.0%</td><td class="num">96.4%</td></tr>
+  </tbody>
+</table>
+</div>
+        <p class="footnote">¹ averaged over labels, so rare labels weigh as much as common ones</p>
+
+        <p>I was more generous while grading than the model, out of +40 possible properties the model tends to be very specific, a useful stat that indicates quality is probably the 4 broad category score, I gave it a 96% the model a 91%. Below are more views into the grading results:
+        </p>
+
+		</div>
+	</div>
+</div>
+
+<div class="container">
+    <div class="columns">
+      <div class="column">
+
+        <style> block is identical in every embed -- keep ONE per blog page. -->
+<style>
+.lcviz{max-width:880px;margin:28px auto;color:#1a1d24;
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.lcviz h2{font-size:24px;margin:0 0 4px;letter-spacing:-0.01em}
+.lcviz h2 .n{color:#8a929e;font-weight:600;font-size:15px;margin-right:8px}
+.lcviz p{margin:10px 0}
+.lcviz p.cap{color:#5b6472;font-size:15px}
+.lcviz .card{background:#f7f9fb;border:1px solid #e4e8ec;border-radius:14px;padding:20px 22px;margin:18px 0}
+.lcviz .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}
+.lcviz .stat{background:#f7f9fb;border:1px solid #e4e8ec;border-radius:14px;padding:16px}
+.lcviz .stat .big{font-size:30px;font-weight:750;letter-spacing:-0.02em}
+.lcviz .stat .lbl{color:#5b6472;font-size:13px;margin-top:2px;line-height:1.35}
+.lcviz .legend{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0 4px;font-size:13.5px;color:#5b6472}
+.lcviz .legend span{display:inline-flex;align-items:center;gap:6px}
+.lcviz .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+.lcviz svg{display:block;width:100%;height:auto}
+.lcviz .tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:8px;background:#eef2f6;color:#445}
+.lcviz .hl{background:linear-gradient(transparent 60%,#ffe9a8 60%)}
+.lcviz .sub{color:#5b6472;font-size:18px;margin:0 0 8px}
+.lcviz .lead{font-size:18px;color:#2c333d}
+@media(max-width:640px){.lcviz .stats{grid-template-columns:repeat(2,1fr)}}
+
+        .viz-panel .lcviz{margin-top:0;}
+        .viz-panel .lcviz h2 .n{display:none;}
+        </style>
+
+        <div class="viz-browser">
+          <ul class="viz-menu" id="vizMenu">
+          <li class="active" data-viz="viz-01">What kinds of relationships?</li>
+          <li data-viz="viz-02">Zoomed out: does it belong?</li>
+          <li data-viz="viz-03">What's in the corpus?</li>
+          <li data-viz="viz-04">How accurate is it?</li>
+          <li data-viz="viz-05">Strong and weak spots, by material</li>
+          <li data-viz="viz-06">Which labels get over- and under-used?</li>
+          <li data-viz="viz-07">The decision that actually matters</li>
+          <li data-viz="viz-08">Do the two judges agree?</li>
+          <li data-viz="viz-10">When clusters fail</li>
+          </ul>
+          <div class="viz-stage" id="vizStage">
+          <div class="viz-panel active" id="viz-01">
+<div class="lcviz">
+<h2><span class="n">01</span>What kinds of relationships?</h2>
+    <p class="cap">Each record gets one label from a 44-term controlled vocabulary. A handful dominate: most records are simply another edition, printing, or part of the same work.</p><div class="legend"><span><span class="dot" style="background:#2563eb"></span>manifestation (same work)</span><span><span class="dot" style="background:#d97706"></span>related expression</span><span><span class="dot" style="background:#db2777"></span>does not belong</span></div><div class="card"><svg viewBox="0 0 742 670" role="img"><text x="192" y="24" text-anchor="end" font-size="13" fill="#1a1d24">revised_edition</text><rect x="200" y="8" width="470" height="24" rx="5" fill="#2563eb"/><text x="678" y="24" font-size="12.5" fill="#5b6472">148,045</text><text x="192" y="59" text-anchor="end" font-size="13" fill="#1a1d24">later_printing_reprint</text><rect x="200" y="43" width="469.01901448883785" height="24" rx="5" fill="#2563eb"/><text x="677.0190144888379" y="59" font-size="12.5" fill="#5b6472">147,736</text><text x="192" y="94" text-anchor="end" font-size="13" fill="#1a1d24">component_part</text><rect x="200" y="78" width="323.5601337431186" height="24" rx="5" fill="#2563eb"/><text x="531.5601337431186" y="94" font-size="12.5" fill="#5b6472">101,918</text><text x="192" y="129" text-anchor="end" font-size="13" fill="#1a1d24">original_first</text><rect x="200" y="113" width="304.4579013137897" height="24" rx="5" fill="#2563eb"/><text x="512.4579013137898" y="129" font-size="12.5" fill="#5b6472">95,901</text><text x="192" y="164" text-anchor="end" font-size="13" fill="#1a1d24">reproduction_surrogate</text><rect x="200" y="148" width="165.9484616164004" height="24" rx="5" fill="#2563eb"/><text x="373.94846161640044" y="164" font-size="12.5" fill="#5b6472">52,272</text><text x="192" y="199" text-anchor="end" font-size="13" fill="#1a1d24">episode_or_installment</text><rect x="200" y="183" width="135.47759127292377" height="24" rx="5" fill="#2563eb"/><text x="343.47759127292375" y="199" font-size="12.5" fill="#5b6472">42,674</text><text x="192" y="234" text-anchor="end" font-size="13" fill="#1a1d24">format_variant</text><rect x="200" y="218" width="106.98456550373197" height="24" rx="5" fill="#2563eb"/><text x="314.984565503732" y="234" font-size="12.5" fill="#5b6472">33,699</text><text x="192" y="269" text-anchor="end" font-size="13" fill="#1a1d24">related_work</text><rect x="200" y="253" width="101.39707521361748" height="24" rx="5" fill="#d97706"/><text x="309.3970752136175" y="269" font-size="12.5" fill="#5b6472">31,939</text><text x="192" y="304" text-anchor="end" font-size="13" fill="#1a1d24">revised_map_edition</text><rect x="200" y="288" width="62.97355533790402" height="24" rx="5" fill="#2563eb"/><text x="270.97355533790403" y="304" font-size="12.5" fill="#5b6472">19,836</text><text x="192" y="339" text-anchor="end" font-size="13" fill="#1a1d24">derivative_work</text><rect x="200" y="323" width="56.944780303286166" height="24" rx="5" fill="#d97706"/><text x="264.94478030328617" y="339" font-size="12.5" fill="#5b6472">17,937</text><text x="192" y="374" text-anchor="end" font-size="13" fill="#1a1d24">different_performance</text><rect x="200" y="358" width="47.4079502853862" height="24" rx="5" fill="#d97706"/><text x="255.4079502853862" y="374" font-size="12.5" fill="#5b6472">14,933</text><text x="192" y="409" text-anchor="end" font-size="13" fill="#1a1d24">different_work</text><rect x="200" y="393" width="40.052146306866156" height="24" rx="5" fill="#db2777"/><text x="248.05214630686615" y="409" font-size="12.5" fill="#5b6472">12,616</text><text x="192" y="444" text-anchor="end" font-size="13" fill="#1a1d24">translation</text><rect x="200" y="428" width="33.45509811206052" height="24" rx="5" fill="#2563eb"/><text x="241.4550981120605" y="444" font-size="12.5" fill="#5b6472">10,538</text><text x="192" y="479" text-anchor="end" font-size="13" fill="#1a1d24">source_work</text><rect x="200" y="463" width="19.02921409031038" height="24" rx="5" fill="#d97706"/><text x="227.02921409031038" y="479" font-size="12.5" fill="#5b6472">5,994</text><text x="192" y="514" text-anchor="end" font-size="13" fill="#1a1d24">different_state_or_impression</text><rect x="200" y="498" width="19.000641696781383" height="24" rx="5" fill="#2563eb"/><text x="227.00064169678137" y="514" font-size="12.5" fill="#5b6472">5,985</text><text x="192" y="549" text-anchor="end" font-size="13" fill="#1a1d24">abridged_edition</text><rect x="200" y="533" width="8.073288527137018" height="24" rx="5" fill="#2563eb"/><text x="216.073288527137" y="549" font-size="12.5" fill="#5b6472">2,543</text><text x="192" y="584" text-anchor="end" font-size="13" fill="#1a1d24">arrangement</text><rect x="200" y="568" width="7.282785639501503" height="24" rx="5" fill="#d97706"/><text x="215.2827856395015" y="584" font-size="12.5" fill="#5b6472">2,294</text><text x="192" y="619" text-anchor="end" font-size="13" fill="#1a1d24">succeeding_title</text><rect x="200" y="603" width="7.130399540680199" height="24" rx="5" fill="#d97706"/><text x="215.1303995406802" y="619" font-size="12.5" fill="#5b6472">2,246</text><text x="192" y="654" text-anchor="end" font-size="13" fill="#1a1d24">(41 others)</text><rect x="200" y="638" width="32.74713769461988" height="24" rx="5" fill="#c7cdd4"/><text x="240.74713769461988" y="654" font-size="12.5" fill="#5b6472">10,315</text></svg></div>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-02">
+<div class="lcviz">
+<h2><span class="n">02</span>Zoomed out: does it belong?</h2>
+    <p class="cap">Collapsing the 44 labels into four buckets. The clustering's core job — deciding membership — is overwhelmingly "yes, this belongs," with a small, important slice excluded as coincidental.</p>
+    <div class="card"><svg viewBox="0 0 470 220" role="img"><path d="M110 18 A92 92 0 1 1 48.31401187436946 41.74431255225271 L75.13400671160014 71.42069839909935 A52 52 0 1 0 110 58 Z" fill="#2563eb"/><path d="M48.31401187436946 41.74431255225271 A92 92 0 0 1 100.37733796744617 18.504621016101325 L104.56110406855653 58.285220574318146 A52 52 0 0 0 75.13400671160014 71.42069839909935 Z" fill="#d97706"/><path d="M100.37733796744617 18.504621016101325 A92 92 0 0 1 109.96270237643031 18.000007560395545 L109.97891873450409 58.000004273267045 A52 52 0 0 0 104.56110406855653 58.285220574318146 Z" fill="#db2777"/><path d="M109.96270237643031 18.000007560395545 A92 92 0 0 1 109.99999999999999 18 L109.99999999999999 58 A52 52 0 0 0 109.97891873450409 58.000004273267045 Z" fill="#94a3b8"/><rect x="240" y="15" width="12" height="12" rx="3" fill="#2563eb"/><text x="258" y="26" font-size="13.5" fill="#1a1d24">manifestation (same work)</text><text x="462" y="26" text-anchor="end" font-size="13" fill="#5b6472">88%</text><rect x="240" y="41" width="12" height="12" rx="3" fill="#d97706"/><text x="258" y="52" font-size="13.5" fill="#1a1d24">related expression</text><text x="462" y="52" text-anchor="end" font-size="13" fill="#5b6472">10%</text><rect x="240" y="67" width="12" height="12" rx="3" fill="#db2777"/><text x="258" y="78" font-size="13.5" fill="#1a1d24">does not belong</text><text x="462" y="78" text-anchor="end" font-size="13" fill="#5b6472">1.7%</text><rect x="240" y="93" width="12" height="12" rx="3" fill="#94a3b8"/><text x="258" y="104" font-size="13.5" fill="#1a1d24">unclear</text><text x="462" y="104" text-anchor="end" font-size="13" fill="#5b6472">0.0%</text></svg></div>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-03">
+<div class="lcviz">
+<h2><span class="n">03</span>What's in the corpus?</h2>
+    <p class="cap">Records by material type, and how big the clusters get. Most clusters are small; a long tail of generic titles runs to dozens of records.</p>
+    <div class="card"><svg viewBox="0 0 692 390" role="img"><text x="142" y="24" text-anchor="end" font-size="13" fill="#1a1d24">book</text><rect x="150" y="8" width="470" height="24" rx="5" fill="#2563eb"/><text x="628" y="24" font-size="12.5" fill="#5b6472">433,886</text><text x="142" y="59" text-anchor="end" font-size="13" fill="#1a1d24">image</text><rect x="150" y="43" width="138.13181342564636" height="24" rx="5" fill="#2563eb"/><text x="296.1318134256463" y="59" font-size="12.5" fill="#5b6472">127,518</text><text x="142" y="94" text-anchor="end" font-size="13" fill="#1a1d24">video/projected</text><rect x="150" y="78" width="67.13016783210337" height="24" rx="5" fill="#2563eb"/><text x="225.13016783210338" y="94" font-size="12.5" fill="#5b6472">61,972</text><text x="142" y="129" text-anchor="end" font-size="13" fill="#1a1d24">map</text><rect x="150" y="113" width="60.74125461526761" height="24" rx="5" fill="#2563eb"/><text x="218.74125461526762" y="129" font-size="12.5" fill="#5b6472">56,074</text><text x="142" y="164" text-anchor="end" font-size="13" fill="#1a1d24">audio (music)</text><rect x="150" y="148" width="38.026924122926296" height="24" rx="5" fill="#2563eb"/><text x="196.0269241229263" y="164" font-size="12.5" fill="#5b6472">35,105</text><text x="142" y="199" text-anchor="end" font-size="13" fill="#1a1d24">serial</text><rect x="150" y="183" width="30.332714123064584" height="24" rx="5" fill="#2563eb"/><text x="188.3327141230646" y="199" font-size="12.5" fill="#5b6472">28,002</text><text x="142" y="234" text-anchor="end" font-size="13" fill="#1a1d24">notated music</text><rect x="150" y="218" width="11.467113481421388" height="24" rx="5" fill="#2563eb"/><text x="169.4671134814214" y="234" font-size="12.5" fill="#5b6472">10,586</text><text x="142" y="269" text-anchor="end" font-size="13" fill="#1a1d24">audio (spoken)</text><rect x="150" y="253" width="6.240510180093389" height="24" rx="5" fill="#2563eb"/><text x="164.2405101800934" y="269" font-size="12.5" fill="#5b6472">5,761</text><text x="142" y="304" text-anchor="end" font-size="13" fill="#1a1d24">computer/software</text><rect x="150" y="288" width="2" height="24" rx="5" fill="#2563eb"/><text x="160" y="304" font-size="12.5" fill="#5b6472">480</text><text x="142" y="339" text-anchor="end" font-size="13" fill="#1a1d24">mixed materials</text><rect x="150" y="323" width="2" height="24" rx="5" fill="#2563eb"/><text x="160" y="339" font-size="12.5" fill="#5b6472">31</text><text x="142" y="374" text-anchor="end" font-size="13" fill="#1a1d24">kit</text><rect x="150" y="358" width="2" height="24" rx="5" fill="#2563eb"/><text x="160" y="374" font-size="12.5" fill="#5b6472">6</text></svg></div>
+    <div class="card"><p class="cap" style="margin-top:0">Cluster size distribution (records per cluster)</p><svg viewBox="0 0 632 285" role="img"><text x="82" y="24" text-anchor="end" font-size="13" fill="#1a1d24">5</text><rect x="90" y="8" width="470" height="24" rx="5" fill="#64748b"/><text x="568" y="24" font-size="12.5" fill="#5b6472">29,692</text><text x="82" y="59" text-anchor="end" font-size="13" fill="#1a1d24">6</text><rect x="90" y="43" width="268.19378957294896" height="24" rx="5" fill="#64748b"/><text x="366.19378957294896" y="59" font-size="12.5" fill="#5b6472">16,943</text><text x="82" y="94" text-anchor="end" font-size="13" fill="#1a1d24">7</text><rect x="90" y="78" width="164.87673447393237" height="24" rx="5" fill="#64748b"/><text x="262.8767344739324" y="94" font-size="12.5" fill="#5b6472">10,416</text><text x="82" y="129" text-anchor="end" font-size="13" fill="#1a1d24">8</text><rect x="90" y="113" width="111.69069109524452" height="24" rx="5" fill="#64748b"/><text x="209.69069109524452" y="129" font-size="12.5" fill="#5b6472">7,056</text><text x="82" y="164" text-anchor="end" font-size="13" fill="#1a1d24">9</text><rect x="90" y="148" width="79.9373568638017" height="24" rx="5" fill="#64748b"/><text x="177.9373568638017" y="164" font-size="12.5" fill="#5b6472">5,050</text><text x="82" y="199" text-anchor="end" font-size="13" fill="#1a1d24">10–14</text><rect x="90" y="183" width="185.91371413175267" height="24" rx="5" fill="#64748b"/><text x="283.91371413175267" y="199" font-size="12.5" fill="#5b6472">11,745</text><text x="82" y="234" text-anchor="end" font-size="13" fill="#1a1d24">15–24</text><rect x="90" y="218" width="97.84015896537788" height="24" rx="5" fill="#64748b"/><text x="195.8401589653779" y="234" font-size="12.5" fill="#5b6472">6,181</text><text x="82" y="269" text-anchor="end" font-size="13" fill="#1a1d24">25–49</text><rect x="90" y="253" width="43.89431496699448" height="24" rx="5" fill="#64748b"/><text x="141.89431496699447" y="269" font-size="12.5" fill="#5b6472">2,773</text></svg></div>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-04">
+<div class="lcviz">
+<h2><span class="n">04</span>How accurate is it?</h2>
+    <p class="cap">Two independent graders scored a stratified sample: a human expert (you) on a population-representative set, and a frontier model (Opus) on 2,500 records. The gap between <b>exact-label</b> and <b>bucket-level</b> accuracy is the story — most "errors" are near-ties inside the right bucket.</p><div class="legend"><span><span class="dot" style="background:#0ea5e9"></span>Human</span><span><span class="dot" style="background:#7c3aed"></span>Opus (frontier)</span></div><div class="card"><svg viewBox="0 0 334 260" role="img"><line x1="34" y1="236" x2="334" y2="236" stroke="#e4e8ec"/><text x="28" y="240" text-anchor="end" font-size="11" fill="#8a929e">0%</text><line x1="34" y1="185.5" x2="334" y2="185.5" stroke="#e4e8ec"/><text x="28" y="189.5" text-anchor="end" font-size="11" fill="#8a929e">25%</text><line x1="34" y1="135" x2="334" y2="135" stroke="#e4e8ec"/><text x="28" y="139" text-anchor="end" font-size="11" fill="#8a929e">50%</text><line x1="34" y1="84.5" x2="334" y2="84.5" stroke="#e4e8ec"/><text x="28" y="88.5" text-anchor="end" font-size="11" fill="#8a929e">75%</text><line x1="34" y1="34" x2="334" y2="34" stroke="#e4e8ec"/><text x="28" y="38" text-anchor="end" font-size="11" fill="#8a929e">100%</text><rect x="59" y="60.25999999999999" width="46" height="175.74" rx="4" fill="#0ea5e9"/><text x="82" y="55.25999999999999" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">87%</text><rect x="113" y="81.79320000000001" width="46" height="154.2068" rx="4" fill="#7c3aed"/><text x="136" y="76.79320000000001" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">76%</text><text x="109" y="254" text-anchor="middle" font-size="13" fill="#5b6472">Exact label</text><rect x="209" y="40.06" width="46" height="195.94" rx="4" fill="#0ea5e9"/><text x="232" y="35.06" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">97%</text><rect x="263" y="52.2406" width="46" height="183.7594" rx="4" fill="#7c3aed"/><text x="286" y="47.2406" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">91%</text><text x="259" y="254" text-anchor="middle" font-size="13" fill="#5b6472">Coarse bucket</text></svg></div>
+    <p class="cap">At the bucket level both graders agree the model is right ~90–97% of the time. Opus is the stricter grader on exact labels.</p>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-05">
+<div class="lcviz">
+<h2><span class="n">05</span>Strong and weak spots, by material</h2>
+    <p class="cap">Frontier-graded accuracy per material (population-weighted; darker = stronger). Books, maps, video and serials are strong; images and software are where the model struggles.</p>
+    <div class="card"><svg viewBox="0 0 652 320" role="img"><text x="142" y="24" text-anchor="end" font-size="13" fill="#1a1d24">map</text><rect x="150" y="8" width="430" height="24" rx="5" fill="#1e40af"/><text x="588" y="24" font-size="12.5" fill="#5b6472">85%  n=209</text><text x="142" y="59" text-anchor="end" font-size="13" fill="#1a1d24">video/projected</text><rect x="150" y="43" width="428.01387797618816" height="24" rx="5" fill="#1f41af"/><text x="586.0138779761882" y="59" font-size="12.5" fill="#5b6472">85%  n=268</text><text x="142" y="94" text-anchor="end" font-size="13" fill="#1a1d24">book</text><rect x="150" y="78" width="414.64102312590296" height="24" rx="5" fill="#2245b2"/><text x="572.641023125903" y="94" font-size="12.5" fill="#5b6472">82%  n=907</text><text x="142" y="129" text-anchor="end" font-size="13" fill="#1a1d24">serial</text><rect x="150" y="113" width="408.64532047653876" height="24" rx="5" fill="#2447b3"/><text x="566.6453204765387" y="129" font-size="12.5" fill="#5b6472">81%  n=269</text><text x="142" y="164" text-anchor="end" font-size="13" fill="#1a1d24">audio (spoken)</text><rect x="150" y="148" width="387.45161235133855" height="24" rx="5" fill="#294fb8"/><text x="545.4516123513386" y="164" font-size="12.5" fill="#5b6472">77%  n=22</text><text x="142" y="199" text-anchor="end" font-size="13" fill="#1a1d24">audio (music)</text><rect x="150" y="183" width="383.6797256461663" height="24" rx="5" fill="#2a50b9"/><text x="541.6797256461663" y="199" font-size="12.5" fill="#5b6472">76%  n=242</text><text x="142" y="234" text-anchor="end" font-size="13" fill="#1a1d24">notated music</text><rect x="150" y="218" width="343.0239836927155" height="24" rx="5" fill="#355ec1"/><text x="501.0239836927155" y="234" font-size="12.5" fill="#5b6472">68%  n=213</text><text x="142" y="269" text-anchor="end" font-size="13" fill="#1a1d24">image</text><rect x="150" y="253" width="240.13646601271077" height="24" rx="5" fill="#5181d6"/><text x="398.1364660127108" y="269" font-size="12.5" fill="#5b6472">48%  n=287</text><text x="142" y="304" text-anchor="end" font-size="13" fill="#1a1d24">computer/software</text><rect x="150" y="288" width="113.83314199771092" height="24" rx="5" fill="#73adf1"/><text x="271.8331419977109" y="304" font-size="12.5" fill="#5b6472">23%  n=83</text></svg></div>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-06">
+<div class="lcviz">
+<h2><span class="n">06</span>Which labels get over- and under-used?</h2>
+    <p class="cap">Every relationship label graded at least 15 times, as a pair of dots: <b>precision</b> (dark — when the model uses the label, how often it's right) and <b>recall</b> (light — how often the true cases actually get it). Sorted by the gap between the two.</p><div class="legend"><span><span class="dot" style="background:#2563eb"></span>precision</span><span><span class="dot" style="background:#60a5fa"></span>recall</span></div><div class="card"><svg viewBox="0 0 680 1049" role="img"><line x1="242" y1="22" x2="242" y2="1031" stroke="#e4e8ec"/><text x="242" y="16" text-anchor="middle" font-size="10.5" fill="#8a929e">0%</text><text x="242" y="1044" text-anchor="middle" font-size="10.5" fill="#8a929e">0%</text><line x1="330.5" y1="22" x2="330.5" y2="1031" stroke="#e4e8ec"/><text x="330.5" y="16" text-anchor="middle" font-size="10.5" fill="#8a929e">25%</text><text x="330.5" y="1044" text-anchor="middle" font-size="10.5" fill="#8a929e">25%</text><line x1="419" y1="22" x2="419" y2="1031" stroke="#e4e8ec"/><text x="419" y="16" text-anchor="middle" font-size="10.5" fill="#8a929e">50%</text><text x="419" y="1044" text-anchor="middle" font-size="10.5" fill="#8a929e">50%</text><line x1="507.5" y1="22" x2="507.5" y2="1031" stroke="#e4e8ec"/><text x="507.5" y="16" text-anchor="middle" font-size="10.5" fill="#8a929e">75%</text><text x="507.5" y="1044" text-anchor="middle" font-size="10.5" fill="#8a929e">75%</text><line x1="596" y1="22" x2="596" y2="1031" stroke="#e4e8ec"/><text x="596" y="16" text-anchor="middle" font-size="10.5" fill="#8a929e">100%</text><text x="596" y="1044" text-anchor="middle" font-size="10.5" fill="#8a929e">100%</text><text x="674" y="16" text-anchor="end" font-size="10.5" fill="#8a929e">P / R</text><text x="0" y="50" font-size="10.5" font-weight="700" letter-spacing="0.06em" fill="#5b6472">UNDER-USED — precise when applied, but misses most true cases</text><g><title>illustrated_edition — precision 100%, recall 10% (graded 46×)</title><rect x="0" y="60" width="680" height="21" fill="transparent"/><text x="232" y="74.5" text-anchor="end" font-size="11.5" fill="#1a1d24">illustrated_edition</text><line x1="278.72306305430465" y1="70.5" x2="596" y2="70.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="278.72306305430465" cy="70.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="596" cy="70.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="74" text-anchor="end" font-size="10.5" fill="#8a929e">100 / 10</text></g><g><title>critical_or_annotated_edition — precision 100%, recall 16% (graded 57×)</title><rect x="0" y="81" width="680" height="21" fill="transparent"/><text x="232" y="95.5" text-anchor="end" font-size="11.5" fill="#1a1d24">critical_or_annotated_edition</text><line x1="298.78601587027515" y1="91.5" x2="596" y2="91.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="298.78601587027515" cy="91.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="596" cy="91.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="95" text-anchor="end" font-size="10.5" fill="#8a929e">100 / 16</text></g><g><title>apparent_duplicate — precision 93%, recall 25% (graded 54×)</title><rect x="0" y="102" width="680" height="21" fill="transparent"/><text x="232" y="116.5" text-anchor="end" font-size="11.5" fill="#1a1d24">apparent_duplicate</text><line x1="330.76979041702447" y1="112.5" x2="570.0975609756097" y2="112.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="330.76979041702447" cy="112.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="570.0975609756097" cy="112.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="116" text-anchor="end" font-size="10.5" fill="#8a929e">93 / 25</text></g><g><title>different_sheet_area — precision 98%, recall 32% (graded 52×)</title><rect x="0" y="123" width="680" height="21" fill="transparent"/><text x="232" y="137.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_sheet_area</text><line x1="353.99858846096964" y1="133.5" x2="587.3658536585366" y2="133.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="353.99858846096964" cy="133.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="587.3658536585366" cy="133.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="137" text-anchor="end" font-size="10.5" fill="#8a929e">98 / 32</text></g><g><title>related_work — precision 93%, recall 31% (graded 276×)</title><rect x="0" y="144" width="680" height="21" fill="transparent"/><text x="232" y="158.5" text-anchor="end" font-size="11.5" fill="#1a1d24">related_work</text><line x1="353.31586608711376" y1="154.5" x2="572.4000000000001" y2="154.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="353.31586608711376" cy="154.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="572.4000000000001" cy="154.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="158" text-anchor="end" font-size="10.5" fill="#8a929e">93 / 31</text></g><g><title>indeterminate — precision 68%, recall 13% (graded 28×)</title><rect x="0" y="165" width="680" height="21" fill="transparent"/><text x="232" y="179.5" text-anchor="end" font-size="11.5" fill="#1a1d24">indeterminate</text><line x1="288.2386529848344" y1="175.5" x2="480.95000000000005" y2="175.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="288.2386529848344" cy="175.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="480.95000000000005" cy="175.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="179" text-anchor="end" font-size="10.5" fill="#8a929e">68 / 13</text></g><g><title>arrangement — precision 93%, recall 48% (graded 65×)</title><rect x="0" y="186" width="680" height="21" fill="transparent"/><text x="232" y="200.5" text-anchor="end" font-size="11.5" fill="#1a1d24">arrangement</text><line x1="412.51839638111187" y1="196.5" x2="570.7142857142857" y2="196.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="412.51839638111187" cy="196.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="570.7142857142857" cy="196.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="200" text-anchor="end" font-size="10.5" fill="#8a929e">93 / 48</text></g><g><title>different_release_issue — precision 78%, recall 39% (graded 41×)</title><rect x="0" y="207" width="680" height="21" fill="transparent"/><text x="232" y="221.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_release_issue</text><line x1="378.6700059140213" y1="217.5" x2="518.2926829268293" y2="217.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="378.6700059140213" cy="217.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="518.2926829268293" cy="217.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="221" text-anchor="end" font-size="10.5" fill="#8a929e">78 / 39</text></g><g><title>different_state_or_impression — precision 63%, recall 27% (graded 49×)</title><rect x="0" y="228" width="680" height="21" fill="transparent"/><text x="232" y="242.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_state_or_impression</text><line x1="339.23245353041386" y1="238.5" x2="465.17391304347836" y2="238.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="339.23245353041386" cy="238.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="465.17391304347836" cy="238.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="242" text-anchor="end" font-size="10.5" fill="#8a929e">63 / 27</text></g><g><title>abridged_edition — precision 98%, recall 64% (graded 44×)</title><rect x="0" y="249" width="680" height="21" fill="transparent"/><text x="232" y="263.5" text-anchor="end" font-size="11.5" fill="#1a1d24">abridged_edition</text><line x1="468.02607281439884" y1="259.5" x2="587.7674418604652" y2="259.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="468.02607281439884" cy="259.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="587.7674418604652" cy="259.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="263" text-anchor="end" font-size="10.5" fill="#8a929e">98 / 64</text></g><g><title>preceding_title — precision 66%, recall 34% (graded 31×)</title><rect x="0" y="270" width="680" height="21" fill="transparent"/><text x="232" y="284.5" text-anchor="end" font-size="11.5" fill="#1a1d24">preceding_title</text><line x1="363.9158484779702" y1="280.5" x2="475.1219512195122" y2="280.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="363.9158484779702" cy="280.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="475.1219512195122" cy="280.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="284" text-anchor="end" font-size="10.5" fill="#8a929e">66 / 34</text></g><g><title>episode_or_installment — precision 100%, recall 82% (graded 108×)</title><rect x="0" y="291" width="680" height="21" fill="transparent"/><text x="232" y="305.5" text-anchor="end" font-size="11.5" fill="#1a1d24">episode_or_installment</text><line x1="533.3939546136924" y1="301.5" x2="596" y2="301.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="533.3939546136924" cy="301.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="596" cy="301.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="305" text-anchor="end" font-size="10.5" fill="#8a929e">100 / 82</text></g><g><title>different_music_edition — precision 49%, recall 32% (graded 26×)</title><rect x="0" y="312" width="680" height="21" fill="transparent"/><text x="232" y="326.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_music_edition</text><line x1="354.09929393405844" y1="322.5" x2="414.68292682926847" y2="322.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="354.09929393405844" cy="322.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="414.68292682926847" cy="322.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="326" text-anchor="end" font-size="10.5" fill="#8a929e">49 / 32</text></g><text x="0" y="355" font-size="10.5" font-weight="700" letter-spacing="0.06em" fill="#5b6472">BALANCED</text><g><title>component_part — precision 81%, recall 69% (graded 203×)</title><rect x="0" y="365" width="680" height="21" fill="transparent"/><text x="232" y="379.5" text-anchor="end" font-size="11.5" fill="#1a1d24">component_part</text><line x1="485.95621788464575" y1="375.5" x2="529.9199999999996" y2="375.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="485.95621788464575" cy="375.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="529.9199999999996" cy="375.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="379" text-anchor="end" font-size="10.5" fill="#8a929e">81 / 69</text></g><g><title>instrumental_parts — precision 78%, recall 66% (graded 33×)</title><rect x="0" y="386" width="680" height="21" fill="transparent"/><text x="232" y="400.5" text-anchor="end" font-size="11.5" fill="#1a1d24">instrumental_parts</text><line x1="474.40606795167537" y1="396.5" x2="516.3500000000001" y2="396.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="474.40606795167537" cy="396.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="516.3500000000001" cy="396.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="400" text-anchor="end" font-size="10.5" fill="#8a929e">78 / 66</text></g><g><title>revised_map_edition — precision 92%, recall 83% (graded 68×)</title><rect x="0" y="407" width="680" height="21" fill="transparent"/><text x="232" y="421.5" text-anchor="end" font-size="11.5" fill="#1a1d24">revised_map_edition</text><line x1="535.256761663902" y1="417.5" x2="567.4516129032259" y2="417.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="535.256761663902" cy="417.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="567.4516129032259" cy="417.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="421" text-anchor="end" font-size="10.5" fill="#8a929e">92 / 83</text></g><g><title>compilation_appearance — precision 44%, recall 35% (graded 21×)</title><rect x="0" y="428" width="680" height="21" fill="transparent"/><text x="232" y="442.5" text-anchor="end" font-size="11.5" fill="#1a1d24">compilation_appearance</text><line x1="365.78225439458697" y1="438.5" x2="397.41463414634154" y2="438.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="365.78225439458697" cy="438.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="397.41463414634154" cy="438.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="442" text-anchor="end" font-size="10.5" fill="#8a929e">44 / 35</text></g><g><title>different_work — precision 83%, recall 75% (graded 60×)</title><rect x="0" y="449" width="680" height="21" fill="transparent"/><text x="232" y="463.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_work</text><line x1="508.2795742241864" y1="459.5" x2="537" y2="459.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="508.2795742241864" cy="459.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="537" cy="459.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="463" text-anchor="end" font-size="10.5" fill="#8a929e">83 / 75</text></g><g><title>different_platform — precision 95%, recall 92% (graded 40×)</title><rect x="0" y="470" width="680" height="21" fill="transparent"/><text x="232" y="484.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_platform</text><line x1="567.7281223449448" y1="480.5" x2="578.3" y2="480.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="567.7281223449448" cy="480.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="578.3" cy="480.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="484" text-anchor="end" font-size="10.5" fill="#8a929e">95 / 92</text></g><g><title>special_edition_release — precision 97%, recall 97% (graded 37×)</title><rect x="0" y="491" width="680" height="21" fill="transparent"/><text x="232" y="505.5" text-anchor="end" font-size="11.5" fill="#1a1d24">special_edition_release</text><line x1="586.4324324324325" y1="501.5" x2="586.4324324324325" y2="501.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="586.4324324324325" cy="501.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="586.4324324324325" cy="501.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="505" text-anchor="end" font-size="10.5" fill="#8a929e">97 / 97</text></g><g><title>excerpt_or_trailer — precision 100%, recall 100% (graded 26×)</title><rect x="0" y="512" width="680" height="21" fill="transparent"/><text x="232" y="526.5" text-anchor="end" font-size="11.5" fill="#1a1d24">excerpt_or_trailer</text><line x1="596" y1="522.5" x2="596" y2="522.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="522.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="596" cy="522.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="526" text-anchor="end" font-size="10.5" fill="#8a929e">100 / 100</text></g><g><title>dubbed_version — precision 100%, recall 100% (graded 24×)</title><rect x="0" y="533" width="680" height="21" fill="transparent"/><text x="232" y="547.5" text-anchor="end" font-size="11.5" fill="#1a1d24">dubbed_version</text><line x1="596" y1="543.5" x2="596" y2="543.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="543.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="596" cy="543.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="547" text-anchor="end" font-size="10.5" fill="#8a929e">100 / 100</text></g><g><title>translation — precision 80%, recall 81% (graded 46×)</title><rect x="0" y="554" width="680" height="21" fill="transparent"/><text x="232" y="568.5" text-anchor="end" font-size="11.5" fill="#1a1d24">translation</text><line x1="526.5882352941177" y1="564.5" x2="529.3821290013441" y2="564.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="529.3821290013441" cy="564.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="526.5882352941177" cy="564.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="568" text-anchor="end" font-size="10.5" fill="#8a929e">80 / 81</text></g><g><title>microform_version — precision 98%, recall 98% (graded 42×)</title><rect x="0" y="575" width="680" height="21" fill="transparent"/><text x="232" y="589.5" text-anchor="end" font-size="11.5" fill="#1a1d24">microform_version</text><line x1="587.15" y1="585.5" x2="590.688672168042" y2="585.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="590.688672168042" cy="585.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="587.15" cy="585.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="589" text-anchor="end" font-size="10.5" fill="#8a929e">98 / 98</text></g><g><title>alternate_cut — precision 94%, recall 97% (graded 30×)</title><rect x="0" y="596" width="680" height="21" fill="transparent"/><text x="232" y="610.5" text-anchor="end" font-size="11.5" fill="#1a1d24">alternate_cut</text><line x1="573.1612903225806" y1="606.5" x2="584.2" y2="606.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="584.2" cy="606.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="573.1612903225806" cy="606.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="610" text-anchor="end" font-size="10.5" fill="#8a929e">94 / 97</text></g><g><title>revised_edition — precision 91%, recall 95% (graded 194×)</title><rect x="0" y="617" width="680" height="21" fill="transparent"/><text x="232" y="631.5" text-anchor="end" font-size="11.5" fill="#1a1d24">revised_edition</text><line x1="565.9099999999996" y1="627.5" x2="577.8599956432818" y2="627.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="577.8599956432818" cy="627.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="565.9099999999996" cy="627.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="631" text-anchor="end" font-size="10.5" fill="#8a929e">91 / 95</text></g><g><title>online_version — precision 93%, recall 100% (graded 38×)</title><rect x="0" y="638" width="680" height="21" fill="transparent"/><text x="232" y="652.5" text-anchor="end" font-size="11.5" fill="#1a1d24">online_version</text><line x1="570.0975609756098" y1="648.5" x2="596" y2="648.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="648.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="570.0975609756098" cy="648.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="652" text-anchor="end" font-size="10.5" fill="#8a929e">93 / 100</text></g><g><title>vocal_score — precision 90%, recall 98% (graded 40×)</title><rect x="0" y="659" width="680" height="21" fill="transparent"/><text x="232" y="673.5" text-anchor="end" font-size="11.5" fill="#1a1d24">vocal_score</text><line x1="561.4634146341464" y1="669.5" x2="588.1541207876123" y2="669.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="588.1541207876123" cy="669.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="561.4634146341464" cy="669.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="673" text-anchor="end" font-size="10.5" fill="#8a929e">90 / 98</text></g><g><title>different_performance — precision 89%, recall 99% (graded 60×)</title><rect x="0" y="680" width="680" height="21" fill="transparent"/><text x="232" y="694.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_performance</text><line x1="558.0714285714287" y1="690.5" x2="592.5477371773045" y2="690.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="592.5477371773045" cy="690.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="558.0714285714287" cy="690.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="694" text-anchor="end" font-size="10.5" fill="#8a929e">89 / 99</text></g><g><title>remastered — precision 87%, recall 100% (graded 34×)</title><rect x="0" y="701" width="680" height="21" fill="transparent"/><text x="232" y="715.5" text-anchor="end" font-size="11.5" fill="#1a1d24">remastered</text><line x1="550.6153846153846" y1="711.5" x2="596" y2="711.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="711.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="550.6153846153846" cy="711.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="715" text-anchor="end" font-size="10.5" fill="#8a929e">87 / 100</text></g><g><title>original_first — precision 81%, recall 95% (graded 131×)</title><rect x="0" y="722" width="680" height="21" fill="transparent"/><text x="232" y="736.5" text-anchor="end" font-size="11.5" fill="#1a1d24">original_first</text><line x1="527.1666666666671" y1="732.5" x2="579.4183706660847" y2="732.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="579.4183706660847" cy="732.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="527.1666666666671" cy="732.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="736" text-anchor="end" font-size="10.5" fill="#8a929e">81 / 95</text></g><text x="0" y="765" font-size="10.5" font-weight="700" letter-spacing="0.06em" fill="#5b6472">OVER-USED — the catch-alls: applied broadly, often wrongly</text><g><title>new_version_release — precision 83%, recall 100% (graded 33×)</title><rect x="0" y="775" width="680" height="21" fill="transparent"/><text x="232" y="789.5" text-anchor="end" font-size="11.5" fill="#1a1d24">new_version_release</text><line x1="534.0500000000002" y1="785.5" x2="596" y2="785.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="785.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="534.0500000000002" cy="785.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="789" text-anchor="end" font-size="10.5" fill="#8a929e">83 / 100</text></g><g><title>subtitled_version — precision 79%, recall 100% (graded 19×)</title><rect x="0" y="796" width="680" height="21" fill="transparent"/><text x="232" y="810.5" text-anchor="end" font-size="11.5" fill="#1a1d24">subtitled_version</text><line x1="522.25" y1="806.5" x2="596" y2="806.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="806.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="522.25" cy="806.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="810" text-anchor="end" font-size="10.5" fill="#8a929e">79 / 100</text></g><g><title>succeeding_title — precision 69%, recall 95% (graded 35×)</title><rect x="0" y="817" width="680" height="21" fill="transparent"/><text x="232" y="831.5" text-anchor="end" font-size="11.5" fill="#1a1d24">succeeding_title</text><line x1="486.42857142857133" y1="827.5" x2="578.3426021149296" y2="827.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="578.3426021149296" cy="827.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="486.42857142857133" cy="827.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="831" text-anchor="end" font-size="10.5" fill="#8a929e">69 / 95</text></g><g><title>print_version — precision 74%, recall 100% (graded 28×)</title><rect x="0" y="838" width="680" height="21" fill="transparent"/><text x="232" y="852.5" text-anchor="end" font-size="11.5" fill="#1a1d24">print_version</text><line x1="502.84210526315786" y1="848.5" x2="596" y2="848.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="848.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="502.84210526315786" cy="848.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="852" text-anchor="end" font-size="10.5" fill="#8a929e">74 / 100</text></g><g><title>full_score — precision 73%, recall 100% (graded 29×)</title><rect x="0" y="859" width="680" height="21" fill="transparent"/><text x="232" y="873.5" text-anchor="end" font-size="11.5" fill="#1a1d24">full_score</text><line x1="498.6500000000001" y1="869.5" x2="596" y2="869.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="869.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="498.6500000000001" cy="869.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="873" text-anchor="end" font-size="10.5" fill="#8a929e">73 / 100</text></g><g><title>derivative_work — precision 64%, recall 95% (graded 44×)</title><rect x="0" y="880" width="680" height="21" fill="transparent"/><text x="232" y="894.5" text-anchor="end" font-size="11.5" fill="#1a1d24">derivative_work</text><line x1="469.99999999999983" y1="890.5" x2="577.1548327968735" y2="890.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="577.1548327968735" cy="890.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="469.99999999999983" cy="890.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="894" text-anchor="end" font-size="10.5" fill="#8a929e">64 / 95</text></g><g><title>detail_or_crop — precision 67%, recall 100% (graded 27×)</title><rect x="0" y="901" width="680" height="21" fill="transparent"/><text x="232" y="915.5" text-anchor="end" font-size="11.5" fill="#1a1d24">detail_or_crop</text><line x1="480.94999999999993" y1="911.5" x2="596" y2="911.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="911.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="480.94999999999993" cy="911.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="915" text-anchor="end" font-size="10.5" fill="#8a929e">67 / 100</text></g><g><title>later_printing_reprint — precision 59%, recall 95% (graded 131×)</title><rect x="0" y="922" width="680" height="21" fill="transparent"/><text x="232" y="936.5" text-anchor="end" font-size="11.5" fill="#1a1d24">later_printing_reprint</text><line x1="452.62999999999994" y1="932.5" x2="579.0523494135059" y2="932.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="579.0523494135059" cy="932.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="452.62999999999994" cy="932.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="936" text-anchor="end" font-size="10.5" fill="#8a929e">59 / 95</text></g><g><title>reproduction_surrogate — precision 47%, recall 85% (graded 58×)</title><rect x="0" y="943" width="680" height="21" fill="transparent"/><text x="232" y="957.5" text-anchor="end" font-size="11.5" fill="#1a1d24">reproduction_surrogate</text><line x1="409.8762886597938" y1="953.5" x2="542.4195358639989" y2="953.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="542.4195358639989" cy="953.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="409.8762886597938" cy="953.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="957" text-anchor="end" font-size="10.5" fill="#8a929e">47 / 85</text></g><g><title>format_variant — precision 49%, recall 91% (graded 43×)</title><rect x="0" y="964" width="680" height="21" fill="transparent"/><text x="232" y="978.5" text-anchor="end" font-size="11.5" fill="#1a1d24">format_variant</text><line x1="416.7012987012987" y1="974.5" x2="562.9133334167789" y2="974.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="562.9133334167789" cy="974.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="416.7012987012987" cy="974.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="978" text-anchor="end" font-size="10.5" fill="#8a929e">49 / 91</text></g><g><title>different_scale — precision 46%, recall 100% (graded 19×)</title><rect x="0" y="985" width="680" height="21" fill="transparent"/><text x="232" y="999.5" text-anchor="end" font-size="11.5" fill="#1a1d24">different_scale</text><line x1="406.048780487805" y1="995.5" x2="596" y2="995.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="596" cy="995.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="406.048780487805" cy="995.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="999" text-anchor="end" font-size="10.5" fill="#8a929e">46 / 100</text></g><g><title>source_work — precision 34%, recall 90% (graded 17×)</title><rect x="0" y="1006" width="680" height="21" fill="transparent"/><text x="232" y="1020.5" text-anchor="end" font-size="11.5" fill="#1a1d24">source_work</text><line x1="362.5106382978722" y1="1016.5" x2="559.6051041949756" y2="1016.5" stroke="#c9d4e2" stroke-width="2"/><circle cx="559.6051041949756" cy="1016.5" r="5" fill="#60a5fa" stroke="#f7f9fb" stroke-width="2"/><circle cx="362.5106382978722" cy="1016.5" r="5" fill="#2563eb" stroke="#f7f9fb" stroke-width="2"/><text x="674" y="1020" text-anchor="end" font-size="10.5" fill="#8a929e">34 / 90</text></g></svg></div>
+    <p class="cap">One machine, two failure modes. Specific labels (<span class="tag">illustrated_edition</span>, <span class="tag">related_work</span>) are trustworthy when they appear but rarely used — the record usually gets a generic label instead. And the generic favorites (<span class="tag">later_printing_reprint</span>, <span class="tag">format_variant</span>, <span class="tag">source_work</span>) are what absorb them: they catch nearly everything, wrongly a third to half of the time. Hover a row for exact values and sample size.</p>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-07">
+<div class="lcviz">
+<h2><span class="n">07</span>The decision that actually matters</h2>
+    <p class="cap">Only one label removes a record from a cluster: <span class="tag">different_work</span>. Here's precision (when it excludes, is it right?) and recall (does it catch the true intruders?) — human vs Opus.</p><div class="legend"><span><span class="dot" style="background:#0ea5e9"></span>Human</span><span><span class="dot" style="background:#7c3aed"></span>Opus</span></div><div class="card"><svg viewBox="0 0 334 260" role="img"><line x1="34" y1="236" x2="334" y2="236" stroke="#e4e8ec"/><text x="28" y="240" text-anchor="end" font-size="11" fill="#8a929e">0%</text><line x1="34" y1="185.5" x2="334" y2="185.5" stroke="#e4e8ec"/><text x="28" y="189.5" text-anchor="end" font-size="11" fill="#8a929e">25%</text><line x1="34" y1="135" x2="334" y2="135" stroke="#e4e8ec"/><text x="28" y="139" text-anchor="end" font-size="11" fill="#8a929e">50%</text><line x1="34" y1="84.5" x2="334" y2="84.5" stroke="#e4e8ec"/><text x="28" y="88.5" text-anchor="end" font-size="11" fill="#8a929e">75%</text><line x1="34" y1="34" x2="334" y2="34" stroke="#e4e8ec"/><text x="28" y="38" text-anchor="end" font-size="11" fill="#8a929e">100%</text><rect x="59" y="75.1474" width="46" height="160.8526" rx="4" fill="#0ea5e9"/><text x="82" y="70.1474" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">80%</text><rect x="113" y="67.67339999999999" width="46" height="168.3266" rx="4" fill="#7c3aed"/><text x="136" y="62.67339999999999" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">83%</text><text x="109" y="254" text-anchor="middle" font-size="13" fill="#5b6472">Precision</text><rect x="209" y="34" width="46" height="202" rx="4" fill="#0ea5e9"/><text x="232" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">100%</text><rect x="263" y="84.0556" width="46" height="151.9444" rx="4" fill="#7c3aed"/><text x="286" y="79.0556" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1d24">75%</text><text x="259" y="254" text-anchor="middle" font-size="13" fill="#5b6472">Recall</text></svg></div>
+    <p class="cap">Both agree the model <b>over-excludes ~1 in 5</b> (precision ~80%). Opus's lower recall was Opus itself being over-strict: on 15/15 boundary cases where Opus wanted a record thrown out, the human sided with the model.</p>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-08">
+<div class="lcviz">
+<h2><span class="n">08</span>Do the two judges agree?</h2>
+    <p class="cap">On the records both reviewed. Agreement with the model, and between the judges (Cohen's κ = 0.48, "moderate").</p>
+    <div class="card"><svg viewBox="0 0 682 145" role="img"><text x="182" y="24" text-anchor="end" font-size="13" fill="#1a1d24">model ↔ human</text><rect x="190" y="8" width="405.99999999999994" height="24" rx="5" fill="#0ea5e9"/><text x="604" y="24" font-size="12.5" fill="#5b6472">87%</text><text x="182" y="59" text-anchor="end" font-size="13" fill="#1a1d24">model ↔ Opus</text><rect x="190" y="43" width="371.00000000000006" height="24" rx="5" fill="#7c3aed"/><text x="569" y="59" font-size="12.5" fill="#5b6472">80%</text><text x="182" y="94" text-anchor="end" font-size="13" fill="#1a1d24">human ↔ Opus (fine)</text><rect x="190" y="78" width="373.3333333333333" height="24" rx="5" fill="#64748b"/><text x="571.3333333333333" y="94" font-size="12.5" fill="#5b6472">80%</text><text x="182" y="129" text-anchor="end" font-size="13" fill="#1a1d24">human ↔ Opus (coarse)</text><rect x="190" y="113" width="420" height="24" rx="5" fill="#94a3b8"/><text x="618" y="129" font-size="12.5" fill="#5b6472">90%</text></svg></div>
+</div>
+          </div>
+          <div class="viz-panel" id="viz-10">
+<div class="lcviz">
+<h2><span class="n">10</span>When clusters fail</h2>
+    <p class="cap">1.5% of clusters (1,374) had most records excluded — a generic title swept up unrelated works. But most "failures" aren't junk:</p>
+    <div class="card"><svg viewBox="0 0 470 220" role="img"><path d="M110 18 A92 92 0 0 1 201.9131993434858 113.99547074130771 L161.95093875936152 112.25830954943478 A52 52 0 0 0 110 58 Z" fill="#9d174d"/><path d="M201.9131993434858 113.99547074130771 A92 92 0 0 1 24.3157733884276 143.4994523832362 L61.569784958676465 128.93447308617698 A52 52 0 0 0 161.95093875936152 112.25830954943478 Z" fill="#db2777"/><path d="M24.3157733884276 143.4994523832362 A92 92 0 0 1 109.99999999999999 18 L109.99999999999999 58 A52 52 0 0 0 61.569784958676465 128.93447308617698 Z" fill="#f0a8cd"/><rect x="240" y="15" width="12" height="12" rx="3" fill="#9d174d"/><text x="258" y="26" font-size="13.5" fill="#1a1d24">every record excluded</text><text x="462" y="26" text-anchor="end" font-size="13" fill="#5b6472">26%</text><rect x="240" y="41" width="12" height="12" rx="3" fill="#db2777"/><text x="258" y="52" font-size="13.5" fill="#1a1d24">all but one record</text><text x="462" y="52" text-anchor="end" font-size="13" fill="#5b6472">43%</text><rect x="240" y="67" width="12" height="12" rx="3" fill="#f0a8cd"/><text x="258" y="78" font-size="13.5" fill="#1a1d24">majority excluded</text><text x="462" y="78" text-anchor="end" font-size="13" fill="#5b6472">31%</text></svg></div>
+    <div class="card">
+      <p style="margin-top:0"><b>74%</b> of failed clusters are actually <b>several real works merged under one title</b>, not garbage — the judge just can't re-partition them.</p>
+      <p class="cap" style="margin-bottom:0">Example — <span class="hl">"the gift"</span>: 21 records = 9 different novels by 9 authors (Larriva, Garwood, Jensen, Ashley, Stover, …) that share only the title. The right answer is ~9 tiny clusters; the pipeline kept 1 and excluded the rest.</p>
+    </div>
+</div>
+          </div>
+          </div>
+        </div>
+
+        <script>
+          (function() {
+            document.querySelectorAll('#vizMenu li').forEach(function(li) {
+              li.addEventListener('click', function() {
+                document.querySelectorAll('#vizMenu li').forEach(function(x) { x.classList.remove('active'); });
+                document.querySelectorAll('#vizStage .viz-panel').forEach(function(x) { x.classList.remove('active'); });
+                li.classList.add('active');
+                document.getElementById(li.getAttribute('data-viz')).classList.add('active');
+              });
+            });
+          })();
+        </script>
+
+      </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="columns">
+		<div class="column" style="">
+
+        <p>The results are pretty straight forward: It works mostly, needs refinement, models will improve or more capable could be used, more metadata pre/post-processing would also help things. But I think the context of its use is also important. This sort of clustering would be enriching a discovery layer, detached from record metadata. Which I think is a good approach to anything AI, progressive enhancement, if it works that&rsquo;s great and makes the user experience better if it fails, oh well doesn&rsquo;t really prevent the user from completing their use case.
+        </p>
+
+
+        <h2 class="is-size-3 section-head" id="opac-browse-interface">OPAC Browse Interface</h2>
+
+        <p>I made a very OPAC-ish search and display interface for the 88K clusters: <a href="https://thisismattmiller.github.io/superwork/" target="_blank">https://thisismattmiller.github.io/superwork/</a>
+        </p>
+
+        <p style="text-align:center;">
+          <a href="https://thisismattmiller.github.io/superwork/" target="_blank"><img src="/img/superwork-screenshot.png" style="width:75%; border:1px solid #dbdbdb;" title="Superwork OPAC browse interface"/></a>
+        </p>
+
+        <p>The best way to try it out is to just click the RANDOM button a few times and see what comes up. But here are a few links:
+        </p>
+
+        <ul class="post-ul">
+          <li><a href="https://thisismattmiller.github.io/superwork/#w=10347728&amp;s=452" target="_blank">The Poems of Catullus</a> (2,000 years of editions, translations, commentary)</li>
+          <li><a href="https://thisismattmiller.github.io/superwork/#w=11542405&amp;s=162" target="_blank">Brideshead Revisited</a> (Waugh&rsquo;s novel + the Granada serial and 2008 film)</li>
+          <li><a href="https://thisismattmiller.github.io/superwork/#w=13033871&amp;s=402" target="_blank">Immunology: A Short Course</a> (the ELECTRONIC carrier chip + full cover run)</li>
+          <li><a href="https://thisismattmiller.github.io/superwork/#w=12043910&amp;s=94" target="_blank">Moby Dick</a></li>
+          <li><a href="https://thisismattmiller.github.io/superwork/#w=13868307&amp;s=408" target="_blank">To the Lighthouse</a> — the edition timeline at its best (23 dated editions, 1927–2023, labeled)</li>
+          <li><a href="https://thisismattmiller.github.io/superwork/#w=10126396&amp;s=297" target="_blank">Don Quixote</a> — the 340-record merged mega-cluster (Spanish anchor, translations into English/French/Italian/Yiddish, operas, ballets, screenplays)</li>
+        </ul>
+
+        <p>There is also a more analytical QA type of view that you can facet on material and LCC <a href="https://thisismattmiller.github.io/superwork/browser.html" target="_blank">here</a>.
+        </p>
+
+
+        <h2 class="is-size-3 section-head" id="summary">Summary</h2>
+
+        <p>Notes about this first attempt:</p>
+
+        <ul class="post-ul">
+          <li>Would refine the vocabulary more before trying again.</li>
+          <li>Probably also spend some time to preprocess the metadata to build more clustering data points internally (hubs/title authorities, name authorities, 7XX, etc) and externally (embeddings, wikidata, ISBN clusters, etc)</li>
+          <li>I would probably exclude image record type and other special collections, the internal collection linking is more useful than this process.</li>
+          <li>Is it useful to see some of these aggregations? Debatable. I think it is useful because it can collect related works, kind of bending the idea of superwork into a more of a &ldquo;also see&rdquo; section.</li>
+          <li>Is there a cheaper way of doing this? Not that I can tell, I spent some time seeing if there were patterns in the record data that could produce similar quality of data and does not seem possible with the data available, you need the LLM judgements and world knowledge.</li>
+          <li>I would say as a rule only 20% of any catalog&rsquo;s records are clusterable, the majority of any catalog are single title/author resources. The 20% though is the most interesting in terms of traditionally &ldquo;boring&rdquo; monograph resources.</li>
+        </ul>
+
+        <p>My takeaway from this test: Yes it is possible to use a &ldquo;low&rdquo; power local LLM to do bibliographic work like this, but quality probably scales with model size. Yes it seems potentially useful for discovery purposes, but there would need to be a lot more data work done to get it closer to production quality. Overall I think there is a place for the types of processes that exist to evaluate data that is too complex to be organized via simple rules and could be useful for enriching legacy catalog data.
+        </p>
+
+        <p>Code + a lot of markdown files with more information on <a href="https://github.com/thisismattmiller/superwork" target="_blank">GitHub</a>.</p>
+
+
+		</div>
+
+	</div>
+</div>
+
+<script>
+  (function() {
+    document.querySelectorAll('.expand-wrap .expand-fade').forEach(function(fade){
+      fade.addEventListener('click', function(){
+        fade.closest('.expand-wrap').classList.remove('collapsed');
+      });
+    });
+  })();
+</script>
+
+
+  <footer>
+    <div>
+
+  <style>
+    #masta:hover{
+      stroke: black !important;
+      fill:  black !important;
+    }
+  </style>
+<a rel="me" class="is-size-5" href="https://ebooks.social/@matt" title="mastodon verification" style="text-decoration: none;">
+<svg id="masta" style="stroke:white; fill: white;" width="20px" height="20px" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <path  d="m5 58.801v5.8008l2.8984-2.9023h19.703v-9.5l4-5.6992v33h9.6992l5-13.602h18.5l5.3008 14.203h8.6992l4.3008-13.902 3.5-18.898h3.7969l0.60156 16h4v-16.801l-7.5-7.6016-0.30078-5.7969-22-12.203-33.098-1-6.1016 2.7031-6.8008 9.7969v25.801z"/>
+  <path d="m14.301 51.102l14.301-1.6016-3.3008 4.8984z"/>
+ </g>
+</svg>
+</a>   
+
+
+    </div>
+  </footer>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+
+  </body>
+</html>

@@ -56,15 +56,15 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
-label = "Paper Marble GAN"
-desc = "Exploring latent space as a tool of organization"
+label = "Exploring Latent Space"
+desc = "Building a Generative adversarial network to organize and explore paper marble "
 date = "2026-08-28"
 [[params.mystuff.newest.newest.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/paper-marble/"
 
 [[params.mystuff.newest.newest.things.links]]
-label = "Viz"
+label = "Explorer"
 url = "https://paper-marble.thisismattmiller.cloud/"
 
 
@@ -77,7 +77,7 @@ label = "Blog"
 url = "https://thisismattmiller.com/post/superwork/"
 
 [[params.mystuff.newest.newest.things.links]]
-label = "Viz"
+label = "OPAC Demo"
 url = "https://thisismattmiller.github.io/superwork/"
 
 
@@ -114,33 +114,6 @@ date = "2025-11-12"
 [[params.mystuff.newest.newest.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/lcnaf-trie/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "Giallo"
-desc = "Using a vision language model to analyze Italian Giallo films"
-date = "2025-10-31"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/giallo/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "Book Bans 2025"
-desc = "Analysis of PEN America Book Ban Data 2025\n"
-date = "2025-10-17"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/book-bans-2025/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "Library of Congress & Flickr Commons\n"
-desc = "Analysis of user interactions on 40,000 images"
-date = "2025-10-06"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/lc-flickr-commons/"
 
 
 
@@ -353,6 +326,32 @@ url = "https://thisismattmiller.com/post/email-visualization/"
 [[params.mystuff.datavisualization.things.links]]
 label = "Viz"
 url = "https://thisismattmiller.github.io/email-viz/viz/dist/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Jeopardy! Video Games of the 80s and 90s"
+desc = "Analysis of 24K questions extracted"
+date = "2026-08-03"
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/jeopardy/"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "Viz"
+url = "https://thisismattmiller.github.io/jeopardy-viz/"
+
+
+[[params.mystuff.datavisualization.things]]
+label = "Exploring Latent Space"
+desc = "Building a Generative adversarial network to organize and explore paper marble "
+date = "2026-08-28"
+[[params.mystuff.datavisualization.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/paper-marble/"
+
+[[params.mystuff.datavisualization.things.links]]
+label = "Explorer"
+url = "https://paper-marble.thisismattmiller.cloud/"
 
 
 
@@ -807,6 +806,19 @@ date = "2025-11-12"
 [[params.mystuff.metadata.things.links]]
 label = "Blog"
 url = "https://thisismattmiller.com/post/lcnaf-trie/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Building Bibliographic Superwork Clusters for Discovery with Local LLMs"
+desc = "Judging work relationships in 88K clusters"
+date = "2026-08-13"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/superwork/"
+
+[[params.mystuff.metadata.things.links]]
+label = "OPAC Demo"
+url = "https://thisismattmiller.github.io/superwork/"
 
 
 

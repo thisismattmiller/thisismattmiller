@@ -56,6 +56,19 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
+label = "The Embedded Catalog"
+desc = "Library of Congress blog post about build vector embeddings for 20M catalog records"
+date = "2026-10-26"
+[[params.mystuff.newest.newest.things.links]]
+label = "LC Blog"
+url = "https://blogs.loc.gov/thesignal/2026/10/ai-sandbox-series-embedded-catalog/"
+
+[[params.mystuff.newest.newest.things.links]]
+label = "Viz"
+url = "https://lcnetdev.github.io/embedded-catalog-viz/"
+
+
+[[params.mystuff.newest.newest.things]]
 label = "Paper Marble GAN"
 desc = "Building a Generative adversarial network to organize and explore paper marble "
 date = "2026-08-28"
@@ -105,15 +118,6 @@ url = "https://thisismattmiller.com/post/email-visualization/"
 [[params.mystuff.newest.newest.things.links]]
 label = "Viz"
 url = "https://thisismattmiller.github.io/email-viz/viz/dist/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "LCNAF + Trie"
-desc = "Storing +11M unique LCNAF names in a 50MB trie data structure"
-date = "2025-11-12"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/lcnaf-trie/"
 
 
 
@@ -819,6 +823,19 @@ url = "https://thisismattmiller.com/post/superwork/"
 [[params.mystuff.metadata.things.links]]
 label = "OPAC Demo"
 url = "https://thisismattmiller.github.io/superwork/"
+
+
+[[params.mystuff.metadata.things]]
+label = "The Embedded Catalog"
+desc = "Library of Congress blog post about build vector embeddings for 20M catalog records"
+date = "2026-10-26"
+[[params.mystuff.metadata.things.links]]
+label = "LC Blog"
+url = "https://blogs.loc.gov/thesignal/2026/10/ai-sandbox-series-embedded-catalog/"
+
+[[params.mystuff.metadata.things.links]]
+label = "Viz"
+url = "https://lcnetdev.github.io/embedded-catalog-viz/"
 
 
 

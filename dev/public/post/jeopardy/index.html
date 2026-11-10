@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html
+  class=""
+  lang="en-us"
+  prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="description" content="Analysis of 24K questions extracted" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Analysis of 24K questions extracted" />
+<meta property="og:title" content="Jeopardy! Video Games of the 80s and 90s" />
+<meta property="og:site_name" content="Matt Miller" />
+<meta property="og:image" content="https://thisismattmiller.com/img/tribect.gif" />
+<meta property="og:image:type" content="" />
+<meta property="og:image:width" content="" />
+<meta property="og:image:height" content="" />
+<meta property="og:url" content="http://localhost:1313/post/jeopardy/" />
+<meta property="og:locale" content="en-us" />
+<meta property="article:published_time" content="2026-08-03
+" /> <meta property="article:modified_time" content="2026-08-03
+" />
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@thisismmiller" />
+<meta name="twitter:creator" content="@thisismmiller" />
+<meta
+  name="twitter:title"
+  content="Jeopardy! Video Games of the 80s and 90s"
+/>
+<meta
+  name="twitter:description"
+  content="Analysis of 24K questions extracted"
+/>
+<meta name="twitter:image:src" content="https://thisismattmiller.com/img/tribect.gif" />
+<meta property="og:image"  content="https://thisismattmiller.com/img/tribect.gif" />
+<meta name="twitter:image"  content="https://thisismattmiller.com/img/tribect.gif" />
+
+
+<meta name="twitter:domain" content="http://localhost:1313/post/jeopardy/" />
+
+
+
+    <title>Jeopardy! Video Games of the 80s and 90s</title>
+    <link rel="canonical" href="http://localhost:1313/post/jeopardy/" />
+
+
+    <link
+  rel="stylesheet"
+  href="http://localhost:1313/css/bulma.min.css"
+/>
+
+<link rel="stylesheet" href="http://localhost:1313/css/style.css" />
+
+<link
+  rel="stylesheet"
+  href="http://localhost:1313/css/github-gist.css"
+/>
+
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto&display=swap" rel="stylesheet">
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f09496fc47cb4d31ae2591c0f4945c3e"}'></script>
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  </head>
+
+
+<body
+  lang="en-us"
+  class=""
+  itemscope
+  itemtype="http://schema.org/Article"
+>
+
+    <div class="container" style="margin-bottom: 5em; ">
+
+
+    <div class="columns">
+      <div class="column is-one-half">
+        <h1 id="title" class="is-size-1">
+          <a href="/" style="color:#313131; text-decoration:none;">Matt Miller</a>
+        </h1>
+        <a href="/about" class="is-size-5" id="menu-links">About</a>        
+      </div>
+    </div>
+
+
+
+  </div>
+ 
+
+  
+
+  <style type="text/css">
+
+  	p{
+  		font-size: 1.25em;
+  		margin-bottom: 2em;
+			line-height: 1.75em;
+  	}
+
+ 	pre{
+ 		background-color: whitesmoke !important;
+ 	}
+
+    .doodle-mono-right-header {
+    	-webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	                     linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	-webkit-mask-composite: source-in;
+    	mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+    	            linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    	mask-composite: intersect;
+    }
+
+	table.jeopardy-table{
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 3em;
+		font-size: 1em;
+	}
+	table.jeopardy-table th{
+		text-align: left;
+		border-bottom: 2px solid black;
+		padding: 0.5em;
+	}
+	table.jeopardy-table td{
+		padding: 0.5em;
+		border-bottom: 1px solid #dbdbdb;
+		vertical-align: top;
+	}
+	table.jeopardy-table tr:nth-child(even){
+		background-color: whitesmoke;
+	}
+	table.jeopardy-table tr{
+		transition-duration: 0.5s;
+	}
+	table.jeopardy-table tr:hover{
+		background-color: aliceblue;
+	}
+	.table-scroll{
+		overflow-x: auto;
+		margin-bottom: 3em;
+	}
+	.table-scroll table.jeopardy-table{
+		margin-bottom: 0;
+	}
+
+	.iframe-container {
+		position: relative;
+		width: 100%;
+		height: 950px;
+		overflow: hidden;
+		border-top: dashed 2px black;
+		border-bottom: dashed 2px black;
+		margin-bottom: 3em;
+	}
+	#vizOverlay{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		cursor: pointer;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		background-color: transparent;
+	}
+	#vizOverlay span{
+		background-color: rgba(0,0,0,0.75);
+		color: white;
+		padding: 8px 16px;
+		border-radius: 4px;
+		margin-bottom: 2em;
+		font-size: 0.9em;
+	}
+  </style>
+
+
+
+  <div class="container">
+
+
+    <div class="columns" style="margin-bottom:3em">
+
+
+		<div class="column is-one-half" style="text-align:left;">
+	      	<h1 class="is-size-1">Jeopardy! Video Games of the 80s and 90s</h1>
+	      	<h2 class="is-size-4 has-text-grey">Analysis of 24K questions extracted</h2>
+	      	<h2 class="is-size-5 has-text-grey">Aug 3 2026</h2>
+
+	    </div>
+		<div class="column is-one-half" style="text-align:center;">
+	    	<img style="width: 45%;" class="doodle-mono-right-header" src="/img/tribect.gif" title="Jeopardy! video games"/>
+	    </div>
+	</div>
+
+
+
+  </div>
+
+
+
+
+<div class="container">
+    <div class="columns">
+
+
+		<div class="column" style="">
+
+        <p>I have been looking at trivia game stuff recently and also been thinking about ROM emulation files, for old console gaming systems like Nintendo, as a data corpus. And it made me remember seeing these Jeopardy games around growing up and thinking how awful they must be. But now that I&rsquo;m old I kind of think they are neat, or at least conceptually. There ended up being quite a lot of games released over the ~10 years that cartridge systems were hugely popular. And I wondered what kind of questions were on these things? The market is of course mostly for children but the Jeopardy brand is pretty serious trivia. So I gathered them up and extracted the questions and did some analysis.
+        </p>
+
+     <p>Getting the questions out I made use of a coding agent to search the binary ROM file. This is a good example of using them where it can just churn away brute forcing binary offsets of the 14 files for as long as needed. I did find a hint before I started that the early games used the classic <a href="https://en.wikipedia.org/wiki/Huffman_coding" target="_blank">Huffman coding</a> algorithm so that was a good start:
+        </p>
+        <div class="table-scroll">
+        <table class="jeopardy-table">
+          <thead>
+            <tr><th>Game title</th><th>Platform</th><th>Year</th><th>Questions</th><th>Question storage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Jeopardy! (Rev 1)</td><td>NES</td><td>1988</td><td>1,891</td><td>Huffman-coded bit stream, fixed in-ROM binary trees, per-bank pointer tables</td></tr>
+            <tr><td>Jeopardy! Junior Edition</td><td>NES</td><td>1989</td><td>1,830</td><td>Same Rare Huffman format as Rev 1</td></tr>
+            <tr><td>Jeopardy! 25th Anniversary Edition</td><td>NES</td><td>1990</td><td>1,769</td><td>Same Rare Huffman format as Rev 1</td></tr>
+            <tr><td>Super Jeopardy!</td><td>NES</td><td>1991</td><td>2,100</td><td>Canonical Huffman code, binary-search decoder + word-token dictionary</td></tr>
+            <tr><td>Jeopardy!</td><td>Game Boy</td><td>1991</td><td>1,675</td><td>Bit-packed prefix code (Huffman-equivalent tables) + token/case post-passes; same engine as Game Gear</td></tr>
+            <tr><td>Jeopardy!</td><td>SNES</td><td>1992</td><td>3,904</td><td>Canonical Huffman code + word-token dictionary, byte-aligned self-delimiting records</td></tr>
+            <tr><td>Jeopardy!</td><td>Game Gear</td><td>~1992&ndash;93</td><td>1,705</td><td>Bit-packed prefix code (Huffman-equivalent tables) + token/case post-passes</td></tr>
+            <tr><td>Jeopardy!</td><td>Sega Genesis</td><td>1993 (Feb)</td><td>2,290</td><td>Length-prefixed ASCII words + LZ77-style back-references, walked record-by-record</td></tr>
+            <tr><td>Jeopardy! Deluxe Edition</td><td>Sega Genesis</td><td>1993 (Oct)</td><td>3,180</td><td>Same LZ back-reference format as Genesis v1</td></tr>
+            <tr><td>Jeopardy! Deluxe Edition</td><td>SNES</td><td>~1993&ndash;94</td><td>2,260</td><td>Uncompressed ASCII, null-terminated segments</td></tr>
+            <tr><td>Jeopardy! Sports Edition</td><td>Game Gear</td><td>~1994</td><td>1,705</td><td>Same bit-packed prefix code as Game Gear v1</td></tr>
+            <tr><td>Jeopardy! Sports Edition</td><td>Sega Genesis</td><td>1994 (May)</td><td>3,425</td><td>Same LZ back-reference format as Genesis v1</td></tr>
+            <tr><td>Jeopardy! Sports Edition</td><td>SNES</td><td>1994</td><td>2,590</td><td>Uncompressed ASCII, null-terminated segments</td></tr>
+            <tr><td>Jeopardy!</td><td>Nintendo 64</td><td>1998</td><td>4,038</td><td>Plain ASCII text lines, no compression (richest metadata: wrong answers, difficulty)</td></tr>
+            <tr><td><strong>Total</strong></td><td></td><td></td><td><strong>34,362</strong></td><td></td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <p>You can see the early games were space restricted so there are more elaborate approaches to packing the questions into the cartridge. While at the end of the run, the tens of megabytes the N64 allows for storage enabled luxurious plain ASCII text.
+        </p>
+
+        <p>There were 34K questions extracted total but if you remove duplicates across games you end up with 24,239 unique questions. That&rsquo;s a lot of questions! I wanted to get a sense of what kind of questions appeared in each game. So I did a process that is becoming my goto workflow of embedding -&gt; clustering -&gt; sample cluster members. I used Google&rsquo;s embedding 2 model, did HDBSCAN and k-means clustering and used my local Qwen3.6-35B-A3B model to sample the members and categorize them. I UMAP&rsquo;d them into this interface:
+        </p>
+
+  <div style="text-align: center; margin: 2em 0;">
+    <a href="https://thisismattmiller.github.io/jeopardy-viz/" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3273dc; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; transition: background-color 0.3s;">
+      Open in New Window
+    </a>
+  </div>
+
+  </div>
+  </div>
+</div>
+
+
+<div class="iframe-container" id="vizContainer">
+<iframe id="vizFrame" style="width: 100%; height: 950px; border: none; pointer-events: none;" src="https://thisismattmiller.github.io/jeopardy-viz/"></iframe>
+<div id="vizOverlay"><span>Click to interact with the visualization</span></div>
+</div>
+
+<script>
+  (function() {
+    const container = document.getElementById('vizContainer');
+    const iframe = document.getElementById('vizFrame');
+    const overlay = document.getElementById('vizOverlay');
+
+    overlay.addEventListener('click', function() {
+      iframe.style.pointerEvents = 'auto';
+      overlay.style.display = 'none';
+    });
+
+    container.addEventListener('mouseleave', function() {
+      iframe.style.pointerEvents = 'none';
+      overlay.style.display = 'flex';
+    });
+  })();
+</script>
+
+
+<div class="container">
+
+   <div class="columns">
+
+
+		<div class="column" style="">
+
+        <p style="font-style: italic; font-size: 0.9em; line-height: 1.5em;">Note: I do not make the questions dataset available for download anywhere, they are in this visualization purely for informational purposes, see the <a href="https://j-archive.com/" target="_blank">J! Archive</a> for Jeopardy trivia questions.
+        </p>
+
+        <p>If we remove the sports themed games and use the more broad k-means clusters these are the top 10 categories:
+        </p>
+
+        <table class="jeopardy-table">
+          <thead>
+            <tr><th>Rank</th><th>Category</th><th>Questions</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Animals</td><td>733</td></tr>
+            <tr><td>2</td><td>U.S. Presidents</td><td>710</td></tr>
+            <tr><td>3</td><td>Idioms and Slang</td><td>691</td></tr>
+            <tr><td>4</td><td>Countries and Capitals</td><td>623</td></tr>
+            <tr><td>5</td><td>General Knowledge Definitions</td><td>601</td></tr>
+            <tr><td>6</td><td>Games And Toys</td><td>591</td></tr>
+            <tr><td>7</td><td>Classic Television Shows</td><td>562</td></tr>
+            <tr><td>8</td><td>Classic Hollywood Films</td><td>561</td></tr>
+            <tr><td>9</td><td>US Cities</td><td>551</td></tr>
+            <tr><td>10</td><td>American Founding Figures</td><td>548</td></tr>
+          </tbody>
+        </table>
+
+        <p>There is of course the "Junior" version of the game that has more kid friendly questions, but the majority questions I would say are geared towards adults. There are a few areas of overrepresentation by game/platform. For example the Sega Genesis version has over two times the amount of biblical questions compared to other versions. And the NES 25th Anniversary version has four times as many questions about The Beatles than any other version. Other areas of over-representation using the HDBSCAN clusters:
+        </p>
+
+        <table class="jeopardy-table">
+          <thead>
+            <tr><th>Game</th><th>Over-represented category</th><th>Lift</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sega Genesis (v1)</td><td>Biblical Figures &amp; Texts</td><td>2.3x</td><td>68</td></tr>
+            <tr><td>Sega Genesis Deluxe</td><td>Gems and Birthstones</td><td>4.6x</td><td>30</td></tr>
+            <tr><td>Sega Genesis Deluxe</td><td>Ancient Egypt</td><td>3.1x</td><td>33</td></tr>
+            <tr><td>Sega Genesis Deluxe</td><td>Fabrics and Fashion</td><td>2.6x</td><td>73</td></tr>
+            <tr><td>N64</td><td>Caribbean Geography</td><td>3.7x</td><td>23</td></tr>
+            <tr><td>N64</td><td>Scandinavian Nations</td><td>3.6x</td><td>31</td></tr>
+            <tr><td>N64</td><td>Middle East Geography and History</td><td>3.1x</td><td>44</td></tr>
+            <tr><td>NES 25th Anniversary</td><td>The Beatles</td><td>4.0x</td><td>14</td></tr>
+            <tr><td>NES 25th Anniversary</td><td>Country Music Artists</td><td>2.5x</td><td>87</td></tr>
+            <tr><td>Super Jeopardy!</td><td>Classic TV Sitcoms</td><td>2.3x</td><td>86</td></tr>
+            <tr><td>SNES (v1)</td><td>American Revolution</td><td>2.8x</td><td>34</td></tr>
+            <tr><td>Game Gear / Game Boy</td><td>Magazines and Newspapers</td><td>2.8x</td><td>16</td></tr>
+          </tbody>
+        </table>
+
+
+        <p>And there are a few questions that repeated across many of the game's iterations:
+        </p>
+
+        <table class="jeopardy-table">
+          <thead>
+            <tr><th>Games</th><th>Clue</th><th>Answer</th><th>Jeopardy Category</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>5</td><td>THE FASTEST GAIT OF A HORSE</td><td>GALLOP</td><td>ANIMALS / HORSE RACING</td></tr>
+            <tr><td>4</td><td>HE WAS PROCLAIMED "ADMIRAL OF THE OCEAN SEA" BY FERDINAND &amp; ISABELLA</td><td>CHRISTOPHER COLUMBUS</td><td>ADMIRALS</td></tr>
+            <tr><td>4</td><td>FRENCH EMPEROR WHO REDESIGNED THE ITALIAN FLAG TO RESEMBLE HIS OWN</td><td>NAPOLEON</td><td>ITALY</td></tr>
+            <tr><td>4</td><td>WEST INDIAN ISLAND THAT'S THE HOME OF THE LIMBO DANCE &amp; CALYPSO MUSIC</td><td>TRINIDAD</td><td>ISLANDS</td></tr>
+            <tr><td>4</td><td>WHETHER ST. PATRICK WAS RESPONSIBLE OR NOT, NONE ARE NATURALLY FOUND IN IRELAND</td><td>SNAKES</td><td>ANIMALS</td></tr>
+            <tr><td>4</td><td>SAUTEED EGG-DIPPED BREAD</td><td>FRENCH TOAST</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>A CAMPFIRE CONFECTION</td><td>TOASTED MARSHMALLOW</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>"RANK" OF GEORGE JESSEL</td><td>TOASTMASTER GENERAL</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>NAMED FOR AN AUSTRALIAN SOPRANO, IT'S THIN, CRISP BREAD</td><td>MELBA TOAST</td><td>TOAST</td></tr>
+            <tr><td>4</td><td>THIS NEIGHBORING COUNTRY'S FRANC IS WORTH MORE THAN FRANCE'S</td><td>SWITZERLAND</td><td>FOREIGN EXCHANGE</td></tr>
+            <tr><td>4</td><td>ANTI-MALARIAL DRUG PRESENT IN TONIC WATER</td><td>QUININE</td><td>MEDICINE</td></tr>
+          </tbody>
+        </table>
+
+
+        <p>Finally I was thinking, out of 24K questions there HAD to be some wrong ones in there. I don&rsquo;t mean question answer pairs that were correct in 1989 but wrong today I mean straight up incorrect. To find these I used a local LLM Qwen 3.6 35B A3B to scan 20 questions at a time to flag possible issues. The second pass then did a more thorough skeptical check that thinned down that previous pass and then finally sent those that kicked up as wrong in both passes to gemini-3.6-flash with google search grounding enabled. Then I reviewed the output of that last pass and found over 50 questions that were incorrect. Oftentimes the wrong questions are just an issue of the writer inverting the clue or other minor problem but sometimes boldly incorrect. Here is a list:
+        </p>
+
+        <div class="table-scroll">
+        <table class="jeopardy-table">
+          <thead>
+            <tr><th>Clue</th><th>ROM answer</th><th>Problem</th><th>Games</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>THIS NEW YORK TOWN IS WHERE THE BRITISH SURRENDERED TO GEORGE WASHINGTON</td><td>SARATOGA</td><td>Clue error: Burgoyne surrendered at Saratoga to <strong>Horatio Gates</strong>; the surrender to Washington was Yorktown, Virginia.</td><td>nes/jeopardy_junior</td></tr>
+            <tr><td>STUDS TERKEL WAS AWARDED THE 1985 PULITZER PRIZE FOR HIS "THE GOOD WAR: AN ORAL HISTORY" OF THIS</td><td>WORLD WAR ONE</td><td>Answer error: <em>The Good War</em> is an oral history of <strong>World War II</strong>.</td><td>sega/jeopardy_deluxe, snes/jeopardy_snes_deluxe</td></tr>
+            <tr><td>THE NICKNAME OF THE DEPAUL BASKETBALL TEAM</td><td>BLUE DEVILS</td><td>Answer error: DePaul is the <strong>Blue Demons</strong>; the Blue Devils are Duke.</td><td>sega/jeopardy_sports</td></tr>
+            <tr><td>THIS ROMAN EMPEROR &amp; STOIC PHILOSOPHER WAS BORN MARCUS ANNIUS VERSUS IN APRIL 1211 A.D.</td><td>MARCUS AURELIUS</td><td>Clue is false as printed: born <strong>121</strong> A.D., n&eacute; Marcus Annius <strong>Verus</strong>. (Answer right, clue typos change the facts.)</td><td>n64/jeopardy_n64</td></tr>
+            <tr><td>THIS LEGENDARY FOOTBALL TEAM OWNER REPLACED BABE RUTH IN RIGHT FIELD FOR THE YANKEES</td><td>GEORGE HALAS</td><td>Clue is backwards: Halas played right field in 1919 and <strong>Ruth replaced him</strong> in 1920.</td><td>game_gear/jeopardy_gg_sports</td></tr>
+            <tr><td>SHE WAS THE YOUNGEST FEMALE GOLD MEDALIST</td><td>BARBARA JONES</td><td>Unqualified, the youngest female Olympic gold medalist is <strong>Marjorie Gestring</strong> (13, springboard diving, 1936); Jones (15, 1952 relay) is only the youngest in track and field &mdash; and the category is general OLYMPIC MEDALS, not track.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>WYOMIA TYUS WON UNPRECEDENTED BACK TO BACK VICTORIES IN THIS EVENT</td><td>100 YARD DASH</td><td>Tyus's back-to-back golds were the 100 METERS (1964, 1968), not the 100 yard dash.</td><td>game_gear/jeopardy_gg_sports</td></tr>
+            <tr><td>THIS QB SET THE ALL-TIME RECORD FOR INTERCEPTIONS THROWN IN A SEASON IN '88</td><td>VINNY TESTAVERDE</td><td>The all-time season interception record is George Blanda's 42 (1962); Testaverde threw 35 in 1988.</td><td>sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>IN THIS 4TH BOOK OF THE BIBLE, THIRST, STARVATION &amp; STONING ARE PUNISHMENTS FOR ADULTERY</td><td>DEUTERONOMY</td><td>Deuteronomy is the 5th book of the Bible; the 4th is Numbers.</td><td>sega/jeopardy_deluxe</td></tr>
+            <tr><td>NAMED FOR A QUEEN, IT'S AUSTRALIA'S SMALLEST MAINLAND STATE</td><td>QUEEN VICTORIA</td><td>The state is VICTORIA; 'Queen Victoria' is the namesake, not the state's name.</td><td>n64/jeopardy_n64</td></tr>
+            <tr><td>THIS EXOTIC DANCER IS BASEBALL'S KISSING BANDIT</td><td>MORGANNA KING</td><td>The Kissing Bandit is Morganna (Roberts); Morganna King is the jazz singer who played Mama Corleone.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>IN A DISNEY CARTOON, SHE FALLS UNDER THE EVIL SPELL OF QUEEN MALIFICENT</td><td>SNOW WHITE</td><td>Maleficent is Sleeping Beauty's villain; Snow White falls to the Evil Queen.</td><td>nes/jeopardy_rev1</td></tr>
+            <tr><td>OF THE T'ANG, THE SHANG, THE MING, OR THE CH'ING, THE 2ND CENTURY DYNASTY THAT IS CHINA'S OLDEST</td><td>SHANG</td><td>The Shang dynasty is 2nd MILLENNIUM BC (c. 1600-1046), not '2nd century'.</td><td>nes/super_jeopardy</td></tr>
+            <tr><td>THE MAN WHO BROUGHT THE CALENDAR INTO SYNC BY DROPPING 10 DAYS OUT OF 1852 HELD THIS POST</td><td>POPE</td><td>Gregory XIII dropped the 10 days in 1582, not 1852. Typo that changes the fact.</td><td>sega/jeopardy_deluxe, snes/jeopardy_snes_deluxe</td></tr>
+            <tr><td>HIS SON PLAYED FOR HIM WHEN HE MANAGED THE KANSAS CITY ROYALS IN 1986</td><td>HAL MACRAE</td><td>Hal McRae didn't manage the Royals until 1991 (son Brian then played for him); in 1986 he was still a player.</td><td>sega/jeopardy_sports</td></tr>
+            <tr><td>THE ONLY MANMADE STRUCTURE VISIBLE FROM ORBITING SPACE CRAFT</td><td>GREAT WALL OF CHINA</td><td>The Great-Wall-from-space claim is a myth: it isn't visible unaided from orbit, and many other structures are.</td><td>nes/jeopardy_rev1</td></tr>
+            <tr><td>THE MEDICAL CONDITION THAT IS THE OPPOSITE OF HYPOGLYCEMIA</td><td>DIABETES</td><td>The opposite of hypoglycemia is HYPERGLYCEMIA; diabetes is a disease, not the opposite condition (category forced a D answer).</td><td>nes/jeopardy_rev1</td></tr>
+            <tr><td>HAWKEYE PIERCE IN THE BIG-SCREEN M.A.S.H.</td><td>ELLIOTT GOULD</td><td>Donald Sutherland was Hawkeye in the 1970 film; Gould was Trapper John.</td><td>nes/super_jeopardy</td></tr>
+            <tr><td>THIS NBA TEAM PLAYS ITS HOME GAMES IN ANAHEIM</td><td>LOS ANGELES LAKERS</td><td>No NBA team played home games in Anaheim; the Lakers played the Forum in Inglewood.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>THE 1ST SOLDIER BURIED IN THIS NATIONAL CEMETERY WAS A CONFEDERATE PRISONER WHO DIED IN 1864</td><td>ARLINGTON</td><td>The first soldier buried at Arlington was Union Pvt. William Christman (May 1864), not a Confederate prisoner.</td><td>sega/jeopardy_v1, snes/jeopardy_snes</td></tr>
+            <tr><td>THE MERRIMACK FOUGHT THIS IRON-CLAD CONFEDERATE SHIP AT HAMPTON ROADS, VA</td><td>MONITOR</td><td>Reversed: the MONITOR was the Union ironclad; the Confederate ship WAS the Merrimack (CSS Virginia).</td><td>nes/jeopardy_rev1</td></tr>
+            <tr><td>ALEC GUINNESS EXECUTED THE ROLE OF THIS EXECUTED KING IN THE 1970 FILM "CROMWELL"</td><td>CHARLES II</td><td>Guinness played CHARLES I - the king who was executed. Charles II died in his bed.</td><td>snes/jeopardy_snes_deluxe</td></tr>
+            <tr><td>IN '23 THIS NFL TEAM WAS KNOWN AS THE FRANKFORD YELLOW JACKETS</td><td>PITTSBURGH STEELERS</td><td>The Frankford Yellow Jackets were a Philadelphia team (Eagles lineage); the Steelers began as the 1933 Pittsburgh Pirates.</td><td>sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>CHIANG KAI-SHEK'S SON NOW RULES THIS COUNTRY</td><td>TAIWAN</td><td>Dated at release: Chiang Ching-kuo died January 1988, before these carts shipped.</td><td>sega/jeopardy_v1, snes/jeopardy_snes</td></tr>
+            <tr><td>LATE POLISH-ITALIAN PIANIST WHOSE FIRST NAMES WERE RUDOLPH VALENTINO</td><td>LIBERACE</td><td>Liberace's given names were Wladziu Valentino, not 'Rudolph Valentino'.</td><td>nes/super_jeopardy</td></tr>
+            <tr><td>BEGUN ON JULY 4, 1858 THIS PRESIDENTIAL MONUMENT WAS FINALLY DEDICATED IN 1885</td><td>WASHINGTON MONUMENT</td><td>Washington Monument construction began July 4, 1848, not 1858.</td><td>sega/jeopardy_v1, snes/jeopardy_snes</td></tr>
+            <tr><td>HE HOLDS THE ROOKIE RECORD FOR HOME RUNS IN A SEASON WITH 49</td><td>JOE DIMAGGIO</td><td>The rookie HR record of 49 is Mark McGwire's (1987); DiMaggio hit 29 as a rookie.</td><td>sega/jeopardy_sports</td></tr>
+            <tr><td>PETER SELLERS PLAYED THIS CHARACTER IN FILMS, &amp; MARVIN MILLER WAS HIS CARTOON VOICE</td><td>INSPECTOR CLOUSEAU</td><td>The cartoon Inspector was voiced by Pat Harrington Jr., not Marvin Miller.</td><td>sega/jeopardy_deluxe, snes/jeopardy_snes_deluxe</td></tr>
+            <tr><td>THE ONLY COUNTRY TO PARTICIPATE IN EVERY MODERN SUMMER &amp; WINTER OLYMPICS</td><td>ENGLAND</td><td>England doesn't compete at the Olympics - GREAT BRITAIN does, and GB holds the every-Games record.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>WALTER FARLEY'S SERIES ABOUT AN EBONY EQUINE</td><td>BLACK BEAUTY</td><td>Walter Farley wrote The BLACK STALLION; Black Beauty is Anna Sewell's.</td><td>sega/jeopardy_v1, snes/jeopardy_snes</td></tr>
+            <tr><td>OF ZOLA BUDD, MARCIA PUICA &amp; MARY DECKER, SHE WAS LEADING WHEN MARY HIT THE DECK</td><td>MARY DECKER</td><td>Zola Budd had just taken the lead when Decker fell; the answer can't be Decker herself.</td><td>sega/jeopardy_sports</td></tr>
+            <tr><td>ST.PATRICK'S DAY IS ON THE 16TH OF THIS MONTH</td><td>MARCH</td><td>St. Patrick's Day is March 17, not the 16th. (Junior edition!)</td><td>nes/jeopardy_junior</td></tr>
+            <tr><td>AN EGYPTIAN RULER COMMISSIONED VERDI TO WRITE "AIDA" TO CELEBRATE ITS OPENING</td><td>SUEZ CANAL</td><td>Famous misconception: Aida was commissioned for the Cairo opera celebrations and premiered 1871, not for the canal's opening.</td><td>nes/super_jeopardy</td></tr>
+            <tr><td>THIS IS THE ONLY PICTURE CARD THAT HAS A FIGURE WITH ONE EYE</td><td>JACK</td><td>The King of Diamonds is also one-eyed; the Jack isn't unique.</td><td>nes/jeopardy_junior</td></tr>
+            <tr><td>SETTLERS BOUND FOR CALIFORNIA WHO MADE THE MISTAKE OF TAKING THE "HASTINGS CUT- OFF" IN 1826</td><td>DONNER PARTY</td><td>The Donner Party took the Hastings Cutoff in 1846, not 1826.</td><td>sega/jeopardy_deluxe, snes/jeopardy_snes_deluxe</td></tr>
+            <tr><td>THIS MAJOR LEAGUE PLAYER PLAYED IN THE MOST GAMES</td><td>HENRY AARON</td><td>Dated at release: Pete Rose (3,562 games) had long passed Aaron by the time these carts shipped.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>THIS PITTSBURGH PLAYER IS THE ONLY ONE IN THE LAST 50 YEARS TO GET 40 OR MORE HOMERS</td><td>WILLIE STARGELL</td><td>Ralph Kiner hit 40+ HR five times for Pittsburgh (1947-51), within 'the last 50 years' of the clue.</td><td>game_gear/jeopardy_gg_sports</td></tr>
+            <tr><td>PORTHOS, ATHOS, ARTEMIS &amp; D'ARTAGNAN</td><td>FOUR MUSKETEERS</td><td>The fourth musketeer is ARAMIS; 'Artemis' is a Greek goddess.</td><td>nes/jeopardy_rev1</td></tr>
+            <tr><td>THIS RED SOX 1ST BASEMAN HIT UNDER .300 FOR THE FIRST TIME IN 1992</td><td>WADE BOGGS</td><td>Wade Boggs was a THIRD baseman, not a first baseman.</td><td>sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>HE WAS THE FIRST MAN TO RUN THE 100-YARD DASH IN LESS THAN 10 SECONDS</td><td>JESSE OWENS</td><td>John Owen broke 10 seconds in 1890, decades before Jesse Owens - almost certainly an Owen/Owens confusion.</td><td>sega/jeopardy_sports</td></tr>
+            <tr><td>THIS LATIN LEADER ONCE PLAYED IN THE US MINOR LEAGUE BASEBALL SYSTEM</td><td>FIDEL CASTRO</td><td>Castro never played pro ball in the US minors - a well-documented legend presented as fact.</td><td>sega/jeopardy_sports</td></tr>
+            <tr><td>THE 1896 PLESSY VS FERGUSON DECISION DECLARED THIS ILLEGAL</td><td>SEGREGATION</td><td>Exactly backwards: Plessy v. Ferguson UPHELD segregation ('separate but equal'). Brown v. Board struck it down.</td><td>sega/jeopardy_v1, snes/jeopardy_snes</td></tr>
+            <tr><td>NICKNAMED "THE SHOE," HE HOLDS THE RECORD FOR SINGLE SEASON WINS</td><td>WILLIE SHOEMAKER</td><td>Dated at release: the single-season record was Kent Desormeaux's 598 (1989); Shoemaker's record was career wins.</td><td>sega/jeopardy_v1, snes/jeopardy_snes</td></tr>
+            <tr><td>THIS WAS THE ONLY UNDEFEATED HORSE TO WIN THE KENTUCKY DERBY</td><td>SEATTLE SLEW</td><td>Regret, Morvich, and Majestic Prince also won the Derby undefeated; Slew's distinction is the undefeated TRIPLE CROWN.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>"IMPERIALIST" AUTHOR WHO COINED THE PHRASE "THE SUN NEVER SETS ON THE BRITISH EMPIRE"</td><td>RUDYARD KIPLING</td><td>The phrase predates Kipling by a century (Spanish empire; applied to Britain by Macartney, 1773).</td><td>sega/jeopardy_v1, snes/jeopardy_snes</td></tr>
+            <tr><td>THOUGH NAMED FOR THE GOD OF THE SEA, THIS PLANET APPEARS TO BE GREEN, NOT BLUE</td><td>NEPTUNE</td><td>Post-Voyager (1989), Neptune is famously deep blue; the greenish planet is Uranus.</td><td>sega/jeopardy_deluxe, snes/jeopardy_snes</td></tr>
+            <tr><td>BRITISH &amp; GERMAN TROOPS PLAYED THIS BETWEEN FRONT-LINE TRENCHES ON CHRISTMAS 1916</td><td>SOCCER</td><td>The Christmas Truce football happened in 1914; by 1916 fraternization was forbidden.</td><td>sega/jeopardy_sports</td></tr>
+            <tr><td>THIS EXPLORER LANDED ON VENEZUELA'S PARIA PENINSULA IN AUGUST 1489</td><td>CHRISTOPHER COLUMBUS</td><td>Columbus reached the Paria Peninsula in August 1498, not 1489 - he hadn't yet sailed in 1489.</td><td>n64/jeopardy_n64</td></tr>
+            <tr><td>THE TURKISH SITE OF THE FEBRUARY, 1945 MEETING OF F.D.R. CHURCHILL &amp; STALIN</td><td>YALTA</td><td>Yalta is in Crimea (then USSR), not Turkey.</td><td>nes/jeopardy_rev1</td></tr>
+            <tr><td>HE HOLDS THE RECORD FOR THE MOST UNSUCCESSFUL FREE THROWS IN A GAME WITH 10</td><td>WILT CHAMBERLAIN</td><td>Wilt's missed-free-throw record in a game is 22 (Dec 1, 1967), not 10.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>DENNIS CONNER HAD TO WIN THIS MANY RACES IN THE FINALS OF THE '87 AMERICA'S CUP</td><td>5</td><td>The 1987 Cup final was best-of-seven: 4 wins needed (Conner swept 4-0).</td><td>sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>THIS GOLFER WON HIS EIGHT MASTERS TOURNAMENTS BETWEEN '46 &amp; '53</td><td>BEN HOGAN</td><td>Hogan won the Masters TWICE (1951, 1953); his 1946-53 haul was ~9 majors, not eight Masters.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>ITS NAME IS AN ACRONYM FOR LIGHT AMPLIFICATION BY SIMULATED EMISSION OF RADIATION</td><td>LASER</td><td>LASER = light amplification by STIMULATED emission of radiation; 'simulated' makes the expansion false.</td><td>nes/super_jeopardy</td></tr>
+            <tr><td>DURING HIS PRO CAREER, HE WAS KNOCKED DOWN ONLY BY KEVIN ANTHE SPOILERON HOWARD</td><td>SUGAR RAY LEONARD</td><td>Dated at release: Donny Lalonde floored Leonard in 1988. (Clue text is also garbled: 'KEVIN ANTHE SPOILERON HOWARD'.)</td><td>game_gear/jeopardy_gg_sports</td></tr>
+            <tr><td>THE ONLY MAN IN BOTH THE PRO FOOTBALL AND THE BASKETBALL HALLS OF FAME</td><td>AMOS ALONZO STAGG</td><td>Stagg is in the COLLEGE Football and Basketball Halls of Fame - not the Pro Football Hall.</td><td>game_gear/jeopardy_gg_sports, sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+            <tr><td>IN THE 1988 SEASON THEY WENT 1-15; IN THE 1992 SEASON THEY BEAT THE BULLS IN THE SUPER BOWL</td><td>DALLAS COWBOYS</td><td>The Cowboys went 1-15 in 1989 (not 1988) and beat the BILLS - not the 'Bulls' - in Super Bowl XXVII.</td><td>sega/jeopardy_sports, snes/jeopardy_snes_sports</td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <p>It&rsquo;s funny to think of some 1993 teen playing Jeopardy on their SNES and being convinced for years afterward that Plessy v. Ferguson actually banned segregation or that the Gregorian calendar started in 1852. You can browse the screenshots <a href="https://jeopardyhistory.fandom.com/wiki/Jeopardy!_Video_Games/Gallery" target="_blank">here</a> to get a sense of what these games looked like and there are a few playthroughs on <a href="https://www.youtube.com/watch?v=NHVHBdf9Ydk" target="_blank">Youtube</a> if you want to torture yourself.
+        </p>
+
+        <p><strong>Update:</strong></p>
+
+        <p>I compared the game clue dataset to one I found on Github (thanks to Reddit user RegisPhone for suggesting) that has 500K clues over the 42 seasons of the show with the goal to find the overlap.
+        </p>
+
+        <p>Of the <strong>24,240</strong> unique game questions, <strong>11,883</strong> (49.0%) match an aired clue: 8,489 with identical normalized text (case, accents, punctuation and spelled-out numbers ignored) and 3,394 fuzzy (same answer, clue similarity &ge; 0.80 &mdash; mostly clues reworded or shortened to fit console screens).
+        </p>
+
+        <p>The games cluster around three season spikes &mdash; seasons 1&ndash;2 (1984&ndash;86), season 5 (1988&ndash;89), and season 11 (1994&ndash;95) &mdash; so each game generation licensed a specific era&rsquo;s clue bank: N64 (1998) matches 88% (mostly season 11), the Sega/SNES family ~67&ndash;72%, Game Boy/Game Gear ~56%, and the NES 25th Anniversary 40%. And NES rev1 (2.6%), Junior (2.0%), and all three Sports Editions (~1%) essentially never match and their questions appear to be custom-written rather than taken from aired episodes.
+        </p>
+
+
+        <style type="text/css">
+          #seasonTable tbody tr.season-row{ cursor: pointer; }
+          #seasonTable tbody tr.season-row:nth-child(4n+3){ background-color: whitesmoke; }
+          #seasonTable tbody tr.season-row:hover{ background-color: aliceblue; }
+          #seasonTable .season-caret{ display: inline-block; transition: transform 0.2s; margin-right: 0.4em; color: #3273dc; }
+          #seasonTable tr.season-row.open .season-caret{ transform: rotate(90deg); }
+          #seasonTable tr.season-detail{ display: none; background-color: #f5f9ff !important; }
+          #seasonTable tr.season-detail.open{ display: table-row; }
+          #seasonTable tr.season-detail td{ padding: 0.75em 1em 0.75em 2.2em; font-size: 0.9em; }
+          #seasonTable .game-pct{ display: inline-block; white-space: nowrap; margin: 0.15em 1.25em 0.15em 0; }
+          #seasonTable .game-pct strong{ color: #3273dc; }
+        </style>
+
+        <table class="jeopardy-table">
+          <thead>
+            <tr><th>Game</th><th>Questions</th><th>Matched to an aired clue</th><th>Rate</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>N64</td><td>4,038</td><td>3,558</td><td>88.1%</td></tr>
+            <tr><td>SNES (v1)</td><td>3,903</td><td>2,795</td><td>71.6%</td></tr>
+            <tr><td>Sega Genesis Deluxe</td><td>3,178</td><td>2,275</td><td>71.6%</td></tr>
+            <tr><td>Sega Genesis (v1)</td><td>2,289</td><td>1,559</td><td>68.1%</td></tr>
+            <tr><td>SNES Deluxe</td><td>2,259</td><td>1,502</td><td>66.5%</td></tr>
+            <tr><td>Super Jeopardy!</td><td>2,100</td><td>1,274</td><td>60.7%</td></tr>
+            <tr><td>Game Gear</td><td>1,680</td><td>942</td><td>56.1%</td></tr>
+            <tr><td>Game Boy</td><td>1,650</td><td>921</td><td>55.8%</td></tr>
+            <tr><td>NES 25th Anniversary</td><td>1,740</td><td>705</td><td>40.5%</td></tr>
+            <tr><td>NES (Rev 1)</td><td>1,860</td><td>49</td><td>2.6%</td></tr>
+            <tr><td>NES Junior Edition</td><td>1,800</td><td>36</td><td>2.0%</td></tr>
+            <tr><td>Game Gear Sports Edition</td><td>1,704</td><td>18</td><td>1.1%</td></tr>
+            <tr><td>Sega Genesis Sports Edition</td><td>3,425</td><td>30</td><td>0.9%</td></tr>
+            <tr><td>SNES Sports Edition</td><td>2,590</td><td>21</td><td>0.8%</td></tr>
+          </tbody>
+        </table>
+
+        <table class="jeopardy-table" id="seasonTable">
+          <thead>
+            <tr><th>Season</th><th>First air date in season</th><th>Matched airings</th></tr>
+          </thead>
+          <tbody>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 1</td><td>1984-09-10</td><td>1,913</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>22%</strong> SNES (v1)</span> <span class="game-pct"><strong>21%</strong> Game Gear</span> <span class="game-pct"><strong>21%</strong> Game Boy</span> <span class="game-pct"><strong>19%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>16%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>&lt;1%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>&lt;1%</strong> NES Junior Edition</span> <span class="game-pct"><strong>&lt;1%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>&lt;1%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> SNES Sports Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 2</td><td>1985-09-09</td><td>2,359</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>26%</strong> SNES (v1)</span> <span class="game-pct"><strong>22%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>20%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>17%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>7%</strong> Game Boy</span> <span class="game-pct"><strong>7%</strong> Game Gear</span> <span class="game-pct"><strong>&lt;1%</strong> SNES Deluxe</span> <span class="game-pct"><strong>&lt;1%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>&lt;1%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>&lt;1%</strong> N64</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 3</td><td>1986-09-08</td><td>114</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>39%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>16%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>13%</strong> SNES (v1)</span> <span class="game-pct"><strong>9%</strong> Game Boy</span> <span class="game-pct"><strong>9%</strong> Game Gear</span> <span class="game-pct"><strong>7%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>2%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>1%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>1%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>1%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>1%</strong> NES Junior Edition</span> <span class="game-pct"><strong>1%</strong> N64</span> <span class="game-pct"><strong>1%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>1%</strong> SNES Deluxe</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 4</td><td>1987-09-07</td><td>26</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>18%</strong> SNES (v1)</span> <span class="game-pct"><strong>16%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>16%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>13%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>11%</strong> Game Boy</span> <span class="game-pct"><strong>11%</strong> Game Gear</span> <span class="game-pct"><strong>8%</strong> NES Junior Edition</span> <span class="game-pct"><strong>3%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>3%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>3%</strong> SNES Sports Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 5</td><td>1988-09-05</td><td>3,584</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>41%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>27%</strong> SNES Deluxe</span> <span class="game-pct"><strong>24%</strong> SNES (v1)</span> <span class="game-pct"><strong>8%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>&lt;1%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>&lt;1%</strong> Game Boy</span> <span class="game-pct"><strong>&lt;1%</strong> Game Gear</span> <span class="game-pct"><strong>&lt;1%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>&lt;1%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> N64</span> <span class="game-pct"><strong>&lt;1%</strong> NES (Rev 1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 6</td><td>1989-09-12</td><td>165</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>48%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>38%</strong> SNES Deluxe</span> <span class="game-pct"><strong>2%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>2%</strong> SNES (v1)</span> <span class="game-pct"><strong>2%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>2%</strong> N64</span> <span class="game-pct"><strong>2%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>1%</strong> Game Gear</span> <span class="game-pct"><strong>1%</strong> NES Junior Edition</span> <span class="game-pct"><strong>1%</strong> Game Boy</span> <span class="game-pct"><strong>&lt;1%</strong> NES (Rev 1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 7</td><td>1990-09-12</td><td>55</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>31%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>19%</strong> SNES Deluxe</span> <span class="game-pct"><strong>10%</strong> N64</span> <span class="game-pct"><strong>8%</strong> SNES (v1)</span> <span class="game-pct"><strong>5%</strong> Game Boy</span> <span class="game-pct"><strong>5%</strong> Game Gear</span> <span class="game-pct"><strong>5%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>4%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>4%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>3%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>1%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>1%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>1%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>1%</strong> NES Junior Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 8</td><td>1991-09-10</td><td>28</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>25%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>22%</strong> SNES Deluxe</span> <span class="game-pct"><strong>10%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>8%</strong> NES Junior Edition</span> <span class="game-pct"><strong>8%</strong> SNES (v1)</span> <span class="game-pct"><strong>8%</strong> N64</span> <span class="game-pct"><strong>5%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>2%</strong> Game Boy</span> <span class="game-pct"><strong>2%</strong> Game Gear</span> <span class="game-pct"><strong>2%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>2%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>2%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>2%</strong> NES (Rev 1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 9</td><td>1992-09-10</td><td>22</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>18%</strong> SNES (v1)</span> <span class="game-pct"><strong>9%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>9%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>9%</strong> SNES Deluxe</span> <span class="game-pct"><strong>9%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>9%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>9%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>6%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>6%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>6%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>3%</strong> Game Boy</span> <span class="game-pct"><strong>3%</strong> Game Gear</span> <span class="game-pct"><strong>3%</strong> NES Junior Edition</span> <span class="game-pct"><strong>3%</strong> N64</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 10</td><td>1993-10-01</td><td>20</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>35%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>13%</strong> SNES (v1)</span> <span class="game-pct"><strong>9%</strong> NES Junior Edition</span> <span class="game-pct"><strong>9%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>9%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>4%</strong> Game Boy</span> <span class="game-pct"><strong>4%</strong> Game Gear</span> <span class="game-pct"><strong>4%</strong> SNES Deluxe</span> <span class="game-pct"><strong>4%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>4%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>4%</strong> N64</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 11</td><td>1994-09-20</td><td>3,423</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>100%</strong> N64</span> <span class="game-pct"><strong>&lt;1%</strong> SNES (v1)</span> <span class="game-pct"><strong>&lt;1%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>&lt;1%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>&lt;1%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>&lt;1%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>&lt;1%</strong> SNES Deluxe</span> <span class="game-pct"><strong>&lt;1%</strong> Super Jeopardy!</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 12</td><td>1995-09-05</td><td>117</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>80%</strong> N64</span> <span class="game-pct"><strong>3%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>3%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>2%</strong> NES Junior Edition</span> <span class="game-pct"><strong>2%</strong> Game Boy</span> <span class="game-pct"><strong>2%</strong> Game Gear</span> <span class="game-pct"><strong>2%</strong> SNES (v1)</span> <span class="game-pct"><strong>2%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>1%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>1%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>1%</strong> SNES Deluxe</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 13</td><td>1996-09-02</td><td>27</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>37%</strong> N64</span> <span class="game-pct"><strong>17%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>11%</strong> SNES Deluxe</span> <span class="game-pct"><strong>9%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>6%</strong> SNES (v1)</span> <span class="game-pct"><strong>3%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>3%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>3%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>3%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>3%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>3%</strong> Game Boy</span> <span class="game-pct"><strong>3%</strong> Game Gear</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 14</td><td>1997-09-05</td><td>24</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>22%</strong> N64</span> <span class="game-pct"><strong>16%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>12%</strong> SNES Deluxe</span> <span class="game-pct"><strong>9%</strong> Game Boy</span> <span class="game-pct"><strong>9%</strong> Game Gear</span> <span class="game-pct"><strong>6%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>6%</strong> SNES (v1)</span> <span class="game-pct"><strong>3%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>3%</strong> NES Junior Edition</span> <span class="game-pct"><strong>3%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>3%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>3%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>3%</strong> SNES Sports Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 15</td><td>1998-09-09</td><td>20</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>27%</strong> N64</span> <span class="game-pct"><strong>15%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>12%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>12%</strong> SNES (v1)</span> <span class="game-pct"><strong>12%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>8%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>8%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>8%</strong> SNES Deluxe</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 16</td><td>1999-09-07</td><td>21</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>18%</strong> N64</span> <span class="game-pct"><strong>14%</strong> SNES Deluxe</span> <span class="game-pct"><strong>11%</strong> SNES (v1)</span> <span class="game-pct"><strong>11%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>11%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>7%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>7%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>7%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>4%</strong> NES Junior Edition</span> <span class="game-pct"><strong>4%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>4%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>4%</strong> SNES Sports Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 17</td><td>2000-11-02</td><td>15</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>30%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>15%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>15%</strong> SNES (v1)</span> <span class="game-pct"><strong>10%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>10%</strong> NES Junior Edition</span> <span class="game-pct"><strong>5%</strong> N64</span> <span class="game-pct"><strong>5%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>5%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>5%</strong> SNES Deluxe</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 18</td><td>2001-09-28</td><td>16</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>12%</strong> SNES (v1)</span> <span class="game-pct"><strong>12%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>12%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>12%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>12%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>8%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>8%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>4%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>4%</strong> SNES Deluxe</span> <span class="game-pct"><strong>4%</strong> Game Boy</span> <span class="game-pct"><strong>4%</strong> Game Gear</span> <span class="game-pct"><strong>4%</strong> NES Junior Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 19</td><td>2002-09-16</td><td>19</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>21%</strong> N64</span> <span class="game-pct"><strong>14%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>14%</strong> SNES (v1)</span> <span class="game-pct"><strong>7%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>7%</strong> NES Junior Edition</span> <span class="game-pct"><strong>7%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>7%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>4%</strong> Game Boy</span> <span class="game-pct"><strong>4%</strong> Game Gear</span> <span class="game-pct"><strong>4%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>4%</strong> SNES Deluxe</span> <span class="game-pct"><strong>4%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>4%</strong> Game Gear Sports Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 20</td><td>2003-09-11</td><td>16</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>21%</strong> N64</span> <span class="game-pct"><strong>16%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>16%</strong> NES Junior Edition</span> <span class="game-pct"><strong>11%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>5%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>5%</strong> SNES (v1)</span> <span class="game-pct"><strong>5%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>5%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>5%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>5%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>5%</strong> SNES Deluxe</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 21</td><td>2004-10-11</td><td>14</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>20%</strong> N64</span> <span class="game-pct"><strong>15%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>15%</strong> SNES (v1)</span> <span class="game-pct"><strong>15%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>10%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>10%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>10%</strong> SNES Deluxe</span> <span class="game-pct"><strong>5%</strong> NES (Rev 1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 22</td><td>2005-10-10</td><td>13</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>22%</strong> NES Junior Edition</span> <span class="game-pct"><strong>11%</strong> SNES (v1)</span> <span class="game-pct"><strong>11%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>6%</strong> SNES Deluxe</span> <span class="game-pct"><strong>6%</strong> N64</span> <span class="game-pct"><strong>6%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>6%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>6%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>6%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>6%</strong> Game Boy</span> <span class="game-pct"><strong>6%</strong> Game Gear</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 23</td><td>2006-09-11</td><td>12</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>12%</strong> Game Boy</span> <span class="game-pct"><strong>12%</strong> Game Gear</span> <span class="game-pct"><strong>12%</strong> SNES (v1)</span> <span class="game-pct"><strong>12%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>6%</strong> SNES Deluxe</span> <span class="game-pct"><strong>6%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>6%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>6%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>6%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>6%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>6%</strong> NES Junior Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 24</td><td>2007-10-15</td><td>18</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>17%</strong> N64</span> <span class="game-pct"><strong>13%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>13%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>13%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>9%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>9%</strong> SNES (v1)</span> <span class="game-pct"><strong>9%</strong> SNES Deluxe</span> <span class="game-pct"><strong>4%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>4%</strong> NES Junior Edition</span> <span class="game-pct"><strong>4%</strong> Game Boy</span> <span class="game-pct"><strong>4%</strong> Game Gear</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 25</td><td>2008-09-19</td><td>7</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>20%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>20%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>20%</strong> SNES (v1)</span> <span class="game-pct"><strong>10%</strong> N64</span> <span class="game-pct"><strong>10%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>10%</strong> SNES Deluxe</span> <span class="game-pct"><strong>10%</strong> NES (Rev 1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 26</td><td>2009-11-04</td><td>12</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>18%</strong> NES Junior Edition</span> <span class="game-pct"><strong>12%</strong> SNES (v1)</span> <span class="game-pct"><strong>12%</strong> Game Boy</span> <span class="game-pct"><strong>12%</strong> Game Gear</span> <span class="game-pct"><strong>6%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>6%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>6%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>6%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>6%</strong> SNES Deluxe</span> <span class="game-pct"><strong>6%</strong> Super Jeopardy!</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 27</td><td>2010-12-06</td><td>9</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>13%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>13%</strong> SNES Deluxe</span> <span class="game-pct"><strong>13%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>13%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>13%</strong> SNES Sports Edition</span> <span class="game-pct"><strong>7%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>7%</strong> NES Junior Edition</span> <span class="game-pct"><strong>7%</strong> SNES (v1)</span> <span class="game-pct"><strong>7%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>7%</strong> Game Gear</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 28</td><td>2011-09-23</td><td>3</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>25%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>25%</strong> SNES (v1)</span> <span class="game-pct"><strong>25%</strong> N64</span> <span class="game-pct"><strong>25%</strong> NES Junior Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 29</td><td>2012-10-22</td><td>12</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>25%</strong> SNES (v1)</span> <span class="game-pct"><strong>19%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>12%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>12%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>6%</strong> Game Boy</span> <span class="game-pct"><strong>6%</strong> Game Gear</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>6%</strong> SNES Deluxe</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 30</td><td>2013-11-06</td><td>7</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>33%</strong> SNES (v1)</span> <span class="game-pct"><strong>11%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>11%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>11%</strong> SNES Deluxe</span> <span class="game-pct"><strong>11%</strong> N64</span> <span class="game-pct"><strong>11%</strong> Game Boy</span> <span class="game-pct"><strong>11%</strong> Game Gear</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 31</td><td>2014-09-26</td><td>9</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>21%</strong> NES Junior Edition</span> <span class="game-pct"><strong>14%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>14%</strong> SNES Deluxe</span> <span class="game-pct"><strong>14%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>7%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>7%</strong> SNES (v1)</span> <span class="game-pct"><strong>7%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>7%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>7%</strong> SNES Sports Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 32</td><td>2015-09-17</td><td>12</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>21%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>11%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>11%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>11%</strong> SNES (v1)</span> <span class="game-pct"><strong>11%</strong> Game Boy</span> <span class="game-pct"><strong>11%</strong> Game Gear</span> <span class="game-pct"><strong>11%</strong> SNES Deluxe</span> <span class="game-pct"><strong>11%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>5%</strong> Super Jeopardy!</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 33</td><td>2016-11-18</td><td>4</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>20%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>20%</strong> N64</span> <span class="game-pct"><strong>20%</strong> NES Junior Edition</span> <span class="game-pct"><strong>20%</strong> Game Boy</span> <span class="game-pct"><strong>20%</strong> Game Gear</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 34</td><td>2017-11-23</td><td>6</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>18%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>18%</strong> SNES (v1)</span> <span class="game-pct"><strong>9%</strong> Game Boy</span> <span class="game-pct"><strong>9%</strong> Game Gear</span> <span class="game-pct"><strong>9%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>9%</strong> N64</span> <span class="game-pct"><strong>9%</strong> Game Gear Sports Edition</span> <span class="game-pct"><strong>9%</strong> Sega Genesis Sports Edition</span> <span class="game-pct"><strong>9%</strong> SNES Sports Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 35</td><td>2018-09-27</td><td>12</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>17%</strong> Game Boy</span> <span class="game-pct"><strong>17%</strong> Game Gear</span> <span class="game-pct"><strong>11%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>11%</strong> SNES Deluxe</span> <span class="game-pct"><strong>11%</strong> N64</span> <span class="game-pct"><strong>6%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>6%</strong> SNES (v1)</span> <span class="game-pct"><strong>6%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>6%</strong> NES Junior Edition</span> <span class="game-pct"><strong>6%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>6%</strong> NES (Rev 1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 36</td><td>2019-09-25</td><td>8</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>18%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>18%</strong> SNES Deluxe</span> <span class="game-pct"><strong>9%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>9%</strong> Game Boy</span> <span class="game-pct"><strong>9%</strong> Game Gear</span> <span class="game-pct"><strong>9%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>9%</strong> NES Junior Edition</span> <span class="game-pct"><strong>9%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>9%</strong> SNES (v1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 37</td><td>2020-10-09</td><td>7</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>25%</strong> SNES Deluxe</span> <span class="game-pct"><strong>25%</strong> NES (Rev 1)</span> <span class="game-pct"><strong>12%</strong> SNES (v1)</span> <span class="game-pct"><strong>12%</strong> Sega Genesis Deluxe</span> <span class="game-pct"><strong>12%</strong> NES 25th Anniversary</span> <span class="game-pct"><strong>12%</strong> N64</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 38</td><td>2022-02-14</td><td>2</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>33%</strong> Sega Genesis (v1)</span> <span class="game-pct"><strong>33%</strong> SNES (v1)</span> <span class="game-pct"><strong>33%</strong> Super Jeopardy!</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 39</td><td>2023-01-26</td><td>1</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>100%</strong> N64</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 40</td><td>2023-11-28</td><td>2</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>50%</strong> Super Jeopardy!</span> <span class="game-pct"><strong>50%</strong> NES Junior Edition</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 41</td><td>2024-10-11</td><td>2</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>50%</strong> N64</span> <span class="game-pct"><strong>50%</strong> NES (Rev 1)</span></td></tr>
+            <tr class="season-row"><td><span class="season-caret">&#9656;</span>Season 42</td><td>2025-10-09</td><td>1</td></tr>
+            <tr class="season-detail"><td colspan="3"><span class="game-pct"><strong>100%</strong> Super Jeopardy!</span></td></tr>
+          </tbody>
+        </table>
+
+        <script>
+          document.querySelectorAll('#seasonTable tr.season-row').forEach(function(row){
+            row.addEventListener('click', function(){
+              row.classList.toggle('open');
+              row.nextElementSibling.classList.toggle('open');
+            });
+          });
+        </script>
+
+
+        <p>Source code on <a href="https://github.com/thisismattmiller/jeopardy-source" target="_blank">GitHub</a>.</p>
+
+
+		</div>
+
+	</div>
+</div>
+
+
+  <footer>
+    <div>
+
+  <style>
+    #masta:hover{
+      stroke: black !important;
+      fill:  black !important;
+    }
+  </style>
+<a rel="me" class="is-size-5" href="https://ebooks.social/@matt" title="mastodon verification" style="text-decoration: none;">
+<svg id="masta" style="stroke:white; fill: white;" width="20px" height="20px" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <path  d="m5 58.801v5.8008l2.8984-2.9023h19.703v-9.5l4-5.6992v33h9.6992l5-13.602h18.5l5.3008 14.203h8.6992l4.3008-13.902 3.5-18.898h3.7969l0.60156 16h4v-16.801l-7.5-7.6016-0.30078-5.7969-22-12.203-33.098-1-6.1016 2.7031-6.8008 9.7969v25.801z"/>
+  <path d="m14.301 51.102l14.301-1.6016-3.3008 4.8984z"/>
+ </g>
+</svg>
+</a>   
+
+
+    </div>
+  </footer>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+
+  </body>
+</html>

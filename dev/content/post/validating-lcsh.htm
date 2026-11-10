@@ -98,6 +98,121 @@ twitterimage  = "https://thisismattmiller.com/img/validating-lcsh.png"
 		font-style: italic;
 	}
 
+	/* animated validation runs: a list of headings, click one to play it */
+	.runs{
+		margin-bottom: 3em;
+	}
+	.runs-label{
+		font-size: 1.05em;
+		color: #7a7a7a;
+		font-style: italic;
+		margin-bottom: 0.75em;
+	}
+	ul.runs-list{
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.75em;
+		margin: 0 0 1em 0;
+		padding: 0;
+		list-style: none;
+	}
+	ul.runs-list li{
+		margin: 0;
+		display: flex;
+	}
+	ul.runs-list button{
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		text-align: left;
+		font-family: inherit;
+		font-size: 1em;
+		line-height: 1.4em;
+		color: inherit;
+		background-color: whitesmoke;
+		border: 1px solid #dbdbdb;
+		border-left: 4px solid #b5b5b5;
+		border-radius: 0 6px 6px 0;
+		padding: 0.75em 1em;
+		cursor: pointer;
+		transition-duration: 0.2s;
+	}
+	ul.runs-list button:hover{
+		background-color: aliceblue;
+	}
+	ul.runs-list button.is-playing{
+		background-color: white;
+		border-color: black;
+	}
+	ul.runs-list .run-heading{
+		display: block;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+		font-size: 0.95em;
+		font-weight: bold;
+		overflow-wrap: anywhere;
+	}
+	ul.runs-list .run-note{
+		display: block;
+		font-size: 0.9em;
+		color: #4a4a4a;
+		margin-top: 0.35em;
+	}
+	ul.runs-list .run-verdict{
+		display: inline-block;
+		font-size: 0.75em;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: white;
+		border-radius: 3px;
+		padding: 0 0.5em;
+		margin-top: 0.5em;
+	}
+	ul.runs-list .run-verdict.is-invalid{
+		background-color: #cc0f35;
+	}
+	ul.runs-list .run-verdict.is-questionable{
+		background-color: #946c00;
+	}
+	.runs-stage{
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		overflow-x: auto;
+		background-color: white;
+	}
+	.runs-stage img{
+		display: block;
+		width: 100%;
+		min-width: 760px;
+		aspect-ratio: 1200 / 720;
+	}
+	.runs-controls{
+		display: flex;
+		justify-content: space-between;
+		gap: 1em;
+		font-size: 0.95em;
+		margin-top: 0.5em;
+	}
+	.runs-controls button{
+		font: inherit;
+		color: #3273dc;
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+	}
+	.runs-controls button:hover, .runs-controls a:hover{
+		text-decoration: underline;
+	}
+	@media screen and (max-width: 1023px){
+		ul.runs-list{ grid-template-columns: repeat(2, 1fr); }
+	}
+	@media screen and (max-width: 600px){
+		ul.runs-list{ grid-template-columns: 1fr; }
+	}
+
 	ol.closing{
 		padding-left: 2em;
 		margin-bottom: 3em;
@@ -368,7 +483,94 @@ twitterimage  = "https://thisismattmiller.com/img/validating-lcsh.png"
         <p>The system also works on a confidence rating 0-1 meaning that it is possible to get three results from it, valid, invalid and questionable. Questionable results occur when the model is not sure in its judgement call based on the rule reading and what is being tested. This aligns with the idea of cataloger’s judgement, there are some gray areas which the model cannot be 100% sure so there is the ability for it to simply flag it as potentially problematic based on how the rules are being applied to it.
         </p>
 
-        <p>So what would this tool be used for? It is not unfair to say LCSH is a complicated system. There are a lot of moving parts to check to make sure a heading is valid. For a professional cataloger this is second nature to them but simply having a validator to double check it seems like a good fallback. Validation is always part of building a catalog record so why not validate the subject headings? It also seems like a good tool for learning the intricacies of LCSH. There is a cost associated with it, not every check will invoke the LLM but if it does it will cost around $0.002 per heading (fifth of a cent) or around a dollar for 500 headings validated.
+        <div class="runs" id="runs">
+          <div class="runs-label">Pick a heading to watch how the validator worked through it:</div>
+          <ul class="runs-list">
+            <li><button type="button" data-run="/img/validating-lcsh-anim-corruption-prevention-brazil.svg" data-label="Corruption--Prevention--Brazil: a mechanical order error and a usage reading">
+              <span class="run-heading">Corruption--Prevention--Brazil</span>
+              <span class="run-note">a mechanical order error and a usage reading</span>
+              <span class="run-verdict is-invalid">invalid 0.92</span>
+            </button></li>
+            <li><button type="button" data-run="/img/validating-lcsh-anim-art-modern-kuwait.svg" data-label="Art, Modern--Kuwait--21st century: a place after a heading that cannot take one">
+              <span class="run-heading">Art, Modern--Kuwait--21st century</span>
+              <span class="run-note">a place after a heading that cannot take one</span>
+              <span class="run-verdict is-invalid">invalid 0.93</span>
+            </button></li>
+            <li><button type="button" data-run="/img/validating-lcsh-anim-sweden-economic-conditions.svg" data-label="Sweden--Economic conditions--History: a subdivision the manual says never takes --History">
+              <span class="run-heading">Sweden--Economic conditions--History</span>
+              <span class="run-note">a subdivision the manual says never takes <span style="white-space: nowrap;">--History</span></span>
+              <span class="run-verdict is-invalid">invalid 0.95</span>
+            </button></li>
+            <li><button type="button" data-run="/img/validating-lcsh-anim-social-change-finance.svg" data-label="Social change--United States--Finance: a usage statement that names categories">
+              <span class="run-heading">Social change--United States--Finance</span>
+              <span class="run-note">a usage statement that names categories</span>
+              <span class="run-verdict is-questionable">questionable 0.7</span>
+            </button></li>
+            <li><button type="button" data-run="/img/validating-lcsh-anim-simulium-date-span.svg" data-label="Simulium--Biological control--History--1985-2017: a date span with no authority behind it">
+              <span class="run-heading">Simulium--Biological control--History--1985-2017</span>
+              <span class="run-note">a date span with no authority behind it</span>
+              <span class="run-verdict is-invalid">invalid 0.85</span>
+            </button></li>
+            <li><button type="button" data-run="/img/validating-lcsh-anim-turkey-politics-21st-century.svg" data-label="Turkey--Politics and government--21st century: a century that collides with established periods">
+              <span class="run-heading">Turkey--Politics and government--21st century</span>
+              <span class="run-note">a century that collides with established periods</span>
+              <span class="run-verdict is-invalid">invalid 0.9</span>
+            </button></li>
+          </ul>
+          <div class="runs-stage">
+            <img id="runsImg" alt="" width="1200" height="720"/>
+          </div>
+          <div class="runs-controls">
+            <button type="button" id="runsReplay">&#8635; Replay from the start</button>
+            <a id="runsOpen" href="#" target="_blank">Open full size in a new window</a>
+          </div>
+        </div>
+
+        <script>
+          // list of animated validation runs: clicking a heading loads its animated SVG
+          (function() {
+            const wrap = document.getElementById('runs');
+            const img = document.getElementById('runsImg');
+            const open = document.getElementById('runsOpen');
+            const buttons = Array.prototype.slice.call(wrap.querySelectorAll('ul.runs-list button'));
+            let current = null;
+            let plays = 0;
+
+            function play(btn) {
+              current = btn;
+              buttons.forEach(function(b) {
+                b.classList.toggle('is-playing', b === btn);
+                b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+              });
+              // the query string makes the browser start the animation over from the beginning
+              img.src = btn.dataset.run + '?play=' + (++plays);
+              img.alt = 'Animated diagram of the validator checking ' + btn.dataset.label;
+              open.href = btn.dataset.run;
+            }
+
+            buttons.forEach(function(b) {
+              b.addEventListener('click', function() { play(b); });
+            });
+            document.getElementById('runsReplay').addEventListener('click', function() {
+              if (current) play(current);
+            });
+
+            // start the first one when the player scrolls into view, so it is seen from its beginning
+            if (window.IntersectionObserver) {
+              const io = new IntersectionObserver(function(entries) {
+                if (entries.some(function(e) { return e.isIntersecting; })) {
+                  io.disconnect();
+                  if (!current) play(buttons[0]);
+                }
+              }, { threshold: 0.25 });
+              io.observe(img.parentNode);
+            } else {
+              play(buttons[0]);
+            }
+          })();
+        </script>
+
+        <p>So what would this tool be used for? It is not unfair to say LCSH is a complicated system. There are a lot of moving parts to check to make sure a heading is valid. For a professional cataloger this is second nature to them but simply having a validator to double check it seems like a good fallback. Validation is always part of building a catalog record so why not validate the subject headings? It also seems like a good tool for learning the intricacies of LCSH. There is a cost associated with it, not every check will invoke the LLM but if it does it will cost around $0.002 per heading (fifth of a cent) or around a dollar for 500 headings validated. And of course the system is an API so in can be intergrated into a editor for realtime validation while cataloging.
         </p>
 
         <p>Of course the question of how accurate it can be is important. To test for false positives I ran 1000 authorized pre-coordinated headings through the test. These are complex headings that have been published (there are about 200K of them, you can <a href="https://id.loc.gov/search/?q=rdftype:ComplexSubject&q=cs%3Ahttp%3A%2F%2Fid.loc.gov%2Fauthorities%2Fsubjects" target="_blank">browse them here</a>). These headings should always be valid, since they are authorized in the authority file. To test them I hid their authority records from the tool, so it wouldn’t see they are authorized and therefore correct and then asked it to validate the string. Out of the 1000 authorized headings 5 of them were flagged invalid, of those 4 of them really should be invalid but were authorized anyway (e.g. <span class="lcsh-inline">Vocal music--To 1800</span> period is not on the music period list or <span class="lcsh-inline">Military supplies--Japan</span>, Military supplies is not coded for geo subdivision but the authorized heading was made anyway). It did mistakenly mark one of these valid strings as invalid: <span class="lcsh-inline">Prostate--Cancer--Pathophysiology</span>. The model treated “Prostate--Cancer” as a heading "of the type [part of the body]--Diseases", and the diseases sheet bars “--Pathophysiology” under that type. It was wrong because that bar applies to the literal subdivision “--Diseases”, not to a specific disease like cancer. So it over fit a rule and marked it as invalid, with this error the tool sits then at 99.8% for this test. Doing the opposite test, running 580 known invalid headings it caught 579 resulting in the same 99.8%. I would not say the tool is perfect, there is always a risk if a tool invokes a LLM for judgment, but there are a lot of guardrails in place to keep the likelihood for false results low. The most likely error would be the tool returning a “Questionable” result, which is more of a soft error than being confidently wrong.

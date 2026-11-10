@@ -56,6 +56,19 @@ twitimage = ""
 label = "Newest"
 desc = "Most recent projects"
 [[params.mystuff.newest.newest.things]]
+label = "Validating Library of Congress Subject Headings"
+desc = "Using rule based and LLM systems to validate pre-coordinated LCSH strings"
+date = "2026-11-09"
+[[params.mystuff.newest.newest.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/validating-lcsh/"
+
+[[params.mystuff.newest.newest.things.links]]
+label = "Tool"
+url = "https://thisismattmiller.github.io/lcsh-validator/"
+
+
+[[params.mystuff.newest.newest.things]]
 label = "The Embedded Catalog"
 desc = "Library of Congress blog post about build vector embeddings for 20M catalog records"
 date = "2026-10-26"
@@ -105,19 +118,6 @@ url = "https://thisismattmiller.com/post/jeopardy/"
 [[params.mystuff.newest.newest.things.links]]
 label = "Viz"
 url = "https://thisismattmiller.github.io/jeopardy-viz/"
-
-
-[[params.mystuff.newest.newest.things]]
-label = "Email Visualization"
-desc = "Visualizing 14,000 Released Epstein Emails"
-date = "2025-11-25"
-[[params.mystuff.newest.newest.things.links]]
-label = "Blog"
-url = "https://thisismattmiller.com/post/email-visualization/"
-
-[[params.mystuff.newest.newest.things.links]]
-label = "Viz"
-url = "https://thisismattmiller.github.io/email-viz/viz/dist/"
 
 
 
@@ -836,6 +836,19 @@ url = "https://blogs.loc.gov/thesignal/2026/10/ai-sandbox-series-embedded-catalo
 [[params.mystuff.metadata.things.links]]
 label = "Viz"
 url = "https://lcnetdev.github.io/embedded-catalog-viz/"
+
+
+[[params.mystuff.metadata.things]]
+label = "Validating Library of Congress Subject Headings"
+desc = "Using rule based and LLM systems to validate pre-coordinated LCSH strings"
+date = "2026-11-09"
+[[params.mystuff.metadata.things.links]]
+label = "Blog"
+url = "https://thisismattmiller.com/post/validating-lcsh/"
+
+[[params.mystuff.metadata.things.links]]
+label = "Tool"
+url = "https://thisismattmiller.github.io/lcsh-validator/"
 
 
 
